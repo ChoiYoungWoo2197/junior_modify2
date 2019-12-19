@@ -147,7 +147,7 @@
          <version>${org.springframework-version}</version>
       </dependency>
       <dependency>
-          <groupId>org.springframework</groupId>
+          <groupId>org.springframework</groupId> <!-- spring-test 라이브러리는 MyBatis가 정상적으로 연동되었는지 확인하는 용도로 사용 -->
           <artifactId>spring-test</artifactId>
           <version>${org.springframework-version}</version>
           <scope>test</scope>
