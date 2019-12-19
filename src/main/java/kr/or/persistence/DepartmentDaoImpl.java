@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import kr.or.domain.Department;
 
+@Repository
 public class DepartmentDaoImpl implements DepartmentDao {
 	private static final String namespace = "kr.or.mappers.departmentMapper";
 	@Autowired
