@@ -2,7 +2,7 @@ package kr.or.domain;
 
 import java.util.Date;
 
-public class manager {
+public class Manager {
 	private int managerId;
 	private Date registerDate;
 	
