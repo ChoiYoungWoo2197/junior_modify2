@@ -11,7 +11,7 @@ import kr.or.domain.MeetingRoomEquipment;
 @Repository
 public class MeetingRoomEquipmentDaoImpl implements MeetingRoomEquipmentDao {
 
-	private static final String namespace = "kr.or.mappers.meetingRoomMapper";
+	private static final String namespace = "kr.or.mappers.meetingRoomEquipmentMapper";
 
 	@Autowired
 	SqlSession sqlSession;

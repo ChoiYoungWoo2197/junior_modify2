@@ -47,7 +47,7 @@ public class EquipmentTest {
 		System.out.println(equipment.getName());
 	}
 	
-	@Test
+	//@Test
 	public void testDelete() {
 		equipmentDao.deleteEquipment(1);
 	}
