@@ -24,6 +24,8 @@ public class MybatisTest {
 	public void testSession() {
 		try(SqlSession session = sqlSessionFactory.openSession()) {
 			System.out.println(session);
+			System.out.println("2");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
