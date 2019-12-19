@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="4" failures="0" name="kr.or.test.MeetingRoomTest" time="0.056" errors="1" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_231\jre\bin"/>
+    <property name="java.vm.version" value="25.231-b11"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\workspace\junior.room"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.rmi.server.randomIDs" value="true"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="KR"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\workspace\junior.room"/>
+    <property name="java.runtime.version" value="1.8.0_231-b11"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_231\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\CMT정~1\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="classworlds.conf" value="C:\workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf1527795044744376032.tmp"/>
+    <property name="sun.jnu.encoding" value="MS949"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_231\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jdk1.8.0_231/bin/../jre/bin/server;C:/Program Files/Java/jdk1.8.0_231/bin/../jre/bin;C:/Program Files/Java/jdk1.8.0_231/bin/../jre/lib/amd64;C:\Program Files\Java\jdk1.8.0_231\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NGX;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\Users\cmt정보통신\AppData\Local\Microsoft\WindowsApps;;C:\Users\cmt정보통신\Desktop;;."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\cmt정보통신"/>
+    <property name="user.timezone" value="Asia/Seoul"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="MS949"/>
+    <property name="user.name" value="cmt_dg"/>
+    <property name="java.class.path" value="C:\Users\cmt정보통신\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_1.10.0.20181127-2120\jars\plexus-classworlds-2.5.2.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_231\jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B install"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="ko"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_231"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_231\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_231\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_231\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_231\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_231\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_231\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_231\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_231\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_231\jre\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="C:\workspace\junior.room\EMBEDDED"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="kr.or.test.MeetingRoomTest" name="testDelete" time="0.003"/>
+  <testcase classname="kr.or.test.MeetingRoomTest" name="testInsert" time="0.046">
+    <error message="
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: (conn:62) Cannot add or update a child row: a foreign key constraint fails (`meetingroom`.`meeting_room`, CONSTRAINT `meeting_room_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`))
+Query is: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?), parameters [1234,&apos;1踰덊쉶�쓽�떎&apos;,10,1,&apos;2019-12-19 16:09:21.535&apos;]
+### The error may involve kr.or.mappers.meetingRoomMapper.insertMeetingRoom-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: (conn:62) Cannot add or update a child row: a foreign key constraint fails (`meetingroom`.`meeting_room`, CONSTRAINT `meeting_room_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`))
+Query is: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?), parameters [1234,&apos;1踰덊쉶�쓽�떎&apos;,10,1,&apos;2019-12-19 16:09:21.535&apos;]
+; SQL []; (conn:62) Cannot add or update a child row: a foreign key constraint fails (`meetingroom`.`meeting_room`, CONSTRAINT `meeting_room_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`))
+Query is: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?), parameters [1234,&apos;1踰덊쉶�쓽�떎&apos;,10,1,&apos;2019-12-19 16:09:21.535&apos;]; nested exception is java.sql.SQLIntegrityConstraintViolationException: (conn:62) Cannot add or update a child row: a foreign key constraint fails (`meetingroom`.`meeting_room`, CONSTRAINT `meeting_room_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`))
+Query is: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?), parameters [1234,&apos;1踰덊쉶�쓽�떎&apos;,10,1,&apos;2019-12-19 16:09:21.535&apos;]" type="org.springframework.dao.DataIntegrityViolationException">org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: (conn:62) Cannot add or update a child row: a foreign key constraint fails (`meetingroom`.`meeting_room`, CONSTRAINT `meeting_room_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`))
+Query is: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?), parameters [1234,&apos;1踰덊쉶�쓽�떎&apos;,10,1,&apos;2019-12-19 16:09:21.535&apos;]
+### The error may involve kr.or.mappers.meetingRoomMapper.insertMeetingRoom-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?)
+### Cause: java.sql.SQLIntegrityConstraintViolationException: (conn:62) Cannot add or update a child row: a foreign key constraint fails (`meetingroom`.`meeting_room`, CONSTRAINT `meeting_room_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`))
+Query is: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?), parameters [1234,&apos;1踰덊쉶�쓽�떎&apos;,10,1,&apos;2019-12-19 16:09:21.535&apos;]
+; SQL []; (conn:62) Cannot add or update a child row: a foreign key constraint fails (`meetingroom`.`meeting_room`, CONSTRAINT `meeting_room_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`))
+Query is: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?), parameters [1234,&apos;1踰덊쉶�쓽�떎&apos;,10,1,&apos;2019-12-19 16:09:21.535&apos;]; nested exception is java.sql.SQLIntegrityConstraintViolationException: (conn:62) Cannot add or update a child row: a foreign key constraint fails (`meetingroom`.`meeting_room`, CONSTRAINT `meeting_room_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`))
+Query is: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?), parameters [1234,&apos;1踰덊쉶�쓽�떎&apos;,10,1,&apos;2019-12-19 16:09:21.535&apos;]
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:249)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:73)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:446)
+	at com.sun.proxy.$Proxy14.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:278)
+	at kr.or.persistence.MeetingRoomDaoImpl.insertMeetingRoom(MeetingRoomDaoImpl.java:26)
+	at kr.or.test.MeetingRoomTest.testInsert(MeetingRoomTest.java:41)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:88)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:193)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:52)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:191)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:42)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:184)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:236)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: (conn:62) Cannot add or update a child row: a foreign key constraint fails (`meetingroom`.`meeting_room`, CONSTRAINT `meeting_room_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`))
+Query is: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?), parameters [1234,&apos;1踰덊쉶�쓽�떎&apos;,10,1,&apos;2019-12-19 16:09:21.535&apos;]
+	at org.mariadb.jdbc.internal.util.ExceptionMapper.get(ExceptionMapper.java:133)
+	at org.mariadb.jdbc.internal.util.ExceptionMapper.getException(ExceptionMapper.java:101)
+	at org.mariadb.jdbc.internal.util.ExceptionMapper.throwAndLogException(ExceptionMapper.java:77)
+	at org.mariadb.jdbc.MariaDbStatement.executeQueryEpilog(MariaDbStatement.java:226)
+	at org.mariadb.jdbc.MariaDbServerPreparedStatement.executeInternal(MariaDbServerPreparedStatement.java:413)
+	at org.mariadb.jdbc.MariaDbServerPreparedStatement.execute(MariaDbServerPreparedStatement.java:362)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:46)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:198)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:185)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:433)
+	... 38 more
+Caused by: org.mariadb.jdbc.internal.util.dao.QueryException: Cannot add or update a child row: a foreign key constraint fails (`meetingroom`.`meeting_room`, CONSTRAINT `meeting_room_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`))
+Query is: INSERT INTO meeting_room (manager_id, name, seats, availability, register_date) VALUES (?, ?, ?, ?, ?), parameters [1234,&apos;1踰덊쉶�쓽�떎&apos;,10,1,&apos;2019-12-19 16:09:21.535&apos;]
+	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readErrorPacket(AbstractQueryProtocol.java:1144)
+	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.readPacket(AbstractQueryProtocol.java:1076)
+	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.getResult(AbstractQueryProtocol.java:1031)
+	at org.mariadb.jdbc.internal.protocol.AbstractQueryProtocol.executePreparedQuery(AbstractQueryProtocol.java:617)
+	at org.mariadb.jdbc.MariaDbServerPreparedStatement.executeInternal(MariaDbServerPreparedStatement.java:401)
+	... 51 more
+</error>
+    <system-out>INFO : org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+INFO : org.springframework.jdbc.support.SQLErrorCodesFactory - SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase]
+</system-out>
+  </testcase>
+  <testcase classname="kr.or.test.MeetingRoomTest" name="testList" time="0.005"/>
+  <testcase classname="kr.or.test.MeetingRoomTest" name="testUpdate" time="0.002"/>
+</testsuite>
