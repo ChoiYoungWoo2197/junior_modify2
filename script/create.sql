@@ -43,7 +43,7 @@ CREATE TABLE meeting_room (
 
 -- 장비
 CREATE TABLE equipment (
-	equipment_id INTEGER AUTO_INCREME		-- 장비번호
+	equipment_id INTEGER AUTO_INCREMENT,	-- 장비번호
 	name VARCHAR(30) NOT NULL,				-- 장비명
 	register_date DATETIME DEFAULT(NOW()),	-- 등록일시
 	PRIMARY KEY (equipment_id)
