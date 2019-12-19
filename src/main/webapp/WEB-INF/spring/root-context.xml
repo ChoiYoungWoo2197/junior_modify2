@@ -39,4 +39,7 @@
 	</bean>
 	<!-- 1번에서 생성된  dataSource 객체를 2번에 ref로 삽입, 2번에서 생성된 sqlSessionFactory를 3번에 ref로 삽입하여 최종적으로 sqlSession을 사용하는 과정-->
 	
+	
+	<context:component-scan base-package="kr.or.persistence" /> 
+	<context:component-scan base-package="kr.or.service" />
 </beans>
