@@ -45,7 +45,7 @@
 <body>
 	<div class="width1200">
 		<header>
-			<button id="loginButton" class="float_right">로그인</button>
+			<button id="loginButton" class="float_right" type="button" onclick="location.href='login.jsp'">로그인</button>
 			<div class="clear_both"></div>
 		</header>
 	</div>
