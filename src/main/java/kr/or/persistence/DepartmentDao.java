@@ -9,6 +9,6 @@ public interface DepartmentDao {
 	public void insertData(String name);
 	public void deleteData(String departmentId);
 	public void updateDate(String departmentId, String name);
-	public List<DepartmentAccount> selectAll();
+	public List<Department> selectAll();
 	
 }

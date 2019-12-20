@@ -6,7 +6,7 @@ public class DepartmentAccount {
 	private int departmentId;
 	private String name;
 	private Date registerDate;
-	private int count;
+	private int account;
 	
 	public int getDepartmentId() {
 		return departmentId;
@@ -26,11 +26,13 @@ public class DepartmentAccount {
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
-	public int getCount() {
-		return count;
+	public int getAccount() {
+		return account;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setAccount(int account) {
+		this.account = account;
 	}
+
+
 
 }
