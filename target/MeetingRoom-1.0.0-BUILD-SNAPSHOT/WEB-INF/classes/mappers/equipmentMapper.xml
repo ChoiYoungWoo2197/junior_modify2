@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.mappers.equipmentMapper">
+
+	<select id="listEquipment" resultType="Equipment" parameterType="Criteria">
+		SELECT * FROM equipment ORDER BY equipment_id DESC LIMIT #{pageStart}, #{perPageNum}
+	</select>
+
+	<insert id="insertEquipment" parameterType="Equipment">
+		INSERT INTO equipment(name, register_date) VALUES (#{name}, #{registerDate})
+	</insert>
+	
+	<update id="updateEquipment" parameterType="Equipment">
+		UPDATE equipment SET name = #{name} WHERE equipment_id = #{equipmentId}
+	</update>
+	
+	<delete id="deleteEquipment" parameterType="int">
+		DELETE FROM equipment WHERE equipment_id = #{equipmentId}
+	</delete>
+	
+	<select id="listEquipmentCount" resultType="int">
+		SELECT COUNT(equipment_id) FROM equipment
+	</select>
+	
+	<select id="searchEquipment" resultType="Equipment">
+		SELECT * FROM equipment WHERE name LIKE CONCAT('%',#{searchContent},'%') 
+		ORDER BY equipment_id DESC LIMIT #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="searchEquipmentCount" resultType="int">
+		SELECT COUNT(equipment_id) FROM equipment WHERE name LIKE CONCAT('%',#{searchContent},'%')
+	</select>
+</mapper>
