@@ -3,31 +3,39 @@
 <mapper namespace="kr.or.mappers.employeeMapper">
 
 	<insert id="insertEmployee">
-		insert into employee(employee_id, department_id, name, password, email, phone)
-		values(#{employee_id}, #{department_id},  #{name}, #{password}, #{email}, #{phone})
+		insert into employee(employee_id, department_id,
+		name, password, email, phone)
+		values(#{employee_id}, #{department_id},
+		#{name}, #{password}, #{email}, #{phone})
 	</insert>
 
 	<delete id="deleteEmployee" parameterType="String">
 		delete from
-		employee where
+		employee
+		where
 		employee_id=#{employee_id}
 	</delete>
-	
+
 	<update id="updateEmployee">
 		update employee
-		set 
+		set
 		department_id = #{department_id},
 		name = #{name},
 		password = #{password},
-		email = #{email},
+		email =
+		#{email},
 		phone = #{phone}
-		
+
 		where employee_id = #{employee_id}
 	</update>
-	
+
 	<select id="selectEmployee" resultType="Employee">
-        select * from employee
-    </select>
+		select * from employee
+	</select>
 
-
+	<select id="selectAccountEmployee" resultType="boolean">
+		select count(*) from employee
+		where employee_id = #{employee_id} and
+		password = #{password}
+	</select>
 </mapper>

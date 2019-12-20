@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import kr.or.domain.Department;
+import org.springframework.stereotype.Repository;
 
+import kr.or.domain.Department;
+import kr.or.domain.DepartmentAccount;
+
+@Repository
 public class DepartmentDaoImpl implements DepartmentDao {
 	private static final String namespace = "kr.or.mappers.departmentMapper";
 	@Autowired
@@ -55,17 +58,19 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	}
 
 	@Override
-	public List<Department> selectAll() {
+	public List<DepartmentAccount> selectAll() {
 		// TODO Auto-generated method stub
-		List<Department> departmentList = new ArrayList<Department>();
+		List<DepartmentAccount> departmentList = new ArrayList<DepartmentAccount>();
 		
 		try(SqlSession session = sqlSessionFactory.openSession()) {
 			departmentList = session.selectList(namespace + ".selectDepartment");
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println(e.toString());
 		}
 		
 		return departmentList;
 	}
+
 
 }
