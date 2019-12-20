@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.domain.Criteria;
 import kr.or.domain.Equipment;
+import kr.or.domain.SearchCriteria;
 
 @Repository
 public class EquipmentDaoImpl implements EquipmentDao {
@@ -16,8 +18,8 @@ public class EquipmentDaoImpl implements EquipmentDao {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<Equipment> listEquipment() {
-		return sqlSession.selectList(namespace + ".listEquipment");
+	public List<Equipment> listEquipment(Criteria criteria) {
+		return sqlSession.selectList(namespace + ".listEquipment", criteria);
 	}
 	
 	@Override
@@ -33,6 +35,21 @@ public class EquipmentDaoImpl implements EquipmentDao {
 	@Override
 	public void deleteEquipment(int equipmentId) {
 		sqlSession.update(namespace + ".deleteEquipment", equipmentId);
+	}
+
+	@Override
+	public int listEquipmentCount() {
+		return sqlSession.selectOne(namespace + ".listEquipmentCount");
+	}
+
+	@Override
+	public List<Equipment> searchEquipment(SearchCriteria criteria) {
+		return sqlSession.selectList(namespace + ".searchEquipment", criteria);
+	}
+
+	@Override
+	public int searchEquipmentCount(SearchCriteria criteria) {
+		return sqlSession.selectOne(namespace + ".searchEquipmentCount", criteria);
 	}
 
 }
