@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="../include/managerHeader.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,12 +39,11 @@ function rowDel (obj) {
 				<tr>
 					<th>${data.departmentId}</th>
 					<th>${data.name}</th>
-					<th>${data.count}</th>
-					<th>${data.registerDate}</th>
+					<th>${data.account}</th>
+					<td><fmt:formatDate value="${data.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
 					<td><input type="button" id="1" value="삭제" onclick='javascript:rowDel(this);'></td>
 				</tr>
 			</c:forEach>
-
 		</tbody>
 
 	</table>

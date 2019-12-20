@@ -46,7 +46,6 @@
 		<property name="dataSource" ref="dataSource" />
  	</bean>
  	<tx:annotation-driven transaction-manager="transactionManager"/>
-
 	<context:component-scan base-package="kr.or.persistence" /> 
 	<context:component-scan base-package="kr.or.service" />
 </beans>

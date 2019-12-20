@@ -18,8 +18,7 @@
 		where department_id = #{departmentId}
 	</update>
 	
-	<select id="selectDepartment" resultType="DepartmentAccount">
-        SELECT dpt.department_id, dpt.name, dpt.register_date, (SELECT COUNT(*) FROM employee AS emp WHERE emp.department_id = dpt.department_id)
-        FROM department AS dpt
+	<select id="selectDepartment" resultType="Department">
+		select * from department
     </select>
 </mapper>

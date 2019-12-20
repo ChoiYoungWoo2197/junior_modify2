@@ -58,9 +58,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	}
 
 	@Override
-	public List<DepartmentAccount> selectAll() {
+	public List<Department> selectAll() {
 		// TODO Auto-generated method stub
-		List<DepartmentAccount> departmentList = new ArrayList<DepartmentAccount>();
+		List<Department> departmentList = new ArrayList<Department>();
 		
 		try(SqlSession session = sqlSessionFactory.openSession()) {
 			departmentList = session.selectList(namespace + ".selectDepartment");

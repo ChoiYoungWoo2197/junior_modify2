@@ -31,28 +31,19 @@ public class LoginController {
 
 	@Autowired
 	private EmployeeDao employeeDao;
-
-	@Autowired
-	private DepartmentDao departMentDao;
-	
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/departMentPage.do", method = RequestMethod.POST) 
-	public String departMent(Locale locale, Model model) {
-		List<DepartmentAccount> departMentList = new ArrayList<DepartmentAccount>();
-		departMentList = departMentDao.selectAll();
-
-		model.addAttribute("departMentData", departMentList);
-		return "departMent";
-		
+	@RequestMapping(value = "/login", method = RequestMethod.GET) 
+	public String login(Locale locale, Model model) {
+		return "login";
 	}
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
 	public String login(Locale locale, Model model, @RequestParam("loginId") String loginId, @RequestParam("loginPw") String loginPw) {
 		logger.info("사원번호 : " + loginId + " " + "비밀번호 : " + loginPw);
 		String result = "login";
