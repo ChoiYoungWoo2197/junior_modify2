@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,16 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
-
 import kr.or.domain.Department;
 import kr.or.domain.DepartmentAccount;
 import kr.or.persistence.DepartmentDao;
 import kr.or.persistence.EmployeeDao;
-import net.sf.json.JSONArray;
 
 /**
  * Handles requests for the application home page.
@@ -45,12 +41,10 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/departMentPage.do", method = RequestMethod.POST) 
 	public String departMent(Locale locale, Model model) {
-		JSONArray jsonArray = new JSONArray();
 		List<DepartmentAccount> departMentList = new ArrayList<DepartmentAccount>();
 		departMentList = departMentDao.selectAll();
 
 		model.addAttribute("departMentData", departMentList);
-		System.out.println(jsonArray.fromObject(departMentList));
 		return "departMent";
 		
 	}
