@@ -2,12 +2,14 @@ package kr.or.test;
 
 import java.util.Date;
 import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.or.domain.Criteria;
 import kr.or.domain.Equipment;
 import kr.or.persistence.EquipmentDao;
 
@@ -18,9 +20,11 @@ public class EquipmentTest {
 	@Autowired
 	EquipmentDao equipmentDao;
 	
-	//@Test
+	@Test
 	public void testList() {
-		List<Equipment> list = equipmentDao.listEquipment();
+		Criteria criteria = new Criteria();
+
+		List<Equipment> list = equipmentDao.listEquipment(criteria);
 		
 		for(Equipment equipment : list) {
 			System.out.println(equipment.getName());

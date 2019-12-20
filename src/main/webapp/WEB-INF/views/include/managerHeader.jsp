@@ -5,42 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	* {
-		margin: 0;
-		padding: 0;
-	}
-	.float_left {
-		float: left;
-	}
-	.float_right {
-		float: right;
-	}
-	.clear_both {
-		clear: both;
-	}
-
-
-	.width1200 {
-		width: 1200px;
-		margin: 0 auto;
-	}
-	header {
-		padding: 20px 0;
-	}
-	nav {
-		background-color: rgba(189,189,189,0.5);
-		height: 60px;
-	}
-	li {
-		list-style: none;
-		float: left;
-		width: 20%;
-		text-align: center;
-		padding: 20px 0;
-	}
-	
-</style>
+<link href="${pageContext.request.contextPath}/resources/css/managerHeader.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<div class="width1200">
@@ -60,5 +25,3 @@
 			</ul>
 		</div>
 	</nav>
-</body>
-</html>

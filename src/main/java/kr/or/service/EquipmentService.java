@@ -1,4 +1,4 @@
-package kr.or.persistence;
+package kr.or.service;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import kr.or.domain.Criteria;
 import kr.or.domain.Equipment;
 import kr.or.domain.SearchCriteria;
 
-public interface EquipmentDao {
+public interface EquipmentService {
 	
 	public List<Equipment> listEquipment(Criteria criteria);
 	public void insertEquipment(Equipment equipment);
