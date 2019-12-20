@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.domain.Department;
+import kr.or.domain.DepartmentAccount;
 
 @Repository
 public class DepartmentDaoImpl implements DepartmentDao {
@@ -57,17 +58,19 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	}
 
 	@Override
-	public List<Department> selectAll() {
+	public List<DepartmentAccount> selectAll() {
 		// TODO Auto-generated method stub
-		List<Department> departmentList = new ArrayList<Department>();
+		List<DepartmentAccount> departmentList = new ArrayList<DepartmentAccount>();
 		
 		try(SqlSession session = sqlSessionFactory.openSession()) {
 			departmentList = session.selectList(namespace + ".selectDepartment");
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println(e.toString());
 		}
 		
 		return departmentList;
 	}
+
 
 }

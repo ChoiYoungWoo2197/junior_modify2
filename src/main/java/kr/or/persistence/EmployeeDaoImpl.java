@@ -7,8 +7,10 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import kr.or.domain.Employee;
 
+@Repository
 public class EmployeeDaoImpl implements EmployeeDao{
 	private static final String namespace = "kr.or.mappers.employeeMapper";
 	@Autowired
@@ -79,8 +81,24 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		return employeeList;
 	}
 
-
-
-
-
+	@Override
+	public boolean checkAccount(String employeeId, String password) {
+		// TODO Auto-generated method stub
+		boolean result = false;
+		Map<String, Object> map = new HashMap<>();
+		
+		try(SqlSession session = sqlSessionFactory.openSession()) {
+			map.put("employee_id", employeeId);
+			map.put("password", password);
+			
+			System.out.println("실행됨?2");
+			result = session.selectOne(namespace + ".selectAccountEmployee", map);
+			System.out.println(result);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 }
