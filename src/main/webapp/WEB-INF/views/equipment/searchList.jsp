@@ -139,6 +139,7 @@
 						url: "${pageContext.request.contextPath}/equipment/update",
 						type: "post",
 						data: {"name":$("input[name='name']").val(),"equipmentId":Number(equipmentId)},
+						dataType:"json",
 						success: function(res) {
 							$("#tableEquipment").empty();
 							$("#tableEquipment").append("<tr><th>번호</th><th>장비명</th><th>등록일시</th><th></th></tr>");
@@ -169,16 +170,14 @@
 		
 		$("#searchEquipment").click(function() {
 			$.ajax({
-				url: "${pageContext.request.contextPath}/equipment/search",
+				url: "${pageContext.request.contextPath}/equipment/searchList?searchContent="+$("input[name='searchContent']").val(),
 				type: "get",
-				data: {"searchContent":$("input[name='searchContent']").val()},
+				dataType:"json",
 				success: function(res) {
 					$("#tableEquipment").empty();
-					$(".pagination").empty();
-					
 					$("#tableEquipment").append("<tr><th>번호</th><th>장비명</th><th>등록일시</th><th></th></tr>");
 					
-					$(res.equipmentList).each(function(i, obj) {
+					$(res).each(function(i, obj) {
 						var register_date = new Date(obj.registerDate);
 						var registerDate = register_date.getFullYear()+"."+(register_date.getMonth()+1)+"."+("00" + register_date.getDate()).slice(-2)+" "+
 											register_date.getHours()+":"+("00" + register_date.getMinutes()).slice(-2);
@@ -192,20 +191,6 @@
 						
 						$tr.append($equipmentId).append($name).append($registerDate).append($buttonWrap);
 						$("#tableEquipment").append($tr);
-					})
-					
-					
-					$(res.pageMaker).each(function(i, obj) {
-						for(var i=obj.startPage; i<=obj.endPage; i++) {
-							var $li = $("<li>");
-							var $a = $("<a>").attr("href","list?page="+i+"&searchContent="+obj.criteria.searchContent);
-							var $span = $("<span>");
-							console.log(i);
-						}
-						
-						$a.append($span);
-						$li.append($a);
-						$(".pagination").append($li);
 					})
 					
 					$("#insertEquipmentDiv").css("display","none");
@@ -247,7 +232,7 @@
 					<li><a href="list?page=${pageMaker.startPage-1}">&laquo;</a></li>
 				</c:if>
 				<c:forEach var="index" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-					<li><a href="list?page=${index}&searchContent=${criteria.searchContent}"><span ${pageMaker.criteria.page == index ? 'class="active"' : ''}></span></a></li>
+					<li><a href="list?page=${index}?searchContent=${criteria.searchContent}"><span ${pageMaker.criteria.page == index ? 'class="active"' : ''}></span></a></li>
 				</c:forEach>
 				<c:if test="${pageMaker.next}">
 					<li><a href="list?page=${pageMaker.startPage-1}">&raquo;</a></li>
