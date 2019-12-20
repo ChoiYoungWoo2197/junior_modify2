@@ -10,19 +10,8 @@
 </head>
 <body>
 	<main class="main-page">
-		<header>
-			<div>
-				<form id="departMentForm" name="departMentForm" method="post" action="departMentPage.do">
-					<button type="submit" class="login-btn">부서관리</button>
-				</form>
-
-			</div>
-
-		</header>
-
 		<section class="main-page-unit">
-			<form id="loginForm" name="loginForm" method="post"
-				action="loginCheck.do">
+			<form id="loginForm" name="loginForm" method="post"	action="loginCheck">
 				<div class="login-frame">
 					<div class="login-unit">
 						<img class="login-img" src="./resources/images/loginID.jpg">
