@@ -1,15 +1,14 @@
 package kr.or.controller;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,14 +31,24 @@ public class EquipmentController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void list(SearchCriteria searchCriteria, Model model) {
 		logger.info("equipment list");
+		logger.info(searchCriteria.getSearchContent());
 		
-		List<Equipment> equipmentList = equipmentService.listEquipment(searchCriteria);
+		if(searchCriteria.getSearchContent()==null) {
+			System.out.println("dfsdfsdfsdf");
+		}
+		
+		List<Equipment> equipmentList = equipmentService.searchEquipment(searchCriteria);
 		model.addAttribute("equipmentList", equipmentList);
+		System.out.println(equipmentList + "-------------------");
+		for(Equipment e : equipmentList) {
+			System.out.println(e.getName() + "--");
+		}
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCriteria(searchCriteria);
-		pageMaker.setTotalCount(equipmentService.listEquipmentCount());
+		pageMaker.setTotalCount(equipmentService.searchEquipmentCount(searchCriteria));
 		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("criteria", searchCriteria);
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -80,7 +89,7 @@ public class EquipmentController {
 		return equipmentList;
 	}
 	
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> searchEquipment(SearchCriteria searchCriteria, Model model) {
 		logger.info("equipment search & searchContent : " + searchCriteria.getSearchContent());
 		
@@ -98,5 +107,5 @@ public class EquipmentController {
 		System.out.println(map);
 		
 		return map;
-	}
+	}*/
 }

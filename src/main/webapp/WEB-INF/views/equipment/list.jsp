@@ -168,10 +168,9 @@
 		})
 		
 		$("#searchEquipment").click(function() {
-			$.ajax({
-				url: "${pageContext.request.contextPath}/equipment/search",
+			/* $.ajax({
+				url: "${pageContext.request.contextPath}/equipment/search?searchContent="+$("input[name='searchContent']").val(),
 				type: "get",
-				data: {"searchContent":$("input[name='searchContent']").val()},
 				success: function(res) {
 					$("#tableEquipment").empty();
 					$(".pagination").empty();
@@ -211,7 +210,8 @@
 					$("#insertEquipmentDiv").css("display","none");
 					$("input[name='name']").val("");
 				}
-			})
+			}) */
+			location.href = "list?page=1&searchContent="+$("input[name='searchContent']").val();
 		})
 	})
 </script>
@@ -220,8 +220,8 @@
 	<section class="width1200">
 		<h1>장비관리</h1>
 		<div>
-			<input type="text" name="searchContent">
-			<button  id="searchEquipment">검색</button>
+			<input type="text" name="searchContent" value="${criteria.searchContent}">
+			<button id="searchEquipment">검색</button>
 		</div>
 		<table id="tableEquipment">
 			<tr>
@@ -244,13 +244,13 @@
 		<div id="paging">
 			<ul class="pagination">
 				<c:if test="${pageMaker.prev}">
-					<li><a href="list?page=${pageMaker.startPage-1}">&laquo;</a></li>
+					<li><a href="list?page=${pageMaker.startPage-1}&searchContent=${criteria.searchContent}">&laquo;</a></li>
 				</c:if>
 				<c:forEach var="index" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 					<li><a href="list?page=${index}&searchContent=${criteria.searchContent}"><span ${pageMaker.criteria.page == index ? 'class="active"' : ''}></span></a></li>
 				</c:forEach>
 				<c:if test="${pageMaker.next}">
-					<li><a href="list?page=${pageMaker.startPage-1}">&raquo;</a></li>
+					<li><a href="list?page=${pageMaker.startPage-1}&searchContent=${criteria.searchContent}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>
