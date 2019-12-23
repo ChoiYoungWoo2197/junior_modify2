@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,19 +29,10 @@ public class EquipmentController {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void list(SearchCriteria searchCriteria, Model model) {
-		logger.info("equipment list");
-		logger.info(searchCriteria.getSearchContent());
-		
-		if(searchCriteria.getSearchContent()==null) {
-			System.out.println("dfsdfsdfsdf");
-		}
+		logger.info("equipment list & searchContent : " + searchCriteria.getSearchContent());
 		
 		List<Equipment> equipmentList = equipmentService.searchEquipment(searchCriteria);
 		model.addAttribute("equipmentList", equipmentList);
-		System.out.println(equipmentList + "-------------------");
-		for(Equipment e : equipmentList) {
-			System.out.println(e.getName() + "--");
-		}
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCriteria(searchCriteria);

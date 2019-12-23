@@ -23,11 +23,11 @@
 	</select>
 	
 	<select id="searchEquipment" resultType="Equipment">
-		SELECT * FROM equipment WHERE name LIKE CONCAT('%',#{searchContent},'%') 
+		SELECT * FROM equipment WHERE name LIKE '%${searchContent}%' 
 		ORDER BY equipment_id DESC LIMIT #{pageStart}, #{perPageNum}
 	</select>
 	
 	<select id="searchEquipmentCount" resultType="int">
-		SELECT COUNT(equipment_id) FROM equipment WHERE name LIKE CONCAT('%',#{searchContent},'%')
+		SELECT COUNT(equipment_id) FROM equipment WHERE name LIKE '%${searchContent}%'
 	</select>
 </mapper>
