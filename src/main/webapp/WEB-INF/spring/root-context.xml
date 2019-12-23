@@ -20,8 +20,8 @@
 	<context:property-placeholder location="classpath:/dataSource.properties"/>
 	
 	<!-- 1. DB Connection을 위한 객체 생성 (DataSource 설정) => 기본적인 Connection을 만드는 dataSource에 프로퍼티 삽입 -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-        <property name="driverClass" value="${jdbc.driverClass}" /> <!-- 가져올 드라이버의 위치를 알려주는 driverClass -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}" /> <!-- 가져올 드라이버의 위치를 알려주는 driverClass -->
         <property name="url" value="${jdbc.url}"/> <!-- DB에 연결하기 위한 url -->
         <property name="username" value="${jdbc.username}" /> <!-- DB에 접속하기 위한 username, password -->
         <property name="password" value="${jdbc.password}" />

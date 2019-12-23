@@ -1,0 +1,22 @@
+# Compiled class file
+*.class
+
+# Directories
+/target/
+
+# Log file
+*.log
+
+# Package Files
+*.jar
+*.war
+*.zip
+*.tar.gz
+
+# Eclipse
+.project
+.metadata
+.classpath
+.settings/
+.loadpath
+.springBeans

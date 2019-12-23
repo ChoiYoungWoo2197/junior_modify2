@@ -11,9 +11,10 @@
 	}
 	table {
 		border-collapse: collapse;
+		width: 100%;
 	}
 	
-	#insertEquipmentDiv {
+	#insertEquipmentForm {
 		display: none;
 	}
 	
@@ -43,7 +44,7 @@
 <script>
 	$(function() {
 		$("#insertEquipment").click(function() {
-			$("#insertEquipmentDiv").css("display","block");
+			$("#insertEquipmentForm").css("display","block");
 			
 			$("input[name='name']").val("");
 			$("#insert").css("display","inline");
@@ -80,14 +81,14 @@
 						$("#tableEquipment").append($tr);
 					})
 					
-					$("#insertEquipmentDiv").css("display","none");
+					$("#insertEquipmentForm").css("display","none");
 					$("input[name='name']").val("");
 				}
 			})
 		})
 		
 		$(document).on("click", ".deleteEquipment", function(){
-			$("#insertEquipmentDiv").css("display","none");
+			$("#insertEquipmentForm").css("display","none");
 			
 			var result = confirm("선택하신 장비를 삭제하시겠습니까?");
 			
@@ -123,23 +124,24 @@
 		})
 		
 		$(document).on("click", ".updateEquipment", function(){
-			$("#insertEquipmentDiv").css("display","block");
+			$("#insertEquipmentForm").css("display","block");
 			
 			$("input[name='name']").val($(this).text());
 			$("#update").css("display","inline");
 			$("#insert").css("display","none");
 			
 			var equipmentId = $(this).attr("data-equipmentId");
+			alert(equipmentId);
 			
 			$("#update").click(function() {
 				var result = confirm("장비를 수정하시겠습니까?");
+				alert("number : " + equipmentId);
 				
 				if(result == true) { 
 					$.ajax({
 						url: "${pageContext.request.contextPath}/equipment/update",
 						type: "post",
 						data: {"name":$("input[name='name']").val(),"equipmentId":Number(equipmentId)},
-						dataType:"json",
 						success: function(res) {
 							$("#tableEquipment").empty();
 							$("#tableEquipment").append("<tr><th>번호</th><th>장비명</th><th>등록일시</th><th></th></tr>");
@@ -160,7 +162,7 @@
 								$("#tableEquipment").append($tr);
 							})
 							
-							$("#insertEquipmentDiv").css("display","none");
+							$("#insertEquipmentForm").css("display","none");
 							$("input[name='name']").val("");
 						}
 					})
@@ -169,16 +171,16 @@
 		})
 		
 		$("#searchEquipment").click(function() {
-			$.ajax({
-				url: "${pageContext.request.contextPath}/equipment/search",
-				type: "post",
-				data: {"searchContent":$("input[name='searchContent']").val()},
-				dataType:"json",
+			/* $.ajax({
+				url: "${pageContext.request.contextPath}/equipment/search?searchContent="+$("input[name='searchContent']").val(),
+				type: "get",
 				success: function(res) {
 					$("#tableEquipment").empty();
+					$(".pagination").empty();
+					
 					$("#tableEquipment").append("<tr><th>번호</th><th>장비명</th><th>등록일시</th><th></th></tr>");
 					
-					$(res).each(function(i, obj) {
+					$(res.equipmentList).each(function(i, obj) {
 						var register_date = new Date(obj.registerDate);
 						var registerDate = register_date.getFullYear()+"."+(register_date.getMonth()+1)+"."+("00" + register_date.getDate()).slice(-2)+" "+
 											register_date.getHours()+":"+("00" + register_date.getMinutes()).slice(-2);
@@ -194,10 +196,33 @@
 						$("#tableEquipment").append($tr);
 					})
 					
-					$("#insertEquipmentDiv").css("display","none");
+					
+					$(res.pageMaker).each(function(i, obj) {
+						for(var i=obj.startPage; i<=obj.endPage; i++) {
+							var $li = $("<li>");
+							var $a = $("<a>").attr("href","list?page="+i+"&searchContent="+obj.criteria.searchContent);
+							var $span = $("<span>");
+							console.log(i);
+						}
+						
+						$a.append($span);
+						$li.append($a);
+						$(".pagination").append($li);
+					})
+					
+					$("#insertEquipmentForm").css("display","none");
 					$("input[name='name']").val("");
 				}
-			})
+			}) */
+			location.href = "list?page=1&searchContent="+$("input[name='searchContent']").val();
+		})
+		
+		$("#AllEquipment").click(function() {
+			location.href = "list";
+		})
+		
+		$("#reset").click(function() {
+			$("input[name='name']").val("");
 		})
 	})
 </script>
@@ -206,8 +231,9 @@
 	<section class="width1200">
 		<h1>장비관리</h1>
 		<div>
-			<input type="text" name="searchContent">
-			<button  id="searchEquipment">검색</button>
+			<input type="text" name="searchContent" value="${criteria.searchContent}">
+			<button id="searchEquipment">검색</button>
+			<button id="AllEquipment">전체보기</button>
 		</div>
 		<table id="tableEquipment">
 			<tr>
@@ -230,24 +256,24 @@
 		<div id="paging">
 			<ul class="pagination">
 				<c:if test="${pageMaker.prev}">
-					<li><a href="list?page=${pageMaker.startPage-1}">&laquo;</a></li>
+					<li><a href="list?page=${pageMaker.startPage-1}&searchContent=${criteria.searchContent}">&lt;</a></li>
 				</c:if>
 				<c:forEach var="index" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-					<li><a href="list?page=${index}"><span ${pageMaker.criteria.page == index ? 'class="active"' : ''}></span></a></li>
+					<li><a href="list?page=${index}&searchContent=${criteria.searchContent}"><span ${pageMaker.criteria.page == index ? 'class="active"' : ''}></span></a></li>
 				</c:forEach>
 				<c:if test="${pageMaker.next}">
-					<li><a href="list?page=${pageMaker.startPage-1}">&raquo;</a></li>
+					<li><a href="list?page=${pageMaker.startPage-1}&searchContent=${criteria.searchContent}">&gt;</a></li>
 				</c:if>
 			</ul>
 		</div>
 		
-		<div id="insertEquipmentDiv">
+		<form id="insertEquipmentForm">
 			<label>장비명</label>
 			<input type="text" name="name">
 			<button id="insert">등록</button>
 			<button id="update">수정</button>
 			<button id="reset">초기화</button>
-		</div>
+		</form>
 	</section>
 </body>
 </html>

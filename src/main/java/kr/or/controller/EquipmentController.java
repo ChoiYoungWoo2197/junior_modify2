@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,20 +28,21 @@ public class EquipmentController {
 	EquipmentService equipmentService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void list(@ModelAttribute("criteria") Criteria criteria, Model model) {
-		logger.info("equipment list");
+	public void list(SearchCriteria searchCriteria, Model model) {
+		logger.info("equipment list & searchContent : " + searchCriteria.getSearchContent());
 		
-		List<Equipment> equipmentList = equipmentService.listEquipment(criteria);
+		List<Equipment> equipmentList = equipmentService.searchEquipment(searchCriteria);
 		model.addAttribute("equipmentList", equipmentList);
 		
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCriteria(criteria);
-		pageMaker.setTotalCount(equipmentService.listEquipmentCount());
+		pageMaker.setCriteria(searchCriteria);
+		pageMaker.setTotalCount(equipmentService.searchEquipmentCount(searchCriteria));
 		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("criteria", searchCriteria);
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody List<Equipment> insertEquipment(@ModelAttribute("criteria") Criteria criteria, String name) {
+	public @ResponseBody List<Equipment> insertEquipment(Criteria criteria, String name) {
 		logger.info("equipment insert & name : " + name);
 		
 		Equipment equipment = new Equipment();
@@ -56,7 +56,7 @@ public class EquipmentController {
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public @ResponseBody List<Equipment> deleteEquipment(@ModelAttribute("criteria") Criteria criteria, int equipmentId) {
+	public @ResponseBody List<Equipment> deleteEquipment(Criteria criteria, int equipmentId) {
 		logger.info("equipment delete & equipmentId : " + equipmentId);
 		
 		equipmentService.deleteEquipment(equipmentId);
@@ -66,7 +66,7 @@ public class EquipmentController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST) 
-	public @ResponseBody List<Equipment> updateEquipment(@ModelAttribute("criteria") Criteria criteria, String name, int equipmentId) {
+	public @ResponseBody List<Equipment> updateEquipment(Criteria criteria, String name, int equipmentId) {
 		logger.info("equipment update & name : " + name + " & equipmentId : " + equipmentId);
 		
 		Equipment equipment = new Equipment();
@@ -79,17 +79,23 @@ public class EquipmentController {
 		return equipmentList;
 	}
 	
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public @ResponseBody List<Equipment> searchEquipment(@ModelAttribute("criteria") SearchCriteria criteria, Model model) {
-		logger.info("equipment search & searchContent : " + criteria.getSearchContent());
+	/*@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> searchEquipment(SearchCriteria searchCriteria, Model model) {
+		logger.info("equipment search & searchContent : " + searchCriteria.getSearchContent());
 		
-		List<Equipment> equipmentList = equipmentService.searchEquipment(criteria);
+		List<Equipment> equipmentList = equipmentService.searchEquipment(searchCriteria);
 		
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCriteria(criteria);
-		pageMaker.setTotalCount(equipmentService.searchEquipmentCount(criteria));
+		pageMaker.setCriteria(searchCriteria);
+		pageMaker.setTotalCount(equipmentService.searchEquipmentCount(searchCriteria));
 		model.addAttribute("pageMaker", pageMaker);
 		
-		return equipmentList;
-	}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("equipmentList", equipmentList);
+		map.put("pageMaker", pageMaker);
+		
+		System.out.println(map);
+		
+		return map;
+	}*/
 }
