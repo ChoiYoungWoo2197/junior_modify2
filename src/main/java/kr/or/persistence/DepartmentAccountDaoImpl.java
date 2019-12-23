@@ -19,14 +19,19 @@ public class DepartmentAccountDaoImpl implements DepartmentAccountDao {
 	@Autowired
 	SqlSession sqlsession;
 	
-	
-
 	@Override
 	public List<DepartmentAccount> selectAll() {
+		return sqlsession.selectList(namespace + ".selectDepartmentAccount");
+	}
+
+
+
+	@Override
+	public List<DepartmentAccount> selectSearch(String name) {
 		// TODO Auto-generated method stub
 		List<DepartmentAccount> departmentList = new ArrayList<DepartmentAccount>();
 		
-		departmentList = sqlsession.selectList(namespace + ".selectDepartmentAccount");
+		departmentList = sqlsession.selectList(namespace + ".selectSearchDepartmentAccount",name);
 		return departmentList;
 	}
 

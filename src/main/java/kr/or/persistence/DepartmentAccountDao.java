@@ -6,5 +6,5 @@ import kr.or.domain.DepartmentAccount;
 
 public interface DepartmentAccountDao {
 	public List<DepartmentAccount> selectAll();
-	
+	public List<DepartmentAccount> selectSearch(String name);
 }
