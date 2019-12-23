@@ -35,7 +35,7 @@ public class employeeController {
 
 		model.addAttribute("employeeData", employeeList);
 		
-		return "/employee/employeeBoard";
+		return "/employee/listEmployee";
 	}
 
 }

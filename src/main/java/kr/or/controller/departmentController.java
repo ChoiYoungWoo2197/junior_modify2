@@ -40,7 +40,7 @@ public class departmentController {
 
 		model.addAttribute("departmentData", departmentList);
 		
-		return "/department/departmentBoard";
+		return "/department/listDepartment";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
