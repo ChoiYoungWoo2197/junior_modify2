@@ -40,6 +40,10 @@ public class EquipmentController {
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("criteria", searchCriteria);
 		
+		for(Equipment e : equipmentList) {
+			System.out.println(e.getName());
+		}
+		
 		return "equipment/listEquipment";
 	}
 	

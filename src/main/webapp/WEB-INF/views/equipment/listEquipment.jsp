@@ -205,6 +205,7 @@
 			</ul>
 		</div>
 		
+		<!--  accept-charset="UTF-8" -->
 		<form id="insertEquipmentForm" method="post" action="/equipment/insert">
 			<label>장비명</label>
 			<input type="text" name="name">
