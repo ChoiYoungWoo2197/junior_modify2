@@ -28,7 +28,7 @@ public class EquipmentController {
 	EquipmentService equipmentService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void list(SearchCriteria searchCriteria, Model model) {
+	public String list(SearchCriteria searchCriteria, Model model) {
 		logger.info("equipment list & searchContent : " + searchCriteria.getSearchContent());
 		
 		List<Equipment> equipmentList = equipmentService.searchEquipment(searchCriteria);
@@ -39,10 +39,12 @@ public class EquipmentController {
 		pageMaker.setTotalCount(equipmentService.searchEquipmentCount(searchCriteria));
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("criteria", searchCriteria);
+		
+		return "equipment/listEquipment";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody List<Equipment> insertEquipment(Criteria criteria, String name) {
+	public String insertEquipment(Criteria criteria, String name) {
 		logger.info("equipment insert & name : " + name);
 		
 		Equipment equipment = new Equipment();
@@ -51,8 +53,7 @@ public class EquipmentController {
 		
 		equipmentService.insertEquipment(equipment);
 		
-		List<Equipment> equipmentList = equipmentService.listEquipment(criteria);
-		return equipmentList;
+		return "redirect:/equipment/list";
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -66,7 +67,7 @@ public class EquipmentController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST) 
-	public @ResponseBody List<Equipment> updateEquipment(Criteria criteria, String name, int equipmentId) {
+	public String updateEquipment(Criteria criteria, String name, int equipmentId) {
 		logger.info("equipment update & name : " + name + " & equipmentId : " + equipmentId);
 		
 		Equipment equipment = new Equipment();
@@ -75,8 +76,7 @@ public class EquipmentController {
 
 		equipmentService.updateEquipment(equipment);
 		
-		List<Equipment> equipmentList = equipmentService.listEquipment(criteria);
-		return equipmentList;
+		return "redirect:/equipment/list";
 	}
 	
 	/*@RequestMapping(value = "/search", method = RequestMethod.GET)
