@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <%@ include file="../include/managerHeader.jsp" %>
 
 <style>
@@ -14,7 +13,7 @@
 		width: 100%;
 	}
 	
-	#insertEquipmentForm {
+	#insertEquipmentForm, #updateEquipmentForm {
 		display: none;
 	}
 	
@@ -44,45 +43,22 @@
 <script>
 	$(function() {
 		$("#insertEquipment").click(function() {
-			$("#insertEquipmentForm").css("display","block");
-			
-			$("input[name='name']").val("");
-			$("#insert").css("display","inline");
-			$("#update").css("display","none");
+			location.href = "insert";
 		})
 		
-		$("#insert").click(function() {
-			if($("input[name='name']").val()=="") {
-				alert("장비명을 입력하세요");
-				return false;
-			}
+		$(document).on("click", ".updateEquipment", function(){
+			$("#updateEquipmentForm").toggle();
+			$("#insertEquipmentForm").css("display","none");
 			
-			$.ajax({
-				url: "${pageContext.request.contextPath}/equipment/insert",
-				type: "post",
-				data: {"name":$("input[name='name']").val()},
-				success: function(res) {
-					$("#tableEquipment").empty();
-					$("#tableEquipment").append("<tr><th>번호</th><th>장비명</th><th>등록일시</th><th></th></tr>");
-					
-					$(res).each(function(i, obj) {
-						var register_date = new Date(obj.registerDate);
-						var registerDate = register_date.getFullYear()+"."+(register_date.getMonth()+1)+"."+("00" + register_date.getDate()).slice(-2)+" "+
-											register_date.getHours()+":"+("00" + register_date.getMinutes()).slice(-2);
-						 
-						var $tr = $("<tr>");
-						var $equipmentId = $("<td>").text(obj.equipmentId);
-						var $name = $("<td>").addClass("updateEquipment").attr("data-equipmentId", obj.equipmentId).text(obj.name);
-						var $registerDate = $("<td>").text(registerDate);
-						var $button = $("<button>").addClass("deleteEquipment").attr("data-equipmentId", obj.equipmentId).text("삭제");
-						var $buttonWrap = $("<td>").append($button);
-						
-						$tr.append($equipmentId).append($name).append($registerDate).append($buttonWrap);
-						$("#tableEquipment").append($tr);
-					})
-					
-					$("#insertEquipmentForm").css("display","none");
-					$("input[name='name']").val("");
+			$("input[name='name']").val($(this).text());
+			
+			var equipmentId = $(this).attr("data-equipmentId");
+			
+			$("#updateEquipmentForm").submit(function() {
+				var result = confirm("장비를 수정하시겠습니까?");
+				
+				if(result == false) { 
+					return false;
 				}
 			})
 		})
@@ -96,7 +72,7 @@
 				var equipmentId = $(this).attr("data-equipmentId");
 				
 				$.ajax({
-					url: "${pageContext.request.contextPath}/equipment/delete",
+					url: "${pageContext.request.contextPath}/management/delete",
 					type: "post",
 					data: {"equipmentId":Number(equipmentId)},
 					success: function(res) {
@@ -123,52 +99,7 @@
 			}
 		})
 		
-		$(document).on("click", ".updateEquipment", function(){
-			$("#insertEquipmentForm").css("display","block");
-			
-			$("input[name='name']").val($(this).text());
-			$("#update").css("display","inline");
-			$("#insert").css("display","none");
-			
-			var equipmentId = $(this).attr("data-equipmentId");
-			alert(equipmentId);
-			
-			$("#update").click(function() {
-				var result = confirm("장비를 수정하시겠습니까?");
-				alert("number : " + equipmentId);
-				
-				if(result == true) { 
-					$.ajax({
-						url: "${pageContext.request.contextPath}/equipment/update",
-						type: "post",
-						data: {"name":$("input[name='name']").val(),"equipmentId":Number(equipmentId)},
-						success: function(res) {
-							$("#tableEquipment").empty();
-							$("#tableEquipment").append("<tr><th>번호</th><th>장비명</th><th>등록일시</th><th></th></tr>");
-							
-							$(res).each(function(i, obj) {
-								var register_date = new Date(obj.registerDate);
-								var registerDate = register_date.getFullYear()+"."+(register_date.getMonth()+1)+"."+("00" + register_date.getDate()).slice(-2)+" "+
-													register_date.getHours()+":"+("00" + register_date.getMinutes()).slice(-2);
-								 
-								var $tr = $("<tr>");
-								var $equipmentId = $("<td>").text(obj.equipmentId);
-								var $name = $("<td>").addClass("updateEquipment").attr("data-equipmentId", obj.equipmentId).text(obj.name);
-								var $registerDate = $("<td>").text(registerDate);
-								var $button = $("<button>").addClass("deleteEquipment").attr("data-equipmentId", obj.equipmentId).text("삭제");
-								var $buttonWrap = $("<td>").append($button);
-								
-								$tr.append($equipmentId).append($name).append($registerDate).append($buttonWrap);
-								$("#tableEquipment").append($tr);
-							})
-							
-							$("#insertEquipmentForm").css("display","none");
-							$("input[name='name']").val("");
-						}
-					})
-				}
-			})
-		})
+		
 		
 		$("#searchEquipment").click(function() {
 			/* $.ajax({
@@ -221,9 +152,6 @@
 			location.href = "list";
 		})
 		
-		$("#reset").click(function() {
-			$("input[name='name']").val("");
-		})
 	})
 </script>
 
@@ -236,20 +164,32 @@
 			<button id="AllEquipment">전체보기</button>
 		</div>
 		<table id="tableEquipment">
-			<tr>
-				<th>번호</th>
-				<th>장비명</th>
-				<th>등록일시</th>
-				<th></th>
-			</tr>
-			<c:forEach var="equipment" items="${equipmentList}">
+			<c:if test="${empty equipmentList}">
 				<tr>
-					<td>${equipment.equipmentId}</td>
-					<td class="updateEquipment" data-equipmentId="${equipment.equipmentId}">${equipment.name}</td>
-					<td><fmt:formatDate value="${equipment.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
-					<td><button class="deleteEquipment" data-equipmentId="${equipment.equipmentId}">삭제</button></td>
+					<th>번호</th>
+					<th>장비명</th>
+					<th>등록일시</th>
 				</tr>
-			</c:forEach>
+				<tr>
+					<td colspan="3">내역이 없습니다.</td>
+				</tr>
+			</c:if>
+			<c:if test="${!empty equipmentList}">
+				<tr>
+					<th>번호</th>
+					<th>장비명</th>
+					<th>등록일시</th>
+					<th></th>
+				</tr>
+				<c:forEach var="equipment" items="${equipmentList}">
+					<tr>
+						<td>${equipment.equipmentId}</td>
+						<td class="updateEquipment" data-equipmentId="${equipment.equipmentId}">${equipment.name}</td>
+						<td><fmt:formatDate value="${equipment.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
+						<td><button class="deleteEquipment" data-equipmentId="${equipment.equipmentId}">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</c:if>
 		</table>
 		<button id="insertEquipment">장비등록</button>
 		
@@ -267,12 +207,14 @@
 			</ul>
 		</div>
 		
-		<form id="insertEquipmentForm">
+		<form id="updateEquipmentForm" method="post" action="/management/update">
 			<label>장비명</label>
 			<input type="text" name="name">
-			<button id="insert">등록</button>
+			<input type="submit" value="수정">
+			<input type="reset">
+			<!-- <button id="insert">등록</button>
 			<button id="update">수정</button>
-			<button id="reset">초기화</button>
+			<button id="reset">초기화</button> -->
 		</form>
 	</section>
 </body>

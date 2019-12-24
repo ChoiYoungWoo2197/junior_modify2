@@ -19,16 +19,16 @@ import kr.or.domain.SearchCriteria;
 import kr.or.service.EquipmentService;
 
 @Controller
-@RequestMapping("/equipment/*")
-public class EquipmentController {
+@RequestMapping("/management/*")
+public class ManagementController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(EquipmentController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
 	
 	@Autowired
 	EquipmentService equipmentService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void list(SearchCriteria searchCriteria, Model model) {
+	public String list(SearchCriteria searchCriteria, Model model) {
 		logger.info("equipment list & searchContent : " + searchCriteria.getSearchContent());
 		
 		List<Equipment> equipmentList = equipmentService.searchEquipment(searchCriteria);
@@ -39,10 +39,23 @@ public class EquipmentController {
 		pageMaker.setTotalCount(equipmentService.searchEquipmentCount(searchCriteria));
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("criteria", searchCriteria);
+		
+		for(Equipment e : equipmentList) {
+			System.out.println(e.getName());
+		}
+		
+		return "management/listManagement";
+	}
+	
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public String insertPage(Criteria criteria, String name) {
+		logger.info("insertPage");
+		
+		return "management/insert";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public @ResponseBody List<Equipment> insertEquipment(Criteria criteria, String name) {
+	public String insertManagement(Criteria criteria, String name) {
 		logger.info("equipment insert & name : " + name);
 		
 		Equipment equipment = new Equipment();
@@ -51,12 +64,11 @@ public class EquipmentController {
 		
 		equipmentService.insertEquipment(equipment);
 		
-		List<Equipment> equipmentList = equipmentService.listEquipment(criteria);
-		return equipmentList;
+		return "redirect:/management/list";
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public @ResponseBody List<Equipment> deleteEquipment(Criteria criteria, int equipmentId) {
+	public @ResponseBody List<Equipment> deleteManagement(Criteria criteria, int equipmentId) {
 		logger.info("equipment delete & equipmentId : " + equipmentId);
 		
 		equipmentService.deleteEquipment(equipmentId);
@@ -66,7 +78,7 @@ public class EquipmentController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST) 
-	public @ResponseBody List<Equipment> updateEquipment(Criteria criteria, String name, int equipmentId) {
+	public String updateManagement(Criteria criteria, String name, int equipmentId) {
 		logger.info("equipment update & name : " + name + " & equipmentId : " + equipmentId);
 		
 		Equipment equipment = new Equipment();
@@ -75,8 +87,7 @@ public class EquipmentController {
 
 		equipmentService.updateEquipment(equipment);
 		
-		List<Equipment> equipmentList = equipmentService.listEquipment(criteria);
-		return equipmentList;
+		return "redirect:/management/list";
 	}
 	
 	/*@RequestMapping(value = "/search", method = RequestMethod.GET)
