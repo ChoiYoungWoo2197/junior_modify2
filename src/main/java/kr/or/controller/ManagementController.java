@@ -47,8 +47,15 @@ public class ManagementController {
 		return "management/listManagement";
 	}
 	
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public String insertPage(Criteria criteria, String name) {
+		logger.info("insertPage");
+		
+		return "management/insert";
+	}
+	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insertEquipment(Criteria criteria, String name) {
+	public String insertManagement(Criteria criteria, String name) {
 		logger.info("equipment insert & name : " + name);
 		
 		Equipment equipment = new Equipment();
@@ -61,7 +68,7 @@ public class ManagementController {
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public @ResponseBody List<Equipment> deleteEquipment(Criteria criteria, int equipmentId) {
+	public @ResponseBody List<Equipment> deleteManagement(Criteria criteria, int equipmentId) {
 		logger.info("equipment delete & equipmentId : " + equipmentId);
 		
 		equipmentService.deleteEquipment(equipmentId);
@@ -71,7 +78,7 @@ public class ManagementController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST) 
-	public String updateEquipment(Criteria criteria, String name, int equipmentId) {
+	public String updateManagement(Criteria criteria, String name, int equipmentId) {
 		logger.info("equipment update & name : " + name + " & equipmentId : " + equipmentId);
 		
 		Equipment equipment = new Equipment();

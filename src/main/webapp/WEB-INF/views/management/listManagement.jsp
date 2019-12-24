@@ -43,17 +43,7 @@
 <script>
 	$(function() {
 		$("#insertEquipment").click(function() {
-			$("#insertEquipmentForm").toggle();
-			$("#updateEquipmentForm").css("display","none");
-			
-			$("input[name='name']").val("");
-			
-			$("#insertEquipmentForm").submit(function() {
-				if($("input[name='name']").val()=="") {
-					alert("장비명을 입력하세요");
-					return false;
-				}
-			})
+			location.href = "insert";
 		})
 		
 		$(document).on("click", ".updateEquipment", function(){
@@ -82,7 +72,7 @@
 				var equipmentId = $(this).attr("data-equipmentId");
 				
 				$.ajax({
-					url: "${pageContext.request.contextPath}/equipment/delete",
+					url: "${pageContext.request.contextPath}/management/delete",
 					type: "post",
 					data: {"equipmentId":Number(equipmentId)},
 					success: function(res) {
@@ -174,20 +164,32 @@
 			<button id="AllEquipment">전체보기</button>
 		</div>
 		<table id="tableEquipment">
-			<tr>
-				<th>번호</th>
-				<th>장비명</th>
-				<th>등록일시</th>
-				<th></th>
-			</tr>
-			<c:forEach var="equipment" items="${equipmentList}">
+			<c:if test="${empty equipmentList}">
 				<tr>
-					<td>${equipment.equipmentId}</td>
-					<td class="updateEquipment" data-equipmentId="${equipment.equipmentId}">${equipment.name}</td>
-					<td><fmt:formatDate value="${equipment.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
-					<td><button class="deleteEquipment" data-equipmentId="${equipment.equipmentId}">삭제</button></td>
+					<th>번호</th>
+					<th>장비명</th>
+					<th>등록일시</th>
 				</tr>
-			</c:forEach>
+				<tr>
+					<td colspan="3">내역이 없습니다.</td>
+				</tr>
+			</c:if>
+			<c:if test="${!empty equipmentList}">
+				<tr>
+					<th>번호</th>
+					<th>장비명</th>
+					<th>등록일시</th>
+					<th></th>
+				</tr>
+				<c:forEach var="equipment" items="${equipmentList}">
+					<tr>
+						<td>${equipment.equipmentId}</td>
+						<td class="updateEquipment" data-equipmentId="${equipment.equipmentId}">${equipment.name}</td>
+						<td><fmt:formatDate value="${equipment.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
+						<td><button class="deleteEquipment" data-equipmentId="${equipment.equipmentId}">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</c:if>
 		</table>
 		<button id="insertEquipment">장비등록</button>
 		
@@ -205,15 +207,7 @@
 			</ul>
 		</div>
 		
-		<!--  accept-charset="UTF-8" -->
-		<form id="insertEquipmentForm" method="post" action="/equipment/insert">
-			<label>장비명</label>
-			<input type="text" name="name">
-			<input type="submit" value="등록">
-			<input type="reset">
-		</form>
-		
-		<form id="updateEquipmentForm" method="post" action="/equipment/update">
+		<form id="updateEquipmentForm" method="post" action="/management/update">
 			<label>장비명</label>
 			<input type="text" name="name">
 			<input type="submit" value="수정">
