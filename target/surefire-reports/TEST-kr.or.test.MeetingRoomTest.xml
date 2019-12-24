@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<<<<<<< HEAD
-<testsuite tests="2" failures="0" name="kr.or.test.MeetingRoomTest" time="0.103" errors="0" skipped="0">
-=======
-<testsuite tests="2" failures="0" name="kr.or.test.MeetingRoomTest" time="0.129" errors="0" skipped="0">
->>>>>>> 096a5e06a96a77a30bce30e42bb0841ac507f40e
+<testsuite tests="2" failures="0" name="kr.or.test.MeetingRoomTest" time="0.165" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_231\jre\bin"/>
@@ -32,11 +28,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-<<<<<<< HEAD
-    <property name="classworlds.conf" value="C:\Users\cmt_dg\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf1701198732775377000.tmp"/>
-=======
-    <property name="classworlds.conf" value="C:\workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf4717192587875667207.tmp"/>
->>>>>>> 096a5e06a96a77a30bce30e42bb0841ac507f40e
+    <property name="classworlds.conf" value="C:\workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf3729443521909304051.tmp"/>
     <property name="sun.jnu.encoding" value="MS949"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_231\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jdk1.8.0_231/bin/../jre/bin/server;C:/Program Files/Java/jdk1.8.0_231/bin/../jre/bin;C:/Program Files/Java/jdk1.8.0_231/bin/../jre/lib/amd64;C:\Program Files\Java\jdk1.8.0_231\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NGX;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\Users\cmt정보통신\AppData\Local\Microsoft\WindowsApps;;C:\Users\cmt정보통신\Desktop;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -47,7 +39,7 @@
     <property name="user.timezone" value="Asia/Seoul"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="java.specification.version" value="1.8"/>
-    <property name="file.encoding" value="MS949"/>
+    <property name="file.encoding" value="UTF-8"/>
     <property name="user.name" value="cmt_dg"/>
     <property name="java.class.path" value="C:\Users\cmt정보통신\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_1.10.0.20181127-2120\jars\plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
@@ -70,11 +62,6 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-<<<<<<< HEAD
-  <testcase classname="kr.or.test.MeetingRoomTest" name="testUpdate" time="0.052"/>
-  <testcase classname="kr.or.test.MeetingRoomTest" name="testList" time="0.051"/>
-=======
-  <testcase classname="kr.or.test.MeetingRoomTest" name="testList" time="0.061"/>
-  <testcase classname="kr.or.test.MeetingRoomTest" name="testUpdate" time="0.068"/>
->>>>>>> 096a5e06a96a77a30bce30e42bb0841ac507f40e
+  <testcase classname="kr.or.test.MeetingRoomTest" name="testUpdate" time="0.085"/>
+  <testcase classname="kr.or.test.MeetingRoomTest" name="testList" time="0.08"/>
 </testsuite>

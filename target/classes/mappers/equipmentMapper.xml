@@ -30,4 +30,8 @@
 	<select id="searchEquipmentCount" resultType="int">
 		SELECT COUNT(equipment_id) FROM equipment WHERE name LIKE '%${searchContent}%'
 	</select>
+	
+	<select id="selectEquipmentById" resultType="Equipment">
+		SELECT * FROM equipment WHERE equipment_id = #{equipmentId}
+	</select>
 </mapper>

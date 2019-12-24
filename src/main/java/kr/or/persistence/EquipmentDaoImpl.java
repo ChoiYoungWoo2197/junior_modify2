@@ -52,4 +52,9 @@ public class EquipmentDaoImpl implements EquipmentDao {
 		return sqlSession.selectOne(namespace + ".searchEquipmentCount", criteria);
 	}
 
+	@Override
+	public Equipment selectEquipmentById(int equipmentId) {
+		return sqlSession.selectOne(namespace + ".selectEquipmentById", equipmentId);
+	}
+
 }

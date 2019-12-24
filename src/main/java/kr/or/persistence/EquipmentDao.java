@@ -15,5 +15,6 @@ public interface EquipmentDao {
 	public int listEquipmentCount();
 	public List<Equipment> searchEquipment(SearchCriteria criteria);
 	public int searchEquipmentCount(SearchCriteria criteria);
+	public Equipment selectEquipmentById(int equipmentId);
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.domain.Department;
 import kr.or.domain.DepartmentAccount;
+import kr.or.domain.SearchCriteria;
 
 @Repository
 public class DepartmentDaoImpl implements DepartmentDao {
@@ -55,6 +56,16 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		}
 		*/
 		return departmentList;
+	}
+
+	@Override
+	public List<Department> searchDepartment(SearchCriteria searchCriteria) {
+		return sqlSession.selectList(namespace + ".searchDepartment", searchCriteria);
+	}
+
+	@Override
+	public int searchDepartmentCount(SearchCriteria searchCriteria) {
+		return sqlSession.selectOne(namespace + ".searchDepartmentCount", searchCriteria);
 	}
 
 

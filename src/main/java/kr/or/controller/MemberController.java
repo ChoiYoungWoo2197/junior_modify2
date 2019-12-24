@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.or.domain.Employee;
 import kr.or.persistence.EmployeeDao;
 import kr.or.service.EmployeeService;
-import kr.or.service.EquipmentService;
+import kr.or.service.ManagementService;
 
 /**
  * Handles requests for the application home page.

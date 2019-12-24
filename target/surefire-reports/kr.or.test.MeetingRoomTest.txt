@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: kr.or.test.MeetingRoomTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.104 sec
-=======
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.129 sec
->>>>>>> 096a5e06a96a77a30bce30e42bb0841ac507f40e
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.165 sec

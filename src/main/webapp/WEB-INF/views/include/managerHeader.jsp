@@ -18,10 +18,10 @@
 		<div class="width1200">
 			<ul>
 				<li>예약 현황</li>
-				<li><a href="department/boards">부서 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/management/list?mgn=department">부서 관리</a></li>
 				<li><a href="member/register">회원 관리</a></li>
 				<li>회의실 관리</li>
-				<li>장비 관리</li>
+				<li><a href="${pageContext.request.contextPath}/management/list?mgn=equipment">장비 관리</a></li>
 			</ul>
 		</div>
 	</nav>

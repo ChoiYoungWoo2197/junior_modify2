@@ -6,15 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.domain.Criteria;
+import kr.or.domain.Department;
 import kr.or.domain.Equipment;
 import kr.or.domain.SearchCriteria;
+import kr.or.persistence.DepartmentDao;
 import kr.or.persistence.EquipmentDao;
 
 @Service
-public class EquipmentServiceImpl implements EquipmentService {
+public class ManagementServiceImpl implements ManagementService {
 	
 	@Autowired
 	EquipmentDao equipmentDao;
+	
+	@Autowired
+	DepartmentDao departmentDao;
 	
 	@Override
 	public List<Equipment> listEquipment(Criteria criteria) {
@@ -49,6 +54,21 @@ public class EquipmentServiceImpl implements EquipmentService {
 	@Override
 	public int searchEquipmentCount(SearchCriteria criteria) {
 		return equipmentDao.searchEquipmentCount(criteria);
+	}
+
+	@Override
+	public Equipment selectEquipmentById(int equipmentId) {
+		return equipmentDao.selectEquipmentById(equipmentId);
+	}
+
+	@Override
+	public List<Department> searchDepartment(SearchCriteria searchCriteria) {
+		return departmentDao.searchDepartment(searchCriteria);
+	}
+
+	@Override
+	public int searchDepartmentCount(SearchCriteria searchCriteria) {
+		return departmentDao.searchDepartmentCount(searchCriteria);
 	}
 
 }

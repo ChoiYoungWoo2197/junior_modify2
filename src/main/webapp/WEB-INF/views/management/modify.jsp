@@ -4,10 +4,11 @@
 	
 	
 	<section class="width1200">
-		<form id="insertEquipmentForm" method="post" action="/management/insert">
+		<form id="updateEquipmentForm" method="post" action="/management/modify">
 			<label>장비명</label>
-			<input type="text" name="name">
-			<input type="submit" value="등록">
+			<input type="hidden" name="equipmentId" value="${equipment.equipmentId}">
+			<input type="text" name="name" value="${equipment.name}">
+			<input type="submit" value="수정">
 			<input type="reset">
 		</form>
 	</section>

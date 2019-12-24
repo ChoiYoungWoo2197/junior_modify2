@@ -21,4 +21,13 @@
 	<select id="selectDepartment" resultType="Department">
 		select * from department
     </select>
+    
+    <select id="searchDepartment">
+    	SELECT * FROM department WHERE name LIKE '%${searchContent}%' 
+		ORDER BY department_id DESC LIMIT #{pageStart}, #{perPageNum}
+    </select>
+    
+    <select id="searchDepartmentCount" resultType="int">
+		SELECT COUNT(department_id) FROM department WHERE name LIKE '%${searchContent}%'
+	</select>
 </mapper>
