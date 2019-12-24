@@ -19,7 +19,7 @@
 			<ul>
 				<li>예약 현황</li>
 				<li><a href="department/boards">부서 관리</a></li>
-				<li><a href="employee/boards">회원 관리</a></li>
+				<li><a href="member/register">회원 관리</a></li>
 				<li>회의실 관리</li>
 				<li>장비 관리</li>
 			</ul>
