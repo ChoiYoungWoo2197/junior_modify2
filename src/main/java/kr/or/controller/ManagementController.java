@@ -19,10 +19,10 @@ import kr.or.domain.SearchCriteria;
 import kr.or.service.EquipmentService;
 
 @Controller
-@RequestMapping("/equipment/*")
-public class EquipmentController {
+@RequestMapping("/management/*")
+public class ManagementController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(EquipmentController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
 	
 	@Autowired
 	EquipmentService equipmentService;
@@ -44,7 +44,7 @@ public class EquipmentController {
 			System.out.println(e.getName());
 		}
 		
-		return "equipment/listEquipment";
+		return "management/listManagement";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -57,7 +57,7 @@ public class EquipmentController {
 		
 		equipmentService.insertEquipment(equipment);
 		
-		return "redirect:/equipment/list";
+		return "redirect:/management/list";
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -80,7 +80,7 @@ public class EquipmentController {
 
 		equipmentService.updateEquipment(equipment);
 		
-		return "redirect:/equipment/list";
+		return "redirect:/management/list";
 	}
 	
 	/*@RequestMapping(value = "/search", method = RequestMethod.GET)
