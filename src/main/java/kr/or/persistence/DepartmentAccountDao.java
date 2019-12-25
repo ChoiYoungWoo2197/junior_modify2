@@ -2,9 +2,9 @@ package kr.or.persistence;
 
 
 import java.util.List;
-import kr.or.domain.DepartmentAccount;
+import kr.or.domain.DepartmentEmployee;
 
 public interface DepartmentAccountDao {
-	public List<DepartmentAccount> selectAll();
-	public List<DepartmentAccount> selectSearch(String name);
+	public List<DepartmentEmployee> selectAll();
+	public List<DepartmentEmployee> selectSearch(String name);
 }

@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.or.domain.Criteria;
 import kr.or.domain.Equipment;
+import kr.or.domain.SearchCriteria;
 import kr.or.persistence.EquipmentDao;
 
 @RunWith(SpringJUnit4ClassRunner.class) //-> 스프링의 테스트 컨텍스트 프레임워크의 JUnit 확장기능 지정
@@ -22,9 +23,9 @@ public class EquipmentTest {
 	
 	@Test
 	public void testList() {
-		Criteria criteria = new Criteria();
+		SearchCriteria criteria = new SearchCriteria();
 
-		List<Equipment> list = equipmentDao.listEquipment(criteria);
+		List<Equipment> list = equipmentDao.searchEquipment(criteria);
 		
 		for(Equipment equipment : list) {
 			System.out.println(equipment.getName());

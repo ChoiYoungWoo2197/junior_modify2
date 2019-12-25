@@ -20,11 +20,6 @@ public class ManagementServiceImpl implements ManagementService {
 	
 	@Autowired
 	DepartmentDao departmentDao;
-	
-	@Override
-	public List<Equipment> listEquipment(Criteria criteria) {
-		return equipmentDao.listEquipment(criteria);
-	}
 
 	@Override
 	public void insertEquipment(Equipment equipment) {
@@ -39,11 +34,6 @@ public class ManagementServiceImpl implements ManagementService {
 	@Override
 	public void deleteEquipment(int equipmentId) {
 		equipmentDao.deleteEquipment(equipmentId);
-	}
-
-	@Override
-	public int listEquipmentCount() {
-		return equipmentDao.listEquipmentCount();
 	}
 
 	@Override
@@ -69,6 +59,26 @@ public class ManagementServiceImpl implements ManagementService {
 	@Override
 	public int searchDepartmentCount(SearchCriteria searchCriteria) {
 		return departmentDao.searchDepartmentCount(searchCriteria);
+	}
+
+	@Override
+	public void insertDepartment(Department department) {
+		departmentDao.insertDepartment(department);
+	}
+
+	@Override
+	public Department selectDepartmentById(int departmentId) {
+		return departmentDao.selectDepartmentById(departmentId);
+	}
+
+	@Override
+	public void updateDepartment(Department department) {
+		departmentDao.updateDepartment(department);
+	}
+
+	@Override
+	public void deleteDepartment(int departmentId) {
+		departmentDao.deleteDepartment(departmentId);
 	}
 
 }

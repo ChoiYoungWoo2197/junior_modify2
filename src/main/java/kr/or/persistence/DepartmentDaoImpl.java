@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.domain.Department;
-import kr.or.domain.DepartmentAccount;
+import kr.or.domain.DepartmentEmployee;
 import kr.or.domain.SearchCriteria;
 
 @Repository
@@ -21,44 +21,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	SqlSession sqlSession;
 	
 	@Override
-	public void insertData(Department department) {
-		// TODO Auto-generated method stub
-		sqlSession.insert(namespace + ".insertDepartment", department);
-	}
-
-	@Override
-	public void deleteData(String departmentId) {
-		// TODO Auto-generated method stub
-		sqlSession.delete(namespace + ".deleteDepartment", departmentId);
-	}
-
-	@Override
-	public void updateDate(String departmentId, String name) {
-		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<>();
-		map.put("departmentId", departmentId);
-		map.put("name", name);
-		
-		sqlSession.update(namespace + ".updateDepartment", map);
-		
-	}
-
-	@Override
-	public List<Department> selectAll() {
-		// TODO Auto-generated method stub
-		List<Department> departmentList = new ArrayList<Department>();
-		/*
-		try(SqlSession session = sqlSessionFactory.openSession()) {
-			departmentList = session.selectList(namespace + ".selectDepartment");
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.toString());
-		}
-		*/
-		return departmentList;
-	}
-
-	@Override
 	public List<Department> searchDepartment(SearchCriteria searchCriteria) {
 		return sqlSession.selectList(namespace + ".searchDepartment", searchCriteria);
 	}
@@ -66,6 +28,26 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	@Override
 	public int searchDepartmentCount(SearchCriteria searchCriteria) {
 		return sqlSession.selectOne(namespace + ".searchDepartmentCount", searchCriteria);
+	}
+
+	@Override
+	public void insertDepartment(Department department) {
+		sqlSession.insert(namespace + ".insertDepartment", department);
+	}
+
+	@Override
+	public Department selectDepartmentById(int departmentId) {
+		return sqlSession.selectOne(namespace + ".selectDepartmentById", departmentId);
+	}
+
+	@Override
+	public void updateDepartment(Department department) {
+		sqlSession.update(namespace + ".updateDepartment", department);
+	}
+
+	@Override
+	public void deleteDepartment(int departmentId) {
+		sqlSession.delete(namespace + ".deleteDepartment", departmentId);
 	}
 
 
