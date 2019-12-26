@@ -8,20 +8,22 @@
 			location.href = "list?mgt="+$("input[name='mgt']").val();
 		})
 	})
-</script>	
+</script>
 	
 	<section class="width1200">
-		<form id="insertEquipmentForm" method="post" action="/management/insert">
+		<form id="updateEquipmentForm" method="post" action="/management/modify">
+			<input type="hidden" name="mgt" value="${mgt}">
 			<c:if test="${mgt eq 'equipment'}">
 				<label>장비명</label>
-				<input type="hidden" name="mgt" value="${mgt}">
+				<input type="hidden" name="equipmentId" value="${equipment.equipmentId}">
+				<input type="text" name="name" value="${equipment.name}">
 			</c:if>
 			<c:if test="${mgt eq 'department'}">
 				<label>부서명</label>
-				<input type="hidden" name="mgt" value="${mgt}">
+				<input type="hidden" name="departmentId" value="${department.departmentId}">
+				<input type="text" name="name" value="${department.name}">
 			</c:if>
-			<input type="text" name="name">
-			<input type="submit" value="등록">
+			<input type="submit" value="수정">
 			<input type="reset">
 		</form>
 		<button id="listManagement">목록</button>

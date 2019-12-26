@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.domain.Department;
-import kr.or.domain.DepartmentAccount;
+import kr.or.domain.DepartmentEmployee;
 
 @Repository
 public class DepartmentAccountDaoImpl implements DepartmentAccountDao {
@@ -20,16 +20,16 @@ public class DepartmentAccountDaoImpl implements DepartmentAccountDao {
 	SqlSession sqlsession;
 	
 	@Override
-	public List<DepartmentAccount> selectAll() {
+	public List<DepartmentEmployee> selectAll() {
 		return sqlsession.selectList(namespace + ".selectDepartmentAccount");
 	}
 
 
 
 	@Override
-	public List<DepartmentAccount> selectSearch(String name) {
+	public List<DepartmentEmployee> selectSearch(String name) {
 		// TODO Auto-generated method stub
-		List<DepartmentAccount> departmentList = new ArrayList<DepartmentAccount>();
+		List<DepartmentEmployee> departmentList = new ArrayList<DepartmentEmployee>();
 		
 		departmentList = sqlsession.selectList(namespace + ".selectSearchDepartmentAccount",name);
 		return departmentList;

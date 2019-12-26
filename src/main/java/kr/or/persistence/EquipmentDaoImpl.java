@@ -18,11 +18,6 @@ public class EquipmentDaoImpl implements EquipmentDao {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<Equipment> listEquipment(Criteria criteria) {
-		return sqlSession.selectList(namespace + ".listEquipment", criteria);
-	}
-	
-	@Override
 	public void insertEquipment(Equipment equipment) {
 		sqlSession.insert(namespace + ".insertEquipment", equipment);
 	}
@@ -38,11 +33,6 @@ public class EquipmentDaoImpl implements EquipmentDao {
 	}
 
 	@Override
-	public int listEquipmentCount() {
-		return sqlSession.selectOne(namespace + ".listEquipmentCount");
-	}
-
-	@Override
 	public List<Equipment> searchEquipment(SearchCriteria criteria) {
 		return sqlSession.selectList(namespace + ".searchEquipment", criteria);
 	}
@@ -50,6 +40,11 @@ public class EquipmentDaoImpl implements EquipmentDao {
 	@Override
 	public int searchEquipmentCount(SearchCriteria criteria) {
 		return sqlSession.selectOne(namespace + ".searchEquipmentCount", criteria);
+	}
+
+	@Override
+	public Equipment selectEquipmentById(int equipmentId) {
+		return sqlSession.selectOne(namespace + ".selectEquipmentById", equipmentId);
 	}
 
 }

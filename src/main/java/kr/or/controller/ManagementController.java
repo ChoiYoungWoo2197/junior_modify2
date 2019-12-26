@@ -10,13 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.domain.Criteria;
+import kr.or.domain.Department;
 import kr.or.domain.Equipment;
 import kr.or.domain.PageMaker;
 import kr.or.domain.SearchCriteria;
-import kr.or.service.EquipmentService;
+import kr.or.service.ManagementService;
 
 @Controller
 @RequestMapping("/management/*")
@@ -25,88 +24,104 @@ public class ManagementController {
 	private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
 	
 	@Autowired
-	EquipmentService equipmentService;
+	ManagementService managementServcice;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(SearchCriteria searchCriteria, Model model) {
-		logger.info("equipment list & searchContent : " + searchCriteria.getSearchContent());
+	public String list(SearchCriteria searchCriteria, Model model, String mgt) {
+		logger.info("management list & searchContent : " + searchCriteria.getSearchContent());
 		
-		List<Equipment> equipmentList = equipmentService.searchEquipment(searchCriteria);
-		model.addAttribute("equipmentList", equipmentList);
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCriteria(searchCriteria);
-		pageMaker.setTotalCount(equipmentService.searchEquipmentCount(searchCriteria));
-		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("criteria", searchCriteria);
-		
-		for(Equipment e : equipmentList) {
-			System.out.println(e.getName());
+		if(mgt.equals("equipment")) {
+			List<Equipment> equipmentList = managementServcice.searchEquipment(searchCriteria);
+			model.addAttribute("equipmentList", equipmentList);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCriteria(searchCriteria);
+			pageMaker.setTotalCount(managementServcice.searchEquipmentCount(searchCriteria));
+			model.addAttribute("pageMaker", pageMaker);
+			model.addAttribute("criteria", searchCriteria);
+			
+			model.addAttribute("mgt", mgt);
+		} else if(mgt.equals("department")) {
+			List<Department> departmentList = managementServcice.searchDepartment(searchCriteria);
+			model.addAttribute("departmentList", departmentList);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCriteria(searchCriteria);
+			pageMaker.setTotalCount(managementServcice.searchDepartmentCount(searchCriteria));
+			model.addAttribute("pageMaker", pageMaker);
+			model.addAttribute("criteria", searchCriteria);
+			model.addAttribute("mgt", mgt);
 		}
-		
-		return "management/listManagement";
+		return "management/list";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public String insertPage(Criteria criteria, String name) {
+	public String insertPage(Model model, String mgt) {
 		logger.info("insertPage");
 		
+		model.addAttribute("mgt", mgt);
 		return "management/insert";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insertManagement(Criteria criteria, String name) {
+	public String insert(String mgt, String name) {
 		logger.info("equipment insert & name : " + name);
 		
-		Equipment equipment = new Equipment();
-		equipment.setName(name);
-		equipment.setRegisterDate(new Date());
+		if(mgt.equals("equipment")) {
+			Equipment equipment = new Equipment();
+			equipment.setName(name);
+			
+			managementServcice.insertEquipment(equipment);
+		} else if(mgt.equals("department")) {
+			Department department = new Department();
+			department.setName(name);
+			
+			managementServcice.insertDepartment(department);
+		}
 		
-		equipmentService.insertEquipment(equipment);
+		return "redirect:/management/list?mgt="+mgt;
+	}
+	
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String modifyPage(Model model, String mgt, int managementId) {
+		logger.info("insertPage & managementId : " + managementId);
 		
-		return "redirect:/management/list";
+		if(mgt.equals("equipment")) {
+			Equipment equipment = managementServcice.selectEquipmentById(managementId);
+			model.addAttribute("equipment", equipment);
+		} else if(mgt.equals("department")) {
+			Department department = managementServcice.selectDepartmentById(managementId);
+			model.addAttribute("department", department);
+		}
+		model.addAttribute("mgt", mgt);
+		
+		return "management/modify";
+	}
+	
+	@RequestMapping(value = "/modify", method = RequestMethod.POST) 
+	public String modify(Equipment equipment, Department department, String mgt) {
+		logger.info("equipment update & name : " + equipment.getName() + " & equipmentId : " + equipment.getEquipmentId());
+		logger.info("equipment update & name : " + department.getName() + " & equipmentId : " + department.getDepartmentId());
+		
+		if(mgt.equals("equipment")) {
+			managementServcice.updateEquipment(equipment);
+		} else if(mgt.equals("department")) {
+			managementServcice.updateDepartment(department);
+		}
+		
+		return "redirect:/management/list?mgt="+mgt;
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public @ResponseBody List<Equipment> deleteManagement(Criteria criteria, int equipmentId) {
-		logger.info("equipment delete & equipmentId : " + equipmentId);
+	public String delete(int managementId, String mgt) {
+		logger.info("equipment delete & managementId : " + managementId);
 		
-		equipmentService.deleteEquipment(equipmentId);
+		if(mgt.equals("equipment")) {
+			managementServcice.deleteEquipment(managementId);
+		} else if(mgt.equals("department")) {
+			managementServcice.deleteDepartment(managementId);
+		}
 		
-		List<Equipment> equipmentList = equipmentService.listEquipment(criteria);
-		return equipmentList;
+		return "redirect:/management/list?mgt="+mgt;
 	}
-	
-	@RequestMapping(value = "/update", method = RequestMethod.POST) 
-	public String updateManagement(Criteria criteria, String name, int equipmentId) {
-		logger.info("equipment update & name : " + name + " & equipmentId : " + equipmentId);
-		
-		Equipment equipment = new Equipment();
-		equipment.setEquipmentId(equipmentId);
-		equipment.setName(name);
-
-		equipmentService.updateEquipment(equipment);
-		
-		return "redirect:/management/list";
-	}
-	
-	/*@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public @ResponseBody Map<String, Object> searchEquipment(SearchCriteria searchCriteria, Model model) {
-		logger.info("equipment search & searchContent : " + searchCriteria.getSearchContent());
-		
-		List<Equipment> equipmentList = equipmentService.searchEquipment(searchCriteria);
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCriteria(searchCriteria);
-		pageMaker.setTotalCount(equipmentService.searchEquipmentCount(searchCriteria));
-		model.addAttribute("pageMaker", pageMaker);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("equipmentList", equipmentList);
-		map.put("pageMaker", pageMaker);
-		
-		System.out.println(map);
-		
-		return map;
-	}*/
 }
