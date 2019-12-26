@@ -7,7 +7,9 @@ public class Employee {
 	private String password;
 	private String email;
 	private String phone;
-	
+	private String authkey;
+	private String state;
+
 	public int getEmployeeId() {
 		return employeeId;
 	}
@@ -45,5 +47,16 @@ public class Employee {
 		this.phone = phone;
 	}
 	
-	
+	public String getAuthkey() {
+		return authkey;
+	}
+	public void setAuthkey(String authkey) {
+		this.authkey = authkey;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 }

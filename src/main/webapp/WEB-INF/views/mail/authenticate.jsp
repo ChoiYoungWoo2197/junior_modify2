@@ -36,7 +36,12 @@ table, th, td {
 				dataType : "text",
 				success : function(res) {
 					console.log(res);
-					alert("메일발송 성공!");
+					if(res == "true") {
+						alert("이메일이 발송되었습니다. 인증번호를 입력해주세요.");
+					}
+					else {
+						alert("이메일발송이 실패했습니다.");
+					}
 				}
 			})
 		})

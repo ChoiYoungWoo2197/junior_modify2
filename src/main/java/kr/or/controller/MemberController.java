@@ -1,6 +1,8 @@
 package kr.or.controller;
 
 import java.util.Locale;
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +47,8 @@ public class MemberController {
 		employee.setPassword(request.getParameter("password"));
 		employee.setEmail(request.getParameter("email"));
 		employee.setPhone(request.getParameter("phone"));
-		
+		employee.setAuthkey(getAuthKey());
+		employee.setState("y");
 		employeeService.insertEmployee(employee);
 		return "redirect:/mail/authenticate";
 	}
@@ -74,6 +77,22 @@ public class MemberController {
 			result = "true";
 		}
 		return result;
+	}
+	
+	//20자리  영문+숫자 랜덤코드 만들기
+	public String getAuthKey() {
+		Random rnd =new Random();
+		StringBuffer buf =new StringBuffer();	 
+
+		for(int i=0;i<20;i++){
+		    if(rnd.nextBoolean()){
+		        buf.append((char)((int)(rnd.nextInt(26))+97));
+		    }else{
+		        buf.append((rnd.nextInt(10))); 
+		    }
+		}
+		
+		return buf.toString();
 	}
 
 }

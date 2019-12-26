@@ -3,13 +3,9 @@
 <mapper namespace="kr.or.mappers.employeeMapper">
 
 	<insert id="insertEmployee" parameterType="Employee">
-		insert into employee(employee_id, department_id, name, password, email, phone)
-		values(#{employeeId}, #{departmentId}, #{name}, #{password}, #{email}, #{phone})
+		insert into employee(employee_id, department_id, name, password, email, phone, authkey, state)
+		values(#{employeeId}, #{departmentId}, #{name}, #{password}, #{email}, #{phone}, #{authkey}, #{state})
 	</insert>
-
-	<select id="selectEmployee" resultType="Employee">
-		select * from employee
-	</select>
 
 	<select id="selectAccountEmployee" resultType="boolean">
 		select count(*) from employee
