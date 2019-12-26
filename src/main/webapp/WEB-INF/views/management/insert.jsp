@@ -7,6 +7,13 @@
 		$("#listManagement").click(function() {
 			location.href = "list?mgt="+$("input[name='mgt']").val();
 		})
+		
+		$("#insertEquipmentForm").submit(function() {
+			if($("input[name='name']").val()=="") {
+				alert("등록할 이름을 적어주세요.");
+				return false;
+			}
+		})
 	})
 </script>	
 	
