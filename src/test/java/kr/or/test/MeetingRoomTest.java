@@ -18,20 +18,20 @@ public class MeetingRoomTest {
 	@Autowired
 	MeetingRoomDao meetingRoomDao;
 	
-	@Test
+	/*@Test
 	public void testList() {
 		List<MeetingRoom> list = meetingRoomDao.listMeetingRoom();
 		
 		for(MeetingRoom meetingRoom : list) {
 			System.out.println(meetingRoom.getName());
 		}
-	}
+	}*/
 	
 	//@Test
 	public void testInsert() {
 		MeetingRoom meetingRoom = new MeetingRoom();
 		meetingRoom.setManagerId(1111);
-		meetingRoom.setName("1번회의실");
+		meetingRoom.setName("1踰덊쉶�쓽�떎");
 		meetingRoom.setSeats(10);
 		meetingRoom.setAvailability(true);
 		
@@ -44,7 +44,7 @@ public class MeetingRoomTest {
 		MeetingRoom meetingRoom = new MeetingRoom();
 		meetingRoom.setMeetingRoomId(4);
 		meetingRoom.setManagerId(1111);
-		meetingRoom.setName("1번회의실입니다!~~");
+		meetingRoom.setName("1踰덊쉶�쓽�떎�엯�땲�떎!~~");
 		meetingRoom.setSeats(7);
 		meetingRoom.setAvailability(true);
 		
