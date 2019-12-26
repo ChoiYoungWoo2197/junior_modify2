@@ -22,6 +22,23 @@
 		<beans:property name="suffix" value=".jsp" /> <!-- 접미어(확장자) -->
 		<!--뷰(View) 경로를 나타내는 것으로 suffix(.jsp) 가 뒤에 자동으로 붙고  prefix (파일의 앞경로) 도 붙게되어 view 경로를 리턴할시 만약 view 만 리턴하게되어도 서블릿이 자동으로 WEB-INF/views/view.jsp 경로로 리턴해 준다. -->
 	</beans:bean>
+ 	
+ 	<!-- 회원가입 메일 인증 -->
+	<beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" /><!-- 465 or 25 -->
+		<beans:property name="username" value="arangchoi40@gmail.com" />
+		<beans:property name="password" value="cmtinfo20191226" />
+		<beans:property name="defaultEncoding" value="utf-8" />
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
 	
 	<context:component-scan base-package="kr.or.controller" /> <!-- 베이스 패키지 하위 모든 어노테이션을 스캔해서 빈으로 등록하겠다는 것 -->
 	<context:component-scan base-package="kr.or.persistence" /> <!-- 베이스 패키지 하위 모든 어노테이션을 스캔해서 빈으로 등록하겠다는 것 -->

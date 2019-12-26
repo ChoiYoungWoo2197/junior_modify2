@@ -31,7 +31,7 @@ public class MemberController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Locale locale, Model model) {
 
-		return "/member/registerMember";
+		return "/member/register";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -47,7 +47,7 @@ public class MemberController {
 		employee.setPhone(request.getParameter("phone"));
 		
 		employeeService.insertEmployee(employee);
-		return "/member/registerMember";
+		return "redirect:/mail/authenticate";
 	}
 	
 	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
