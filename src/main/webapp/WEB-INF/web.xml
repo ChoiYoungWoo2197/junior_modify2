@@ -33,26 +33,7 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-<<<<<<< HEAD
 
-
-	<filter>
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>
-			org.springframework.web.filter.CharacterEncodingFilter
-		</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-=======
-	
 	<!-- post방식에서 한글깨짐 해결하기 위해 filter 삽입 -->
 	<!-- 
 		브라우저 —> 요청정보 Body 데이터 —UTF8 인코딩—> Java 단에서의 데이터 처리
@@ -79,5 +60,5 @@
 		<filter-name>encodingFilter</filter-name> 
 	    <url-pattern>/*</url-pattern> 
 	</filter-mapping> 
->>>>>>> 096a5e06a96a77a30bce30e42bb0841ac507f40e
+
 </web-app>

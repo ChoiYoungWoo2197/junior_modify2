@@ -2,7 +2,7 @@ CREATE DATABASE meetingroom;
 use meetingroom;
 
 -- 부서
-CREATE TABLE department (
+CREATE TABLE department2 (
 	department_id INTEGER AUTO_INCREMENT, 	-- 부서번호
 	name VARCHAR(30) NOT NULL, 				-- 부서명
 	register_date DATETIME DEFAULT NOW(),	-- 등록일시
