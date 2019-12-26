@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import kr.or.domain.Employee;
 import kr.or.persistence.EmployeeDao;
 import kr.or.service.EmployeeService;
@@ -29,7 +31,7 @@ public class MemberController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Locale locale, Model model) {
 
-		return "/member/registerMember";
+		return "/member/register";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -40,10 +42,38 @@ public class MemberController {
 		employee.setEmployeeId(Integer.parseInt(request.getParameter("employeeId")));
 		employee.setDepartmentId(Integer.parseInt(request.getParameter("departmentType")));
 		employee.setName(request.getParameter("name"));
+		employee.setPassword(request.getParameter("password"));
+		employee.setEmail(request.getParameter("email"));
 		employee.setPhone(request.getParameter("phone"));
 		
 		employeeService.insertEmployee(employee);
-		return "/member/registerMember";
+		return "redirect:/mail/authenticate";
+	}
+	
+	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
+	public @ResponseBody String checkId(HttpServletRequest request) {
+		logger.info("employee Id :" + request.getParameter("employeeId"));
+		String employeeId = request.getParameter("employeeId");
+		String result = "false";
+		Employee employee = employeeService.checkIdEmployee(employeeId);
+		
+		if(employee != null) {
+			result = "true";
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
+	public @ResponseBody String checkEmail(HttpServletRequest request) {
+		logger.info("email :" + request.getParameter("email"));
+		String email = request.getParameter("email");
+		String result = "false";
+		Employee employee = employeeService.checkEmailEmployee(email);
+		
+		if(employee != null) {
+			result = "true";
+		}
+		return result;
 	}
 
 }

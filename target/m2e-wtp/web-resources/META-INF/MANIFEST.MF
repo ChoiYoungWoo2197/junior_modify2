@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
 Built-By: cmt_dg
+<<<<<<< HEAD
 Build-Jdk: 1.8.0_231
+=======
+Build-Jdk: 1.8.0_202
+>>>>>>> b01fcb3bffb58feffed44bb846bb634790769f9e
 Created-By: Maven Integration for Eclipse
 

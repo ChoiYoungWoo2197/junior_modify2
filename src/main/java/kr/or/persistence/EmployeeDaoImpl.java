@@ -31,4 +31,16 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		map.put("password", password);
 		return sqlsession.selectOne(namespace + ".selectAccountEmployee", map);
 	}
+
+	@Override
+	public Employee checkIdEmployee(String employeeId) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(namespace + ".selectCheckIdEmployee", employeeId);
+	}
+
+	@Override
+	public Employee checkEmailEmployee(String email) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(namespace + ".selectCheckEmailEmployee", email);
+	}
 }

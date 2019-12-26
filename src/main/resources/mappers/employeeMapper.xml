@@ -16,4 +16,14 @@
 		where employee_id = #{employee_id} and
 		password = #{password}
 	</select>
+	
+	<select id="selectCheckIdEmployee" parameterType="String" resultType="Employee">
+		select * from employee
+		where employee_id = #{employeeId}
+	</select>
+	
+	<select id="selectCheckEmailEmployee" parameterType="String" resultType="Employee">
+		select * from employee
+		where email = #{email}
+	</select>
 </mapper>

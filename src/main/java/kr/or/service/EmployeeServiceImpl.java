@@ -17,6 +17,20 @@ public class EmployeeServiceImpl implements  EmployeeService{
 		// TODO Auto-generated method stub
 		employeeDao.insertData(employee);
 	}
+
+
+	@Override
+	public Employee checkIdEmployee(String employeeId) {
+		// TODO Auto-generated method stub
+		return employeeDao.checkIdEmployee(employeeId);
+	}
+
+
+	@Override
+	public Employee checkEmailEmployee(String email) {
+		// TODO Auto-generated method stub
+		return employeeDao.checkEmailEmployee(email);
+	}
 	
 
 
