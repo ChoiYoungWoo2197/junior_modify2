@@ -2,11 +2,11 @@ package kr.or.domain;
 
 import java.util.Date;
 
-public class DepartmentAccount {
+public class DepartmentEmployee {
 	private int departmentId;
 	private String name;
 	private Date registerDate;
-	private int account;
+	private int emoloyeeCount;
 	
 	public int getDepartmentId() {
 		return departmentId;
@@ -26,13 +26,11 @@ public class DepartmentAccount {
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
-	public int getAccount() {
-		return account;
+	public int getEmoloyeeCount() {
+		return emoloyeeCount;
 	}
-	public void setAccount(int account) {
-		this.account = account;
+	public void setEmoloyeeCount(int emoloyeeCount) {
+		this.emoloyeeCount = emoloyeeCount;
 	}
-
-
 
 }
