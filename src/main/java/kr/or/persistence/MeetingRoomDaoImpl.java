@@ -22,8 +22,8 @@ public class MeetingRoomDaoImpl implements MeetingRoomDao {
 	}
 
 	@Override
-	public void insertMeetingRoom(MeetingRoom meetingRoom) {
-		sqlSession.insert(namespace + ".insertMeetingRoom", meetingRoom);
+	public int insertMeetingRoom(MeetingRoom meetingRoom) {
+		return sqlSession.insert(namespace + ".insertMeetingRoom", meetingRoom);
 	}
 
 	@Override

@@ -8,7 +8,7 @@
 			location.href = "list?mgt="+$("input[name='mgt']").val();
 		})
 		
-		$("#insertEquipmentForm").submit(function() {
+		$("#insertManagementForm").submit(function() {
 			if($("input[name='name']").val()=="") {
 				alert("등록할 이름을 적어주세요.");
 				return false;
@@ -18,7 +18,7 @@
 </script>	
 	
 	<section class="width1200">
-		<form id="insertEquipmentForm" method="post" action="/management/insert">
+		<form id="insertManagementForm" method="post" action="/management/insert">
 			<c:if test="${mgt eq 'equipment'}">
 				<label>장비명</label>
 				<input type="hidden" name="mgt" value="${mgt}">

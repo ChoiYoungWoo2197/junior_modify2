@@ -7,7 +7,7 @@
 	</select> -->
 	
 	
-	<insert id="insertMeetingRoom" parameterType="MeetingRoom">
+	<insert id="insertMeetingRoom" parameterType="MeetingRoom" useGeneratedKeys="true" keyProperty="meetingRoomId">
 		INSERT INTO meeting_room(manager_id, name, seats, availability) VALUES (#{managerId},#{name},#{seats},#{availability})
 	</insert>
 	

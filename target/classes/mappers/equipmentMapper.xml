@@ -26,4 +26,8 @@
 	<delete id="deleteEquipment" parameterType="int">
 		DELETE FROM equipment WHERE equipment_id = #{equipmentId}
 	</delete>
+	
+	<select id="selectEquipment" resultType="Equipment">
+		SELECT * FROM equipment
+	</select>
 </mapper>

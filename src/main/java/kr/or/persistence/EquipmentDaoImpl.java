@@ -46,4 +46,9 @@ public class EquipmentDaoImpl implements EquipmentDao {
 		return sqlSession.selectOne(namespace + ".selectEquipmentById", equipmentId);
 	}
 
+	@Override
+	public List<Equipment> selectEquipment() {
+		return sqlSession.selectList(namespace + ".selectEquipment");
+	}
+
 }

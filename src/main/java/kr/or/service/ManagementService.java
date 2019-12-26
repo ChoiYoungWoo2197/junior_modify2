@@ -10,12 +10,12 @@ import kr.or.domain.SearchCriteria;
 public interface ManagementService {
 	
 	//Equipment
-	public void insertEquipment(Equipment equipment);
-	public void updateEquipment(Equipment equipment);
-	public void deleteEquipment(int equipmentId);
 	public List<Equipment> searchEquipment(SearchCriteria criteria);
 	public int searchEquipmentCount(SearchCriteria criteria);
+	public void insertEquipment(Equipment equipment);
 	public Equipment selectEquipmentById(int equipmentId);
+	public void updateEquipment(Equipment equipment);
+	public void deleteEquipment(int equipmentId);
 	
 	//Department
 	public int searchDepartmentCount(SearchCriteria searchCriteria);

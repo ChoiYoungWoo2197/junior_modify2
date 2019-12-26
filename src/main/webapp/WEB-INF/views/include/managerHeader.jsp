@@ -24,7 +24,7 @@
 				<li>예약 현황</li>
 				<li><a href="${pageContext.request.contextPath}/management/list?mgt=department">부서 관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/member/register">회원 관리</a></li>
-				<li>회의실 관리</li>
+				<li><a href="${pageContext.request.contextPath}/meetingRoom/list">회의실 관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/management/list?mgt=equipment">장비 관리</a></li>
 			</ul>
 		</div>

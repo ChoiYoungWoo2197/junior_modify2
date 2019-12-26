@@ -152,15 +152,6 @@
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
-<<<<<<< HEAD
-	
-		<!-- <dependency>
-			<groupId>org.projectlombok</groupId> getter/setter 자동주입하기 위해 사용
-		    <artifactId>lombok</artifactId>
-		    <version>1.18.8</version>
-		    <scope>provided</scope>
-		</dependency> -->
-=======
 
 		<!-- 이메일 인증  -->
 		<dependency>
@@ -174,7 +165,6 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
->>>>>>> b01fcb3bffb58feffed44bb846bb634790769f9e
 	</dependencies>
 	<build>
 		<plugins>
