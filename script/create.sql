@@ -17,6 +17,8 @@ CREATE TABLE employee (
 	password CHAR(41) NOT NULL,		-- 비밀번호
 	email VARCHAR(30) NOT NULL,		-- 이메일
 	phone VARCHAR(13),				-- 전화번호
+	authkey varchar(50), 			-- 인증번호
+	state boolean,                  -- 인증상태
 	PRIMARY KEY (employee_id),
 	FOREIGN KEY (department_id) REFERENCES department (department_id)
 );
@@ -68,15 +70,15 @@ CREATE TABLE reservation (
 	start_date DATETIME NOT NULL,				-- 시작일시
 	end_date DATETIME NOT NULL,					-- 종료일시
 	reservation_date DATETIME DEFAULT NOW(),	-- 신청일시
-	state VARCHAR(15) NOT NULL,					-- 예약상태
-	modify_date DATETIME DEFAULT NOW(),		-- 수정일시
-	actual_end_date DATETIME NOT NULL,			-- 실제종료시간
-	validate_time DATETIME DEFAULT NOW(),		-- 종료확인시간
+	state VARCHAR(15) DEFAULT 'R',				-- 예약상태
+	modify_date DATETIME DEFAULT NOW(),			-- 수정일시
+	actual_end_date DATETIME,					-- 실제종료시간
+	validate_time DATETIME,						-- 종료확인시간
 	validate_applicant VARCHAR(20),				-- 종료신청자
 	validate_checker VARCHAR(20),				-- 종료확인자
 	abnormality TEXT,							-- 이상유무
 	cancel_applicant VARCHAR(20),				-- 취소신청자
-	cancel_date DATETIME DEFAULT NOW(),		-- 취소신청일시
+	cancel_date DATETIME,						-- 취소신청일시
 	cancel_reason TEXT,							-- 취소사유
 	PRIMARY KEY (reservation_id),
 	FOREIGN KEY (employee_id) REFERENCES employee (employee_id),

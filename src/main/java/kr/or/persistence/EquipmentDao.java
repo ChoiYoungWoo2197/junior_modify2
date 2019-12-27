@@ -2,19 +2,18 @@ package kr.or.persistence;
 
 import java.util.List;
 
-import kr.or.domain.Criteria;
 import kr.or.domain.Equipment;
 import kr.or.domain.SearchCriteria;
 
 public interface EquipmentDao {
 	
-	//public List<Equipment> listEquipment(Criteria criteria);
+	public List<Equipment> searchEquipment(SearchCriteria searchCriteria);
+	public int searchEquipmentCount(SearchCriteria searchCriteria);
 	public void insertEquipment(Equipment equipment);
+	public Equipment selectEquipmentById(int equipmentId);
 	public void updateEquipment(Equipment equipment);
 	public void deleteEquipment(int equipmentId);
-	//public int listEquipmentCount();
-	public List<Equipment> searchEquipment(SearchCriteria criteria);
-	public int searchEquipmentCount(SearchCriteria criteria);
-	public Equipment selectEquipmentById(int equipmentId);
+	
+	public List<Equipment> selectEquipment();
 	
 }

@@ -2,12 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.mappers.meetingRoomMapper">
 	
-	<!-- <select id="listMeetingRoom" resultType="MeetingRoom">
-		SELECT * FROM meeting_room;
-	</select> -->
+	<select id="searchMeetingRoom" resultType="MeetingRoom">
+		SELECT * FROM meeting_room 
+		WHERE name LIKE '%${searchContent}%'
+		ORDER BY meeting_room_id DESC LIMIT #{pageStart}, #{amount}
+	</select>
 	
+	<select id="searchMeetingRoomCount" resultType="int">
+		SELECT COUNT(meeting_room_id) FROM meeting_room WHERE name LIKE '%${searchContent}%'
+	</select>
 	
-	<insert id="insertMeetingRoom" parameterType="MeetingRoom">
+	<insert id="insertMeetingRoom" parameterType="MeetingRoom" useGeneratedKeys="true" keyProperty="meetingRoomId">
 		INSERT INTO meeting_room(manager_id, name, seats, availability) VALUES (#{managerId},#{name},#{seats},#{availability})
 	</insert>
 	
@@ -19,4 +24,8 @@
 	<delete id="deleteMeetingRoom" parameterType="int">
 		DELETE FROM meeting_room WHERE meeting_room_id = #{meetingRoomId}
 	</delete>
+	
+	<select id="selectMeetingRoomById" resultType="Reservation">
+		SELECT * FROM meeting_room WHERE meeting_room_id = #{meetingRoomId}
+	</select>
 </mapper>

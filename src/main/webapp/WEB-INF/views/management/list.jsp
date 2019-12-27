@@ -13,13 +13,8 @@
 		width: 100%;
 	}
 	
-	#insertManagementForm, #updateEquipmentForm {
-		display: none;
-	}
-	
-	
 	/* ----------------- 페이지 ----------------- */
-	#paging {
+	#page {
 		text-align: center;
 		margin-top: 20px;
 	}
@@ -28,10 +23,10 @@
 		list-style: none;
 		display: inline-block;
 	}
-	.active {
-		background-color: #4285f4;
+	.color_sky {
+		background-color: #6799FF !important;
 	}
-	span {
+	.page_shape {
 		background-color: rgb(189, 189, 189);
 		width: 10px;
 		height: 10px;
@@ -48,28 +43,42 @@
 		$(document).on("click", ".updateManagement", function(){
 			var managementId = Number($(this).attr("data-managementId"));
 			
-			var result = confirm("수정하시겠습니까?");
-			
-			if(result == true) { 
-				location.href = "modify?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
+			if($("input[name=mgt]").val() == "department") {
+				location.href = "read?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
+			} else if($("input[name=mgt]").val() == "equipment") {
+				var result = confirm("수정하시겠습니까?");
+				
+				if(result == true) { 
+					location.href = "modify?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
+				}
 			}
+			
 		})
 		
 		$(document).on("click", ".deleteManagement", function(){
 			var result = confirm("삭제하시겠습니까?");
 			
 			if(result == true) {
+				if($("input[name=mgt]").val() == "department") {
+					if($(this).parent().prev().prev().text() != "0") {
+						alert("소속된 사원이 존재하여 삭제할 수 없습니다.");
+						return false;
+					}
+				}
+				
 				var managementId = Number($(this).attr("data-managementId"));
-				
 				$("input[name='managementId']").val(managementId);
-				
-				$("#deleteForm").attr("action", "delete");
-				$("#deleteForm").attr("method", "post");
+				$("#deleteForm").attr("action", "delete").attr("method", "post");
 				$("#deleteForm").submit();
 			}
 		})
 		
 		$("#searchEquipment").click(function() {
+			if($("input[name='searchContent']").val()=="") {
+				alert("검색할 내용을 입력해주세요.");
+				return false;
+			}
+			
 			location.href = "list?mgt="+$("input[name=mgt]").val()+"&page=1&searchContent="+$("input[name='searchContent']").val();
 		})
 		
@@ -80,7 +89,14 @@
 </script>
 
 	<section class="width1200">
-		<h1>${mgt}관리</h1>
+		<c:if test="${mgt eq 'equipment'}">
+			<c:set var="title" value="장비"/>
+		</c:if>
+		<c:if test="${mgt eq 'department'}">
+			<c:set var="title" value="부서"/>
+		</c:if>
+		
+		<h1>${title}관리</h1>
 		<div>
 			<input type="text" name="searchContent" value="${criteria.searchContent}">
 			<button id="searchEquipment">검색</button>
@@ -119,7 +135,7 @@
 		</c:if>
 		<c:if test="${mgt eq 'department'}">
 			<table>
-				<c:if test="${empty departmentList}">
+				<c:if test="${empty employeeByDepartmentList}">
 					<tr>
 						<th>번호</th>
 						<th>부서명</th>
@@ -130,7 +146,7 @@
 						<td colspan="4">내역이 없습니다.</td>
 					</tr>
 				</c:if>
-				<c:if test="${!empty departmentList}">
+				<c:if test="${!empty employeeByDepartmentList}">
 					<tr>
 						<th>번호</th>
 						<th>부서명</th>
@@ -138,11 +154,11 @@
 						<th>등록일시</th>
 						<th></th>
 					</tr>
-					<c:forEach var="department" items="${departmentList}">
+					<c:forEach var="department" items="${employeeByDepartmentList}">
 						<tr>
 							<td>${department.departmentId}</td>
 							<td class="updateManagement" data-managementId="${department.departmentId}">${department.name}</td>
-							<td></td>
+							<td>${department.emoloyeeCount}</td>
 							<td><fmt:formatDate value="${department.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
 							<td><button class="deleteManagement" data-managementId="${department.departmentId}">삭제</button></td>
 						</tr>
@@ -157,16 +173,29 @@
 			<input type="hidden" name="mgt" value="${mgt}">
 		</form>
 		
-		<div id="paging">
+		<div id="page">
 			<ul class="pagination">
-				<c:if test="${pageMaker.prev}">
-					<li><a href="list?mgt=equipment&page=${pageMaker.startPage-1}&searchContent=${criteria.searchContent}">&lt;</a></li>
+				<c:if test="${page.prev}">
+					<li>
+						<a href="list?mgt=${mgt}&page=${page.startPage-1}&searchContent=${page.criteria.searchContent}">&lt;</a>
+					</li>
 				</c:if>
-				<c:forEach var="index" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-					<li><a href="list?mgt=equipment&page=${index}&searchContent=${criteria.searchContent}"><span ${pageMaker.criteria.page == index ? 'class="active"' : ''}></span></a></li>
+				<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
+					<li>
+						<a href="list?mgt=${mgt}&page=${index}&searchContent=${page.criteria.searchContent}">
+							<c:if test="${page.criteria.page == index}">
+								<span class="page_shape color_sky"></span>
+							</c:if>
+							<c:if test="${page.criteria.page != index}">
+								<span class="page_shape"></span>
+							</c:if>
+						</a>
+					</li>
 				</c:forEach>
-				<c:if test="${pageMaker.next}">
-					<li><a href="list?mgt=equipment&page=${pageMaker.startPage-1}&searchContent=${criteria.searchContent}">&gt;</a></li>
+				<c:if test="${page.next}">
+					<li>
+						<a href="list?mgt=${mgt}&page=${page.endPage+1}&searchContent=${page.criteria.searchContent}">&gt;</a>
+					</li>
 				</c:if>
 			</ul>
 		</div>

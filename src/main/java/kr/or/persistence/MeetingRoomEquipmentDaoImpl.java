@@ -1,11 +1,15 @@
 package kr.or.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.domain.Equipment;
+import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
 
 @Repository
@@ -22,8 +26,18 @@ public class MeetingRoomEquipmentDaoImpl implements MeetingRoomEquipmentDao {
 	}
 
 	@Override
-	public void insertMeetingRoomEquipment(MeetingRoomEquipment meetingRoomEquipment) {
-		sqlSession.insert(namespace + ".insertMeetingRoomEquipment", meetingRoomEquipment);
+	public void insertMeetingRoomEquipment(int equipmentId, int meetingRoomId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("equipmentId", equipmentId);
+		map.put("meetingRoomId", meetingRoomId);
+		
+		sqlSession.insert(namespace + ".insertMeetingRoomEquipment", map);
+	}
+
+	@Override
+	public MeetingRoomEquipment selectMeetingRoomEquipmentById(int meetingRoomId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,6 +1,5 @@
 package kr.or.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.domain.Department;
+import kr.or.domain.EmployeeByDepartment;
 import kr.or.domain.Equipment;
-import kr.or.domain.PageMaker;
+import kr.or.domain.Page;
 import kr.or.domain.SearchCriteria;
 import kr.or.service.ManagementService;
 
@@ -34,22 +34,13 @@ public class ManagementController {
 			List<Equipment> equipmentList = managementServcice.searchEquipment(searchCriteria);
 			model.addAttribute("equipmentList", equipmentList);
 			
-			PageMaker pageMaker = new PageMaker();
-			pageMaker.setCriteria(searchCriteria);
-			pageMaker.setTotalCount(managementServcice.searchEquipmentCount(searchCriteria));
-			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("criteria", searchCriteria);
-			
+			model.addAttribute("page", new Page(managementServcice.searchEquipmentCount(searchCriteria), searchCriteria));
 			model.addAttribute("mgt", mgt);
 		} else if(mgt.equals("department")) {
-			List<Department> departmentList = managementServcice.searchDepartment(searchCriteria);
-			model.addAttribute("departmentList", departmentList);
+			List<EmployeeByDepartment> employeeByDepartmentList = managementServcice.searchEmployeeByDepartment(searchCriteria);
+			model.addAttribute("employeeByDepartmentList", employeeByDepartmentList);
 			
-			PageMaker pageMaker = new PageMaker();
-			pageMaker.setCriteria(searchCriteria);
-			pageMaker.setTotalCount(managementServcice.searchDepartmentCount(searchCriteria));
-			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("criteria", searchCriteria);
+			model.addAttribute("page", new Page(managementServcice.searchDepartmentCount(searchCriteria), searchCriteria));
 			model.addAttribute("mgt", mgt);
 		}
 		return "management/list";
@@ -80,6 +71,22 @@ public class ManagementController {
 		}
 		
 		return "redirect:/management/list?mgt="+mgt;
+	}
+	
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public String read(Model model, String mgt, int managementId) {
+		logger.info("read & managementId : " + managementId);
+		
+		List<EmployeeByDepartment> employeeByDepartmentList = managementServcice.selectEmployeeByDepartmentById(managementId);
+		
+		if(employeeByDepartmentList.size()==0) {
+			model.addAttribute("managementId", managementId);
+		} else {
+			model.addAttribute("employeeByDepartmentList", employeeByDepartmentList);
+		}
+		model.addAttribute("mgt", mgt);
+		
+		return "management/read";
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)

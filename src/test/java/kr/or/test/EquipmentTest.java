@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.or.domain.Criteria;
 import kr.or.domain.Equipment;
 import kr.or.domain.SearchCriteria;
 import kr.or.persistence.EquipmentDao;

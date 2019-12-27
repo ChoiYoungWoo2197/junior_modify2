@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.or.domain.Criteria;
 import kr.or.domain.Equipment;
 import kr.or.domain.SearchCriteria;
 
@@ -33,18 +32,23 @@ public class EquipmentDaoImpl implements EquipmentDao {
 	}
 
 	@Override
-	public List<Equipment> searchEquipment(SearchCriteria criteria) {
-		return sqlSession.selectList(namespace + ".searchEquipment", criteria);
+	public List<Equipment> searchEquipment(SearchCriteria searchCriteria) {
+		return sqlSession.selectList(namespace + ".searchEquipment", searchCriteria);
 	}
 
 	@Override
-	public int searchEquipmentCount(SearchCriteria criteria) {
-		return sqlSession.selectOne(namespace + ".searchEquipmentCount", criteria);
+	public int searchEquipmentCount(SearchCriteria searchCriteria) {
+		return sqlSession.selectOne(namespace + ".searchEquipmentCount", searchCriteria);
 	}
 
 	@Override
 	public Equipment selectEquipmentById(int equipmentId) {
 		return sqlSession.selectOne(namespace + ".selectEquipmentById", equipmentId);
+	}
+
+	@Override
+	public List<Equipment> selectEquipment() {
+		return sqlSession.selectList(namespace + ".selectEquipment");
 	}
 
 }

@@ -9,4 +9,8 @@
 	<insert id="insertMeetingRoomEquipment" parameterType="MeetingRoomEquipment">
 		INSERT INTO meeting_room_equipment VALUES (#{equipmentId}, #{meetingRoomId})
 	</insert>
+	
+	<select id="selectMeetingRoomEquipmentById" resultType="MeetingRoomEquipment">
+		SELECT * FROM meeting_room_equipment WHERE meeting_room_id = #{meetingRoomId}
+	</select>
 </mapper>

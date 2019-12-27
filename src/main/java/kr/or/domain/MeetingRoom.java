@@ -1,6 +1,7 @@
 package kr.or.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class MeetingRoom {
 	private int meetingRoomId;
