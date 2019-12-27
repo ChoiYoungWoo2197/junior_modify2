@@ -42,5 +42,11 @@ public class MeetingRoomDaoImpl implements MeetingRoomDao {
 		sqlSession.delete(namespace + ".deleteMeetingRoom", meetingRoomId);
 	}
 
+	@Override
+	public MeetingRoom selectMeetingRoomById(int meetingRoomId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

@@ -24,4 +24,8 @@
 	<delete id="deleteMeetingRoom" parameterType="int">
 		DELETE FROM meeting_room WHERE meeting_room_id = #{meetingRoomId}
 	</delete>
+	
+	<select id="selectMeetingRoomById" resultType="Reservation">
+		SELECT * FROM meeting_room WHERE meeting_room_id = #{meetingRoomId}
+	</select>
 </mapper>

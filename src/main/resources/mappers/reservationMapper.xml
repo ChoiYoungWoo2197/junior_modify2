@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.mappers.ReservationMapper">
+	
+	<!-- 검색하기 위한 용도 -->
+	<sql id="search">
+		<if test="searchType == 'employee_id'.toString()">
+			WHERE employee_id LIKE '%${searchContent}%'
+		</if>
+		<if test="searchType == 'meet_purpose'.toString()">
+			WHERE meet_purpose LIKE '%${searchContent}%'
+		</if>
+	</sql>	
+	
+	<select id="searchReservation" resultType="Reservation">
+		SELECT * FROM reservation WHERE meet_purpose LIKE '%${searchContent}%'
+		ORDER BY reservation_id DESC LIMIT #{pageStart}, #{amount}		
+	</select>
+	
+	<select id="searchReservationCount" resultType="int">
+		SELECT COUNT(reservation_id) FROM reservation WHERE meet_purpose LIKE '%${searchContent}%'
+	</select>
+	
+	<select id="selectReservationByMeetAndDate" resultType="Reservation">
+		SELECT * FROM reservation WHERE meeting_room_id = #{meetingRoomId} AND reservation_date = #{reservationDate}
+	</select>
+	
+	<insert id="insertReservation" parameterType="Reservation">
+		INSERT INTO reservation(employee_id, meeting_room_id, meet_purpose, meet_attendess, start_date, end_date)
+		VALUES (#{employeeId},#{meetingRoomId},#{meetPurpose},#{meetAttendess},#{startDate},#{endDate})
+	</insert>
+	
+	<update id="updateReservation" parameterType="Reservation">
+		UPDATE reservation SET meeting_room_id = #{meetingRoomId}, meet_purpose = #{meetPurpose}, meet_attendess = #{meetAttendess}, 
+		start_date = #{startDate}, end_date = #{endDate}, modify_date = #{modifyDate}
+		WHERE reservation_id = 1	
+	</update>
+</mapper>

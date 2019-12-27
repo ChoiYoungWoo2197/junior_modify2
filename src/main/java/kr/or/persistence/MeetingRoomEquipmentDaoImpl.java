@@ -34,4 +34,10 @@ public class MeetingRoomEquipmentDaoImpl implements MeetingRoomEquipmentDao {
 		sqlSession.insert(namespace + ".insertMeetingRoomEquipment", map);
 	}
 
+	@Override
+	public MeetingRoomEquipment selectMeetingRoomEquipmentById(int meetingRoomId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
