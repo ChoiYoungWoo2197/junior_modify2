@@ -32,13 +32,13 @@ public class EquipmentDaoImpl implements EquipmentDao {
 	}
 
 	@Override
-	public List<Equipment> searchEquipment(SearchCriteria criteria) {
-		return sqlSession.selectList(namespace + ".searchEquipment", criteria);
+	public List<Equipment> searchEquipment(SearchCriteria searchCriteria) {
+		return sqlSession.selectList(namespace + ".searchEquipment", searchCriteria);
 	}
 
 	@Override
-	public int searchEquipmentCount(SearchCriteria criteria) {
-		return sqlSession.selectOne(namespace + ".searchEquipmentCount", criteria);
+	public int searchEquipmentCount(SearchCriteria searchCriteria) {
+		return sqlSession.selectOne(namespace + ".searchEquipmentCount", searchCriteria);
 	}
 
 	@Override

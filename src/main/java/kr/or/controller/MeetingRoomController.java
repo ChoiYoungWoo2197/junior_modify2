@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.or.domain.Equipment;
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
+import kr.or.domain.Page;
+import kr.or.domain.SearchCriteria;
 import kr.or.service.MeetingRoomService;
 
 @Controller
@@ -26,9 +28,12 @@ public class MeetingRoomController {
 	MeetingRoomService meetingRoomService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
+	public String list(SearchCriteria searchCriteria, Model model) {
 		logger.info("meetingRoom list");
 		
+		List<MeetingRoom> meetingRoomList = meetingRoomService.searchMeetingRoom(searchCriteria);
+		model.addAttribute("meetingRoomList", meetingRoomList);
+		model.addAttribute("page", new Page(meetingRoomService.searchMeetingRoomCount(searchCriteria), searchCriteria));		
 		return "meetingRoom/list";
 	}
 	
@@ -49,7 +54,8 @@ public class MeetingRoomController {
 		
 		List<String> equipmentList = Arrays.asList(checkTrue.split(","));
 		
-		int meetingRoomId = meetingRoomService.insertMeetingRoom(meetingRoom);
+		meetingRoomService.insertMeetingRoom(meetingRoom);
+		int meetingRoomId = meetingRoom.getMeetingRoomId();
 		meetingRoomService.insertMeetingRoomEquipment(meetingRoomId, equipmentList);
 		
 		return "redirect:/meetingRoom/list";
