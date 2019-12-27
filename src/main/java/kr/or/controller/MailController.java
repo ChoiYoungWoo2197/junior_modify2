@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Random;
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.domain.Employee;
 import kr.or.service.EmployeeService;
 
 /**
@@ -32,12 +34,17 @@ public class MailController {
 	@Inject    //서비스를 호출하기 위해서 의존성을 주입
 	JavaMailSender senderMail;     //메일 서비스를 사용하기 위해 의존성을 주입함.
 
+	int employeeId = 0;
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/authenticate", method = RequestMethod.GET)
-	public String authenticate(Locale locale, Model model) {
-
+	public String authenticate(Locale locale, Model model, HttpServletRequest request) {
+		logger.info("mail > employId :" + request.getParameter("employeeId"));
+		Employee employee = employeeService.checkIdEmployee(request.getParameter("employeeId"));
+		model.addAttribute("mail", employee.getEmail());
+		employeeId = employee.getEmployeeId();
 		return "/mail/authenticate";
 	}
 
@@ -45,6 +52,7 @@ public class MailController {
 	@RequestMapping(value = "/request", method = RequestMethod.POST)
 	public @ResponseBody String request(HttpServletResponse response, @RequestParam("mail") String mail) {
 		boolean success = false;
+		
 		String authKey = getAuthKey(); //이메일로 받는 인증번호 부분 (난수)
 		String sendPerson = "arangchoi40@gamil.com";
 		String receivePerson = mail; // 받는 사람 이메일

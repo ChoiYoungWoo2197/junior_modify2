@@ -234,20 +234,23 @@ table, th, td {
 			<table>
 				<tr>
 					<td><b>사번</b><b class="red">*</b></td>
-					<td><input name="employeeId" type="text" size="20" />
-					<td colspan="2"><input type="button" id="employeeIdCheck"
-						onclick="checkId()" value="중복체크"> <span id="valideId"
-						class="error" size="20">사원번호를 입력하세요.</span> <span
-						id="checkIdSuccess" class="success" size="20">사용가능한 사원번호
-							입니다.</span> <span id="checkIdFail" class="error" size="20">이미
-							존재하는 사원번호 입니다.</span></td>
+					<td>
+					<input name="employeeId" type="text" size="20" />
+					<span id="valideId"	class="error" size="20">사원번호를 입력하세요.</span>
+					<span id="checkIdSuccess" class="success" size="20">사용가능한 사원번호 입니다.</span>
+					<span id="checkIdFail" class="error" size="20">이미 존재하는 사원번호 입니다.</span>
+					</td>
+					<td colspan="2"><input type="button" id="employeeIdCheck" onclick="checkId()" value="중복체크"></td>
+					
 
 				</tr>
 				<tr>
 					<td><b>사원명</b><b class="red">*</b></td>
-					<td><input name="name" type="text" size="20" />
-					<td><span id="valideName" class="error" size="20">이름을
-							입력하세요.</span></td>
+					<td>
+					<input name="name" type="text" size="20" />
+					<span id="valideName" class="error" size="20">이름을 입력하세요.</span>
+					</td>
+					<td colspan="2"></td>
 				</tr>
 				<tr>
 					<td><b>소속부서</b><b class="red">*</b></td>
@@ -257,41 +260,43 @@ table, th, td {
 							<option value="2">기획부</option>
 							<option value="3">영업부</option>
 							<option value="4">인사부</option>
-					</select></td>
-					<td><span id="valideDepartmentType" class="error" size="20">부서를
-							선택하세요.</span></td>
+					</select>
+					<span id="valideDepartmentType" class="error" size="20">부서를 선택하세요.</span>
+					</td>
+					<td colspan="2"></td>
 				</tr>
 				</tr>
 				<tr>
 					<td><b>비빌번호</b><b class="red">*</b></td>
 					<td><input name="password" type="password" size="20" />
-					<td><span id="validePassword" class="error" size="20">비밀번호를
-							입력하세요.</span></td>
+					<span id="validePassword" class="error" size="20">비밀번호를 입력하세요.</span>
+					</td>
+					
 					<td><b>비밀번호 확인</b><b class="red">*</b></td>
-					<td colspan="2"><input id="passwordCheck" name="passwordCheck"
-						type="password" size="20" /> <span id="validePasswordCheck"
-						class="error" size="20">비밀번호 확인을 입력하세요.</span> <span
-						id="checkPasswordSuccess" class="success" size="20">비밀번호가
-							일치합니다.</span> <span id="checkPasswordFail" class="error" size="20">비밀번호가
-							일치하지 않습니다.</span></td>
+					<td colspan="1">
+					<input id="passwordCheck" name="passwordCheck" type="password" size="20" />
+					<span id="validePasswordCheck"	class="error" size="20">비밀번호 확인을 입력하세요.</span>
+					<span id="checkPasswordSuccess" class="success" size="20">비밀번호가 일치합니다.</span>
+					<span id="checkPasswordFail" class="error" size="20">비밀번호가 일치하지 않습니다.</span>
+					</td>
 				</tr>
 				<tr>
 					<td><b>이메일</b><b class="red">*</b></td>
-					<td><input name="email" type="text" size="20" />
-					<td colspan="2"><input type="button" id="employeeEmailCheck"
-						onclick="checkEmail()" value="중복체크"> <span
-						id="valideEmail" class="error" size="20">이메일을 입력하세요.</span> <span
-						id="checkEmailSuccess" class="success" size="20">사용가능한 이메일
-							입니다.</span> <span id="checkEmailFail" class="error" size="20">이미
-							존재하는 이메일 입니다.</span></td>
-
-
+					<td>
+					<input name="email" type="text" size="20" />
+					<span id="valideEmail" class="error" size="20">이메일을 입력하세요.</span>
+					<span id="checkEmailSuccess" class="success" size="20">사용가능한 이메일	입니다.</span>
+					<span id="checkEmailFail" class="error" size="20">이미 존재하는 이메일 입니다.</span>
+					</td>
+					<td colspan="2"><input type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크"></td>
 				</tr>
 				<tr>
 					<td><label>전화번호</label></td>
-					<td><input name="phone" type="text" size="20" />
-					<td><span id="validePhone" class="error" size="20">전화번호을
-							입력하세요.</span></td>
+					<td>
+					<input name="phone" type="text" size="20" />
+					<span id="validePhone" class="error" size="20">전화번호를 입력하세요.</span>
+					</td>
+					<td colspan="2"></td>
 				</tr>
 
 			</table>

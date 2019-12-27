@@ -71,7 +71,7 @@ table, th, td {
 			<table>
 				<tr>
 					<td><b>이메일 주소</b></td>
-					<td><input name="mail" type="text" size="50" />
+					<td><input name="mail" type="text" size="50" value="${mail}"/>
 				</tr>
 
 				<tr>

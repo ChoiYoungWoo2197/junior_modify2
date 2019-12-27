@@ -48,9 +48,9 @@ public class MemberController {
 		employee.setEmail(request.getParameter("email"));
 		employee.setPhone(request.getParameter("phone"));
 		employee.setAuthkey(getAuthKey());
-		employee.setState("y");
+		employee.setState("N");
 		employeeService.insertEmployee(employee);
-		return "redirect:/mail/authenticate";
+		return "redirect:/mail/authenticate?employeeId="+employee.getEmployeeId();
 	}
 	
 	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
