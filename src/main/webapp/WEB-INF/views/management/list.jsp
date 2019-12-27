@@ -43,14 +43,10 @@
 		$(document).on("click", ".updateManagement", function(){
 			var managementId = Number($(this).attr("data-managementId"));
 			
-			if($("input[name=mgt]").val() == "department") {
-				location.href = "read?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
-			} else if($("input[name=mgt]").val() == "equipment") {
-				var result = confirm("수정하시겠습니까?");
-				
-				if(result == true) { 
-					location.href = "modify?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
-				}
+			var result = confirm("수정하시겠습니까?");
+			
+			if(result == true) { 
+				location.href = "modify?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
 			}
 			
 		})
