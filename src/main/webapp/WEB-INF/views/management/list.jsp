@@ -54,6 +54,7 @@
 		$(document).on("click", ".deleteManagement", function(){
 			var result = confirm("삭제하시겠습니까?");
 			var managementId = Number($(this).attr("data-managementId"));
+			var deleteAvailable = true;
 			
 			if(result == true) {
 				if($("input[name=mgt]").val() == "department") {
@@ -61,18 +62,26 @@
 						url : "/management/countEmp?managementId="+managementId,
 						type : "get",
 						dataType : "text",
+						async: false,
+						/*
+						ajax는 비동기식이기 때문에 다른 호출을 먼저 할 수도 있다(ajax가 완료된것을 기다려주지 않음).
+						비동기식인 ajax를 동기식으로 설정해줘야 함 => async: false
+						*/
 						success : function(res) {
+							console.log(res);
 							if(res == "false") {
 								alert("소속된 사원이 존재하여 삭제할 수 없습니다.");
-								return false;
+								deleteAvailable = false;
 							}
 						}
 					})
 				}
 				
-				$("input[name='managementId']").val(managementId);
-				$("#deleteForm").attr("action", "delete").attr("method", "post");
-				$("#deleteForm").submit();
+				if(deleteAvailable) {
+					$("input[name='managementId']").val(managementId);
+					$("#deleteForm").attr("action", "delete").attr("method", "post");
+					$("#deleteForm").submit();
+				}
 			}
 		})
 		

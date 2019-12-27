@@ -24,17 +24,15 @@
 		UPDATE department SET name = #{name} WHERE department_id = #{departmentId}
 	</update>
 	
-	<delete id="deleteDepartment" parameterType="int">
-		DELETE FROM department WHERE department_id = #{departmentId}
-	</delete>
-	
-<<<<<<< HEAD
 	<select id="selectEmployeeCountById" resultType="int">
 		SELECT (SELECT count(employee_id) FROM employee WHERE employee.department_id = department.department_id) AS emoloyeeCount 
 		FROM department WHERE department_id = #{departmentId}
 	</select>
-=======
->>>>>>> d4ba0bbea5e1bf058b6eb6b9b7926fc7e8f022d0
+	
+	<delete id="deleteDepartment" parameterType="int">
+		DELETE FROM department WHERE department_id = #{departmentId}
+	</delete>
+	
 	<!-- <select id="selectEmployeeByDepartmentById" resultType="EmployeeByDepartment">
     	SELECT department.department_id, department.name, employee.employee_id, employee.name AS employeeName, employee.email, employee.phone 
 		FROM department JOIN employee ON employee.department_id = department.department_id
