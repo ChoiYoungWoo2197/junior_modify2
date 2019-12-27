@@ -85,7 +85,10 @@ public class ManagementServiceImpl implements ManagementService {
 		departmentDao.deleteDepartment(departmentId);
 	}
 
+<<<<<<< HEAD
 	
 
+=======
+>>>>>>> d4ba0bbea5e1bf058b6eb6b9b7926fc7e8f022d0
 
 }

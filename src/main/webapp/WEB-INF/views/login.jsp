@@ -27,6 +27,17 @@
 				<button type="submit" class="login-btn">로그인</button>
 			</form>
 		</section>
+
+		<section class="main-page-unit">
+			<form id="insertForm" name="insertForm" method="get" action="${pageContext.request.contextPath}/member/register">
+				<div class="login-frame">
+					<div class="login-unit">
+						<button type="submit" class="login-btn">회원가입</button>
+					</div>
+				</div>
+
+			</form>
+		</section>
 	</main>
 </body>
 </html>

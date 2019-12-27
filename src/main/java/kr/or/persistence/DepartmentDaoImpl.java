@@ -51,5 +51,4 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		sqlSession.delete(namespace + ".deleteDepartment", departmentId);
 	}
 
-
 }
