@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.domain.Department;
-import kr.or.domain.EmployeeByDepartment;
 import kr.or.domain.Equipment;
 import kr.or.domain.SearchCriteria;
 import kr.or.persistence.DepartmentDao;
-import kr.or.persistence.EmployeeByDepartmentDao;
 import kr.or.persistence.EquipmentDao;
 
 @Service
@@ -22,9 +20,6 @@ public class ManagementServiceImpl implements ManagementService {
 	@Autowired
 	DepartmentDao departmentDao;
 	
-	@Autowired
-	EmployeeByDepartmentDao employeeByDepartmentDao;
-
 	@Override
 	public void insertEquipment(Equipment equipment) {
 		equipmentDao.insertEquipment(equipment);
@@ -56,6 +51,11 @@ public class ManagementServiceImpl implements ManagementService {
 	}
 
 	@Override
+	public List<Department> searchDepartment(SearchCriteria searchCriteria) {
+		return departmentDao.searchDepartment(searchCriteria);
+	}
+	
+	@Override
 	public int searchDepartmentCount(SearchCriteria searchCriteria) {
 		return departmentDao.searchDepartmentCount(searchCriteria);
 	}
@@ -74,20 +74,18 @@ public class ManagementServiceImpl implements ManagementService {
 	public void updateDepartment(Department department) {
 		departmentDao.updateDepartment(department);
 	}
+	
+	@Override
+	public int selectEmployeeCountById(int departmentId) {
+		return departmentDao.selectEmployeeCountById(departmentId);
+	}
 
 	@Override
 	public void deleteDepartment(int departmentId) {
 		departmentDao.deleteDepartment(departmentId);
 	}
 
-	@Override
-	public List<EmployeeByDepartment> searchEmployeeByDepartment(SearchCriteria searchCriteria) {
-		return employeeByDepartmentDao.searchEmployeeByDepartment(searchCriteria);
-	}
+	
 
-	@Override
-	public List<EmployeeByDepartment> selectEmployeeByDepartmentById(int departmentId) {
-		return employeeByDepartmentDao.selectEmployeeByDepartmentById(departmentId);
-	}
 
 }

@@ -1,5 +1,7 @@
 package kr.or.persistence;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +15,11 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	
 	@Autowired
 	SqlSession sqlSession;
+	
+	@Override
+	public List<Department> searchDepartment(SearchCriteria searchCriteria) {
+		return sqlSession.selectList(namespace + ".searchDepartment", searchCriteria);
+	}
 	
 	@Override
 	public int searchDepartmentCount(SearchCriteria searchCriteria) {
@@ -34,6 +41,11 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		sqlSession.update(namespace + ".updateDepartment", department);
 	}
 
+	@Override
+	public int selectEmployeeCountById(int departmentId) {
+		return sqlSession.selectOne(namespace + ".selectEmployeeCountById", departmentId);
+	}
+	
 	@Override
 	public void deleteDepartment(int departmentId) {
 		sqlSession.delete(namespace + ".deleteDepartment", departmentId);

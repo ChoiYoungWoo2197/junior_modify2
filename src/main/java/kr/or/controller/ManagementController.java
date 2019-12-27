@@ -9,9 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.domain.Department;
-import kr.or.domain.EmployeeByDepartment;
 import kr.or.domain.Equipment;
 import kr.or.domain.Page;
 import kr.or.domain.SearchCriteria;
@@ -37,7 +37,7 @@ public class ManagementController {
 			model.addAttribute("page", new Page(managementServcice.searchEquipmentCount(searchCriteria), searchCriteria));
 			model.addAttribute("mgt", mgt);
 		} else if(mgt.equals("department")) {
-			List<EmployeeByDepartment> employeeByDepartmentList = managementServcice.searchEmployeeByDepartment(searchCriteria);
+			List<Department> employeeByDepartmentList = managementServcice.searchDepartment(searchCriteria);
 			model.addAttribute("employeeByDepartmentList", employeeByDepartmentList);
 			
 			model.addAttribute("page", new Page(managementServcice.searchDepartmentCount(searchCriteria), searchCriteria));
@@ -73,25 +73,9 @@ public class ManagementController {
 		return "redirect:/management/list?mgt="+mgt;
 	}
 	
-	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public String read(Model model, String mgt, int managementId) {
-		logger.info("read & managementId : " + managementId);
-		
-		List<EmployeeByDepartment> employeeByDepartmentList = managementServcice.selectEmployeeByDepartmentById(managementId);
-		
-		if(employeeByDepartmentList.size()==0) {
-			model.addAttribute("managementId", managementId);
-		} else {
-			model.addAttribute("employeeByDepartmentList", employeeByDepartmentList);
-		}
-		model.addAttribute("mgt", mgt);
-		
-		return "management/read";
-	}
-	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyPage(Model model, String mgt, int managementId) {
-		logger.info("insertPage & managementId : " + managementId);
+		logger.info("modifyPage & managementId : " + managementId);
 		
 		if(mgt.equals("equipment")) {
 			Equipment equipment = managementServcice.selectEquipmentById(managementId);
@@ -108,7 +92,7 @@ public class ManagementController {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST) 
 	public String modify(Equipment equipment, Department department, String mgt) {
 		logger.info("equipment update & name : " + equipment.getName() + " & equipmentId : " + equipment.getEquipmentId());
-		logger.info("equipment update & name : " + department.getName() + " & equipmentId : " + department.getDepartmentId());
+		logger.info("department update & name : " + department.getName() + " & departmentId : " + department.getDepartmentId());
 		
 		if(mgt.equals("equipment")) {
 			managementServcice.updateEquipment(equipment);
@@ -117,6 +101,20 @@ public class ManagementController {
 		}
 		
 		return "redirect:/management/list?mgt="+mgt;
+	}
+	
+	@RequestMapping(value = "/countEmp", method = RequestMethod.GET)
+	public @ResponseBody String countEmp(Model model, String mgt, int managementId) {
+		logger.info("countEmp & managementId : " + managementId);
+
+		int employeeCount = managementServcice.selectEmployeeCountById(managementId);
+		System.out.println(employeeCount + "--------------------");
+		String deleteAvailable = "false";
+		if(employeeCount == 0) {
+			deleteAvailable = "true";
+		}
+		
+		return deleteAvailable;
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)

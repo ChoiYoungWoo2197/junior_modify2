@@ -6,6 +6,7 @@ public class Department {
 	private int departmentId;
 	private String name;
 	private Date registerDate;
+	private int emoloyeeCount;
 	
 	public int getDepartmentId() {
 		return departmentId;
@@ -25,6 +26,10 @@ public class Department {
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
-	
-	
+	public int getEmoloyeeCount() {
+		return emoloyeeCount;
+	}
+	public void setEmoloyeeCount(int emoloyeeCount) {
+		this.emoloyeeCount = emoloyeeCount;
+	}
 }

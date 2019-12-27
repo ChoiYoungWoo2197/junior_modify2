@@ -43,30 +43,33 @@
 		$(document).on("click", ".updateManagement", function(){
 			var managementId = Number($(this).attr("data-managementId"));
 			
-			if($("input[name=mgt]").val() == "department") {
-				location.href = "read?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
-			} else if($("input[name=mgt]").val() == "equipment") {
-				var result = confirm("수정하시겠습니까?");
-				
-				if(result == true) { 
-					location.href = "modify?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
-				}
+			var result = confirm("수정하시겠습니까?");
+			
+			if(result == true) { 
+				location.href = "modify?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
 			}
 			
 		})
 		
 		$(document).on("click", ".deleteManagement", function(){
 			var result = confirm("삭제하시겠습니까?");
+			var managementId = Number($(this).attr("data-managementId"));
 			
 			if(result == true) {
 				if($("input[name=mgt]").val() == "department") {
-					if($(this).parent().prev().prev().text() != "0") {
-						alert("소속된 사원이 존재하여 삭제할 수 없습니다.");
-						return false;
-					}
+					$.ajax({
+						url : "/management/countEmp?managementId="+managementId,
+						type : "get",
+						dataType : "text",
+						success : function(res) {
+							if(res == "false") {
+								alert("소속된 사원이 존재하여 삭제할 수 없습니다.");
+								return false;
+							}
+						}
+					})
 				}
 				
-				var managementId = Number($(this).attr("data-managementId"));
 				$("input[name='managementId']").val(managementId);
 				$("#deleteForm").attr("action", "delete").attr("method", "post");
 				$("#deleteForm").submit();
