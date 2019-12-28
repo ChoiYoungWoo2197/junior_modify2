@@ -13,7 +13,6 @@ public interface EquipmentDao {
 	public Equipment selectEquipmentById(int equipmentId);
 	public void updateEquipment(Equipment equipment);
 	public void deleteEquipment(int equipmentId);
-	
 	public List<Equipment> selectEquipment();
 	
 }

@@ -1,6 +1,8 @@
 package kr.or.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +45,7 @@ public class MeetingRoomDaoImpl implements MeetingRoomDao {
 	}
 
 	@Override
-	public MeetingRoom selectMeetingRoomById(int meetingRoomId) {
+	public MeetingRoom listMeetingRoomEquipmentById(int meetingRoomId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

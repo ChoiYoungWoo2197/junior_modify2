@@ -8,8 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.or.domain.Equipment;
-import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
 
 @Repository

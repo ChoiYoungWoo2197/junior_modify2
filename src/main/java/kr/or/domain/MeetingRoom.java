@@ -47,5 +47,4 @@ public class MeetingRoom {
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
-	
 }

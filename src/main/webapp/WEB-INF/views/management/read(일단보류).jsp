@@ -14,12 +14,12 @@
 <script>
 	$(function() {
 		$("#listManagement").click(function() {
-			location.href = "list?mgt="+$("input[name='mgt']").val();
+			location.href = "list?management="+$("input[name='management']").val();
 		})
 		
 		$("#updateManagement").click(function() {
 			var managementId = Number($("input[name=managementId]").val());
-			location.href = "modify?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
+			location.href = "modify?management="+$("input[name=management]").val()+"&managementId="+managementId;
 		})
 	})
 </script>
@@ -35,7 +35,7 @@
 			</tr>
 			<c:if test="${empty employeeByDepartmentList}">
 				<input type="hidden" name="managementId" value="${managementId}">
-				<input type="hidden" name="mgt" value="${mgt}">
+				<input type="hidden" name="management" value="${management}">
 				<tr>
 					<td colspan="5">소속된 사원이 없습니다.</td>
 				</tr>
@@ -45,7 +45,7 @@
 					<tr>
 						<c:if test="${status.first}">
 							<input type="hidden" name="managementId" value="${department.departmentId}">
-							<input type="hidden" name="mgt" value="${mgt}">
+							<input type="hidden" name="management" value="${management}">
 							<td rowspan="${fn:length(employeeByDepartmentList)}">${department.name}</td>
 						</c:if>
 						<td>${department.employeeId}</td>

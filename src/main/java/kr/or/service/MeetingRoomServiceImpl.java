@@ -49,6 +49,11 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 	}
 	
 	@Override
+	public List<MeetingRoomEquipment> listMeetingRoomEquipment() {
+		return meetingRoomEquipmentDao.listMeetingRoomEquipment();
+	}
+	
+	@Override
 	public List<Equipment> selectEquipment() {
 		return equipmentDao.selectEquipment();
 	}

@@ -16,6 +16,7 @@ public interface MeetingRoomService {
 	
 	//MeetingRoomEquipment
 	public void insertMeetingRoomEquipment(int meetingRoomId, List<String> equipmentList);
+	public List<MeetingRoomEquipment> listMeetingRoomEquipment();
 	
 	//Equipment
 	public List<Equipment> selectEquipment();

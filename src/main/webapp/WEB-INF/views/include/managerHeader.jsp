@@ -22,10 +22,10 @@
 		<div class="width1200">
 			<ul>
 				<li>예약 현황</li>
-				<li><a href="${pageContext.request.contextPath}/management/list?mgt=department">부서 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/management/list?management=department">부서 관리</a></li>
 				<li><a>회원 관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/meetingRoom/list">회의실 관리</a></li>
-				<li><a href="${pageContext.request.contextPath}/management/list?mgt=equipment">장비 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/management/list?management=equipment">장비 관리</a></li>
 			</ul>
 		</div>
 	</nav>

@@ -37,7 +37,7 @@
 <script>
 	$(function() {
 		$("#insertManagement").click(function() {
-			location.href = "insert?mgt="+$("input[name=mgt]").val();
+			location.href = "insert?management="+$("input[name=management]").val();
 		})
 		
 		$(document).on("click", ".updateManagement", function(){
@@ -46,7 +46,7 @@
 			var result = confirm("수정하시겠습니까?");
 			
 			if(result == true) { 
-				location.href = "modify?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
+				location.href = "modify?management="+$("input[name=management]").val()+"&managementId="+managementId;
 			}
 			
 		})
@@ -57,7 +57,7 @@
 			var deleteAvailable = true;
 			
 			if(result == true) {
-				if($("input[name=mgt]").val() == "department") {
+				if($("input[name=management]").val() == "department") {
 					$.ajax({
 						url : "/management/countEmp?managementId="+managementId,
 						type : "get",
@@ -91,20 +91,20 @@
 				return false;
 			}
 			
-			location.href = "list?mgt="+$("input[name=mgt]").val()+"&page=1&searchContent="+$("input[name='searchContent']").val();
+			location.href = "list?management="+$("input[name=management]").val()+"&page=1&searchContent="+$("input[name='searchContent']").val();
 		})
 		
 		$("#AllEquipment").click(function() {
-			location.href = "list?mgt="+$("input[name=mgt]").val();
+			location.href = "list?management="+$("input[name=management]").val();
 		})
 	})
 </script>
 
 	<section class="width1200">
-		<c:if test="${mgt eq 'equipment'}">
+		<c:if test="${management eq 'equipment'}">
 			<c:set var="title" value="장비"/>
 		</c:if>
-		<c:if test="${mgt eq 'department'}">
+		<c:if test="${management eq 'department'}">
 			<c:set var="title" value="부서"/>
 		</c:if>
 		
@@ -114,7 +114,7 @@
 			<button id="searchEquipment">검색</button>
 			<button id="AllEquipment">전체보기</button>
 		</div>
-		<c:if test="${mgt eq 'equipment'}">
+		<c:if test="${management eq 'equipment'}">
 			<table>
 				<c:if test="${empty equipmentList}">
 					<tr>
@@ -145,7 +145,7 @@
 			</table>
 			<button id="insertManagement">장비등록</button>
 		</c:if>
-		<c:if test="${mgt eq 'department'}">
+		<c:if test="${management eq 'department'}">
 			<table>
 				<c:if test="${empty employeeByDepartmentList}">
 					<tr>
@@ -182,19 +182,19 @@
 		
 		<form id="deleteForm">
 			<input type="hidden" name="managementId">
-			<input type="hidden" name="mgt" value="${mgt}">
+			<input type="hidden" name="management" value="${management}">
 		</form>
 		
 		<div id="page">
 			<ul class="pagination">
 				<c:if test="${page.prev}">
 					<li>
-						<a href="list?mgt=${mgt}&page=${page.startPage-1}&searchContent=${page.criteria.searchContent}">&lt;</a>
+						<a href="list?management=${management}&page=${page.startPage-1}&searchContent=${page.criteria.searchContent}">&lt;</a>
 					</li>
 				</c:if>
 				<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
 					<li>
-						<a href="list?mgt=${mgt}&page=${index}&searchContent=${page.criteria.searchContent}">
+						<a href="list?management=${management}&page=${index}&searchContent=${page.criteria.searchContent}">
 							<c:if test="${page.criteria.page == index}">
 								<span class="page_shape color_sky"></span>
 							</c:if>
@@ -206,7 +206,7 @@
 				</c:forEach>
 				<c:if test="${page.next}">
 					<li>
-						<a href="list?mgt=${mgt}&page=${page.endPage+1}&searchContent=${page.criteria.searchContent}">&gt;</a>
+						<a href="list?management=${management}&page=${page.endPage+1}&searchContent=${page.criteria.searchContent}">&gt;</a>
 					</li>
 				</c:if>
 			</ul>
