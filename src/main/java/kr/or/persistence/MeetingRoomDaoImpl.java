@@ -45,9 +45,8 @@ public class MeetingRoomDaoImpl implements MeetingRoomDao {
 	}
 
 	@Override
-	public MeetingRoom listMeetingRoomEquipmentById(int meetingRoomId) {
-		// TODO Auto-generated method stub
-		return null;
+	public MeetingRoom selectMeetingRoomById(int meetingRoomId) {
+		return sqlSession.selectOne(namespace + ".selectMeetingRoomById", meetingRoomId);
 	}
 
 	

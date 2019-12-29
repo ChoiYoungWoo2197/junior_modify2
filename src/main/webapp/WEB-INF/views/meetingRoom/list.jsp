@@ -37,9 +37,26 @@
 		$("#insertMeetingRoom").click(function() {
 			location.href = "insert";
 		})
+		
+		$(document).on("click", ".updateMeetingRoom", function(){
+			var meetingRoomId = Number($(this).prev().text());
+			
+			var result = confirm("수정하시겠습니까?");
+			
+			if(result == true) { 
+				location.href = "modify?meetingRoomId="+meetingRoomId;
+			}
+			
+		})
 	})
 </script>
 	<section class="width1200">
+		<%-- <div>
+			<input type="text" name="searchContent" value="${criteria.searchContent}">
+			<button id="searchEquipment">검색</button>
+			<button id="AllEquipment">전체보기</button>
+		</div> --%>
+		--검색기능구현안했음--
 		<table>
 			<tr>
 				<th>번호</th>
@@ -58,10 +75,10 @@
 				<c:forEach var="meetingRoom" items="${meetingRoomList}">
 					<tr>
 						<td>${meetingRoom.meetingRoomId}</td>
-						<td>${meetingRoom.name}</td>
+						<td class="updateMeetingRoom">${meetingRoom.name}</td>
 						<td>${meetingRoom.seats}</td>
 						<td>${meetingRoom.availability eq "true" ? "가능" : "불가능"}</td>
-						<td class="equipmentNames">
+						<td>
 							<c:forEach var="meetingRoomEquipment" items="${meetingRoomEquipmentList}">
 								<c:if test="${meetingRoomEquipment.meetingRoomId == meetingRoom.meetingRoomId}">
 									${meetingRoomEquipment.equipmentName}&nbsp;
@@ -73,7 +90,7 @@
 				</c:forEach>
 			</c:if>
 		</table>
-		<button id="insertMeetingRoom">회의실 등록</button>
+		<button id="insertMeetingRoom">회의실등록</button>
 		
 		<div id="page">
 			<ul class="pagination">

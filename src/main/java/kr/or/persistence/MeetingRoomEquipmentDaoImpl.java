@@ -19,8 +19,8 @@ public class MeetingRoomEquipmentDaoImpl implements MeetingRoomEquipmentDao {
 	SqlSession sqlSession;
 
 	@Override
-	public List<MeetingRoomEquipment> listMeetingRoomEquipment() {
-		return sqlSession.selectList(namespace + ".listMeetingRoomEquipment");
+	public List<MeetingRoomEquipment> selectMeetingRoomEquipment() {
+		return sqlSession.selectList(namespace + ".selectMeetingRoomEquipment");
 	}
 
 	@Override
@@ -33,9 +33,8 @@ public class MeetingRoomEquipmentDaoImpl implements MeetingRoomEquipmentDao {
 	}
 
 	@Override
-	public MeetingRoomEquipment selectMeetingRoomEquipmentById(int meetingRoomId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId) {
+		return sqlSession.selectList(namespace + ".selectMeetingRoomEquipmentById", meetingRoomId);
 	}
 
 }

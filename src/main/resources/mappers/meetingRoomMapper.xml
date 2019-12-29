@@ -44,7 +44,7 @@
 		WHERE meeting_room_id = #{meetingRoomId}
 	</delete>
 	
-	<select id="selectMeetingRoomById" resultType="Reservation">
+	<select id="selectMeetingRoomById" resultType="MeetingRoom">
 		SELECT * 
 		FROM meeting_room 
 		WHERE meeting_room_id = #{meetingRoomId}

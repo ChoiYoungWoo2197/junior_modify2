@@ -8,10 +8,10 @@
 			location.href = "list?management="+$("input[name='management']").val();
 		})
 		
-		$("#cancelUpdate").click(function() {
+		/* $("#cancelUpdate").click(function() {
 			var managementId = Number($("input[name='departmentId']").val());
 			location.href = "read?management="+$("input[name='management']").val()+"&managementId="+managementId;
-		})
+		}) */
 		
 		$("#updateEquipmentForm").submit(function() {
 			var result = confirm("수정하시겠습니까?");
@@ -31,14 +31,13 @@
 				<input type="hidden" name="equipmentId" value="${equipment.equipmentId}">
 				<input type="text" name="name" value="${equipment.name}">
 				<input type="submit" value="수정">
-				<input type="reset">
 			</c:if>
 			<c:if test="${management eq 'department'}">
 				<label>부서명</label>
 				<input type="hidden" name="departmentId" value="${department.departmentId}">
 				<input type="text" name="name" value="${department.name}">
 				<input type="submit" value="수정">
-				<input type="button" value="취소" id="cancelUpdate">
+				<!-- <input type="button" value="취소" id="cancelUpdate"> -->
 			</c:if>
 		</form>
 		<button id="listManagement">목록</button>

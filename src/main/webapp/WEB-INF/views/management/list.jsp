@@ -85,7 +85,7 @@
 			}
 		})
 		
-		$("#searchEquipment").click(function() {
+		$("#searchManagement").click(function() {
 			if($("input[name='searchContent']").val()=="") {
 				alert("검색할 내용을 입력해주세요.");
 				return false;
@@ -94,7 +94,7 @@
 			location.href = "list?management="+$("input[name=management]").val()+"&page=1&searchContent="+$("input[name='searchContent']").val();
 		})
 		
-		$("#AllEquipment").click(function() {
+		$("#AllManagement").click(function() {
 			location.href = "list?management="+$("input[name=management]").val();
 		})
 	})
@@ -111,8 +111,8 @@
 		<h1>${title}관리</h1>
 		<div>
 			<input type="text" name="searchContent" value="${criteria.searchContent}">
-			<button id="searchEquipment">검색</button>
-			<button id="AllEquipment">전체보기</button>
+			<button id="searchManagement">검색</button>
+			<button id="AllManagement">전체보기</button>
 		</div>
 		<c:if test="${management eq 'equipment'}">
 			<table>
