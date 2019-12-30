@@ -19,7 +19,7 @@ function displayCaldendar() {
 	
 	var row = Math.ceil((dayWeek + lastDate) / 7 ); //행의 갯수(ceil=>올림)
 	
-	$("#today").text(year+"."+(month+1));
+	$("#today").text(year+"."+("0"+(month+1)).slice(-2));
 	
 	var calendar = "<table>";
 	calendar +="<tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>";

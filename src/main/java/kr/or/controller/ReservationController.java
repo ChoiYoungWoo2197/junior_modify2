@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
+import kr.or.domain.Reservation;
 import kr.or.service.ReservationService;
 
 @Controller
@@ -56,5 +57,16 @@ public class ReservationController {
 		map.put("meetingRoomEquipmentList", meetingRoomEquipmentList);
 		
 		return map;
+	}
+	
+	@RequestMapping(value = "/infoReserve", method = RequestMethod.GET)
+	public @ResponseBody List<Reservation> infoReserve(int meetingRoomId, String choiceDay) {
+		logger.info("infoReserve & meetingRoomId : " + meetingRoomId);
+		logger.info("infoReserve & choiceDay : " + choiceDay);
+		
+		String startDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
+		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(meetingRoomId, startDate);
+		
+		return reservationList;
 	}
 }

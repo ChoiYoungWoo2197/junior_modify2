@@ -30,31 +30,8 @@
 			nextMonth();
 		})
 		
-		$(document).on("click", "td", function() {
-			$("td").removeClass("color_blue");
-			
-			var date = new Date();
-			var today = String(date.getFullYear())+String((date.getMonth()+1))+String(date.getDate());
-			var choiceDay = $("#today").text().replace(".","")+$(this).text();
-			
-			alert(today);
-			alert(choiceDay);
-			
-			/* if($(this).text() < date.getDate()) {
-				alert("이전 날짜를 선택할 수 없습니다.");
-				return false;
-			} else {
-				$(this).addClass("color_blue");
-				
-				alert($("#today").text());
-			} */
-			
-			$(this).addClass("color_blue");
-			
-			//alert($("#today").text());
-		})
-		
 		$("#meetingRoomSelect").change(function() {
+			$("td").removeClass("color_blue");
 			if($("select[name='meetingRoom']").val() != "none") {
 				var meetingRoomId = Number($("select[name='meetingRoom']").val());
 				
@@ -65,8 +42,6 @@
 					url : "/reservation/infoMeet?meetingRoomId="+meetingRoomId,
 					type : "get",
 					success : function(res) {
-						console.log(res);
-						
 						if(res.meetingRoomEquipmentList.length != 0) {
 							var $equipmentLabel = $("<h5>").text("지원장비");
 							var $equipmentUl = $("<ul>");
@@ -86,11 +61,43 @@
 						
 						
 						var $seatLabel = $("<h5>").text("좌석수");
-						var $seats = $("<span>").text(res.meetingRoom.seats + "석");
+						var $seats = $("<span id='meetingRoomSeats'>").text(res.meetingRoom.seats + "석");
 						$("#meetingRoomSeats").append($seatLabel).append($seats);
 					}
 				})
 			}
+		})
+		
+		$(document).on("click", "td", function() {
+			$("td").removeClass("color_blue");
+
+			var meetingRoomId = Number($("select[name='meetingRoom']").val());
+			
+			var date = new Date();
+			var today = String(date.getFullYear())+String(('0'+(date.getMonth()+1)).slice(-2))+String(('0'+date.getDate()).slice(-2));
+			if(Number($(this).text()) < 10) {
+				var choiceDay = $("#today").text().replace(".","")+'0'+$(this).text();
+			} else {
+				var choiceDay = $("#today").text().replace(".","")+$(this).text();
+			}
+			
+			if(Number(today) > Number(choiceDay)) {
+				alert("지난 날짜를 선택하실 수 없습니다.");
+				return false;
+			}
+			$(this).addClass("color_blue");
+			
+			$.ajax({
+				url : "/reservation/infoReserve?meetingRoomId="+meetingRoomId+"&choiceDay="+choiceDay,
+				type : "get",
+				success : function(res) {
+					console.log(res);
+					
+					if(res.length == 0) {
+						$("#reservationList").text("예약 내역이 존재하지 않습니다.");	
+					}
+				}
+			})
 		})
 	})
 </script>	
@@ -115,9 +122,7 @@
 	        		<span id="prevMonth">&lt; </span><b id="today"></b><span id="nextMonth"> &gt;</span>
 					<div id="calendar"></div>
 				</div>
-				<div>
-					
-				</div>
+				<div id="reservationList"></div>
 			</div>
 			<div>
 				<label>시작시간 : </label>
@@ -147,6 +152,14 @@
 		</div>
 		<div class="width30 float_left">
 			<h4>3.회의정보</h4>
+			<label>회의목적</label> <br>
+			<input type="text" placeholder="회의목적(주제)를 입력해주세요."> <br>
+			<label>회의참석자</label> <br>
+			<select>
+				<c:forEach var="index" begin="1" end="1">
+					<option>${index}</option>
+				</c:forEach>
+			</select>
 		</div>
 	</section>
 </body>

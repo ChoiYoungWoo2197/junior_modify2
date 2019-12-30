@@ -7,17 +7,27 @@ import org.springframework.stereotype.Service;
 
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
+import kr.or.domain.Reservation;
 import kr.or.persistence.MeetingRoomDao;
 import kr.or.persistence.MeetingRoomEquipmentDao;
+import kr.or.persistence.ReservationDao;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
+	
+	@Autowired
+	ReservationDao reservationDao;
 	
 	@Autowired
 	MeetingRoomDao meetingRoomDao;
 	
 	@Autowired
 	MeetingRoomEquipmentDao meetingRoomEquipmentDao;
+	
+	@Override
+	public List<Reservation> selectReservationByMeetAndDate(int meetingRoomId, String startDate) {
+		return reservationDao.selectReservationByMeetAndDate(meetingRoomId, startDate);
+	}
 	
 	@Override
 	public List<MeetingRoom> selectMeetingRoom() {
@@ -33,6 +43,5 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId) {
 		return meetingRoomEquipmentDao.selectMeetingRoomEquipmentById(meetingRoomId);
 	}
-
 	
 }
