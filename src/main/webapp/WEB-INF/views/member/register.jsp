@@ -57,6 +57,7 @@ table, th, td {
 	var flag = true;
 
 	function check() {
+		//alert($("input[name='memberId']").val());
 		clearError();
 
 		valideInput();
@@ -73,8 +74,8 @@ table, th, td {
 	}
 
 	function valideInput() {
-		if ($("input[name='employeeId']").val() == ""
-				|| validateId.test($("input[name='employeeId']").val()) == false) {
+		if ($("input[name='memberId']").val() == ""
+				|| validateId.test($("input[name='memberId']").val()) == false) {
 			$("#valideId").css("display", "inline");
 			flag = false;
 		}
@@ -129,19 +130,19 @@ table, th, td {
 
 	function checkId() {
 		$("#valideId").css("display", "none");
-		if ($("input[name='employeeId']").val() == ""
-				|| validateId.test($("input[name='employeeId']").val()) == false) {
+		if ($("input[name='memberId']").val() == ""
+				|| validateId.test($("input[name='memberId']").val()) == false) {
 			$("#valideId").css("display", "inline");
 
 			return false;
 		}
 
-		var employeeId = $("input[name='employeeId']").val();
+		var memberId = $("input[name='memberId']").val();
 		$.ajax({
 			url : "${pageContext.request.contextPath}/member/checkId",
 			type : "post",
 			data : {
-				"employeeId" : $("input[name='employeeId']").val()
+				"memberId" : $("input[name='memberId']").val()
 			},
 			dataType : "text",
 			success : function(res) {
@@ -229,18 +230,17 @@ table, th, td {
 			</div>
 		</div>
 		<br>
-		<form name="memberForm" action="insert" method="post"
-			onsubmit="return check()">
+		<form name="memberForm" action="insert" method="post" onsubmit="return check()">
 			<table>
 				<tr>
 					<td><b>사번</b><b class="red">*</b></td>
 					<td>
-					<input name="employeeId" type="text" size="20" />
+					<input name="memberId" type="text" size="20" />
 					<span id="valideId"	class="error" size="20">사원번호를 입력하세요.</span>
 					<span id="checkIdSuccess" class="success" size="20">사용가능한 사원번호 입니다.</span>
 					<span id="checkIdFail" class="error" size="20">이미 존재하는 사원번호 입니다.</span>
 					</td>
-					<td colspan="2"><input type="button" id="employeeIdCheck" onclick="checkId()" value="중복체크"></td>
+					<td colspan="2"><input type="button" onclick="checkId()" value="중복체크"></td>
 					
 
 				</tr>

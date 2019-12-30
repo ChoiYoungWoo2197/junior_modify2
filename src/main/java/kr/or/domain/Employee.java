@@ -4,6 +4,7 @@ public class Employee {
 	private int employeeId;
 	private int departmentId;
 	private String name;
+	private String memberId;
 	private String password;
 	private String email;
 	private String phone;
@@ -28,6 +29,12 @@ public class Employee {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -46,7 +53,7 @@ public class Employee {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+
 	public String getAuthkey() {
 		return authkey;
 	}
@@ -59,4 +66,5 @@ public class Employee {
 	public void setState(String state) {
 		this.state = state;
 	}
+
 }

@@ -3,23 +3,54 @@
 <mapper namespace="kr.or.mappers.employeeMapper">
 
 	<insert id="insertEmployee" parameterType="Employee">
-		insert into employee(employee_id, department_id, name, password, email, phone, authkey, state)
-		values(#{employeeId}, #{departmentId}, #{name}, #{password}, #{email}, #{phone}, #{authkey}, #{state})
+		INSERT INTO employee
+		(department_id, name, member_id, password, email, phone, authkey,
+		state)
+		VALUES (#{departmentId}, #{name}, #{memberId}, #{password},
+		#{email}, #{phone}, #{authkey}, #{state});
 	</insert>
 
-	<select id="selectAccountEmployee" resultType="boolean">
-		select count(*) from employee
-		where employee_id = #{employee_id} and
+	<select id="checkUser" resultType="Employee">
+		select *
+		from employee
+		where
+		member_id = #{memberId} and
 		password = #{password}
 	</select>
-	
-	<select id="selectCheckIdEmployee" parameterType="String" resultType="Employee">
+
+	<select id="selectCheckIdEmployee" parameterType="String"
+		resultType="Employee">
 		select * from employee
-		where employee_id = #{employeeId}
+		where member_id = #{memberId}
 	</select>
-	
-	<select id="selectCheckEmailEmployee" parameterType="String" resultType="Employee">
+
+	<select id="selectCheckEmailEmployee" parameterType="String"
+		resultType="Employee">
 		select * from employee
 		where email = #{email}
+	</select>
+
+	<select id="selectCheckKeyEmployee" resultType="Employee">
+		select * from
+		employee where email = #{email} and authKey = #{authkey}
+	</select>
+
+	<update id="modifyStateEmployee">
+		UPDATE employee
+		SET state = #{state} WHERE member_id =
+		#{memberId}
+	</update>
+
+	<update id="modifyKeyEmployee">
+		UPDATE employee
+		SET authkey = #{authKey} WHERE
+		member_id =
+		#{memberId}
+	</update>
+
+	<select id="checkState" resultType="Employee">
+		select * from employee
+		where member_id = #{memberId} and
+		state = #{state}
 	</select>
 </mapper>
