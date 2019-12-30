@@ -1,5 +1,8 @@
 package kr.or.interceptor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,13 +30,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle (HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 		System.out.println("Login postHandle : ");
 		HttpSession session = request.getSession();
-		Object object = modelAndView.getModelMap().get("user");
 
+		Object object = modelAndView.getModelMap().get("Account");
 		if(object != null) {
 			session.setAttribute("loginUser", object);
 			System.out.println("new login! : " +request.getContextPath().toString());
 			//response.sendRedirect("/");
 		}
+
 	}
 
 

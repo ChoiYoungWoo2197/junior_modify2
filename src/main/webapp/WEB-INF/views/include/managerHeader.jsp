@@ -24,8 +24,14 @@
 			</c:if>
 			<c:if test="${not empty loginUser}">
 				<div style="float: right;">
-					<span  size="20">${loginUser.name} 님</span>
-					<button id="loginButton" class="float_right" type="button"	onclick="location.href='${pageContext.request.contextPath}/login'">로그아웃</button>
+					<c:if test="${loginUser.manager eq 'true'}">
+						<span size="20">관리자(${loginUser.user.name}) 님</span>
+					</c:if>
+					<c:if test="${loginUser.manager eq 'false'}">
+						<span size="20">${loginUser.user.name} 님</span>
+					</c:if>
+					<button id="loginButton" class="float_right" type="button"
+						onclick="location.href='${pageContext.request.contextPath}/login'">로그아웃</button>
 				</div>
 
 				<div class="clear_both"></div>
@@ -37,10 +43,16 @@
 		<div class="width1200">
 			<ul>
 				<li>예약 현황</li>
-				<li><a href="${pageContext.request.contextPath}/management/list?management=department">부서 관리</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/management/list?management=department">부서
+						관리</a></li>
 				<li><a>회원 관리</a></li>
-				<li><a href="${pageContext.request.contextPath}/meetingRoom/list">회의실 관리</a></li>
-				<li><a href="${pageContext.request.contextPath}/management/list?management=equipment">장비 관리</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/meetingRoom/list">회의실
+						관리</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/management/list?management=equipment">장비
+						관리</a></li>
 			</ul>
 		</div>
 	</nav>

@@ -5,8 +5,11 @@ import java.security.NoSuchAlgorithmException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import kr.or.domain.Employee;
+import kr.or.domain.Manager;
 import kr.or.persistence.EmployeeDao;
+import kr.or.persistence.ManagerDao;
 
 @Service
 public class EmployeeServiceImpl implements  EmployeeService{
@@ -14,7 +17,10 @@ public class EmployeeServiceImpl implements  EmployeeService{
 	@Autowired
 	EmployeeDao employeeDao;
 
-
+	@Autowired
+	ManagerDao managerDao;
+	
+	
 	@Override
 	public void insertEmployee(Employee employee) {
 		// TODO Auto-generated method stub
@@ -94,8 +100,9 @@ public class EmployeeServiceImpl implements  EmployeeService{
 	}
 
 
-
-
-
-
+	@Override
+	public Manager checkManager(int managerId) {
+		// TODO Auto-generated method stub
+		return managerDao.checkManager(managerId);
+	}
 }
