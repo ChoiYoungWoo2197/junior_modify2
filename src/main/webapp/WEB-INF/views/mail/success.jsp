@@ -77,7 +77,7 @@
 		</section>
 
 		<section class="main-page-unit">
-			<form id="loginForm" name="loginForm" method="post"	action="loginCheck">
+			<form id="loginForm" name="loginForm" method="post"	action="${pageContext.request.contextPath}/login/check">
 				<button type="submit" class="login-btn">로그인</button>
 			</form>
 		</section>

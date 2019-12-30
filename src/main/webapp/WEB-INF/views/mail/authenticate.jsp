@@ -45,6 +45,13 @@ table, th, td {
 				}
 			})
 		})
+		
+		$("#cancel").click(function() {
+			if(confirm("이메일 인증을 취소하시겠습니까?") == true) {
+				window.location.href = '${pageContext.request.contextPath}/';
+			}
+			
+		})
 	})
 </script>
 
@@ -75,7 +82,7 @@ table, th, td {
 					<input 	type="button" id="sendReMail" value="인증메일 재발송"></td>
 				</tr>
 			</table>
-			<input type="reset" value="취소" />
+			<input type="button" id="cancel" value="취소" />
 			<input type="submit" value="확인" />
 		</form>
 	</section>

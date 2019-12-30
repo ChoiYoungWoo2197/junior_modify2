@@ -19,7 +19,7 @@
 		<header>
 			<c:if test="${empty loginUser}">
 				<button id="loginButton" class="float_right" type="button"
-					onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+					onclick="location.href='${pageContext.request.contextPath}/login/login'">로그인</button>
 				<div class="clear_both"></div>
 			</c:if>
 			<c:if test="${not empty loginUser}">
