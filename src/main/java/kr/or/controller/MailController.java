@@ -34,18 +34,21 @@ public class MailController {
 
 	@Autowired
 	MailService mailService;
-	
-	String memberId;
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	//이메일 인증페이지 출력
 	@RequestMapping(value = "/authenticate", method = RequestMethod.GET)
 	public String authenticate(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("mail > memberId :" + request.getParameter("memberId"));
-		Employee employee = employeeService.checkIdEmployee(request.getParameter("memberId"));
-		model.addAttribute("mail", employee.getEmail());
-		memberId = employee.getMemberId();
+		try {
+			Employee employee = employeeService.checkIdEmployee(request.getParameter("memberId"));
+			model.addAttribute("mail", employee.getEmail());
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
 		return "/mail/authenticate";
 	}
 
@@ -53,44 +56,50 @@ public class MailController {
 	@RequestMapping(value = "/request", method = RequestMethod.POST)
 	public @ResponseBody String request(HttpServletRequest request) {
 		boolean success = false;
-		Employee employee = employeeService.checkEmailEmployee(request.getParameter("mail"));
-		
-		if(employee != null) {
-			String authKey = mailService.getAuthKey();
-			employeeService.modifyKey(employee.getMemberId(), authKey);
-			
-			String title = "회원가입 인증 이메일 입니다.";
-			StringBuilder text = new StringBuilder();
-			text.append("귀화의 인증번호는 : " + authKey + " 입니다.");
-			
-			mailService.sendMail(mailService.sendTo(), employee.getEmail(), title, text.toString());
-			success = true;
-		}
-		
+		try {
+			Employee employee = employeeService.checkEmailEmployee(request.getParameter("mail"));
 
-		return String.valueOf(success);
+			if(employee != null) {
+				String authKey = mailService.getAuthKey();
+				employeeService.modifyKey(employee.getMemberId(), authKey);
+
+				String title = "회원가입 인증 이메일 입니다.";
+				StringBuilder text = new StringBuilder();
+				text.append("귀화의 인증번호는 : " + authKey + " 입니다.");
+
+				mailService.sendMail(mailService.sendTo(), employee.getEmail(), title, text.toString());
+				success = true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
+
+		return String.valueOf(success);	
 	}
-	
+
 	//이메일 인증완료 
 	@RequestMapping(value = "/complete", method = RequestMethod.POST)
-	public @ResponseBody String complete(HttpServletRequest request) {
+	public String complete(HttpServletRequest request, Model model) {
 		logger.info("mail > complete :" + request.getParameter("mail") + " : " + request.getParameter("authKey"));
-		boolean success = false;
-		Employee employee = employeeService.checkKey(request.getParameter("mail"), request.getParameter("authKey"));
-		
-		if(employee != null) {
-			employeeService.modifyState(employee.getMemberId(), "Y");
-			success = true;
-		}
-		else 
-		{
-			success = false;
-		}
-		
-		
-		return String.valueOf(success);
-	}
-	
-	
+		String result = "";
+		try {
+			Employee employee = employeeService.checkKey(request.getParameter("mail"), request.getParameter("authKey"));
 
+			if(employee != null) {
+				employeeService.modifyState(employee.getMemberId(), "Y");
+				model.addAttribute("user", employee);
+				result = "/mail/success";
+			}
+			else 
+			{
+				Employee tmp = employeeService.checkEmailEmployee(request.getParameter("mail"));
+				result = "redirect:/mail/authenticate?memberId="+ tmp.getMemberId();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
+		return result;
+	}
 }

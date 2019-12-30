@@ -12,7 +12,7 @@
 	<beans:bean id="loginInterceptor" class="kr.or.interceptor.LoginInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
-			<mapping path="/loginCheck" />
+			<mapping path="/login/check" />
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>
 	</interceptors>

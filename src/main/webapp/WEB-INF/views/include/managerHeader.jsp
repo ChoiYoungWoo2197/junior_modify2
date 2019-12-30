@@ -19,12 +19,17 @@
 		<header>
 			<c:if test="${empty loginUser}">
 				<button id="loginButton" class="float_right" type="button"
-					onclick="location.href='${pageContext.request.contextPath}/login'">로그인</button>
+					onclick="location.href='${pageContext.request.contextPath}/login/login'">로그인</button>
 				<div class="clear_both"></div>
 			</c:if>
 			<c:if test="${not empty loginUser}">
 				<div style="float: right;">
-					<span  size="20">${loginUser.name} 님</span>
+					<c:if test="${loginUser.manager eq 'true'}">
+						<span size="20">관리자(${loginUser.user.name}) 님</span>
+					</c:if>
+					<c:if test="${loginUser.manager eq 'false'}">
+						<span size="20">${loginUser.user.name} 님</span>
+					</c:if>
 					<button id="loginButton" class="float_right" type="button"
 						onclick="location.href='${pageContext.request.contextPath}/login'">로그아웃</button>
 				</div>

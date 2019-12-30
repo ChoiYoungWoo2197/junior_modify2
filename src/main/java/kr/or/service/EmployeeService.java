@@ -1,6 +1,7 @@
 package kr.or.service;
 
 import kr.or.domain.Employee;
+import kr.or.domain.Manager;
 
 public interface EmployeeService {
 	public void insertEmployee(Employee employee);
@@ -12,5 +13,6 @@ public interface EmployeeService {
 	public void modifyKey(String memberId, String authKey);
 	public Employee checkState(String memberId, String state);
 	public String encSHA256(String text);
+	public Manager checkManager(int managerId);
 	
 }
