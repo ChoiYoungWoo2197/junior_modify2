@@ -13,6 +13,7 @@ public interface DepartmentDao {
 	public void insertDepartment(Department department);
 	public Department selectDepartmentById(int departmentId);
 	public void updateDepartment(Department department);
+	public int selectEmployeeCountById(int departmentId);
 	public void deleteDepartment(int departmentId);
 	
 }

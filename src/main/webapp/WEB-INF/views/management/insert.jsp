@@ -5,7 +5,7 @@
 <script>
 	$(function() {
 		$("#listManagement").click(function() {
-			location.href = "list?mgt="+$("input[name='mgt']").val();
+			location.href = "list?management="+$("input[name='management']").val();
 		})
 		
 		$("#insertManagementForm").submit(function() {
@@ -19,13 +19,13 @@
 	
 	<section class="width1200">
 		<form id="insertManagementForm" method="post" action="/management/insert">
-			<c:if test="${mgt eq 'equipment'}">
+			<c:if test="${management eq 'equipment'}">
 				<label>장비명</label>
-				<input type="hidden" name="mgt" value="${mgt}">
+				<input type="hidden" name="management" value="${management}">
 			</c:if>
-			<c:if test="${mgt eq 'department'}">
+			<c:if test="${management eq 'department'}">
 				<label>부서명</label>
-				<input type="hidden" name="mgt" value="${mgt}">
+				<input type="hidden" name="management" value="${management}">
 			</c:if>
 			<input type="text" name="name">
 			<input type="submit" value="등록">

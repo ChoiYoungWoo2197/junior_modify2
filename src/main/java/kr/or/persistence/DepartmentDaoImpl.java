@@ -42,6 +42,11 @@ public class DepartmentDaoImpl implements DepartmentDao {
 	}
 
 	@Override
+	public int selectEmployeeCountById(int departmentId) {
+		return sqlSession.selectOne(namespace + ".selectEmployeeCountById", departmentId);
+	}
+	
+	@Override
 	public void deleteDepartment(int departmentId) {
 		sqlSession.delete(namespace + ".deleteDepartment", departmentId);
 	}

@@ -2,15 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.mappers.meetingRoomEquipmentMapper">
 	
-	<select id="listMeetingRoomEquipment" resultType="MeetingRoomEquipment">
-		SELECT * FROM meeting_room_equipment
+	<select id="selectMeetingRoomEquipment" resultType="MeetingRoomEquipment">
+		<!-- SELECT * 
+		FROM meeting_room_equipment -->
+		SELECT meeting_room_equipment.*, equipment.name AS equipmentName
+		FROM meeting_room_equipment
+		JOIN equipment 
+		ON equipment.equipment_id = meeting_room_equipment.equipment_id
+		ORDER BY meeting_room_id DESC, equipment_id
 	</select>
 	
 	<insert id="insertMeetingRoomEquipment" parameterType="MeetingRoomEquipment">
-		INSERT INTO meeting_room_equipment VALUES (#{equipmentId}, #{meetingRoomId})
+		INSERT INTO meeting_room_equipment 
+		VALUES (#{equipmentId}, #{meetingRoomId})
 	</insert>
 	
 	<select id="selectMeetingRoomEquipmentById" resultType="MeetingRoomEquipment">
-		SELECT * FROM meeting_room_equipment WHERE meeting_room_id = #{meetingRoomId}
+		SELECT meeting_room_equipment.*, equipment.name AS equipmentName
+		FROM meeting_room_equipment
+		JOIN equipment 
+		ON equipment.equipment_id = meeting_room_equipment.equipment_id
+		WHERE meeting_room_equipment.meeting_room_id = #{meetingRoomId}
 	</select>
 </mapper>

@@ -5,27 +5,42 @@
 	<select id="searchDepartment" resultType="Department">
 		SELECT *, (SELECT count(employee_id) FROM employee WHERE employee.department_id = department.department_id) AS emoloyeeCount
 		FROM department WHERE name LIKE '%${searchContent}%' 
-		ORDER BY department_id DESC LIMIT #{pageStart}, #{amount}
+		ORDER BY department_id DESC 
+		LIMIT #{pageStart}, #{amount}
     </select>
 	
     <select id="searchDepartmentCount" resultType="int">
-		SELECT COUNT(department_id) FROM department WHERE name LIKE '%${searchContent}%'
+		SELECT COUNT(department_id) 
+		FROM department 
+		WHERE name LIKE '%${searchContent}%'
 	</select>
 	
 	<insert id="insertDepartment" parameterType="Department">
-		INSERT INTO department(name) VALUES (#{name})
+		INSERT INTO department(name) 
+		VALUES (#{name})
 	</insert>
 	
 	<select id="selectDepartmentById" resultType="Department">
-		SELECT * FROM department WHERE department_id = #{departmentId}
+		SELECT * 
+		FROM department 
+		WHERE department_id = #{departmentId}
 	</select>
 	
 	<update id="updateDepartment" parameterType="Department">
-		UPDATE department SET name = #{name} WHERE department_id = #{departmentId}
+		UPDATE department 
+		SET name = #{name} 
+		WHERE department_id = #{departmentId}
 	</update>
 	
+	<select id="selectEmployeeCountById" resultType="int">
+		SELECT (SELECT count(employee_id) FROM employee WHERE employee.department_id = department.department_id) AS emoloyeeCount 
+		FROM department 
+		WHERE department_id = #{departmentId}
+	</select>
+	
 	<delete id="deleteDepartment" parameterType="int">
-		DELETE FROM department WHERE department_id = #{departmentId}
+		DELETE FROM department 
+		WHERE department_id = #{departmentId}
 	</delete>
 	
 	<!-- <select id="selectEmployeeByDepartmentById" resultType="EmployeeByDepartment">

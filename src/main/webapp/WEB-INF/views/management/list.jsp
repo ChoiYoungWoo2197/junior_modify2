@@ -37,7 +37,7 @@
 <script>
 	$(function() {
 		$("#insertManagement").click(function() {
-			location.href = "insert?mgt="+$("input[name=mgt]").val();
+			location.href = "insert?management="+$("input[name=management]").val();
 		})
 		
 		$(document).on("click", ".updateManagement", function(){
@@ -46,59 +46,75 @@
 			var result = confirm("수정하시겠습니까?");
 			
 			if(result == true) { 
-				location.href = "modify?mgt="+$("input[name=mgt]").val()+"&managementId="+managementId;
+				location.href = "modify?management="+$("input[name=management]").val()+"&managementId="+managementId;
 			}
 			
 		})
 		
 		$(document).on("click", ".deleteManagement", function(){
 			var result = confirm("삭제하시겠습니까?");
+			var managementId = Number($(this).attr("data-managementId"));
+			var deleteAvailable = true;
 			
 			if(result == true) {
-				if($("input[name=mgt]").val() == "department") {
-					if($(this).parent().prev().prev().text() != "0") {
-						alert("소속된 사원이 존재하여 삭제할 수 없습니다.");
-						return false;
-					}
+				if($("input[name=management]").val() == "department") {
+					$.ajax({
+						url : "/management/countEmp?managementId="+managementId,
+						type : "get",
+						dataType : "text",
+						async: false,
+						/*
+						ajax는 비동기식이기 때문에 다른 호출을 먼저 할 수도 있다(ajax가 완료된것을 기다려주지 않음).
+						비동기식인 ajax를 동기식으로 설정해줘야 함 => async: false
+						*/
+						success : function(res) {
+							console.log(res);
+							if(res == "false") {
+								alert("소속된 사원이 존재하여 삭제할 수 없습니다.");
+								deleteAvailable = false;
+							}
+						}
+					})
 				}
 				
-				var managementId = Number($(this).attr("data-managementId"));
-				$("input[name='managementId']").val(managementId);
-				$("#deleteForm").attr("action", "delete").attr("method", "post");
-				$("#deleteForm").submit();
+				if(deleteAvailable) {
+					$("input[name='managementId']").val(managementId);
+					$("#deleteForm").attr("action", "delete").attr("method", "post");
+					$("#deleteForm").submit();
+				}
 			}
 		})
 		
-		$("#searchEquipment").click(function() {
+		$("#searchManagement").click(function() {
 			if($("input[name='searchContent']").val()=="") {
 				alert("검색할 내용을 입력해주세요.");
 				return false;
 			}
 			
-			location.href = "list?mgt="+$("input[name=mgt]").val()+"&page=1&searchContent="+$("input[name='searchContent']").val();
+			location.href = "list?management="+$("input[name=management]").val()+"&page=1&searchContent="+$("input[name='searchContent']").val();
 		})
 		
-		$("#AllEquipment").click(function() {
-			location.href = "list?mgt="+$("input[name=mgt]").val();
+		$("#AllManagement").click(function() {
+			location.href = "list?management="+$("input[name=management]").val();
 		})
 	})
 </script>
 
 	<section class="width1200">
-		<c:if test="${mgt eq 'equipment'}">
+		<c:if test="${management eq 'equipment'}">
 			<c:set var="title" value="장비"/>
 		</c:if>
-		<c:if test="${mgt eq 'department'}">
+		<c:if test="${management eq 'department'}">
 			<c:set var="title" value="부서"/>
 		</c:if>
 		
 		<h1>${title}관리</h1>
 		<div>
 			<input type="text" name="searchContent" value="${criteria.searchContent}">
-			<button id="searchEquipment">검색</button>
-			<button id="AllEquipment">전체보기</button>
+			<button id="searchManagement">검색</button>
+			<button id="AllManagement">전체보기</button>
 		</div>
-		<c:if test="${mgt eq 'equipment'}">
+		<c:if test="${management eq 'equipment'}">
 			<table>
 				<c:if test="${empty equipmentList}">
 					<tr>
@@ -129,7 +145,7 @@
 			</table>
 			<button id="insertManagement">장비등록</button>
 		</c:if>
-		<c:if test="${mgt eq 'department'}">
+		<c:if test="${management eq 'department'}">
 			<table>
 				<c:if test="${empty employeeByDepartmentList}">
 					<tr>
@@ -166,19 +182,19 @@
 		
 		<form id="deleteForm">
 			<input type="hidden" name="managementId">
-			<input type="hidden" name="mgt" value="${mgt}">
+			<input type="hidden" name="management" value="${management}">
 		</form>
 		
 		<div id="page">
 			<ul class="pagination">
 				<c:if test="${page.prev}">
 					<li>
-						<a href="list?mgt=${mgt}&page=${page.startPage-1}&searchContent=${page.criteria.searchContent}">&lt;</a>
+						<a href="list?management=${management}&page=${page.startPage-1}&searchContent=${page.criteria.searchContent}">&lt;</a>
 					</li>
 				</c:if>
 				<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
 					<li>
-						<a href="list?mgt=${mgt}&page=${index}&searchContent=${page.criteria.searchContent}">
+						<a href="list?management=${management}&page=${index}&searchContent=${page.criteria.searchContent}">
 							<c:if test="${page.criteria.page == index}">
 								<span class="page_shape color_sky"></span>
 							</c:if>
@@ -190,7 +206,7 @@
 				</c:forEach>
 				<c:if test="${page.next}">
 					<li>
-						<a href="list?mgt=${mgt}&page=${page.endPage+1}&searchContent=${page.criteria.searchContent}">&gt;</a>
+						<a href="list?management=${management}&page=${page.endPage+1}&searchContent=${page.criteria.searchContent}">&gt;</a>
 					</li>
 				</c:if>
 			</ul>

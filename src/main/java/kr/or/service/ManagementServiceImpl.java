@@ -74,11 +74,15 @@ public class ManagementServiceImpl implements ManagementService {
 	public void updateDepartment(Department department) {
 		departmentDao.updateDepartment(department);
 	}
+	
+	@Override
+	public int selectEmployeeCountById(int departmentId) {
+		return departmentDao.selectEmployeeCountById(departmentId);
+	}
 
 	@Override
 	public void deleteDepartment(int departmentId) {
 		departmentDao.deleteDepartment(departmentId);
 	}
-
 
 }

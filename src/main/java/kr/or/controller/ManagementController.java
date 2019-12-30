@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.domain.Department;
 import kr.or.domain.Equipment;
@@ -26,92 +27,106 @@ public class ManagementController {
 	ManagementService managementServcice;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(SearchCriteria searchCriteria, Model model, String mgt) {
+	public String list(SearchCriteria searchCriteria, Model model, String management) {
 		logger.info("management list & searchContent : " + searchCriteria.getSearchContent());
 		
-		if(mgt.equals("equipment")) {
+		if(management.equals("equipment")) {
 			List<Equipment> equipmentList = managementServcice.searchEquipment(searchCriteria);
 			model.addAttribute("equipmentList", equipmentList);
 			
 			model.addAttribute("page", new Page(managementServcice.searchEquipmentCount(searchCriteria), searchCriteria));
-			model.addAttribute("mgt", mgt);
-		} else if(mgt.equals("department")) {
+			model.addAttribute("management", management);
+		} else if(management.equals("department")) {
 			List<Department> employeeByDepartmentList = managementServcice.searchDepartment(searchCriteria);
 			model.addAttribute("employeeByDepartmentList", employeeByDepartmentList);
 			
 			model.addAttribute("page", new Page(managementServcice.searchDepartmentCount(searchCriteria), searchCriteria));
-			model.addAttribute("mgt", mgt);
+			model.addAttribute("management", management);
 		}
 		return "management/list";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public String insertPage(Model model, String mgt) {
+	public String insertPage(Model model, String management) {
 		logger.info("insertPage");
 		
-		model.addAttribute("mgt", mgt);
+		model.addAttribute("management", management);
 		return "management/insert";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insert(String mgt, String name) {
+	public String insert(String management, String name) {
 		logger.info("equipment insert & name : " + name);
 		
-		if(mgt.equals("equipment")) {
+		if(management.equals("equipment")) {
 			Equipment equipment = new Equipment();
 			equipment.setName(name);
 			
 			managementServcice.insertEquipment(equipment);
-		} else if(mgt.equals("department")) {
+		} else if(management.equals("department")) {
 			Department department = new Department();
 			department.setName(name);
 			
 			managementServcice.insertDepartment(department);
 		}
 		
-		return "redirect:/management/list?mgt="+mgt;
+		return "redirect:/management/list?management="+management;
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public String modifyPage(Model model, String mgt, int managementId) {
-		logger.info("insertPage & managementId : " + managementId);
+	public String modifyPage(Model model, String management, int managementId) {
+		logger.info("modifyPage & managementId : " + managementId);
 		
-		if(mgt.equals("equipment")) {
+		if(management.equals("equipment")) {
 			Equipment equipment = managementServcice.selectEquipmentById(managementId);
 			model.addAttribute("equipment", equipment);
-		} else if(mgt.equals("department")) {
+		} else if(management.equals("department")) {
 			Department department = managementServcice.selectDepartmentById(managementId);
 			model.addAttribute("department", department);
 		}
-		model.addAttribute("mgt", mgt);
+		model.addAttribute("management", management);
 		
 		return "management/modify";
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST) 
-	public String modify(Equipment equipment, Department department, String mgt) {
+	public String modify(Equipment equipment, Department department, String management) {
 		logger.info("equipment update & name : " + equipment.getName() + " & equipmentId : " + equipment.getEquipmentId());
 		logger.info("department update & name : " + department.getName() + " & departmentId : " + department.getDepartmentId());
 		
-		if(mgt.equals("equipment")) {
+		if(management.equals("equipment")) {
 			managementServcice.updateEquipment(equipment);
-		} else if(mgt.equals("department")) {
+		} else if(management.equals("department")) {
 			managementServcice.updateDepartment(department);
 		}
 		
-		return "redirect:/management/list?mgt="+mgt;
+		return "redirect:/management/list?management="+management;
+	}
+	
+	@RequestMapping(value = "/countEmp", method = RequestMethod.GET)
+	public @ResponseBody String countEmp(String management, int managementId) {
+		logger.info("countEmp & managementId : " + managementId);
+
+		int employeeCount = managementServcice.selectEmployeeCountById(managementId);
+		System.out.println(employeeCount + "--------------------");
+		String deleteAvailable = "false";
+		if(employeeCount == 0) {
+			deleteAvailable = "true";
+		}
+		
+		return deleteAvailable;
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String delete(int managementId, String mgt) {
+	public String delete(int managementId, String management) {
 		logger.info("equipment delete & managementId : " + managementId);
 		
-		if(mgt.equals("equipment")) {
+		if(management.equals("equipment")) {
 			managementServcice.deleteEquipment(managementId);
-		} else if(mgt.equals("department")) {
+		} else if(management.equals("department")) {
 			managementServcice.deleteDepartment(managementId);
 		}
 		
-		return "redirect:/management/list?mgt="+mgt;
+		return "redirect:/management/list?management="+management;
 	}
 }

@@ -42,10 +42,30 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 	}
 
 	@Override
+	public MeetingRoom selectMeetingRoomById(int meetingRoomId) {
+		return meetingRoomDao.selectMeetingRoomById(meetingRoomId);
+	}
+	
+	@Override
+	public void updateMeetingRoom(MeetingRoom meetingRoom) {
+		meetingRoomDao.updateMeetingRoom(meetingRoom);
+	}
+	
+	@Override
 	public void insertMeetingRoomEquipment(int meetingRoomId, List<String> equipmentList) {
 		for(String equipmentId : equipmentList) {
 			meetingRoomEquipmentDao.insertMeetingRoomEquipment(Integer.parseInt(equipmentId), meetingRoomId);
 		}
+	}
+	
+	@Override
+	public List<MeetingRoomEquipment> selectMeetingRoomEquipment() {
+		return meetingRoomEquipmentDao.selectMeetingRoomEquipment();
+	}
+
+	@Override
+	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId) {
+		return meetingRoomEquipmentDao.selectMeetingRoomEquipmentById(meetingRoomId);
 	}
 	
 	@Override
@@ -54,4 +74,5 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 	}
 
 	
+
 }

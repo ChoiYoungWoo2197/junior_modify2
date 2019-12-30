@@ -3,31 +3,43 @@
 <mapper namespace="kr.or.mappers.equipmentMapper">
 
 	<select id="searchEquipment" resultType="Equipment">
-		SELECT * FROM equipment WHERE name LIKE '%${searchContent}%' 
-		ORDER BY equipment_id DESC LIMIT #{pageStart}, #{amount}
+		SELECT * 
+		FROM equipment 
+		WHERE name LIKE '%${searchContent}%' 
+		ORDER BY equipment_id DESC 
+		LIMIT #{pageStart}, #{amount}
 	</select>
 	
 	<select id="searchEquipmentCount" resultType="int">
-		SELECT COUNT(equipment_id) FROM equipment WHERE name LIKE '%${searchContent}%'
+		SELECT COUNT(equipment_id) 
+		FROM equipment 
+		WHERE name LIKE '%${searchContent}%'
 	</select>
 	
 	<insert id="insertEquipment" parameterType="Equipment">
-		INSERT INTO equipment(name) VALUES (#{name})
+		INSERT INTO equipment(name) 
+		VALUES (#{name})
 	</insert>
 	
 	<select id="selectEquipmentById" resultType="Equipment">
-		SELECT * FROM equipment WHERE equipment_id = #{equipmentId}
+		SELECT * 
+		FROM equipment 
+		WHERE equipment_id = #{equipmentId}
 	</select>
 	
 	<update id="updateEquipment" parameterType="Equipment">
-		UPDATE equipment SET name = #{name} WHERE equipment_id = #{equipmentId}
+		UPDATE equipment 
+		SET name = #{name} 
+		WHERE equipment_id = #{equipmentId}
 	</update>
 	
 	<delete id="deleteEquipment" parameterType="int">
-		DELETE FROM equipment WHERE equipment_id = #{equipmentId}
+		DELETE FROM equipment 
+		WHERE equipment_id = #{equipmentId}
 	</delete>
 	
 	<select id="selectEquipment" resultType="Equipment">
-		SELECT * FROM equipment
+		SELECT * 
+		FROM equipment
 	</select>
 </mapper>

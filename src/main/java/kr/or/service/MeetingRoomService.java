@@ -13,9 +13,13 @@ public interface MeetingRoomService {
 	public List<MeetingRoom> searchMeetingRoom(SearchCriteria searchCriteria);
 	public int searchMeetingRoomCount(SearchCriteria searchCriteria);
 	public int insertMeetingRoom(MeetingRoom meetingRoom);
+	public MeetingRoom selectMeetingRoomById(int meetingRoomId);
+	public void updateMeetingRoom(MeetingRoom meetingRoom);
 	
 	//MeetingRoomEquipment
 	public void insertMeetingRoomEquipment(int meetingRoomId, List<String> equipmentList);
+	public List<MeetingRoomEquipment> selectMeetingRoomEquipment();
+	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId);
 	
 	//Equipment
 	public List<Equipment> selectEquipment();

@@ -8,8 +8,8 @@ import kr.or.domain.MeetingRoomEquipment;
 
 public interface MeetingRoomEquipmentDao {
 	
-	public List<MeetingRoomEquipment> listMeetingRoomEquipment();
+	public List<MeetingRoomEquipment> selectMeetingRoomEquipment();
 	public void insertMeetingRoomEquipment(int equipmentId, int meetingRoomId);
-	public MeetingRoomEquipment selectMeetingRoomEquipmentById(int meetingRoomId);
+	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId);
 	
 }
