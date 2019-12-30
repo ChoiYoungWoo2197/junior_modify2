@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.domain.MeetingRoomEquipment;
+import kr.or.domain.SearchCriteria;
 
 @Repository
 public class MeetingRoomEquipmentDaoImpl implements MeetingRoomEquipmentDao {
@@ -18,10 +19,11 @@ public class MeetingRoomEquipmentDaoImpl implements MeetingRoomEquipmentDao {
 	@Autowired
 	SqlSession sqlSession;
 
-	@Override
-	public List<MeetingRoomEquipment> selectMeetingRoomEquipment() {
-		return sqlSession.selectList(namespace + ".selectMeetingRoomEquipment");
-	}
+	/*
+	 * @Override public List<MeetingRoomEquipment>
+	 * searchMeetingRoomEquipment(SearchCriteria searchCriteria) { return
+	 * sqlSession.selectList(namespace + ".searchMeetingRoomEquipment"); }
+	 */
 
 	@Override
 	public void insertMeetingRoomEquipment(int equipmentId, int meetingRoomId) {
@@ -35,6 +37,11 @@ public class MeetingRoomEquipmentDaoImpl implements MeetingRoomEquipmentDao {
 	@Override
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId) {
 		return sqlSession.selectList(namespace + ".selectMeetingRoomEquipmentById", meetingRoomId);
+	}
+
+	@Override
+	public void deleteMeetingRoomEquipment(int meetingRoomId) {
+		sqlSession.delete(namespace + ".deleteMeetingRoomEquipment", meetingRoomId);
 	}
 
 }

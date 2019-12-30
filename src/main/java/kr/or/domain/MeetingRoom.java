@@ -10,6 +10,7 @@ public class MeetingRoom {
 	private int seats;
 	private boolean availability;
 	private Date registerDate;
+	private String meetingRoomEquipmenet;
 	
 	public int getMeetingRoomId() {
 		return meetingRoomId;
@@ -47,5 +48,12 @@ public class MeetingRoom {
 	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
+	public String getMeetingRoomEquipmenet() {
+		return meetingRoomEquipmenet;
+	}
+	public void setMeetingRoomEquipmenet(String meetingRoomEquipmenet) {
+		this.meetingRoomEquipmenet = meetingRoomEquipmenet;
+	}
+	
 	
 }

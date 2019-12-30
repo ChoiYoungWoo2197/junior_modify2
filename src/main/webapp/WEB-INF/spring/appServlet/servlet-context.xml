@@ -17,13 +17,13 @@
 		</interceptor>
 	</interceptors>
 
-	<beans:bean id="authInterceptor" class="kr.or.interceptor.AuthInterceptor"></beans:bean>
+	<!-- <beans:bean id="authInterceptor" class="kr.or.interceptor.AuthInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
 			<mapping path="/meetingRoom/list" />
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
-	</interceptors>
+	</interceptors> -->
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->

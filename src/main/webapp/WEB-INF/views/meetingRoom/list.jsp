@@ -41,22 +41,33 @@
 		$(document).on("click", ".updateMeetingRoom", function(){
 			var meetingRoomId = Number($(this).prev().text());
 			
-			var result = confirm("수정하시겠습니까?");
-			
-			if(result == true) { 
-				location.href = "modify?meetingRoomId="+meetingRoomId;
+			location.href = "read?meetingRoomId="+meetingRoomId;
+		})
+		
+		$("#searchEquipment").click(function() {
+			if($("input[name='searchContent']").val()=="") {
+				alert("검색할 내용을 입력해주세요.");
+				return false;
 			}
 			
+			location.href = "list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+		})
+		
+		$("#AllMeetingRoom").click(function() {
+			location.href = "list";
 		})
 	})
 </script>
 	<section class="width1200">
-		<%-- <div>
-			<input type="text" name="searchContent" value="${criteria.searchContent}">
+		<div>
+			<select name="searchType">
+				<option value="meetingRoom" ${searchCriteria.searchType == 'meetingRoom' ? 'selected' : ''}>회의실</option>
+				<option value="equipment" ${searchCriteria.searchType == 'equipment' ? 'selected' : ''}>지원장비</option>
+			</select>
+			<input type="text" name="searchContent" value="${searchCriteria.searchContent}">
 			<button id="searchEquipment">검색</button>
-			<button id="AllEquipment">전체보기</button>
-		</div> --%>
-		--검색기능구현안했음--
+			<button id="AllMeetingRoom">전체보기</button>
+		</div>
 		<table>
 			<tr>
 				<th>번호</th>
@@ -78,13 +89,7 @@
 						<td class="updateMeetingRoom">${meetingRoom.name}</td>
 						<td>${meetingRoom.seats}</td>
 						<td>${meetingRoom.availability eq "true" ? "가능" : "불가능"}</td>
-						<td>
-							<c:forEach var="meetingRoomEquipment" items="${meetingRoomEquipmentList}">
-								<c:if test="${meetingRoomEquipment.meetingRoomId == meetingRoom.meetingRoomId}">
-									${meetingRoomEquipment.equipmentName}&nbsp;
-								</c:if>
-							</c:forEach>
-						</td>
+						<td>${meetingRoom.meetingRoomEquipmenet}</td>
 						<td><fmt:formatDate value="${meetingRoom.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
 					</tr>
 				</c:forEach>

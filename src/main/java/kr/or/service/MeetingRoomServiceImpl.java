@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.domain.Equipment;
 import kr.or.domain.MeetingRoom;
@@ -16,7 +15,7 @@ import kr.or.persistence.MeetingRoomEquipmentDao;
 
 @Service
 public class MeetingRoomServiceImpl implements MeetingRoomService {
-	
+
 	@Autowired
 	MeetingRoomDao meetingRoomDao;
 	
@@ -52,16 +51,23 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 	}
 	
 	@Override
+	public void deleteMeetingRoom(int meetingRoomId) {
+		meetingRoomDao.deleteMeetingRoom(meetingRoomId);
+	}
+	
+	@Override
 	public void insertMeetingRoomEquipment(int meetingRoomId, List<String> equipmentList) {
 		for(String equipmentId : equipmentList) {
+			System.out.println(equipmentId);
 			meetingRoomEquipmentDao.insertMeetingRoomEquipment(Integer.parseInt(equipmentId), meetingRoomId);
 		}
 	}
 	
-	@Override
-	public List<MeetingRoomEquipment> selectMeetingRoomEquipment() {
-		return meetingRoomEquipmentDao.selectMeetingRoomEquipment();
-	}
+	/*
+	 * @Override public List<MeetingRoomEquipment>
+	 * searchMeetingRoomEquipment(SearchCriteria searchCriteria) { return
+	 * meetingRoomEquipmentDao.searchMeetingRoomEquipment(searchCriteria); }
+	 */
 
 	@Override
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId) {
@@ -69,10 +75,13 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 	}
 	
 	@Override
+	public void deleteMeetingRoomEquipment(int meetingRoomId) {
+		meetingRoomEquipmentDao.deleteMeetingRoomEquipment(meetingRoomId);
+	}
+	
+	@Override
 	public List<Equipment> selectEquipment() {
 		return equipmentDao.selectEquipment();
 	}
-
-	
 
 }

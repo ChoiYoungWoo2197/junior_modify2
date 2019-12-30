@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.or.domain.Department;
 import kr.or.domain.Equipment;
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
@@ -31,12 +30,14 @@ public class MeetingRoomController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(SearchCriteria searchCriteria, Model model) {
 		logger.info("meetingRoom list");
-		
+		System.out.println(searchCriteria.getSearchType() + "----------------------------------");
+
 		List<MeetingRoom> meetingRoomList = meetingRoomService.searchMeetingRoom(searchCriteria);
-		List<MeetingRoomEquipment> meetingRoomEquipmentList = meetingRoomService.selectMeetingRoomEquipment();
+		//List<MeetingRoomEquipment> meetingRoomEquipmentList = meetingRoomService.searchMeetingRoomEquipment(searchCriteria);
 		
 		model.addAttribute("meetingRoomList", meetingRoomList);
-		model.addAttribute("meetingRoomEquipmentList", meetingRoomEquipmentList);
+		//model.addAttribute("meetingRoomEquipmentList", meetingRoomEquipmentList);
+		model.addAttribute("searchCriteria", searchCriteria);
 		model.addAttribute("page", new Page(meetingRoomService.searchMeetingRoomCount(searchCriteria), searchCriteria));		
 		return "meetingRoom/list";
 	}
@@ -68,6 +69,19 @@ public class MeetingRoomController {
 		return "redirect:/meetingRoom/list";
 	}
 	
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public String read(Model model, int meetingRoomId) {
+		logger.info("read & meetingRoomId : " + meetingRoomId);
+		
+		MeetingRoom meetingRoom = meetingRoomService.selectMeetingRoomById(meetingRoomId);
+		model.addAttribute("meetingRoom", meetingRoom);
+		
+		List<MeetingRoomEquipment> meetingRoomEquipmentList = meetingRoomService.selectMeetingRoomEquipmentById(meetingRoomId);
+		model.addAttribute("meetingRoomEquipmentList", meetingRoomEquipmentList);
+
+		return "meetingRoom/read";
+	}
+	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyPage(Model model, int meetingRoomId) {
 		logger.info("modifyPage & meetingRoomId : " + meetingRoomId);
@@ -86,12 +100,27 @@ public class MeetingRoomController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST) 
 	public String modify(MeetingRoom meetingRoom, String checkTrue) {
-		logger.info("modify");
+		logger.info("modify & meetingRoomId : " + meetingRoom.getMeetingRoomId());
+		
+		meetingRoomService.updateMeetingRoom(meetingRoom);
 		
 		if(!checkTrue.equals("")) {
 			List<String> equipmentList = Arrays.asList(checkTrue.split(","));
 			System.out.println(equipmentList);
+			
+			meetingRoomService.deleteMeetingRoomEquipment(meetingRoom.getMeetingRoomId());
+			meetingRoomService.insertMeetingRoomEquipment(meetingRoom.getMeetingRoomId(), equipmentList);
 		}
+		
+		return "redirect:/meetingRoom/read?meetingRoomId="+meetingRoom.getMeetingRoomId();
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(Model model, int meetingRoomId) {
+		logger.info("delete & meetingRoomId : " + meetingRoomId);
+		
+		meetingRoomService.deleteMeetingRoomEquipment(meetingRoomId);
+		meetingRoomService.deleteMeetingRoom(meetingRoomId);
 		
 		return "redirect:/meetingRoom/list";
 	}
