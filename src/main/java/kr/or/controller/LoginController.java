@@ -5,6 +5,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class LoginController {
 	
 	//로그인 시도
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
-	public String loginCheck(Locale locale, Model model, HttpServletRequest request) {
+	public String check(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("사원번호 : " + request.getParameter("loginId") + " " + "비밀번호 : " + request.getParameter("loginPw"));
 		String result = "redirect:/login/login";
 		try {
@@ -79,6 +81,12 @@ public class LoginController {
 		}
 		
 		return result;
+	}
+	//로그인 시도
+	@RequestMapping(value = "/out", method = RequestMethod.GET)
+	public String out(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 
 }

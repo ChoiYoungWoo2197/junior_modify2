@@ -25,13 +25,12 @@
 			<c:if test="${not empty loginUser}">
 				<div style="float: right;">
 					<c:if test="${loginUser.manager eq 'true'}">
-						<span size="20">관리자(${loginUser.user.name}) 님</span>
+						<span>관리자(${loginUser.user.name}) 님</span>
 					</c:if>
 					<c:if test="${loginUser.manager eq 'false'}">
-						<span size="20">${loginUser.user.name} 님</span>
+						<span>${loginUser.user.name} 님</span>
 					</c:if>
-					<button id="loginButton" class="float_right" type="button"
-						onclick="location.href='${pageContext.request.contextPath}/login'">로그아웃</button>
+					<button id="loginButton" class="float_right" type="button" onclick="location.href='${pageContext.request.contextPath}/login/out'">로그아웃</button>
 				</div>
 
 				<div class="clear_both"></div>
