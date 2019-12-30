@@ -105,4 +105,11 @@ public class EmployeeServiceImpl implements  EmployeeService{
 		// TODO Auto-generated method stub
 		return managerDao.checkManager(managerId);
 	}
+
+
+	@Override
+	public void modifyAuthKeyDate(String memberId) {
+		// TODO Auto-generated method stub
+		employeeDao.modifyAuthKeyDate(memberId);
+	}
 }

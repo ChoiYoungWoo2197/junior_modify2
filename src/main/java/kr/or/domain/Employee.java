@@ -1,5 +1,7 @@
 package kr.or.domain;
 
+import java.util.Date;
+
 public class Employee {
 	private int employeeId;
 	private int departmentId;
@@ -10,6 +12,7 @@ public class Employee {
 	private String phone;
 	private String authkey;
 	private String state;
+	private Date authKeyDate;
 
 	public int getEmployeeId() {
 		return employeeId;
@@ -66,5 +69,10 @@ public class Employee {
 	public void setState(String state) {
 		this.state = state;
 	}
-
+	public Date getAuthKeyDate() {
+		return authKeyDate;
+	}
+	public void setAuthKeyDate(Date authKeyDate) {
+		this.authKeyDate = authKeyDate;
+	}
 }

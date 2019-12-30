@@ -5,6 +5,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,29 +44,29 @@ public class LoginController {
 	
 	//로그인 시도
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
-	public String loginCheck(Locale locale, Model model, HttpServletRequest request) {
+	public String check(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("사원번호 : " + request.getParameter("loginId") + " " + "비밀번호 : " + request.getParameter("loginPw"));
 		String result = "redirect:/login/login";
 		try {
 			Employee employee = employeeService.checkUser(request.getParameter("loginId"), employeeService.encSHA256(request.getParameter("loginPw")));
 			if(employee != null) { // 로그인 성공인 경우
-				if(employeeService.checkState(employee.getMemberId(), "Y") != null) //인증을 했는 경우
+				//인증을 했는 경우
+				if(employeeService.checkState(employee.getMemberId(), "Y") != null) 
 				{
 					Map<String, Object> map = new HashMap<>();
 
-					if(employeeService.checkManager(employee.getEmployeeId()) != null) {
+					//관리자 계정인 경우
+					if(employeeService.checkManager(employee.getEmployeeId()) != null) { 
 						//관리자
 						map.put("manager", "true");
-						map.put("user", employee);
-						model.addAttribute("Account", map);
 					}
 					else {
 						//일반회원
 						map.put("manager", "false");
-						map.put("user", employee);
-						model.addAttribute("Account", map);
+
 					}
-					
+					map.put("user", employee);
+					model.addAttribute("Account", map);
 
 					result = "redirect:/";
 				}
@@ -79,6 +81,12 @@ public class LoginController {
 		}
 		
 		return result;
+	}
+	//로그인 시도
+	@RequestMapping(value = "/out", method = RequestMethod.GET)
+	public String out(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 
 }
