@@ -28,7 +28,7 @@ table, th, td {
 
 <script>
 	$(function() {
-		$("#sendMail").click(function() {
+		$("#sendReMail").click(function() {
 			$.ajax({
 				url : "${pageContext.request.contextPath}/mail/request",
 				type : "post",
@@ -37,7 +37,7 @@ table, th, td {
 				success : function(res) {
 					console.log(res);
 					if(res == "true") {
-						alert("이메일이 발송되었습니다. 인증번호를 입력해주세요.");
+						alert("이메일이 재발송되었습니다. 인증번호를 입력해주세요.");
 					}
 					else {
 						alert("이메일발송이 실패했습니다.");
@@ -45,12 +45,6 @@ table, th, td {
 				}
 			})
 		})
-
-		$("#sendReMail").click(function() {
-			alert("할룽룽?");
-		})
-
-
 	})
 </script>
 
@@ -67,21 +61,22 @@ table, th, td {
 				메일발송을 해주시기 바랍니다.</h5>
 		</div>
 		<br>
-		<form name="authenticateForm" method="post">
+		<form name="authenticateForm" action="${pageContext.request.contextPath}/mail/complete" method="post">
 			<table>
 				<tr>
 					<td><b>이메일 주소</b></td>
-					<td><input name="mail" type="text" size="50" value="${mail}"/>
+					<td><input name="mail" type="text" size="50" value="${mail}" readonly="readonly"/>
 				</tr>
 
 				<tr>
 					<td><b>인증번호</b></td>
-					<td colspan="2"><input name="mail" type="text" size="30" /> <input
-						type="button" id="sendMail" value="인증메일 발송"> <input
-						type="button" id="sendReMail" value="인증메일 재발송"></td>
+					<td colspan="2">
+					<input name="authKey" type="text" size="30" value="" />
+					<input 	type="button" id="sendReMail" value="인증메일 재발송"></td>
 				</tr>
 			</table>
-			<input type="reset" value="취소" /> <input type="submit" value="확인" />
+			<input type="reset" value="취소" />
+			<input type="submit" value="확인" />
 		</form>
 	</section>
 </body>

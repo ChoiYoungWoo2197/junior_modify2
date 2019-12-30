@@ -1,9 +1,12 @@
 package kr.or.controller;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.domain.Employee;
-import kr.or.persistence.EmployeeDao;
 import kr.or.service.EmployeeService;
-import kr.or.service.ManagementService;
+import kr.or.service.MailService;
+
 
 /**
  * Handles requests for the application home page.
@@ -27,6 +30,10 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired
 	EmployeeService employeeService;
+	
+	@Autowired
+	MailService mailService;
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -38,27 +45,35 @@ public class MemberController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {
-		logger.info("member insert :" + request.getParameter("employeeId") + " : " + request.getParameter("departmentType"));
+		logger.info("member insert :" + request.getParameter("memberId") + " : " + request.getParameter("departmentType"));
 		
 		Employee employee = new Employee();
-		employee.setEmployeeId(Integer.parseInt(request.getParameter("employeeId")));
+		//employee.setEmployeeId(Integer.parseInt(request.getParameter("employeeId")));
 		employee.setDepartmentId(Integer.parseInt(request.getParameter("departmentType")));
 		employee.setName(request.getParameter("name"));
-		employee.setPassword(request.getParameter("password"));
+		employee.setMemberId(request.getParameter("memberId"));
+		employee.setPassword(employeeService.encSHA256(request.getParameter("password")));
 		employee.setEmail(request.getParameter("email"));
 		employee.setPhone(request.getParameter("phone"));
-		employee.setAuthkey(getAuthKey());
+		employee.setAuthkey(mailService.getAuthKey());
 		employee.setState("N");
 		employeeService.insertEmployee(employee);
-		return "redirect:/mail/authenticate?employeeId="+employee.getEmployeeId();
+		
+		String title = "회원가입 인증 이메일 입니다.";
+		StringBuilder text = new StringBuilder();
+		text.append("귀화의 인증번호는 : " + employee.getAuthkey() + " 입니다.");
+		
+		mailService.sendMail(mailService.sendTo(), employee.getEmail(),title, text.toString());
+		
+		return "redirect:/mail/authenticate?memberId="+employee.getMemberId();
 	}
 	
 	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
 	public @ResponseBody String checkId(HttpServletRequest request) {
-		logger.info("employee Id :" + request.getParameter("employeeId"));
-		String employeeId = request.getParameter("employeeId");
+		logger.info("memberId:" + request.getParameter("memberId"));
+		String memberId = request.getParameter("memberId");
 		String result = "false";
-		Employee employee = employeeService.checkIdEmployee(employeeId);
+		Employee employee = employeeService.checkIdEmployee(memberId);
 		
 		if(employee != null) {
 			result = "true";
@@ -77,22 +92,6 @@ public class MemberController {
 			result = "true";
 		}
 		return result;
-	}
-	
-	//20자리  영문+숫자 랜덤코드 만들기
-	public String getAuthKey() {
-		Random rnd =new Random();
-		StringBuffer buf =new StringBuffer();	 
-
-		for(int i=0;i<20;i++){
-		    if(rnd.nextBoolean()){
-		        buf.append((char)((int)(rnd.nextInt(26))+97));
-		    }else{
-		        buf.append((rnd.nextInt(10))); 
-		    }
-		}
-		
-		return buf.toString();
 	}
 
 }

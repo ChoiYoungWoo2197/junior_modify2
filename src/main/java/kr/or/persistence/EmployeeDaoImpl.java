@@ -25,11 +25,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	@Override
-	public boolean checkAccount(String employeeId, String password) {
+	public Employee checkUser(String memberId, String password) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("employee_id", employeeId);
+		map.put("memberId", memberId);
 		map.put("password", password);
-		return sqlsession.selectOne(namespace + ".selectAccountEmployee", map);
+		return sqlsession.selectOne(namespace + ".checkUser", map);
 	}
 
 	@Override
@@ -42,5 +42,39 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	public Employee checkEmailEmployee(String email) {
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne(namespace + ".selectCheckEmailEmployee", email);
+	}
+
+	@Override
+	public Employee checkKey(String email, String authKey) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("email", email);
+		map.put("authkey", authKey);
+		return sqlsession.selectOne(namespace + ".selectCheckKeyEmployee", map);
+	}
+
+	@Override
+	public void modifyState(String memberId, String state) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("state", state);
+		map.put("memberId", memberId);
+		sqlsession.selectOne(namespace + ".modifyStateEmployee", map);
+		
+	}
+
+	@Override
+	public void modifyKey(String memberId, String authKey) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("authKey", authKey);
+		map.put("memberId", memberId);
+		sqlsession.selectOne(namespace + ".modifyKeyEmployee", map);
+		
+	}
+
+	@Override
+	public Employee checkState(String memberId, String state) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("state", state);
+		return sqlsession.selectOne(namespace + ".checkState", map);
 	}
 }

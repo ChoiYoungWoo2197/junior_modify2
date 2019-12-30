@@ -6,8 +6,12 @@ import kr.or.domain.Employee;
 
 public interface EmployeeDao {
 	public void insertData(Employee employee);
-	public boolean checkAccount(String employeeId, String password);
+	public Employee checkUser(String memberId, String password);
 	public Employee checkIdEmployee(String employeeId);
 	public Employee checkEmailEmployee(String email);
+	public Employee checkKey(String email, String authKey);
+	public void modifyState(String memberId, String state);
+	public void modifyKey(String memberId, String authKey);
+	public Employee checkState(String memberId, String state);
 	public List<Employee> selectAll();
 }
