@@ -13,7 +13,7 @@
 </style>
 <script>
 	$(function() {
-		$("#listManagement").click(function() {
+		$("#listMeetingRoom").click(function() {
 			location.href = "list";
 		})
 		
@@ -84,7 +84,7 @@
 				<input type="submit" value="등록">
 			</div>
 		</form>
-		<button id="listManagement">목록</button>
+		<button id="listMeetingRoom">목록</button>
 	</section>
 </body>
 </html>

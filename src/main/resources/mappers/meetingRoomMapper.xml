@@ -2,24 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.mappers.meetingRoomMapper">
 	
+	<!-- 검색하기 위한 용도 -->
+	<sql id="search">
+		<if test="searchType == 'meetingRoom'.toString()">
+			WHERE meeting_room.name LIKE '%${searchContent}%'
+		</if>
+		<if test="searchType == 'equipment'.toString()">
+			WHERE equipment.name LIKE '%${searchContent}%'
+		</if>
+	</sql>
+	
 	<select id="searchMeetingRoom" resultType="MeetingRoom">
-		SELECT * FROM meeting_room 
-		WHERE name LIKE '%${searchContent}%'
-		ORDER BY meeting_room_id DESC LIMIT #{pageStart}, #{amount}
-		<!-- SELECT meeting_room.* , meeting_room_equipment.equipment_id AS equipmenetList
-		FROM meeting_room LEFT JOIN meeting_room_equipment
-		ON meeting_room.meeting_room_id = meeting_room_equipment.meeting_room_id
-		WHERE name LIKE '%${searchContent}%'
-		ORDER BY meeting_room_id DESC LIMIT #{pageStart}, #{amount} -->
-		<!-- SELECT meeting_room.* , equipment.name AS equipmenetList
+		SELECT meeting_room.* , GROUP_CONCAT(equipment.name) AS meetingRoomEquipmenet
 		FROM meeting_room 
 		LEFT JOIN meeting_room_equipment
 		ON meeting_room.meeting_room_id = meeting_room_equipment.meeting_room_id
 		LEFT JOIN equipment 
 		ON equipment.equipment_id = meeting_room_equipment.equipment_id
-		WHERE meeting_room.name LIKE '%${searchContent}%'
+		<include refid="search"></include>
+		GROUP BY meeting_room_id
 		ORDER BY meeting_room_id DESC 
-		LIMIT #{pageStart}, #{amount} -->
+		LIMIT #{pageStart}, #{amount}
 	</select>
 	
 	<select id="searchMeetingRoomCount" resultType="int">

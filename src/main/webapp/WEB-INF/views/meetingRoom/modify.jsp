@@ -18,37 +18,48 @@
 		})
 		
 		$("#updateMeetingRoomForm").submit(function() {
-			var check = true;
-			$("input[name='name']").next().addClass("display_none");
-			$("input[name='seats']").next().addClass("display_none");
+			var result = confirm("수정하시겠습니까?");
 			
-			if($("input[name='name']").val() == "") {
-				$("input[name='name']").next().removeClass("display_none");
-				check = false;
+			if(result == true) {
+				var check = true;
+				$("input[name='name']").next().addClass("display_none");
+				$("input[name='seats']").next().addClass("display_none");
+				
+				if($("input[name='name']").val() == "") {
+					$("input[name='name']").next().removeClass("display_none");
+					check = false;
+				}
+				
+				if($("input[name='seats']").val() == "") {
+					$("input[name='seats']").next().removeClass("display_none");
+					check = false;
+				} else if ($("input[name='seats']").val() != "") {
+					if(Number($("input[name='seats']").val()) <= 0) {
+						$("input[name='seats']").next().next().removeClass("display_none");
+			        	check = false;
+			        }
+			        
+			        if(Number($("input[name='seats']").val()) != $("input[name='seats']").val()) {
+			        	$("input[name='seats']").next().next().removeClass("display_none");
+			        	check = false;
+			        }
+				}
+				
+				var checkTrue = [];
+				$("input[name='equipmentId']:checked").each(function(i) {
+					checkTrue.push($(this).val());	// 체크된 것만 값을 뽑아서 배열에 push
+			    })
+			    $("input[name='checkTrue']").val(checkTrue);
+				
+				return check;
+			} else {
+				return false;
 			}
-			
-			if($("input[name='seats']").val() == "") {
-				$("input[name='seats']").next().removeClass("display_none");
-				check = false;
-			} else if ($("input[name='seats']").val() != "") {
-				if(Number($("input[name='seats']").val()) <= 0) {
-					$("input[name='seats']").next().next().removeClass("display_none");
-		        	check = false;
-		        }
-		        
-		        if(Number($("input[name='seats']").val()) != $("input[name='seats']").val()) {
-		        	$("input[name='seats']").next().next().removeClass("display_none");
-		        	check = false;
-		        }
-			}
-			
-			var checkTrue = [];
-			$("input[name='equipmentId']:checked").each(function(i) {
-				checkTrue.push($(this).val());	// 체크된 것만 값을 뽑아서 배열에 push
-		    })
-		    $("input[name='checkTrue']").val(checkTrue);
-			
-			return check;
+		})
+		
+		$("#cancelUpdate").click(function() {
+			var meetingRoomId = Number($("input[name='meetingRoomId']").val());
+			location.href = "read?meetingRoomId="+meetingRoomId;
 		})
 	})
 </script>
@@ -96,6 +107,7 @@
 				<input type="hidden" name="meetingRoomId" value="${meetingRoom.meetingRoomId}">
 				<input type="hidden" name="managerId" value="1">
 				<input type="submit" value="수정">
+				<input type="button" value="돌아가기" id="cancelUpdate">
 			</div>
 		</form>
 		<button id="listManagement">목록</button>

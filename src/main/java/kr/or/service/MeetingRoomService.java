@@ -15,10 +15,15 @@ public interface MeetingRoomService {
 	public int insertMeetingRoom(MeetingRoom meetingRoom);
 	public MeetingRoom selectMeetingRoomById(int meetingRoomId);
 	public void updateMeetingRoom(MeetingRoom meetingRoom);
+	public void deleteMeetingRoom(int meetingRoomId);
 	
 	//MeetingRoomEquipment
 	public void insertMeetingRoomEquipment(int meetingRoomId, List<String> equipmentList);
-	public List<MeetingRoomEquipment> selectMeetingRoomEquipment();
+
+	/*
+	 * public List<MeetingRoomEquipment> searchMeetingRoomEquipment(SearchCriteria
+	 * searchCriteria);
+	 */
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId);
 	public void deleteMeetingRoomEquipment(int meetingRoomId);
 	
