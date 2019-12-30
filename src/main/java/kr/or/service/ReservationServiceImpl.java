@@ -2,55 +2,37 @@ package kr.or.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
-import kr.or.domain.Reservation;
-import kr.or.domain.SearchCriteria;
+import kr.or.persistence.MeetingRoomDao;
+import kr.or.persistence.MeetingRoomEquipmentDao;
 
+@Service
 public class ReservationServiceImpl implements ReservationService {
-
+	
+	@Autowired
+	MeetingRoomDao meetingRoomDao;
+	
+	@Autowired
+	MeetingRoomEquipmentDao meetingRoomEquipmentDao;
+	
 	@Override
-	public List<Reservation> searchReservation(SearchCriteria searchCriteria) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int searchReservationCount(SearchCriteria searchCriteria) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Reservation> selectReservationByMeetAndDate(Reservation reservation) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void insertReservation(Reservation reservation) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateReservation(Reservation reservation) {
-		// TODO Auto-generated method stub
-		
+	public List<MeetingRoom> selectMeetingRoom() {
+		return meetingRoomDao.selectMeetingRoom();
 	}
 
 	@Override
 	public MeetingRoom selectMeetingRoomById(int meetingRoomId) {
-		// TODO Auto-generated method stub
-		return null;
+		return meetingRoomDao.selectMeetingRoomById(meetingRoomId);
 	}
 
 	@Override
-	public MeetingRoomEquipment selectMeetingRoomEquipmentById(int meetingRoomId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId) {
+		return meetingRoomEquipmentDao.selectMeetingRoomEquipmentById(meetingRoomId);
 	}
 
 	
-
 }

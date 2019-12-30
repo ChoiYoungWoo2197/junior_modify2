@@ -2,9 +2,12 @@ package kr.or.persistence;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import kr.or.domain.Reservation;
 import kr.or.domain.SearchCriteria;
 
+@Repository
 public class ReservationDaoImpl implements ReservationDao {
 
 	@Override

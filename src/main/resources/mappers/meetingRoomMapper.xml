@@ -52,4 +52,9 @@
 		FROM meeting_room 
 		WHERE meeting_room_id = #{meetingRoomId}
 	</select>
+	
+	<select id="selectMeetingRoom" resultType="MeetingRoom">
+		SELECT * 
+		FROM meeting_room 
+	</select>
 </mapper>
