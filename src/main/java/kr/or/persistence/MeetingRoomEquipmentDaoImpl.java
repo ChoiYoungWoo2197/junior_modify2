@@ -37,4 +37,9 @@ public class MeetingRoomEquipmentDaoImpl implements MeetingRoomEquipmentDao {
 		return sqlSession.selectList(namespace + ".selectMeetingRoomEquipmentById", meetingRoomId);
 	}
 
+	@Override
+	public void deleteMeetingRoomEquipment(int meetingRoomId) {
+		sqlSession.delete(namespace + ".deleteMeetingRoomEquipment", meetingRoomId);
+	}
+
 }

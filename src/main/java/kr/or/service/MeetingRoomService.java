@@ -20,6 +20,7 @@ public interface MeetingRoomService {
 	public void insertMeetingRoomEquipment(int meetingRoomId, List<String> equipmentList);
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipment();
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId);
+	public void deleteMeetingRoomEquipment(int meetingRoomId);
 	
 	//Equipment
 	public List<Equipment> selectEquipment();

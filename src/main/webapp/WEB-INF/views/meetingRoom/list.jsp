@@ -52,11 +52,10 @@
 </script>
 	<section class="width1200">
 		<%-- <div>
-			<input type="text" name="searchContent" value="${criteria.searchContent}">
+			<input type="text" name="searchContent" value="${searchCriteria.searchContent}">
 			<button id="searchEquipment">검색</button>
 			<button id="AllEquipment">전체보기</button>
 		</div> --%>
-		--검색기능구현안했음--
 		<table>
 			<tr>
 				<th>번호</th>

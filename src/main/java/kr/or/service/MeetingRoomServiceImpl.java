@@ -54,6 +54,7 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 	@Override
 	public void insertMeetingRoomEquipment(int meetingRoomId, List<String> equipmentList) {
 		for(String equipmentId : equipmentList) {
+			System.out.println(equipmentId);
 			meetingRoomEquipmentDao.insertMeetingRoomEquipment(Integer.parseInt(equipmentId), meetingRoomId);
 		}
 	}
@@ -69,10 +70,14 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 	}
 	
 	@Override
+	public void deleteMeetingRoomEquipment(int meetingRoomId) {
+		meetingRoomEquipmentDao.deleteMeetingRoomEquipment(meetingRoomId);
+	}
+	
+	@Override
 	public List<Equipment> selectEquipment() {
 		return equipmentDao.selectEquipment();
 	}
 
-	
 
 }

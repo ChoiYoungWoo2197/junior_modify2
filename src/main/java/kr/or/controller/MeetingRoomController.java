@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.or.domain.Department;
 import kr.or.domain.Equipment;
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
@@ -86,11 +85,16 @@ public class MeetingRoomController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST) 
 	public String modify(MeetingRoom meetingRoom, String checkTrue) {
-		logger.info("modify");
+		logger.info("modify & meetingRoomId : " + meetingRoom.getMeetingRoomId());
+		
+		meetingRoomService.updateMeetingRoom(meetingRoom);
 		
 		if(!checkTrue.equals("")) {
 			List<String> equipmentList = Arrays.asList(checkTrue.split(","));
 			System.out.println(equipmentList);
+			
+			meetingRoomService.deleteMeetingRoomEquipment(meetingRoom.getMeetingRoomId());
+			meetingRoomService.insertMeetingRoomEquipment(meetingRoom.getMeetingRoomId(), equipmentList);
 		}
 		
 		return "redirect:/meetingRoom/list";

@@ -110,7 +110,7 @@
 		
 		<h1>${title}관리</h1>
 		<div>
-			<input type="text" name="searchContent" value="${criteria.searchContent}">
+			<input type="text" name="searchContent" value="${searchCriteria.searchContent}">
 			<button id="searchManagement">검색</button>
 			<button id="AllManagement">전체보기</button>
 		</div>

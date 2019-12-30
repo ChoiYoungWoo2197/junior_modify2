@@ -31,7 +31,8 @@
 	</insert>
 	
 	<update id="updateReservation" parameterType="Reservation">
-		UPDATE reservation SET meeting_room_id = #{meetingRoomId}, meet_purpose = #{meetPurpose}, meet_attendess = #{meetAttendess}, 
+		UPDATE reservation 
+		SET meeting_room_id = #{meetingRoomId}, meet_purpose = #{meetPurpose}, meet_attendess = #{meetAttendess}, 
 		start_date = #{startDate}, end_date = #{endDate}, modify_date = #{modifyDate}
 		WHERE reservation_id = 1	
 	</update>

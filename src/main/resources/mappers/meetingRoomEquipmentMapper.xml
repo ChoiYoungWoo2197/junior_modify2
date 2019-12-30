@@ -24,4 +24,9 @@
 		ON equipment.equipment_id = meeting_room_equipment.equipment_id
 		WHERE meeting_room_equipment.meeting_room_id = #{meetingRoomId}
 	</select>
+	
+	<delete id="deleteMeetingRoomEquipment" parameterType="MeetingRoomEquipment">
+		DELETE FROM meeting_room_equipment 
+		WHERE meeting_room_id = #{meetingRoomId}
+	</delete>
 </mapper>
