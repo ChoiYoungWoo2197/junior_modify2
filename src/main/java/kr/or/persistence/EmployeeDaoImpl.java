@@ -57,7 +57,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		Map<String, Object> map = new HashMap<>();
 		map.put("state", state);
 		map.put("memberId", memberId);
-		sqlsession.selectOne(namespace + ".modifyStateEmployee", map);
+		sqlsession.update(namespace + ".modifyStateEmployee", map);
 		
 	}
 
@@ -66,7 +66,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		Map<String, Object> map = new HashMap<>();
 		map.put("authKey", authKey);
 		map.put("memberId", memberId);
-		sqlsession.selectOne(namespace + ".modifyKeyEmployee", map);
+		sqlsession.update(namespace + ".modifyKeyEmployee", map);
 		
 	}
 
@@ -76,5 +76,10 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		map.put("memberId", memberId);
 		map.put("state", state);
 		return sqlsession.selectOne(namespace + ".checkState", map);
+	}
+
+	@Override
+	public void modifyAuthKeyDate(String memberId) {
+		sqlsession.update(namespace + ".modifyAuthKeyDate", memberId);
 	}
 }

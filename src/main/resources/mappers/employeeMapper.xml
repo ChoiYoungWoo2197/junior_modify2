@@ -5,9 +5,10 @@
 	<insert id="insertEmployee" parameterType="Employee">
 		INSERT INTO employee
 		(department_id, name, member_id, password, email, phone, authkey,
-		state)
-		VALUES (#{departmentId}, #{name}, #{memberId}, #{password},
-		#{email}, #{phone}, #{authkey}, #{state});
+		state, authkey_date)
+		VALUES (#{departmentId}, #{name}, #{memberId},
+		#{password},
+		#{email}, #{phone}, #{authkey}, #{state}, now());
 	</insert>
 
 	<select id="checkUser" resultType="Employee">
@@ -48,9 +49,16 @@
 		#{memberId}
 	</update>
 
+	<update id="modifyAuthKeyDate" parameterType="String">
+		UPDATE employee
+		SET authkey_date = now()
+		WHERE member_id = #{memberId}
+	</update>
+
 	<select id="checkState" resultType="Employee">
 		select * from employee
-		where member_id = #{memberId} and
+		where
+		member_id = #{memberId} and
 		state = #{state}
 	</select>
 </mapper>

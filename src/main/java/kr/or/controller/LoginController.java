@@ -48,23 +48,23 @@ public class LoginController {
 		try {
 			Employee employee = employeeService.checkUser(request.getParameter("loginId"), employeeService.encSHA256(request.getParameter("loginPw")));
 			if(employee != null) { // 로그인 성공인 경우
-				if(employeeService.checkState(employee.getMemberId(), "Y") != null) //인증을 했는 경우
+				//인증을 했는 경우
+				if(employeeService.checkState(employee.getMemberId(), "Y") != null) 
 				{
 					Map<String, Object> map = new HashMap<>();
 
-					if(employeeService.checkManager(employee.getEmployeeId()) != null) {
+					//관리자 계정인 경우
+					if(employeeService.checkManager(employee.getEmployeeId()) != null) { 
 						//관리자
 						map.put("manager", "true");
-						map.put("user", employee);
-						model.addAttribute("Account", map);
 					}
 					else {
 						//일반회원
 						map.put("manager", "false");
-						map.put("user", employee);
-						model.addAttribute("Account", map);
+
 					}
-					
+					map.put("user", employee);
+					model.addAttribute("Account", map);
 
 					result = "redirect:/";
 				}

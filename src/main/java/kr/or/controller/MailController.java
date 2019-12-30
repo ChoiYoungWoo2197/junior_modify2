@@ -1,21 +1,19 @@
 package kr.or.controller;
 
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
-import javax.inject.Inject;
-import javax.mail.internet.MimeMessage;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.domain.Employee;
@@ -42,40 +40,38 @@ public class MailController {
 	@RequestMapping(value = "/authenticate", method = RequestMethod.GET)
 	public String authenticate(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("mail > memberId :" + request.getParameter("memberId"));
-		try {
-			Employee employee = employeeService.checkIdEmployee(request.getParameter("memberId"));
-			model.addAttribute("mail", employee.getEmail());
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e);
-		}
+		
+		Employee employee = employeeService.checkIdEmployee(request.getParameter("memberId"));
+		model.addAttribute("mail", employee.getEmail());
 		return "/mail/authenticate";
 	}
 
 	//이메일 인증요청
 	@RequestMapping(value = "/request", method = RequestMethod.POST)
 	public @ResponseBody String request(HttpServletRequest request) {
-		boolean success = false;
-		try {
-			Employee employee = employeeService.checkEmailEmployee(request.getParameter("mail"));
+		boolean result = false;
+		Employee employee = employeeService.checkEmailEmployee(request.getParameter("mail"));
 
+		//제한일시내에 재발송을 한경우에는
+		if(compareDay(employee.getAuthKeyDate(), new Date()) < 0) {
+			result = false;
+		}
+		else {
 			if(employee != null) {
 				String authKey = mailService.getAuthKey();
-				employeeService.modifyKey(employee.getMemberId(), authKey);
-
+				employeeService.modifyKey(employee.getMemberId(), authKey); //난수를 업데이트 한다.
+				employeeService.modifyAuthKeyDate(employee.getMemberId());  //인증요청 일시를 업데이트 한다.
+				
 				String title = "회원가입 인증 이메일 입니다.";
 				StringBuilder text = new StringBuilder();
 				text.append("귀화의 인증번호는 : " + authKey + " 입니다.");
 
 				mailService.sendMail(mailService.sendTo(), employee.getEmail(), title, text.toString());
-				success = true;
+				result = true;
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e);
 		}
 
-		return String.valueOf(success);	
+		return String.valueOf(result);	
 	}
 
 	//이메일 인증완료 
@@ -83,23 +79,42 @@ public class MailController {
 	public String complete(HttpServletRequest request, Model model) {
 		logger.info("mail > complete :" + request.getParameter("mail") + " : " + request.getParameter("authKey"));
 		String result = "";
-		try {
-			Employee employee = employeeService.checkKey(request.getParameter("mail"), request.getParameter("authKey"));
+		Employee employee = employeeService.checkKey(request.getParameter("mail"), request.getParameter("authKey"));
 
-			if(employee != null) {
-				employeeService.modifyState(employee.getMemberId(), "Y");
-				model.addAttribute("user", employee);
-				result = "/mail/success";
-			}
-			else 
-			{
-				Employee tmp = employeeService.checkEmailEmployee(request.getParameter("mail"));
-				result = "redirect:/mail/authenticate?memberId="+ tmp.getMemberId();
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e);
+		if(employee != null) {
+			employeeService.modifyState(employee.getMemberId(), "Y");
+			model.addAttribute("user", employee);
+			result = "/mail/success";
+		}
+		else 
+		{
+			Employee tmp = employeeService.checkEmailEmployee(request.getParameter("mail"));
+			result = "redirect:/mail/authenticate?memberId="+ tmp.getMemberId();
 		}
 		return result;
+	}
+	
+	//날짜 비교
+	public int compareDay(Date authKeyDate, Date currentDate) {
+		//yyyy-MM-dd hh:mm:ss
+		int compare =0;
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(authKeyDate); //디비에 저장되어 있는 일시
+		cal.add(Calendar.MINUTE, 2); // 2분 추가
+		
+		Date limitAuthKeyDate= new Date(cal.getTimeInMillis()); // 제한 일시 만듬
+		
+		compare = currentDate.compareTo(limitAuthKeyDate);
+
+		
+ 		if(compare > 0) {
+ 			//System.out.println("현재일시가 제한일시보다 큰 경우.");
+ 		}
+ 		else if(compare <0) {
+ 			//제한일시보다 앞선경우니깐 이메일 재발송을 못한다.
+ 			//System.out.println("현재일시가 제한일시보다 작은 경우.");
+ 		}
+		
+		return compare;
 	}
 }
