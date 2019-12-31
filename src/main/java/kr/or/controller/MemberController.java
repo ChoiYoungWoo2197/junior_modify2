@@ -1,6 +1,7 @@
 package kr.or.controller;
 
 import java.util.Locale;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import kr.or.domain.Employee;
+import kr.or.domain.Equipment;
+import kr.or.domain.Page;
+import kr.or.domain.SearchCriteria;
 import kr.or.service.EmployeeService;
 import kr.or.service.MailService;
 
@@ -28,13 +32,19 @@ public class MemberController {
 	@Autowired
 	MailService mailService;
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(Locale locale, Model model) {
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(SearchCriteria searchCriteria,Model model) {
+		logger.info("member list & searchContent :" + searchCriteria.getSearchContent());
+		List<Employee> employeeList = employeeService.searchEmployee(searchCriteria);
+		model.addAttribute("employeeList", employeeList);
+		model.addAttribute("page", new Page(employeeService.searchEmployeeCount(searchCriteria), searchCriteria));
+		return "/member/list";
+	}
 
-		return "/member/register";
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public String insertPage(Locale locale, Model model) {
+
+		return "/member/insert";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)

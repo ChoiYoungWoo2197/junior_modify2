@@ -55,12 +55,13 @@ table, th, td {
 	var validateEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //이메일 양식
 	var validatePhone = /^\d{2,3}-\d{3,4}-\d{4}$/; //전화번호 양식
 	var checkInput = true;
-	var checkMemberId= true;
+	var checkMemberId = true;
 	var checkMemberEmail = true;
 	var checkMemberPassword = true;
-	
+
 	function check() {
-		//alert($("input[name='memberId']").val());
+		//alert($('input:radio[name=manager]').is(':checked'));
+
 		clearError();
 
 		valideInput();
@@ -70,8 +71,7 @@ table, th, td {
 		var check = checkAll();
 		if (check == true) {
 			var departmentType = $("#departmentType option:selected").val();
-			window.location.href = "${pageContext.request.contextPath}//insert?departmentType="
-					+ departmentType;
+			window.location.href = "${pageContext.request.contextPath}/insert?departmentType="+ departmentType;
 		}
 
 		return check;
@@ -83,31 +83,31 @@ table, th, td {
 				|| validateId.test($("input[name='memberId']").val()) == false) {
 			$("#valideId").css("display", "inline");
 			checkInput = false;
-			alert("valideId :" + checkInput);
+			//alert("valideId :" + checkInput);
 		}
 		if ($("input[name='name']").val() == ""
 				|| validateName.test($("input[name='name']").val()) == false) {
 			$("#valideName").css("display", "inline");
-			
+
 			checkInput = false;
-			alert("valideName :" + checkInput);
+			//alert("valideName :" + checkInput);
 		}
 		if ($("input[name='password']").val() == ""
 				|| validatePassword.test($("input[name='password']").val()) == false) {
 			$("#validePassword").css("display", "inline");
 			checkInput = false;
-			alert("validePassword :" + checkInput);
+			//alert("validePassword :" + checkInput);
 		}
 		if ($("input[name='passwordCheck']").val() == "") {
 			$("#validePasswordCheck").css("display", "inline");
 			checkInput = false;
-			alert("validePasswordCheck :" + checkInput);
+			//alert("validePasswordCheck :" + checkInput);
 		}
 		if ($("input[name='email']").val() == ""
 				|| validateEmail.test($("input[name='email']").val()) == false) {
 			$("#valideEmail").css("display", "inline");
 			checkInput = false;
-			alert("valideEmail :" + checkInput);
+			//alert("valideEmail :" + checkInput);
 		}
 		if ($("input[name='phone']").val() == ""
 				|| validatePhone.test($("input[name='phone']").val()) == false) {
@@ -118,7 +118,7 @@ table, th, td {
 		if ($("select[name='departmentType']").val() == "") {
 			$("#valideDepartmentType").css("display", "inline");
 			checkInput = false;
-			alert("valideDepartmentType :" + checkInput);
+			//alert("valideDepartmentType :" + checkInput);
 		}
 	}
 
@@ -140,14 +140,16 @@ table, th, td {
 		$("#checkPasswordSuccess").css("display", "none");
 		$("#checkPasswordFail").css("display", "none");
 	}
-	
+
 	function checkAll() {
-		if(checkInput == true && checkMemberId == true && checkMemberEmail == true && checkMemberPassword == true) {
-			alert("true");
+		if (checkInput == true && checkMemberId == true
+				&& checkMemberEmail == true && checkMemberPassword == true) {
+			//alert("true");
 			return true;
-		}
-		else {
-			alert("checkInput : " + checkInput + " checkMemberId : " + checkMemberId + " checkMemberEmail : " + checkMemberEmail + " checkMemberPassword : " + checkMemberPassword);
+		} else {
+			//alert("checkInput : " + checkInput + " checkMemberId : "
+					+ checkMemberId + " checkMemberEmail : " + checkMemberEmail
+					+ " checkMemberPassword : " + checkMemberPassword);
 			return false;
 		}
 	}
@@ -171,7 +173,7 @@ table, th, td {
 			dataType : "text",
 			success : function(res) {
 				console.log(res);
-		 		//alert(res);
+				//alert(res);
 				if (res == "true") {
 					$("#checkIdSuccess").css("display", "none");
 					$("#checkIdFail").css("display", "inline");
@@ -247,33 +249,32 @@ table, th, td {
 </head>
 <body>
 	<section class="width1200">
-		<h3>회원 등록</h3>
-		<div class="overflow">
-			<div class="float">
-				<b class="red">* 필수입력</b>
-			</div>
-		</div>
+		<c:if test="${not empty loginUser}">
+			<c:if test="${loginUser.manager eq 'true'}">
+				<h3>회원 등록</h3>
+			</c:if>
+		</c:if>
+		<c:if test="${empty loginUser}">
+			<h3>회원 가입</h3>
+		</c:if>
+
 		<br>
-		<form name="memberForm" action="insert" method="post" onsubmit="return check()">
+		<form name="memberForm" action="insert" method="post"
+			onsubmit="return check()">
 			<table>
 				<tr>
 					<td><b>사번</b><b class="red">*</b></td>
-					<td>
-					<input name="memberId" type="text" size="20" />
-					<span id="valideId"	class="error" size="20">사원번호를 입력하세요.</span>
-					<span id="checkIdSuccess" class="success" size="20">사용가능한 사원번호 입니다.</span>
-					<span id="checkIdFail" class="error" size="20">이미 존재하는 사원번호 입니다.</span>
-					</td>
-					<td colspan="2"><input type="button" onclick="checkId()" value="중복체크"></td>
-					
-
+					<td><input name="memberId" type="text" size="20" /> <span
+						id="valideId" class="error">사원번호를 입력하세요.</span> <span
+						id="checkIdSuccess" class="success">사용가능한 사원번호 입니다.</span> <span
+						id="checkIdFail" class="error">이미 존재하는 사원번호 입니다.</span></td>
+					<td colspan="2"><input type="button" onclick="checkId()"
+						value="중복체크"></td>
 				</tr>
 				<tr>
 					<td><b>사원명</b><b class="red">*</b></td>
-					<td>
-					<input name="name" type="text" size="20" />
-					<span id="valideName" class="error" size="20">이름을 입력하세요.</span>
-					</td>
+					<td><input name="name" type="text" size="20" /> <span
+						id="valideName" class="error">이름을 입력하세요.</span></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
@@ -284,44 +285,50 @@ table, th, td {
 							<option value="2">기획부</option>
 							<option value="3">영업부</option>
 							<option value="4">인사부</option>
-					</select>
-					<span id="valideDepartmentType" class="error" size="20">부서를 선택하세요.</span>
-					</td>
+					</select> <span id="valideDepartmentType" class="error">부서를 선택하세요.</span></td>
 					<td colspan="2"></td>
 				</tr>
 				</tr>
 				<tr>
 					<td><b>비빌번호</b><b class="red">*</b></td>
-					<td><input name="password" type="password" size="20" />
-					<span id="validePassword" class="error" size="20">비밀번호를 입력하세요.</span>
-					</td>
-					
+					<td><input name="password" type="password" size="20" /> <span
+						id="validePassword" class="error">비밀번호를 입력하세요.</span></td>
+
 					<td><b>비밀번호 확인</b><b class="red">*</b></td>
-					<td colspan="1">
-					<input id="passwordCheck" name="passwordCheck" type="password" size="20" />
-					<span id="validePasswordCheck"	class="error" size="20">비밀번호 확인을 입력하세요.</span>
-					<span id="checkPasswordSuccess" class="success" size="20">비밀번호가 일치합니다.</span>
-					<span id="checkPasswordFail" class="error" size="20">비밀번호가 일치하지 않습니다.</span>
-					</td>
+					<td colspan="1"><input id="passwordCheck" name="passwordCheck"
+						type="password" size="20" /> <span id="validePasswordCheck"
+						class="error">비밀번호 확인을 입력하세요.</span> <span
+						id="checkPasswordSuccess" class="success">비밀번호가 일치합니다.</span> <span
+						id="checkPasswordFail" class="error">비밀번호가 일치하지 않습니다.</span></td>
 				</tr>
 				<tr>
 					<td><b>이메일</b><b class="red">*</b></td>
-					<td>
-					<input name="email" type="text" size="20" />
-					<span id="valideEmail" class="error" size="20">이메일을 입력하세요.</span>
-					<span id="checkEmailSuccess" class="success" size="20">사용가능한 이메일	입니다.</span>
-					<span id="checkEmailFail" class="error" size="20">이미 존재하는 이메일 입니다.</span>
-					</td>
-					<td colspan="2"><input type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크"></td>
+					<td><input name="email" type="text" size="20" /> <span
+						id="valideEmail" class="error">이메일을 입력하세요.</span> <span
+						id="checkEmailSuccess" class="success">사용가능한 이메일 입니다.</span> <span
+						id="checkEmailFail" class="error">이미 존재하는 이메일 입니다.</span></td>
+					<td colspan="2"><input type="button" id="employeeEmailCheck"
+						onclick="checkEmail()" value="중복체크"></td>
 				</tr>
 				<tr>
 					<td><label>전화번호</label></td>
-					<td>
-					<input name="phone" type="text" size="20" />
-					<span id="validePhone" class="error" size="20">전화번호를 입력하세요.</span>
-					</td>
+					<td><input name="phone" type="text" size="20" /> <span
+						id="validePhone" class="error">전화번호를 입력하세요.</span></td>
 					<td colspan="2"></td>
 				</tr>
+				<c:if test="${not empty loginUser}">
+					<c:if test="${loginUser.manager eq 'true'}">
+						<tr>
+							<td><label>관리자권한</label></td>
+							<td>
+							<input type="radio" name="manager" value="yes" /> yes
+							<input type="radio" name="manager" value="no" checked="checked" /> no</td>
+							<td colspan="2"></td>
+						</tr>
+					</c:if>
+				</c:if>
+
+
 
 			</table>
 			<input type="submit" value="회원가입" />

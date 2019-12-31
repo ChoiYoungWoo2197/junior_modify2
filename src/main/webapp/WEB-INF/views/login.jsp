@@ -96,7 +96,7 @@ html, body {
 		</section>
 
 		<section class="main-page-unit">
-			<form id="insertForm" name="insertForm" method="get" action="${pageContext.request.contextPath}/member/register">
+			<form id="insertForm" name="insertForm" method="get" action="${pageContext.request.contextPath}/member/insert">
 				<div class="login-frame">
 					<div class="login-unit">
 						<button type="submit" class="login-btn">회원가입</button>

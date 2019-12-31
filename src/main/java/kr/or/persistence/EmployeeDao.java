@@ -3,6 +3,8 @@ package kr.or.persistence;
 
 import java.util.List;
 import kr.or.domain.Employee;
+import kr.or.domain.Equipment;
+import kr.or.domain.SearchCriteria;
 
 public interface EmployeeDao {
 	public void insertData(Employee employee);
@@ -15,4 +17,6 @@ public interface EmployeeDao {
 	public void modifyAuthKeyDate(String memberId);
 	public Employee checkState(String memberId, String state);
 	public List<Employee> selectAll();
+	public List<Employee> searchEmployee(SearchCriteria searchCriteria);
+	public int searchEmployeeCount(SearchCriteria searchCriteria);
 }

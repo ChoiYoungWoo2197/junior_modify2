@@ -69,6 +69,8 @@ public class LoginController {
 					model.addAttribute("Account", map);
 
 					result = "redirect:/";
+					
+					//여기서 세션 저장한다.
 				}
 				else {
 					result = "redirect:/mail/authenticate?memberId="+employee.getMemberId();

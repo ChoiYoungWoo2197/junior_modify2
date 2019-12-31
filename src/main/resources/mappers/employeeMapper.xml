@@ -51,7 +51,8 @@
 
 	<update id="modifyAuthKeyDate" parameterType="String">
 		UPDATE employee
-		SET authkey_date = now()
+		SET
+		authkey_date = now()
 		WHERE member_id = #{memberId}
 	</update>
 
@@ -60,5 +61,20 @@
 		where
 		member_id = #{memberId} and
 		state = #{state}
+	</select>
+
+	<select id="searchEmployee" resultType="Employee">
+		SELECT *
+		FROM employee
+		WHERE name LIKE '%${searchContent}%'
+		ORDER BY employee_id DESC
+		LIMIT #{pageStart}, #{amount}
+	</select>
+
+	<select id="searchEmployeeCount" resultType="int">
+		SELECT
+		COUNT(employee_id)
+		FROM employee
+		WHERE name LIKE '%${searchContent}%'
 	</select>
 </mapper>
