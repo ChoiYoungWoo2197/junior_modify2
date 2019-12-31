@@ -2,19 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.mappers.reservationMapper">
 	
-	<!-- 검색하기 위한 용도 -->
-	<sql id="search">
-		<if test="searchType == 'employee_id'.toString()">
-			WHERE employee_id LIKE '%${searchContent}%'
-		</if>
-		<if test="searchType == 'meet_purpose'.toString()">
-			WHERE meet_purpose LIKE '%${searchContent}%'
-		</if>
-	</sql>	
-	
 	<select id="searchReservation" resultType="Reservation">
-		SELECT * FROM reservation WHERE meet_purpose LIKE '%${searchContent}%'
-		ORDER BY reservation_id DESC LIMIT #{pageStart}, #{amount}		
+		<!-- SELECT * FROM reservation 
+		WHERE meet_purpose LIKE '%${searchContent}%'
+		ORDER BY reservation_id DESC LIMIT #{pageStart}, #{amount} -->
+		SELECT reservation.*, meeting_room.name AS meetingRoomName, employee.name AS employeeName, department.name AS departmentName
+		FROM reservation 
+		JOIN meeting_room ON meeting_room.meeting_room_id = reservation.meeting_room_id
+		JOIN employee ON employee.employee_id = reservation.employee_id
+		JOIN department ON department.department_id = employee.department_id
+		WHERE meet_purpose LIKE '%${searchContent}%'
+		ORDER BY reservation_id DESC LIMIT #{pageStart}, #{amount}	
 	</select>
 	
 	<select id="searchReservationCount" resultType="int">
@@ -23,7 +21,15 @@
 	
 	<select id="selectReservationByMeetAndDate" resultType="Reservation">
 		<!-- SELECT * FROM reservation WHERE meeting_room_id = 1 AND start_date LIKE '2019-12-27%' -->
-		SELECT * FROM reservation WHERE meeting_room_id = #{meetingRoomId} AND start_date LIKE '%${startDate}%'
+		<!-- SELECT * FROM reservation 
+		WHERE meeting_room_id = #{meetingRoomId} AND start_date LIKE '%${startDate}%'
+		ORDER BY start_date ASC -->
+		SELECT reservation.*, employee.name AS employeeName, department.name AS departmentName
+		FROM reservation
+		JOIN employee ON employee.employee_id = reservation.employee_id
+		JOIN department ON department.department_id = employee.department_id
+		WHERE meeting_room_id = 16 AND start_date LIKE '2020-01-01%' 
+		ORDER BY start_date ASC
 	</select>
 	
 	<insert id="insertReservation" parameterType="Reservation">

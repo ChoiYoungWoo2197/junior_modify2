@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
 import kr.or.domain.Reservation;
+import kr.or.domain.SearchCriteria;
 import kr.or.service.ReservationService;
 
 @Controller
@@ -28,15 +29,18 @@ public class ReservationController {
 	ReservationService reservationService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list() {
+	public String list(SearchCriteria searchCriteria, Model model) {
 		logger.info("list");
+		
+		List<Reservation> reservationList = reservationService.searchReservation(searchCriteria);
+		model.addAttribute("reservationList", reservationList);
 		
 		return "reservation/list";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public String insert(Model model) {
-		logger.info("insert");
+	public String insertPage(Model model) {
+		logger.info("insertPage");
 		
 		List<MeetingRoom> meetingRoomList = reservationService.selectMeetingRoom();
 		model.addAttribute("meetingRoomList", meetingRoomList);
@@ -68,5 +72,13 @@ public class ReservationController {
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(meetingRoomId, startDate);
 		
 		return reservationList;
+	}
+	
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public String insert() {
+		logger.info("insert");
+		
+		
+		return "redirect:/reservation/list";
 	}
 }

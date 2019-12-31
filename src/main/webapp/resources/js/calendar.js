@@ -51,5 +51,3 @@ function nextMonth(){//한달 후
    today.setMonth(today.getMonth() + 1);   
    displayCaldendar();
 }
-
-

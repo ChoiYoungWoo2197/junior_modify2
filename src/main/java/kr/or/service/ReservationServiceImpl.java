@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
 import kr.or.domain.Reservation;
+import kr.or.domain.SearchCriteria;
 import kr.or.persistence.MeetingRoomDao;
 import kr.or.persistence.MeetingRoomEquipmentDao;
 import kr.or.persistence.ReservationDao;
@@ -30,6 +31,11 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	
 	@Override
+	public List<Reservation> searchReservation(SearchCriteria searchCriteria) {
+		return reservationDao.searchReservation(searchCriteria);
+	}
+	
+	@Override
 	public List<MeetingRoom> selectMeetingRoom() {
 		return meetingRoomDao.selectMeetingRoom();
 	}
@@ -43,5 +49,6 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId) {
 		return meetingRoomEquipmentDao.selectMeetingRoomEquipmentById(meetingRoomId);
 	}
+
 	
 }

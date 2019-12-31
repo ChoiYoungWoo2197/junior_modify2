@@ -11,7 +11,7 @@ public interface ReservationService {
 
 	//Reservation
 	public List<Reservation> selectReservationByMeetAndDate(int meetingRoomId, String startDate);
-//	public List<Reservation> searchReservation(SearchCriteria searchCriteria);
+	public List<Reservation> searchReservation(SearchCriteria searchCriteria);
 //	public int searchReservationCount (SearchCriteria searchCriteria);
 //	public void insertReservation(Reservation reservation);
 //	public void updateReservation(Reservation reservation);

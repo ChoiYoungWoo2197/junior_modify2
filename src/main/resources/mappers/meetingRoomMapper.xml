@@ -55,6 +55,7 @@
 	
 	<select id="selectMeetingRoom" resultType="MeetingRoom">
 		SELECT * 
-		FROM meeting_room 
+		FROM meeting_room
+		WHERE availability = true
 	</select>
 </mapper>

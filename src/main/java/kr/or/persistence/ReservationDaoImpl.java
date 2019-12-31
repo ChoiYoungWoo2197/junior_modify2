@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.domain.Reservation;
+import kr.or.domain.SearchCriteria;
 
 @Repository
 public class ReservationDaoImpl implements ReservationDao {
@@ -24,6 +25,11 @@ private static final String namespace = "kr.or.mappers.reservationMapper";
 		map.put("startDate", startDate);
 		
 		return sqlSession.selectList(namespace + ".selectReservationByMeetAndDate", map);
+	}
+
+	@Override
+	public List<Reservation> searchReservation(SearchCriteria searchCriteria) {
+		return sqlSession.selectList(namespace + ".searchReservation", searchCriteria);
 	}
 
 }

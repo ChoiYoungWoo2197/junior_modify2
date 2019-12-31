@@ -19,6 +19,11 @@ public class Reservation {
 	 private String validateChecker;
 	 private String abnormality;
 	 private String cancelApplicant;
+	 private Date cancelDate;
+	 private String cancelReason;
+	 private String employeeName;
+	 private String departmentName;
+	 private String meetingRoomName;
 	 
 	 public int getReservationId() {
 		return reservationId;
@@ -128,6 +133,23 @@ public class Reservation {
 	public void setCancelReason(String cancelReason) {
 		this.cancelReason = cancelReason;
 	}
-	private Date cancelDate;
-	 private String cancelReason;
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+	public String getMeetingRoomName() {
+		return meetingRoomName;
+	}
+	public void setMeetingRoomName(String meetingRoomName) {
+		this.meetingRoomName = meetingRoomName;
+	}
+	
 }
