@@ -5,12 +5,21 @@
 	<select id="searchReservationById" parameterType="int"
 		resultType="Reservation">
 		select * from reservation
-		where reservation_id =	#{reservationId}
+		where reservation_id =
+		#{reservationId}
 	</select>
 
 	<update id="updateCancelReasonByMap">
 		UPDATE reservation
-		SET cancel_reason = #{cancelReason}, cancel_applicant = #{cancelApplicant}, cancel_date = now()
+		SET cancel_reason =
+		#{cancelReason}, cancel_applicant = #{cancelApplicant}, cancel_date =
+		now()
+		WHERE reservation_id = #{reservationId}
+	</update>
+
+	<update id="updateStateByMap">
+		UPDATE reservation
+		SET state = #{state}
 		WHERE reservation_id = #{reservationId}
 	</update>
 </mapper>

@@ -65,6 +65,7 @@ public class ReservationDetailController {
 		String reason = request.getParameter("reason");
 
 		reservationDetailService.updateCancelReasonByMap(reservationId, person, reason);
+		reservationDetailService.updateStateByMap(reservationId, "RC");
 		return "redirect:/";
 	}
 

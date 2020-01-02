@@ -31,6 +31,15 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 		map.put("cancelReason", cancelReason);
 		sqlSession.update(namespace + ".updateCancelReasonByMap", map);
 	}
+
+	@Override
+	public void updateStateByMap(int reservationId, String state) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("reservationId", reservationId);
+		map.put("state", state);
+		sqlSession.update(namespace + ".updateStateByMap", map);
+	}
 	
 
 }
