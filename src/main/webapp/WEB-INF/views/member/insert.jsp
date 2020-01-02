@@ -5,7 +5,6 @@
 <%@ include file="../include/managerHeader.jsp"%>
 <!DOCTYPE html>
 
-<%String register = ""; %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -47,8 +46,7 @@ table, th, td {
 }
 </style>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
 	//변수
 	var validateId = /^[A-Za-z0-9]+$/; //영어 + 숫자만 입력

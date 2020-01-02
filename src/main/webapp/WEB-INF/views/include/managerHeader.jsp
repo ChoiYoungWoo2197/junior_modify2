@@ -8,9 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/managerHeader.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/calendar.js" charset="UTF-8" type="text/javascript"></script>
+
+
 </head>
 <body>
 	<div class="width1200">

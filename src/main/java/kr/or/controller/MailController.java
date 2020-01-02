@@ -41,7 +41,7 @@ public class MailController {
 	public String authenticate(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("mail > memberId :" + request.getParameter("memberId"));
 		
-		Employee employee = employeeService.checkIdEmployee(request.getParameter("memberId"));
+		Employee employee = employeeService.checkEmployeeById(request.getParameter("memberId"));
 		model.addAttribute("mail", employee.getEmail());
 		return "/mail/authenticate";
 	}
@@ -50,7 +50,7 @@ public class MailController {
 	@RequestMapping(value = "/request", method = RequestMethod.POST)
 	public @ResponseBody String request(HttpServletRequest request) {
 		boolean result = false;
-		Employee employee = employeeService.checkEmailEmployee(request.getParameter("mail"));
+		Employee employee = employeeService.checkEmployeeByEmail(request.getParameter("mail"));
 
 		//제한일시내에 재발송을 한경우에는
 		if(compareDay(employee.getAuthKeyDate(), new Date()) < 0) {
@@ -59,8 +59,8 @@ public class MailController {
 		else {
 			if(employee != null) {
 				String authKey = mailService.getAuthKey();
-				employeeService.modifyKey(employee.getMemberId(), authKey); //난수를 업데이트 한다.
-				employeeService.modifyAuthKeyDate(employee.getMemberId());  //인증요청 일시를 업데이트 한다.
+				employeeService.updateKeyByMap(employee.getMemberId(), authKey); //난수를 업데이트 한다.
+				employeeService.updateKeyDateById(employee.getMemberId());  //인증요청 일시를 업데이트 한다.
 				
 				String title = "회원가입 인증 이메일 입니다.";
 				StringBuilder text = new StringBuilder();
@@ -79,16 +79,16 @@ public class MailController {
 	public String complete(HttpServletRequest request, Model model) {
 		logger.info("mail > complete :" + request.getParameter("mail") + " : " + request.getParameter("authKey"));
 		String result = "";
-		Employee employee = employeeService.checkKey(request.getParameter("mail"), request.getParameter("authKey"));
+		Employee employee = employeeService.checkKeyByMap(request.getParameter("mail"), request.getParameter("authKey"));
 
 		if(employee != null) {
-			employeeService.modifyState(employee.getMemberId(), "Y");
+			employeeService.updateStateByMap(employee.getMemberId(), "Y");
 			model.addAttribute("user", employee);
 			result = "/mail/success";
 		}
 		else 
 		{
-			Employee tmp = employeeService.checkEmailEmployee(request.getParameter("mail"));
+			Employee tmp = employeeService.checkEmployeeByEmail(request.getParameter("mail"));
 			result = "redirect:/mail/authenticate?memberId="+ tmp.getMemberId();
 		}
 		return result;

@@ -4,66 +4,37 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/managerHeader.jsp"%>
 
-<style>
-td, th {
-	border: 1px solid black;
-}
-
-table {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-/* ----------------- 페이지 ----------------- */
-#page {
-	text-align: center;
-	margin-top: 20px;
-}
-
-.pagination li {
-	width: 20px;
-	list-style: none;
-	display: inline-block;
-}
-
-.color_sky {
-	background-color: #6799FF !important;
-}
-
-.page_shape {
-	background-color: rgb(189, 189, 189);
-	width: 10px;
-	height: 10px;
-	border-radius: 5px;
-	display: inline-block;
-}
-</style>
-
+<link href="${pageContext.request.contextPath}/resources/css/member/list.css" rel="stylesheet" type="text/css" />
+<%-- <script src="${pageContext.request.contextPath}/resources/js/member/list.js" charset="UTF-8" type="text/javascript"></script> --%>
 <script>
-	$(function() {
-		$("#insertMember").click(function() {
-			location.href = "${pageContext.request.contextPath}/member/insert";
-		})
-
-		$("#searchEquipment").click(function() {
-			if ($("input[name='searchContent']").val() == "") {
-				alert("검색할 내용을 입력해주세요.");
-				return false;
-			}
-
-			location.href = "list?page=1&searchType=" + $("select[name='searchType']").val()+ "&searchContent="+ $("input[name='searchContent']").val();
-		})
-
-		$(document).on("click", ".readMember", function() {
-			var memberId = Number($(this).prev().text());
-			location.href = "read?memberId=" + memberId;
-		})
-		
-		$("#AllMeetingRoom").click(function() {
-			location.href = "list";
-		})
-
+$(function() {
+	$("#insertMember").click(function() {
+		//alert("?");
+		location.href = "${pageContext.request.contextPath}/member/insert";
 	})
+
+	$("#searchEquipment").click(function() {
+		//alert("???");
+		if ($("input[name='searchContent']").val() == "") {
+			alert("검색할 내용을 입력해주세요.");
+			return false;
+		}
+
+		location.href = "list?page=1&searchType=" + $("select[name='searchType']").val()+ "&searchContent="+ $("input[name='searchContent']").val();
+	})
+
+	$(document).on("click", ".readMember", function() {
+		var memberId = Number($(this).prev().text());
+		location.href = "read?memberId=" + memberId;
+	})
+
+	$("#AllMeetingRoom").click(function() {
+		location.href = "list";
+	})
+
+})
+
+
 </script>
 
 <section class="width1200">

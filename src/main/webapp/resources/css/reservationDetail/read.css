@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+table {
+	width: 100%;
+}
+
+table, th, td {
+	border: 1px solid #bcbcbc;
+}
+
+.width1200 {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.show {
+	display: block;
+}
+
+.hide {
+	display: none;
+}
+
+
