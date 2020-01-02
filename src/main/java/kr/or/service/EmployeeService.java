@@ -20,4 +20,8 @@ public interface EmployeeService {
 	public Manager checkManager(int managerId);
 	public List<Employee> searchEmployee(SearchCriteria criteria);
 	public int searchEmployeeCount(SearchCriteria criteria);
+	public void modify(Employee employee);
+	public void delete(int memberId);
+	public void insertManager(int employeeId);
+	public void deleteManager(int employeeId);
 }

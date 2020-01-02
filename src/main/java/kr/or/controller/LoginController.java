@@ -44,7 +44,7 @@ public class LoginController {
 	
 	//로그인 시도
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
-	public String check(Locale locale, Model model, HttpServletRequest request) {
+	public String check(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
 		logger.info("사원번호 : " + request.getParameter("loginId") + " " + "비밀번호 : " + request.getParameter("loginPw"));
 		String result = "redirect:/login/login";
 		try {
@@ -63,14 +63,14 @@ public class LoginController {
 					else {
 						//일반회원
 						map.put("manager", "false");
-
 					}
 					map.put("user", employee);
-					model.addAttribute("Account", map);
+					//여기서 세션 저장한다.
+					session.setAttribute("loginUser", map);
+					
+					//model.addAttribute("Account", map);
 
 					result = "redirect:/";
-					
-					//여기서 세션 저장한다.
 				}
 				else {
 					result = "redirect:/mail/authenticate?memberId="+employee.getMemberId();

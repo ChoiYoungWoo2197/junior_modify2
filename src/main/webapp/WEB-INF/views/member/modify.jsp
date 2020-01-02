@@ -4,8 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/managerHeader.jsp"%>
 <!DOCTYPE html>
-
-<%String register = ""; %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -61,9 +59,14 @@ table, th, td {
 	var checkMemberEmail = true;
 	var checkMemberPassword = true;
 
-	function check() {
-		checkRegister();
+	window.onload = function () {
+		modifyDepartMentType();
 		
+		modifyManagerType();
+	}
+	
+	
+	function check() {
 		clearError();
 
 		valideInput();
@@ -74,26 +77,18 @@ table, th, td {
 		if (check == true) {
 			var departmentType = $("#departmentType option:selected").val();
 			var manageType = $('input:radio[name="manager"][value="yes"]').is(':checked');
-			var register =checkRegister();
-			alert($("input[name='register']").val());
-			window.location.href = "${pageContext.request.contextPath}/insert?departmentType="+ departmentType + "&manager=" + manageType + "&register=" + register;
-			//window.location.href = "${pageContext.request.contextPath}/insert?departmentType="+ departmentType;
-			
+			var originalMemberId = $("input[name='originalMemberId']").val();
+			var memberId = $("input[name='modifyMemberId']").val();
+			alert(originalMemberId + " : " +memberId);
+			//alert("departmentType : " + departmentType + "  " + "manageType : " + manageType);
+			window.location.href = "${pageContext.request.contextPath}/modify?departmentType="+ departmentType + "&manager=" + manageType+ "&originalMemberId=" +originalMemberId;
+			//window.location.href = "/member/modify?departmentType="+ departmentType + "&manager=" + manageType + "&originalMemberId=" +originalMemberId;
+
 		}
 
 		return check;
 	}
-	
-	function valideRadio(name) {
-		//document에서 함수의 인자와 같은 태그요소를 가져오기 위해 사용
-		var chk_radio = document.getElementsByName(name);
-		var sel_type = null;
-		for(var i=0;i<chk_radio.length;i++){
-			if(chk_radio[i].checked == true){ 
-				return chk_radio[i].value;
-			}
-		}
-	}
+
 
 	function valideInput() {
 		checkInput = true;
@@ -160,7 +155,8 @@ table, th, td {
 	}
 
 	function checkAll() {
-		if (checkInput == true && checkMemberId == true && checkMemberEmail == true && checkMemberPassword == true) {
+		if (checkInput == true && checkMemberId == true
+				&& checkMemberEmail == true && checkMemberPassword == true) {
 			//alert("true");
 			return true;
 		} else {
@@ -171,10 +167,8 @@ table, th, td {
 
 	function checkId() {
 		$("#valideId").css("display", "none");
-		if ($("input[name='memberId']").val() == ""
-				|| validateId.test($("input[name='memberId']").val()) == false) {
+		if ($("input[name='memberId']").val() == ""	|| validateId.test($("input[name='memberId']").val()) == false) {
 			$("#valideId").css("display", "inline");
-
 			return false;
 		}
 
@@ -259,52 +253,53 @@ table, th, td {
 
 	}
 	
-	function checkRegister() {
-		var register =  '<%=session.getAttribute("loginUser")%>';
-		var result = register.indexOf("manager=true", 0 );
-		
-		if(result > 0) {
-			$("input[name='register']").val("true");
-			return true;
-		}
-		else {
-			$("input[name='register']").val("false");
-			return false;
-		}
-		
+	function modifyDepartMentType() {
+		var departmentType = ${employeeModify.departmentId};
+		//$("#departmentType").val(dptType).prop("selected", true); 
+		$("select[name='departmentType']").val(departmentType).attr("selected", "selected");
 		
 	}
 	
+	function modifyManagerType() {
+		var managerType = ${managerType};
+		//alert(managerType );
+		
+		if(managerType == true) {
+			$('input:radio[name="manager"][value="yes"]').prop('checked', true);
+		}
+		else {
+			$('input:radio[name="manager"][value="no"]').prop('checked', true);
+		}
+	}
+	
+	function memberList() {
+		//alert("list");
+		window.location.href = "${pageContext.request.contextPath}/member/list"
+	}
 </script>
 
 
 </head>
 <body>
 	<section class="width1200">
-		<c:if test="${not empty loginUser}">
-			<c:if test="${loginUser.manager eq 'true'}">
-				<h3>회원 등록</h3>
-			</c:if>
-		</c:if>
-		<c:if test="${empty loginUser}">
-			<h3>회원 가입</h3>
-		</c:if>
-		
+		<h3>회원 수정</h3>
 		<br>
-		<form name="memberForm" method="post" onsubmit="return check()">
+		<form name="memberForm"  method="post"	onsubmit="return check()">
 			<table>
 				<tr>
 					<td><b>사번</b><b class="red">*</b></td>
-					<td><input name="memberId" type="text" size="20" /> <span
-						id="valideId" class="error">사원번호를 입력하세요.</span> <span
-						id="checkIdSuccess" class="success">사용가능한 사원번호 입니다.</span> <span
-						id="checkIdFail" class="error">이미 존재하는 사원번호 입니다.</span></td>
-					<td colspan="2"><input type="button" onclick="checkId()" value="중복체크"></td>
+					<td><input name="modifyMemberId" type="text" size="20" value="${employeeModify.memberId}" /> <span id="valideId"
+						class="error">사원번호를 입력하세요.</span> <span id="checkIdSuccess"
+						class="success">사용가능한 사원번호 입니다.</span> <span id="checkIdFail"
+						class="error">이미 존재하는 사원번호 입니다.</span></td>
+					<td colspan="2"><input type="button" onclick="checkId()"
+						value="중복체크"></td>
 				</tr>
 				<tr>
 					<td><b>사원명</b><b class="red">*</b></td>
-					<td><input name="name" type="text" size="20" /> <span
-						id="valideName" class="error">이름을 입력하세요.</span></td>
+					<td><input name="name" type="text" size="20"
+						value="${employeeModify.name}" /> <span id="valideName"
+						class="error">이름을 입력하세요.</span></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
@@ -332,36 +327,31 @@ table, th, td {
 				</tr>
 				<tr>
 					<td><b>이메일</b><b class="red">*</b></td>
-					<td><input name="email" type="text" size="20" /> <span
-						id="valideEmail" class="error">이메일을 입력하세요.</span> <span
-						id="checkEmailSuccess" class="success">사용가능한 이메일 입니다.</span> <span
-						id="checkEmailFail" class="error">이미 존재하는 이메일 입니다.</span></td>
-					<td colspan="2"><input type="button" id="employeeEmailCheck"
-						onclick="checkEmail()" value="중복체크"></td>
+					<td><input name="email" type="text" size="20" value="${employeeModify.email}" /> <span id="valideEmail"
+						class="error">이메일을 입력하세요.</span> <span id="checkEmailSuccess"
+						class="success">사용가능한 이메일 입니다.</span> <span id="checkEmailFail"
+						class="error">이미 존재하는 이메일 입니다.</span></td>
+					<td colspan="2"><input type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크"></td>
 				</tr>
 				<tr>
 					<td><label>전화번호</label></td>
-					<td><input name="phone" type="text" size="20" /> <span
+					<td><input name="phone" type="text" size="20" value="${employeeModify.phone}"/> <span
 						id="validePhone" class="error">전화번호를 입력하세요.</span></td>
 					<td colspan="2"></td>
 				</tr>
-				<c:if test="${not empty loginUser}">
-					<c:if test="${loginUser.manager eq 'true'}">
-						<tr>
-							<td><label>관리자권한</label></td>
-							<td>
-							<input type="radio" name="manager" value="yes" /> yes
-							<input type="radio" name="manager" value="no" checked="checked" /> no</td>
-							<td colspan="2"></td>
-						</tr>
-					</c:if>
-				</c:if>
-
+				<tr>
+					<td><label>관리자권한</label></td>
+					<td>
+					<input type="radio" name="manager" value="yes"> yes
+					<input type="radio" name="manager" value="no" checked="checked"> no</td>
+					<td colspan="2"></td>
+				</tr>
 
 
 			</table>
-			<input type="hidden" id="register" name="register" value="">
-			<input type="submit" value="회원가입" />
+			<input type="hidden" id="originalMemberId" name="originalMemberId" value="${employeeModify.memberId}"> 
+			<input type="button" value="목록" onclick="memberList()">
+			<input type="submit" value="수정하기" />
 		</form>
 
 	</section>

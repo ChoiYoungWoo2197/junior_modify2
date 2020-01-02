@@ -14,8 +14,17 @@ public class ManagerDaoImpl implements ManagerDao {
 	
 	@Override
 	public Manager checkManager(int managerId) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace + ".checkManager", managerId);
+	}
+
+	@Override
+	public void insert(int employeeId) {
+		sqlSession.insert(namespace + ".insert",employeeId);
+	}
+
+	@Override
+	public void delete(int employeeId) {
+		sqlSession.delete(namespace + ".delete",employeeId);
 	}
 
 }

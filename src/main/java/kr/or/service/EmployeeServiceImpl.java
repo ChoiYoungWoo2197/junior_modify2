@@ -29,7 +29,6 @@ public class EmployeeServiceImpl implements  EmployeeService{
 		employeeDao.insertData(employee);
 	}
 
-
 	@Override
 	public Employee checkIdEmployee(String employeeId) {
 		// TODO Auto-generated method stub
@@ -127,5 +126,28 @@ public class EmployeeServiceImpl implements  EmployeeService{
 	public int searchEmployeeCount(SearchCriteria criteria) {
 		// TODO Auto-generated method stub
 		return employeeDao.searchEmployeeCount(criteria);
+	}
+
+	@Override
+	public void modify(Employee employee) {
+		employeeDao.modify(employee);
+	}
+
+	@Override
+	public void insertManager(int employeeId) {
+		// TODO Auto-generated method stub
+		managerDao.insert(employeeId);
+	}
+
+	@Override
+	public void deleteManager(int employeeId) {
+		// TODO Auto-generated method stub
+		managerDao.delete(employeeId);
+	}
+
+	@Override
+	public void delete(int memberId) {
+		// TODO Auto-generated method stub
+		employeeDao.delete(memberId);
 	}
 }

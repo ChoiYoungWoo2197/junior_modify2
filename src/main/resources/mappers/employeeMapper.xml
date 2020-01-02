@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.mappers.employeeMapper">
 
+	<sql id="search">
+		<if test="searchType == 'memberId'.toString()">
+			WHERE employee.member_id = ${searchContent}
+		</if>
+		<if test="searchType == 'name'.toString()">
+			WHERE employee.name LIKE '%${searchContent}%'
+		</if>
+		<if test="searchType == 'department'.toString()">
+			WHERE department.name LIKE '%${searchContent}%'
+		</if>
+		
+	</sql>
+
+
 	<insert id="insertEmployee" parameterType="Employee">
 		INSERT INTO employee
 		(department_id, name, member_id, password, email, phone, authkey,
@@ -64,11 +78,19 @@
 	</select>
 
 	<select id="searchEmployee" resultType="Employee">
-		SELECT *
+		<!-- SELECT * FROM employee <include refid="search"></include> ORDER BY 
+			employee_id DESC LIMIT #{pageStart}, #{amount} -->
+
+		SELECT employee.employee_id, department.name AS departmentId,
+		employee.name, employee.member_id, employee.password, employee.email,
+		employee.phone, employee.authkey, employee.state,
+		employee.authkey_date
 		FROM employee
-		WHERE name LIKE '%${searchContent}%'
-		ORDER BY employee_id DESC
+		LEFT JOIN department ON department.department_id = employee.department_id
+		<include refid="search"></include>
+		ORDER BY employee.employee_id DESC
 		LIMIT #{pageStart}, #{amount}
+
 	</select>
 
 	<select id="searchEmployeeCount" resultType="int">
@@ -77,4 +99,19 @@
 		FROM employee
 		WHERE name LIKE '%${searchContent}%'
 	</select>
+
+	<update id="modify">
+		UPDATE employee SET member_id= #{memberId},
+		department_id = #{departmentId}, name = #{name}, password =
+		#{password}, email = #{email}, phone = #{phone}
+		WHERE
+		employee_id=#{employeeId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM
+		employee
+		WHERE
+		member_id = #{memberId}
+	</delete>
 </mapper>

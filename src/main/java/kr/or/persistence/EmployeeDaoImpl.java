@@ -93,4 +93,24 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	public int searchEmployeeCount(SearchCriteria searchCriteria) {
 		return sqlsession.selectOne(namespace + ".searchEmployeeCount", searchCriteria);
 	}
+
+	@Override
+	public void modify(Employee employee) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("employeeId", employee.getEmployeeId());
+		map.put("departmentId", employee.getDepartmentId());
+		map.put("name", employee.getName());
+		map.put("memberId", employee.getMemberId());
+		map.put("password", employee.getPassword());
+		map.put("email", employee.getEmail());
+		map.put("phone", employee.getPhone());
+		
+		sqlsession.update(namespace + ".modify", map);
+	}
+
+	@Override
+	public void delete(int memberId) {
+		sqlsession.delete(namespace + ".delete", memberId);
+		
+	}
 }

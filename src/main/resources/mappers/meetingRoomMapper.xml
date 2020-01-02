@@ -15,10 +15,8 @@
 	<select id="searchMeetingRoom" resultType="MeetingRoom">
 		SELECT meeting_room.* , GROUP_CONCAT(equipment.name) AS meetingRoomEquipmenet
 		FROM meeting_room 
-		LEFT JOIN meeting_room_equipment
-		ON meeting_room.meeting_room_id = meeting_room_equipment.meeting_room_id
-		LEFT JOIN equipment 
-		ON equipment.equipment_id = meeting_room_equipment.equipment_id
+		LEFT JOIN meeting_room_equipment ON meeting_room.meeting_room_id = meeting_room_equipment.meeting_room_id
+		LEFT JOIN equipment ON equipment.equipment_id = meeting_room_equipment.equipment_id
 		<include refid="search"></include>
 		GROUP BY meeting_room_id
 		ORDER BY meeting_room_id DESC 
