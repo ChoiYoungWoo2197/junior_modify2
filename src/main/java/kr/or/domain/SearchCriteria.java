@@ -5,6 +5,9 @@ public class SearchCriteria {
 	private int amount; //페이지당 몇개의 데이터를 보여줄 것인가?
 	private String searchType; //검색타입
 	private String searchContent; //검색내용
+	//예약내역에서 검색할 때 필요
+	private String state;
+	private String meetingRoomId;
 	
 	public SearchCriteria(int page, int amount) {
 		this.page = page;
@@ -40,4 +43,17 @@ public class SearchCriteria {
 	public int getPageStart() {
 		return (this.page - 1) * amount;
 	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getMeetingRoomId() {
+		return meetingRoomId;
+	}
+	public void setMeetingRoomId(String meetingRoomId) {
+		this.meetingRoomId = meetingRoomId;
+	}
+	
 }

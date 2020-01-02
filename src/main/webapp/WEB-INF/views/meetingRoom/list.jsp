@@ -53,7 +53,7 @@
 			location.href = "list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
 		})
 		
-		$("#AllMeetingRoom").click(function() {
+		$("#allMeetingRoom").click(function() {
 			location.href = "list";
 		})
 	})
@@ -66,7 +66,7 @@
 			</select>
 			<input type="text" name="searchContent" value="${searchCriteria.searchContent}">
 			<button id="searchEquipment">검색</button>
-			<button id="AllMeetingRoom">전체보기</button>
+			<button id="allMeetingRoom">전체보기</button>
 		</div>
 		<table>
 			<tr>
@@ -107,12 +107,12 @@
 			<ul class="pagination">
 				<c:if test="${page.prev}">
 					<li>
-						<a href="list?management=${management}&page=${page.startPage-1}&searchContent=${page.criteria.searchContent}">&lt;</a>
+						<a href="list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}">&lt;</a>
 					</li>
 				</c:if>
 				<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
 					<li>
-						<a href="list?management=${management}&page=${index}&searchContent=${page.criteria.searchContent}">
+						<a href="list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}">
 							<c:if test="${page.criteria.page == index}">
 								<span class="page_shape color_sky"></span>
 							</c:if>
@@ -124,7 +124,7 @@
 				</c:forEach>
 				<c:if test="${page.next}">
 					<li>
-						<a href="list?management=${management}&page=${page.endPage+1}&searchContent=${page.criteria.searchContent}">&gt;</a>
+						<a href="list?page=${page.endPage+1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}">&gt;</a>
 					</li>
 				</c:if>
 			</ul>

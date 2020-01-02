@@ -10,6 +10,27 @@
 		border-collapse: collapse;
 		width: 100%;
 	}
+	
+	/* ----------------- 페이지 ----------------- */
+	#page {
+		text-align: center;
+		margin-top: 20px;
+	}
+	.pagination li {
+		width: 20px;
+		list-style: none;
+		display: inline-block;
+	}
+	.color_sky {
+		background-color: #6799FF !important;
+	}
+	.page_shape {
+		background-color: rgb(189, 189, 189);
+		width: 10px;
+		height: 10px;
+		border-radius: 5px;
+		display: inline-block;
+	}
 </style>
 
 <script>
@@ -18,30 +39,62 @@
 			location.href = "insert";
 		})
 		
+		$("#searchReservation").click(function() {
+			if($("select[name='state']").val()!="none") {
+				location.href = "list?page=1&state="+$("select[name='state']").val();
+				return false;
+			}
+			
+			if($("select[name='meetingRoomId']").val()!="none") {
+				location.href = "list?page=1&meetingRoomId="+$("select[name='meetingRoomId']").val();
+				return false;
+			}
+			
+			if($("input[name='searchContent']").val()=="" && $("select[name='state']").val()=="none") {
+				alert("검색할 내용을 입력해주세요.");
+				return false;
+			}
+			
+			location.href = "list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+		})
 		
+		$("#allReservation").click(function() {
+			location.href = "list";
+		})
 	})
 </script>	
 	
 	<section class="width1200">
 		<div>
 			<label>사용일</label>
-			<input type="date"> ~ <input type="date">
-			<select>
-				<option>상태</option>
-				<option>예약</option>
-				<option>예약취소</option>
-				<option>연장</option>
-				<option>종료</option>
-				<option>종료확인</option>
+			<input type="date" name="searchStartDate"> ~ <input type="date" name="searchEndDate">
+			<select name="state">
+				<option value="none">상태</option>
+				<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약</option>
+				<option value="RC" ${searchCriteria.state == 'RC' ? 'selected' : ''}>예약취소</option>
+				<option value="E" ${searchCriteria.state == 'E' ? 'selected' : ''}>연장</option>
+				<option value="F" ${searchCriteria.state == 'F' ? 'selected' : ''}>종료</option>
+				<option value="FV" ${searchCriteria.state == 'FV' ? 'selected' : ''}>종료확인</option>
 			</select>
-			<select>
-				<option>회의실</option>
+			<select name="meetingRoomId">
+				<option value="none">회의실</option>
+				<c:forEach var="meetingRoom" items="${meetingRoomList}">
+					<c:if test="${meetingRoom.meetingRoomId == searchCriteria.meetingRoomId}">
+						<option value="${meetingRoom.meetingRoomId}" selected="selected">${meetingRoom.name}</option>
+					</c:if>
+					<c:if test="${meetingRoom.meetingRoomId != searchCriteria.meetingRoomId}">
+						<option value="${meetingRoom.meetingRoomId}">${meetingRoom.name}</option>
+					</c:if>
+				</c:forEach>
 			</select>
-			<select>
-				<option>부서</option>
-				<option>신청자</option>
-				<option>회의목적</option>
+			<select name="searchType">
+				<option value="department">부서</option>
+				<option value="employee">신청자</option>
+				<option value="meetPurpose">회의목적</option>
 			</select>
+			<input type="text" name="searchContent" value="${searchCriteria.searchContent}">
+			<button id="searchReservation">검색</button>
+			<button id="allReservation">전체보기</button>
 		</div>
 		<table>
 			<tr>
@@ -86,6 +139,33 @@
 			</c:forEach>
 		</table>
 		<button id="insertReservation">예약등록</button>
+		
+		<div id="page">
+			<ul class="pagination">
+				<c:if test="${page.prev}">
+					<li>
+						<a href="list?page=${page.startPage-1}&searchContent=${page.criteria.searchContent}">&lt;</a>
+					</li>
+				</c:if>
+				<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
+					<li>
+						<a href="list?page=${index}&searchContent=${page.criteria.searchContent}">
+							<c:if test="${page.criteria.page == index}">
+								<span class="page_shape color_sky"></span>
+							</c:if>
+							<c:if test="${page.criteria.page != index}">
+								<span class="page_shape"></span>
+							</c:if>
+						</a>
+					</li>
+				</c:forEach>
+				<c:if test="${page.next}">
+					<li>
+						<a href="list?page=${page.endPage+1}&searchContent=${page.criteria.searchContent}">&gt;</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
 	</section>
 </body>
 </html>
