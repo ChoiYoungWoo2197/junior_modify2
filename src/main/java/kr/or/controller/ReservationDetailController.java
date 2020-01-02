@@ -53,5 +53,19 @@ public class ReservationDetailController {
 
 		return "reservationDetail/read";
 	}
+	
+	@RequestMapping(value = "/cancel", method = RequestMethod.POST)
+	public String cancel(HttpServletRequest request) {
+		logger.info("예약취소 사유 : " + request.getParameter("reason") + " 예약번호 : " + request.getParameter("reservationId"));
+		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
+		Reservation reservation =  reservationDetailService.searchReservationById(reservationId);
+		Employee employee = employeeService.checkEmployeeByEmployeeId(Integer.toString(reservation.getEmployeeId()));
+		
+		String person = employee.getName();
+		String reason = request.getParameter("reason");
+
+		reservationDetailService.updateCancelReasonByMap(reservationId, person, reason);
+		return "redirect:/";
+	}
 
 }

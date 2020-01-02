@@ -16,4 +16,10 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 		// TODO Auto-generated method stub
 		return reservationDetailDao.searchReservationById(reservationId);
 	}
+
+	@Override
+	public void updateCancelReasonByMap(int reservationId, String cancelApplicant, String cancelReason) {
+		// TODO Auto-generated method stub
+		reservationDetailDao.updateCancelReasonByMap(reservationId, cancelApplicant, cancelReason);
+	}
 }

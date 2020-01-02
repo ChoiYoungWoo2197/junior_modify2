@@ -8,29 +8,17 @@ table, th, td {
 	border: 1px solid #bcbcbc;
 }
 
-.red {
-	color: red;
-}
-
-.error {
-	color: red;
-	display: none;
-}
-
-.success {
-	color: blue;
-	display: none;
-}
-
 .width1200 {
 	width: 1200px;
 	margin: 0 auto;
 }
 
-.overflow {
-	overflow: hidden;
+.show {
+	display: block;
 }
 
-.float {
-	float: right;
+.hide {
+	display: none;
 }
+
+

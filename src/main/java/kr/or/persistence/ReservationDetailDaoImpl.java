@@ -1,5 +1,8 @@
 package kr.or.persistence;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +20,16 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 	public Reservation searchReservationById(int reservationId) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace + ".searchReservationById", reservationId);
+	}
+	
+	@Override
+	public void updateCancelReasonByMap(int reservationId, String cancelApplicant, String cancelReason) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("reservationId", reservationId);
+		map.put("cancelApplicant", cancelApplicant);
+		map.put("cancelReason", cancelReason);
+		sqlSession.update(namespace + ".updateCancelReasonByMap", map);
 	}
 	
 
