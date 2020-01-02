@@ -10,15 +10,16 @@ import kr.or.domain.SearchCriteria;
 public interface ReservationService {
 
 	//Reservation
+	public List<Reservation> selectReservationByMeetAndDate(int meetingRoomId, String startDate);
 	public List<Reservation> searchReservation(SearchCriteria searchCriteria);
-	public int searchReservationCount (SearchCriteria searchCriteria);
-	public List<Reservation> selectReservationByMeetAndDate(Reservation reservation);
-	public void insertReservation(Reservation reservation);
-	public void updateReservation(Reservation reservation);
+//	public int searchReservationCount (SearchCriteria searchCriteria);
+//	public void insertReservation(Reservation reservation);
+//	public void updateReservation(Reservation reservation);
 	
 	//MeetingRoom
+	public List<MeetingRoom> selectMeetingRoom();
 	public MeetingRoom selectMeetingRoomById(int meetingRoomId);
 	
 	//MeetingRoomEquipment
-	public MeetingRoomEquipment selectMeetingRoomEquipmentById(int meetingRoomId);
+	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId);
 }

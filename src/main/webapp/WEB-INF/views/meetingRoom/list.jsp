@@ -73,9 +73,11 @@
 				<th>번호</th>
 				<th>회의실</th>
 				<th>좌석수</th>
-				<th>예약가능여부</th>
 				<th>지원장비</th>
-				<th>등록일시</th>
+				<th>예약가능여부</th>
+				<c:if test="${loginUser.manager eq 'true'}">
+					<th>등록일시</th>
+				</c:if>
 			</tr>
 			<c:if test="${empty meetingRoomList}">
 				<tr>
@@ -88,14 +90,18 @@
 						<td>${meetingRoom.meetingRoomId}</td>
 						<td class="updateMeetingRoom">${meetingRoom.name}</td>
 						<td>${meetingRoom.seats}</td>
-						<td>${meetingRoom.availability eq "true" ? "가능" : "불가능"}</td>
 						<td>${meetingRoom.meetingRoomEquipmenet}</td>
-						<td><fmt:formatDate value="${meetingRoom.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
+						<td>${meetingRoom.availability eq "true" ? "가능" : "불가능"}</td>
+						<c:if test="${loginUser.manager eq 'true'}">
+							<td><fmt:formatDate value="${meetingRoom.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</c:if>
 		</table>
-		<button id="insertMeetingRoom">회의실등록</button>
+		<c:if test="${loginUser.manager eq 'true'}">
+			<button id="insertMeetingRoom">회의실등록</button>
+		</c:if>
 		
 		<div id="page">
 			<ul class="pagination">
