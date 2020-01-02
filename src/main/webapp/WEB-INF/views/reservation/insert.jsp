@@ -47,22 +47,24 @@
 					type : "get",
 					success : function(res) {
 						console.log(res);
+						$("#meetingRoomEquipment h5").text("지원장비");
 						
 						if(res.meetingRoomEquipmentList.length != 0) {
-							var $equipmentLabel = $("<h5>").text("지원장비");
-							var $equipmentUl = $("<ul>");
+							//var $equipmentLabel = $("<h5>").text("지원장비");
+							//var $equipmentUl = $("<ul>");
 							
 							$(res.meetingRoomEquipmentList).each(function(index, element) {
 								var $equipmentLi = $("<li>").text(element.equipmentName);
-								$equipmentUl.append($equipmentLi);
+								$("#meetingRoomEquipment ul").append($equipmentLi);
+								//$equipmentUl.append($equipmentLi);
 							})
 							
-							$("#meetingRoomEquipment").append($equipmentLabel).append($equipmentUl);
+							//$("#meetingRoomEquipment").append($equipmentLabel).append($equipmentUl);
 						} else {
-							var $equipmentLabel = $("<h5>").text("지원장비");
-							var $equipment = $("<div>").text("지원하는 장비가 없습니다.");
-							
-							$("#meetingRoomEquipment").append($equipmentLabel).append($equipment);
+							//var $equipmentLabel = $("<h5>").text("지원장비");
+							//var $equipment = $("<p>").text("지원하는 장비가 없습니다.");
+							$("#meetingRoomEquipment p").text("지원하는 장비가 없습니다.");
+							//$("#meetingRoomEquipment").append($equipmentLabel).append($equipment);
 						}
 						
 						
@@ -152,7 +154,11 @@
 						<option value="${meetingRoom.meetingRoomId}">${meetingRoom.name}</option>
 					</c:forEach>
 				</select>
-				<div id="meetingRoomEquipment"></div>
+				<div id="meetingRoomEquipment">
+					<h5></h5>
+					<ul></ul>
+					<p></p>
+				</div>
 				<div id="meetingRoomSeats"></div>
 			</div>
 			<div class="width30 float_left">
