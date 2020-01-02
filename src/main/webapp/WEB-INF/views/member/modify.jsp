@@ -8,45 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>memberRegister test</title>
-<style>
-table {
-	width: 100%;
-}
-
-table, th, td {
-	border: 1px solid #bcbcbc;
-}
-
-.red {
-	color: red;
-}
-
-.error {
-	color: red;
-	display: none;
-}
-
-.success {
-	color: blue;
-	display: none;
-}
-
-.width1200 {
-	width: 1200px;
-	margin: 0 auto;
-}
-
-.overflow {
-	overflow: hidden;
-}
-
-.float {
-	float: right;
-}
-</style>
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/member/modify.css" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
 	//변수
 	var validateId = /^[A-Za-z0-9]+$/; //영어 + 숫자만 입력

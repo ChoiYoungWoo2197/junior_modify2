@@ -18,7 +18,11 @@
 			location.href = "insert";
 		})
 		
-		
+		$(document).on("click", ".readReservation", function() {
+		var reservationId = Number($(this).text());
+		window.location.href = "${pageContext.request.contextPath}/reservationDetail/read?reservationId="+ reservationId;
+		//location.href = "read?memberId=" + memberId;
+		})
 	})
 </script>	
 	
@@ -56,7 +60,7 @@
 			</tr>
 			<c:forEach var="reservation" items="${reservationList}">
 				<tr>
-					<td>${reservation.reservationId}</td>
+					<td class="readReservation">${reservation.reservationId}</td>
 					<td><fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd"/></td>
 					<td><fmt:formatDate value="${reservation.startDate}" pattern="kk:mm"/> ~ <fmt:formatDate value="${reservation.endDate}" pattern="kk:mm"/></td>
 					<td>

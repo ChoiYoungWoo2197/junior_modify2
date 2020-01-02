@@ -6,75 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>login test</title>
-<!-- <link rel="stylesheet" href="./resources/css/login/login.css" /> -->
-<style>
-*, ::after, ::before {
-   box-sizing: border-box;
-}
-
-html, body {
-   margin: 0;
-   font-size: 13px;
-   line-height: 1.5;
-}
-
-.main-page {
-   position: absolute;
-   left: 50%;
-   top: 50%;
-   margin: -145px 0 0 -160px;
-}
-
-.main-page-unit {
-   position: relative;
-   width: 320px;
-   
-}
-
-.login-frame {
-   margin: 35px 0 0;
-   border: 1px solid #ddd;
-}
-
-.login-unit {
-   position: relative;
-   width: 100%;
-   padding: 18px 19px 19px;
-   border-top: 1px solid #ddd;
-   overflow: hidden;
-}
-
-.login-text input, img{
-	float: left;
-}
-
-
-.login-img {
- width:  40px;
- height: 30px;
- 
-}
-
-.login-input {
-	width: 80%;
-	position : relative;
-	top: 7px;
-}
-
-.login-btn {
-   margin: 20px 0 0;
-   width: 100%;
-   height: 48px;
-   font-family : sans-serif;
-   font-size: 16px;
-   color: #404040;
-   background-color: #e0e0e0;
-   border-radius: 12px;/* 버튼 테두리를 둥글게 */
-   border : 2px;
-   border-color:  #e0e0e0;
-}
-</style>
-
+<link href="${pageContext.request.contextPath}/resources/css/login/login.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>

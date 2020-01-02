@@ -4,37 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/managerHeader.jsp"%>
 
-<style>
-.color_red {
-	color: red;
-	font-size: 14px;
-}
-
-.display_none {
-	display: none;
-}
-</style>
-<script>
-	$(function() {
-		$("#list").click(function() {
-			location.href = "list";
-		})
-		
-		$("#update").click(function() {
-			var memberId = Number($("input[name=memberId]").val());
-			location.href = "modify?memberId="+memberId;
-		})
-		
-		$("#delete").click(function() {
-			var result = confirm($("#name").text()+"님을 삭제하시겠습니까?");
-			
-			if(result == true) {
-				var memberId = Number($("input[name=memberId]").val());
-				location.href = "delete?memberId="+memberId;
-			}
-		})
-	})
-</script>
+<script src="${pageContext.request.contextPath}/resources/js/member/read.js" charset="UTF-8" type="text/javascript"></script>
 
 <section class="width1200">
 	<table>
@@ -54,7 +24,7 @@
 				<td>${employeeDetail.memberId}</td>
 				<td>${employeeDetail.departmentId}</td>
 				<td>${employeeDetail.state}</td>
-				<td>${employeeDetail.state}</td>
+				<td>${managerType}</td>
 				<td>${employeeDetail.email}</td>
 				<td>${employeeDetail.phone}</td>
 			</tr>

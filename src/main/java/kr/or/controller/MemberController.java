@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.domain.Department;
 import kr.or.domain.Employee;
 import kr.or.domain.Manager;
 import kr.or.domain.Page;
 import kr.or.domain.SearchCriteria;
 import kr.or.service.EmployeeService;
 import kr.or.service.MailService;
+import kr.or.service.ManagementService;
 
 
 /**
@@ -35,6 +37,9 @@ public class MemberController {
 	
 	@Autowired
 	MailService mailService;
+	
+	@Autowired
+	ManagementService managementServcice;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(SearchCriteria searchCriteria,Model model) {
@@ -73,10 +78,10 @@ public class MemberController {
 		
 		if(register.equals("true") == true) {//관리자가 회원등록을 한경우
 			//이메일 인증이 필요 없다.
-			employeeService.modifyState(employee.getMemberId(), "Y");
+			employeeService.updateStateByMap(employee.getMemberId(), "Y");
 			
 			if(managerType.equals("yes") == true) {//회원을 관리자로 등록할 경우
-				Employee tmp = employeeService.checkIdEmployee(request.getParameter("memberId"));
+				Employee tmp = employeeService.checkEmployeeById(request.getParameter("memberId"));
 				if(employeeService.checkManager(tmp.getEmployeeId()) == null) {
 					employeeService.insertManager(tmp.getEmployeeId());
 				}
@@ -100,15 +105,20 @@ public class MemberController {
 	@RequestMapping(value = "/read", method = RequestMethod.GET) 
 	public String read(Model model, int memberId) {
 		logger.info("read memberId : " + memberId);
-		Employee employee = employeeService.checkIdEmployee(String.valueOf(memberId));
+		Employee employee = employeeService.checkEmployeeById(String.valueOf(memberId));
+		Department department = managementServcice.selectDepartmentById(Integer.parseInt(employee.getDepartmentId()));
+		Manager manager = employeeService.checkManager(employee.getEmployeeId());
+		
+		employee.setDepartmentId(department.getName());
 		model.addAttribute("employeeDetail", employee);
+		model.addAttribute("managerType", (manager != null)? "Y" : "N");
 		return "member/read";
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyPage(Model model, int memberId) {
 		logger.info("modifyPage  memberId : " + memberId);
-		Employee employee = employeeService.checkIdEmployee(String.valueOf(memberId));
+		Employee employee = employeeService.checkEmployeeById(String.valueOf(memberId));
 		Manager manager = employeeService.checkManager(employee.getEmployeeId());
 		
 		model.addAttribute("employeeModify", employee);
@@ -124,7 +134,7 @@ public class MemberController {
 		String originalMemberId = request.getParameter("originalMemberId");
 		String managerType = request.getParameter("manager");
 		
-		Employee employee =employeeService.checkIdEmployee(originalMemberId);
+		Employee employee =employeeService.checkEmployeeById(originalMemberId);
 		employee.setDepartmentId(request.getParameter("departmentType"));
 		employee.setName(request.getParameter("name"));
 		employee.setMemberId(request.getParameter("modifyMemberId"));
@@ -150,7 +160,7 @@ public class MemberController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(HttpServletRequest request, int memberId) {
 		logger.info("delete : " + memberId);
-		Employee employee = employeeService.checkIdEmployee(String.valueOf(memberId));
+		Employee employee = employeeService.checkEmployeeById(String.valueOf(memberId));
 		employeeService.deleteManager(employee.getEmployeeId());
 		employeeService.delete(memberId);
 		
@@ -163,7 +173,7 @@ public class MemberController {
 		logger.info("memberId:" + request.getParameter("memberId"));
 		String memberId = request.getParameter("memberId");
 		String result = "false";
-		Employee employee = employeeService.checkIdEmployee(memberId);
+		Employee employee = employeeService.checkEmployeeById(memberId);
 		
 		if(employee != null) {
 			result = "true";
@@ -176,7 +186,7 @@ public class MemberController {
 		logger.info("email :" + request.getParameter("email"));
 		String email = request.getParameter("email");
 		String result = "false";
-		Employee employee = employeeService.checkEmailEmployee(email);
+		Employee employee = employeeService.checkEmployeeByEmail(email);
 		
 		if(employee != null) {
 			result = "true";

@@ -26,41 +26,41 @@ public class EmployeeServiceImpl implements  EmployeeService{
 	@Override
 	public void insertEmployee(Employee employee) {
 		// TODO Auto-generated method stub
-		employeeDao.insertData(employee);
+		employeeDao.insertEmployee(employee);
 	}
 
 	@Override
-	public Employee checkIdEmployee(String employeeId) {
+	public Employee checkEmployeeById(String memberId) {
 		// TODO Auto-generated method stub
-		return employeeDao.checkIdEmployee(employeeId);
-	}
-
-
-	@Override
-	public Employee checkEmailEmployee(String email) {
-		// TODO Auto-generated method stub
-		return employeeDao.checkEmailEmployee(email);
+		return employeeDao.checkEmployeeById(memberId);
 	}
 
 
 	@Override
-	public Employee checkKey(String email, String authKey) {
+	public Employee checkEmployeeByEmail(String email) {
 		// TODO Auto-generated method stub
-		return employeeDao.checkKey(email, authKey);
+		return employeeDao.checkEmployeeByEmail(email);
 	}
 
 
 	@Override
-	public void modifyState(String memberId, String state) {
+	public Employee checkKeyByMap(String email, String authKey) {
 		// TODO Auto-generated method stub
-		employeeDao.modifyState(memberId, state);
+		return employeeDao.checkKeyByMap(email, authKey);
 	}
 
 
 	@Override
-	public void modifyKey(String memberId, String authKey) {
+	public void updateStateByMap(String memberId, String state) {
 		// TODO Auto-generated method stub
-		employeeDao.modifyKey(memberId, authKey);
+		employeeDao.updateStateByMap(memberId, state);
+	}
+
+
+	@Override
+	public void updateKeyByMap(String memberId, String authKey) {
+		// TODO Auto-generated method stub
+		employeeDao.updateKeyByMap(memberId, authKey);
 	}
 
 
@@ -71,9 +71,9 @@ public class EmployeeServiceImpl implements  EmployeeService{
 	}
 	
 	@Override
-	public Employee checkState(String memberId, String state) {
+	public Employee checkStateByMap(String memberId, String state) {
 		// TODO Auto-generated method stub
-		return employeeDao.checkState(memberId, state);
+		return employeeDao.checkStateByMap(memberId, state);
 	}
 
 	@Override
@@ -109,9 +109,9 @@ public class EmployeeServiceImpl implements  EmployeeService{
 
 
 	@Override
-	public void modifyAuthKeyDate(String memberId) {
+	public void updateKeyDateById(String memberId) {
 		// TODO Auto-generated method stub
-		employeeDao.modifyAuthKeyDate(memberId);
+		employeeDao.updateKeyDateById(memberId);
 	}
 
 
@@ -149,5 +149,11 @@ public class EmployeeServiceImpl implements  EmployeeService{
 	public void delete(int memberId) {
 		// TODO Auto-generated method stub
 		employeeDao.delete(memberId);
+	}
+
+	@Override
+	public Employee checkEmployeeByEmployeeId(String employeeId) {
+		// TODO Auto-generated method stub
+		return employeeDao.checkEmployeeByEmployeeId(employeeId);
 	}
 }

@@ -51,7 +51,7 @@ public class LoginController {
 			Employee employee = employeeService.checkUser(request.getParameter("loginId"), employeeService.encSHA256(request.getParameter("loginPw")));
 			if(employee != null) { // 로그인 성공인 경우
 				//인증을 했는 경우
-				if(employeeService.checkState(employee.getMemberId(), "Y") != null) 
+				if(employeeService.checkStateByMap(employee.getMemberId(), "Y") != null) 
 				{
 					Map<String, Object> map = new HashMap<>();
 

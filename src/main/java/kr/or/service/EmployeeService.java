@@ -9,13 +9,13 @@ import kr.or.domain.SearchCriteria;
 public interface EmployeeService {
 	public void insertEmployee(Employee employee);
 	public Employee checkUser(String memberId, String password);
-	public Employee checkIdEmployee(String employeeId);
-	public Employee checkEmailEmployee(String email);
-	public Employee checkKey(String email, String authKey);
-	public void modifyState(String memberId, String state);
-	public void modifyKey(String memberId, String authKey);
-	public void modifyAuthKeyDate(String memberId);
-	public Employee checkState(String memberId, String state);
+	public Employee checkEmployeeById(String memberId);
+	public Employee checkEmployeeByEmail(String email);
+	public Employee checkKeyByMap(String email, String authKey);
+	public void updateStateByMap(String memberId, String state);
+	public void updateKeyByMap(String memberId, String authKey);
+	public void updateKeyDateById(String memberId);
+	public Employee checkStateByMap(String memberId, String state);
 	public String encSHA256(String text);
 	public Manager checkManager(int managerId);
 	public List<Employee> searchEmployee(SearchCriteria criteria);
@@ -24,4 +24,5 @@ public interface EmployeeService {
 	public void delete(int memberId);
 	public void insertManager(int employeeId);
 	public void deleteManager(int employeeId);
+	public Employee checkEmployeeByEmployeeId(String employeeId);
 }
