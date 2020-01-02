@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Employee {
 	private int employeeId;
-	private int departmentId;
+	private String departmentId;
 	private String name;
 	private String memberId;
 	private String password;
@@ -20,10 +20,10 @@ public class Employee {
 	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
 	}
-	public int getDepartmentId() {
+	public String getDepartmentId() {
 		return departmentId;
 	}
-	public void setDepartmentId(int departmentId) {
+	public void setDepartmentId(String departmentId) {
 		this.departmentId = departmentId;
 	}
 	public String getName() {

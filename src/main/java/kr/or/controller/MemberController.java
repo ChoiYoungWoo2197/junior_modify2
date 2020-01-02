@@ -1,7 +1,11 @@
 package kr.or.controller;
 
+import java.util.Enumeration;
+import java.util.List;
 import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import kr.or.domain.Employee;
+import kr.or.domain.Manager;
+import kr.or.domain.Page;
+import kr.or.domain.SearchCriteria;
 import kr.or.service.EmployeeService;
 import kr.or.service.MailService;
 
@@ -28,22 +36,32 @@ public class MemberController {
 	@Autowired
 	MailService mailService;
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register(Locale locale, Model model) {
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(SearchCriteria searchCriteria,Model model) {
+		logger.info("member list & searchContent :" + searchCriteria.getSearchContent());
+		List<Employee> employeeList = employeeService.searchEmployee(searchCriteria);
+		model.addAttribute("employeeList", employeeList);
+		model.addAttribute("searchCriteria", searchCriteria);
+		model.addAttribute("page", new Page(employeeService.searchEmployeeCount(searchCriteria), searchCriteria));
+		return "/member/list";
+	}
 
-		return "/member/register";
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public String insertPage(Locale locale, Model model) {
+
+		return "/member/insert";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {
-		logger.info("member insert :" + request.getParameter("memberId") + " : " + request.getParameter("departmentType"));
-		
+		logger.info("member register :" + request.getParameter("register"));
+		String result;
+		//Enumeration enums = request.getParameterNames();
+		String register = request.getParameter("register");
+		String managerType = request.getParameter("manager");
 		Employee employee = new Employee();
 		//employee.setEmployeeId(Integer.parseInt(request.getParameter("employeeId")));
-		employee.setDepartmentId(Integer.parseInt(request.getParameter("departmentType")));
+ 		employee.setDepartmentId(request.getParameter("departmentType"));
 		employee.setName(request.getParameter("name"));
 		employee.setMemberId(request.getParameter("memberId"));
 		employee.setPassword(employeeService.encSHA256(request.getParameter("password")));
@@ -53,13 +71,91 @@ public class MemberController {
 		employee.setState("N");
 		employeeService.insertEmployee(employee);
 		
-		String title = "회원가입 인증 이메일 입니다.";
-		StringBuilder text = new StringBuilder();
-		text.append("귀화의 인증번호는 : " + employee.getAuthkey() + " 입니다.");
+		if(register.equals("true") == true) {//관리자가 회원등록을 한경우
+			//이메일 인증이 필요 없다.
+			employeeService.modifyState(employee.getMemberId(), "Y");
+			
+			if(managerType.equals("yes") == true) {//회원을 관리자로 등록할 경우
+				Employee tmp = employeeService.checkIdEmployee(request.getParameter("memberId"));
+				if(employeeService.checkManager(tmp.getEmployeeId()) == null) {
+					employeeService.insertManager(tmp.getEmployeeId());
+				}
+			}
+			result = "redirect:/";
+		}
+		else {// 회원가입을 한경우
+			String title = "회원가입 인증 이메일 입니다.";
+			StringBuilder text = new StringBuilder();
+			text.append("귀화의 인증번호는 : " + employee.getAuthkey() + " 입니다.");
+			
+			mailService.sendMail(mailService.sendTo(), employee.getEmail(),title, text.toString());
+			
+			result = "redirect:/mail/authenticate?memberId="+employee.getMemberId();
+		}
+
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/read", method = RequestMethod.GET) 
+	public String read(Model model, int memberId) {
+		logger.info("read memberId : " + memberId);
+		Employee employee = employeeService.checkIdEmployee(String.valueOf(memberId));
+		model.addAttribute("employeeDetail", employee);
+		return "member/read";
+	}
+	
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String modifyPage(Model model, int memberId) {
+		logger.info("modifyPage  memberId : " + memberId);
+		Employee employee = employeeService.checkIdEmployee(String.valueOf(memberId));
+		Manager manager = employeeService.checkManager(employee.getEmployeeId());
 		
-		mailService.sendMail(mailService.sendTo(), employee.getEmail(),title, text.toString());
+		model.addAttribute("employeeModify", employee);
+		model.addAttribute("managerType", (manager != null)? true : false);
 		
-		return "redirect:/mail/authenticate?memberId="+employee.getMemberId();
+		return "member/modify";
+	}
+	
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modify(HttpServletRequest request) {
+		logger.info("modify originalMemberId :" + request.getParameter("originalMemberId"));
+		//Enumeration enums = request.getParameterNames();
+		String originalMemberId = request.getParameter("originalMemberId");
+		String managerType = request.getParameter("manager");
+		
+		Employee employee =employeeService.checkIdEmployee(originalMemberId);
+		employee.setDepartmentId(request.getParameter("departmentType"));
+		employee.setName(request.getParameter("name"));
+		employee.setMemberId(request.getParameter("modifyMemberId"));
+		employee.setPassword(employeeService.encSHA256(request.getParameter("password")));
+		employee.setEmail(request.getParameter("email"));
+		employee.setPhone(request.getParameter("phone"));
+		employeeService.modify(employee);
+		
+		
+		if(managerType.equals("yes")) {
+			if(employeeService.checkManager(employee.getEmployeeId()) == null) {
+				employeeService.insertManager(employee.getEmployeeId());
+			}
+		
+		}
+		else {
+			employeeService.deleteManager(employee.getEmployeeId());
+		}
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(HttpServletRequest request, int memberId) {
+		logger.info("delete : " + memberId);
+		Employee employee = employeeService.checkIdEmployee(String.valueOf(memberId));
+		employeeService.deleteManager(employee.getEmployeeId());
+		employeeService.delete(memberId);
+		
+		
+		return "redirect:/member/list";
 	}
 	
 	@RequestMapping(value = "/checkId", method = RequestMethod.POST)

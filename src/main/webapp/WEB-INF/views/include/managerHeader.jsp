@@ -37,6 +37,13 @@
 	<nav>
 		<div class="width1200">
 			<ul>
+<<<<<<< HEAD
+				<li>예약 현황</li>
+				<li><a href="${pageContext.request.contextPath}/management/list?management=department">부서 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/list">회원 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/meetingRoom/list">회의실 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/management/list?management=equipment">장비 관리</a></li>
+=======
 				<c:if test="${loginUser.manager eq 'true'}">
 					<li class="float_left"><a href="${pageContext.request.contextPath}/reservation/list">예약 현황</a></li>
 					<li class="float_left"><a href="${pageContext.request.contextPath}/management/list?management=department">부서 관리</a></li>
@@ -48,6 +55,7 @@
 					<li class="float_left"><a href="${pageContext.request.contextPath}/reservation/list">예약 현황</a></li>
 					<li class="float_left"><a href="${pageContext.request.contextPath}/meetingRoom/list">회의실 현황</a></li>
 				</c:if>
+>>>>>>> 600bafc9524ab51c6764c3a0c9f66f02034d6593
 			</ul>
 		</div>
 	</nav>

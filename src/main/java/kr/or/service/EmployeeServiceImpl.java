@@ -2,12 +2,14 @@ package kr.or.service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.domain.Employee;
 import kr.or.domain.Manager;
+import kr.or.domain.SearchCriteria;
 import kr.or.persistence.EmployeeDao;
 import kr.or.persistence.ManagerDao;
 
@@ -26,7 +28,6 @@ public class EmployeeServiceImpl implements  EmployeeService{
 		// TODO Auto-generated method stub
 		employeeDao.insertData(employee);
 	}
-
 
 	@Override
 	public Employee checkIdEmployee(String employeeId) {
@@ -111,5 +112,42 @@ public class EmployeeServiceImpl implements  EmployeeService{
 	public void modifyAuthKeyDate(String memberId) {
 		// TODO Auto-generated method stub
 		employeeDao.modifyAuthKeyDate(memberId);
+	}
+
+
+	@Override
+	public List<Employee> searchEmployee(SearchCriteria criteria) {
+		// TODO Auto-generated method stub
+		return employeeDao.searchEmployee(criteria);
+	}
+
+
+	@Override
+	public int searchEmployeeCount(SearchCriteria criteria) {
+		// TODO Auto-generated method stub
+		return employeeDao.searchEmployeeCount(criteria);
+	}
+
+	@Override
+	public void modify(Employee employee) {
+		employeeDao.modify(employee);
+	}
+
+	@Override
+	public void insertManager(int employeeId) {
+		// TODO Auto-generated method stub
+		managerDao.insert(employeeId);
+	}
+
+	@Override
+	public void deleteManager(int employeeId) {
+		// TODO Auto-generated method stub
+		managerDao.delete(employeeId);
+	}
+
+	@Override
+	public void delete(int memberId) {
+		// TODO Auto-generated method stub
+		employeeDao.delete(memberId);
 	}
 }

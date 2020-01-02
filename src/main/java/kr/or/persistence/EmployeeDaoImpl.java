@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import kr.or.domain.Employee;
+import kr.or.domain.SearchCriteria;
 
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao{
@@ -81,5 +82,35 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	@Override
 	public void modifyAuthKeyDate(String memberId) {
 		sqlsession.update(namespace + ".modifyAuthKeyDate", memberId);
+	}
+
+	@Override
+	public List<Employee> searchEmployee(SearchCriteria searchCriteria) {
+		return sqlsession.selectList(namespace + ".searchEmployee", searchCriteria);
+	}
+
+	@Override
+	public int searchEmployeeCount(SearchCriteria searchCriteria) {
+		return sqlsession.selectOne(namespace + ".searchEmployeeCount", searchCriteria);
+	}
+
+	@Override
+	public void modify(Employee employee) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("employeeId", employee.getEmployeeId());
+		map.put("departmentId", employee.getDepartmentId());
+		map.put("name", employee.getName());
+		map.put("memberId", employee.getMemberId());
+		map.put("password", employee.getPassword());
+		map.put("email", employee.getEmail());
+		map.put("phone", employee.getPhone());
+		
+		sqlsession.update(namespace + ".modify", map);
+	}
+
+	@Override
+	public void delete(int memberId) {
+		sqlsession.delete(namespace + ".delete", memberId);
+		
 	}
 }
