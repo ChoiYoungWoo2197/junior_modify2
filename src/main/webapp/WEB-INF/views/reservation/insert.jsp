@@ -105,7 +105,7 @@
 			$.ajax({
 				url : "/reservation/infoReserve?meetingRoomId="+meetingRoomId+"&choiceDay="+choiceDay,
 				type : "get",
-				async : false,
+				//async : false,
 				success : function(res) {
 					console.log(res);
 					
@@ -158,6 +158,9 @@
 			$("input[name='start']").val(startDate);
 			$("input[name='end']").val(endDate);
 			
+			alert(meetingStart);
+			alert(meetingEnd);
+			
 			for(var i=0; i<meetingStart.length; i++) {
 				if(Number(meetingStart[i].replace(":","")) <= start || start <= Number(meetingEnd[i].replace(":",""))) {
 					alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.1");
@@ -170,7 +173,6 @@
 					return false;
 				}
 			}
-			return false;
 		})
 		
 	})

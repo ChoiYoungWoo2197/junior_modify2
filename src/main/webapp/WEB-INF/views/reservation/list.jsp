@@ -39,7 +39,6 @@
 			location.href = "insert";
 		})
 		
-<<<<<<< HEAD
 		$("#searchReservation").click(function() {
 			if($("select[name='state']").val()!="none") {
 				location.href = "list?page=1&state="+$("select[name='state']").val();
@@ -56,17 +55,20 @@
 				return false;
 			}
 			
+			alert($("input[name='searchStartDate']").val());
+			alert($("input[name='searchEndDate']").val());
+			
 			location.href = "list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
 		})
 		
 		$("#allReservation").click(function() {
 			location.href = "list";
-=======
+		})
+		
 		$(document).on("click", ".readReservation", function() {
-		var reservationId = Number($(this).text());
-		window.location.href = "${pageContext.request.contextPath}/reservationDetail/read?reservationId="+ reservationId;
-		//location.href = "read?memberId=" + memberId;
->>>>>>> 82fbe5e2fb8a189d700a30f34dc9e72f92ca456c
+			var reservationId = Number($(this).text());
+			window.location.href = "${pageContext.request.contextPath}/reservationDetail/read?reservationId="+ reservationId;
+			//location.href = "read?memberId=" + memberId;
 		})
 	})
 </script>	
