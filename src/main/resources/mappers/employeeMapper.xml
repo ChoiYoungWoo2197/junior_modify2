@@ -42,18 +42,18 @@
 		where email = #{email}
 	</select>
 
-	<select id="checkKeyByEmail" resultType="Employee">
+	<select id="checkKeyByMap" resultType="Employee">
 		select * from
 		employee where email = #{email} and authKey = #{authkey}
 	</select>
 
-	<update id="updateStateById">
+	<update id="updateStateByMap">
 		UPDATE employee
 		SET state = #{state} WHERE member_id =
 		#{memberId}
 	</update>
 
-	<update id="updateKeyById">
+	<update id="updateKeyByMap">
 		UPDATE employee
 		SET authkey = #{authKey} WHERE
 		member_id =
