@@ -43,6 +43,7 @@
 			if($("input[name='searchStartDate']").val()!="" || $("input[name='searchEndDate']").val()!="") {
 				alert($("input[name='searchStartDate']").val());
 				alert($("input[name='searchEndDate']").val());
+				alert($("input[name='searchStartDate']").val()+$("input[name='searchEndDate']").val());
 				return false;
 			}
 			
@@ -127,7 +128,8 @@
 					<td>
 						<c:choose>
 							<c:when test="${reservation.state == 'R'}">
-								예약
+								<jsp:useBean id="now" class="java.util.Date" />
+								${now < reservation.startDate == 'true'? '예약':'진행중'}
 							</c:when>
 							<c:when test="${reservation.state == 'RC'}">
 								예약취소

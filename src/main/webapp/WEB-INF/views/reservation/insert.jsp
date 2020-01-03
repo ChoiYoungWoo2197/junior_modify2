@@ -129,6 +129,7 @@
 			})
 		})
 		
+		//var todayDate = new Date();
 		$("#insertReservationForm").submit(function() {
 			if($("select[name='meetingRoomId']").val() == "0") {
 				alert("회의실을 선택하세요.");
@@ -161,6 +162,8 @@
 			
 			/* alert(meetingStart);
 			alert(meetingEnd); */
+			
+			
 			
 			for(var i=0; i<meetingStart.length; i++) {
 				if(Number(meetingStart[i].replace(":","")) <= start && start <= Number(meetingEnd[i].replace(":",""))) {
