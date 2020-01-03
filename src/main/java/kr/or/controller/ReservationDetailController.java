@@ -1,6 +1,11 @@
 package kr.or.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +22,6 @@ import kr.or.service.EmployeeService;
 import kr.or.service.ManagementService;
 import kr.or.service.MeetingRoomService;
 import kr.or.service.ReservationDetailService;
-import kr.or.service.ReservationService;
 
 @Controller
 @RequestMapping("/reservationDetail/*")
@@ -49,6 +53,12 @@ public class ReservationDetailController {
 		reservation.setEmployeeName(employee.getName());
 		reservation.setDepartmentName(department.getName());
 		reservation.setMeetingRoomName(meetingRoom.getName());
+		
+		
+		Date date1 = setTime("2020.01.03 16:30");
+		Date date2 = setTime("2020.01.03 19:30");
+		//reservationDetailService.checkTime(reservation.getStartDate(), reservation.getEndDate(), new Date(), reservation.getState());
+		reservationDetailService.checkTime(date1, date2, new Date(), reservation.getState());
 		model.addAttribute("reservation", reservation);
 
 		return "reservationDetail/read";
@@ -67,6 +77,17 @@ public class ReservationDetailController {
 		reservationDetailService.updateCancelReasonByMap(reservationId, person, reason);
 		reservationDetailService.updateStateByMap(reservationId, "RC");
 		return "redirect:/";
+	}
+	
+	public Date setTime(String time) {
+		Date temp = new Date();
+		try {
+			DateFormat sdFormat = new SimpleDateFormat("yyyy.MM.dd kk:mm");
+			temp = sdFormat.parse(time);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return temp;
 	}
 
 }

@@ -51,10 +51,10 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 		}
 		// 시작일시 ~현재일시~ 종료일시
 		else if(resultStart >= 0 && resultEnd < 0) { //2. 현재일시가 시작일시 -- 종료일시사이에 있는 경우 => 진행중(P)
-			if(state == "R") { // 진행중이라는걸 알려야 하는 경우
+			if(state.equals("R")) { // 진행중이라는걸 알려야 하는 경우
 				resultState = "P";
 			}
-			else if(state =="E") { //연장에 들어간 경우
+			else if(state.equals("E")) { //연장에 들어간 경우
 				resultState = "E";
 			}
 			

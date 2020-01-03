@@ -23,24 +23,18 @@
 			alert("예약수정!");
 		})
 
-		$("#ok")
-				.click(
-						function() {
-							if (confirm("취소하시겠습니까?") == true) {
-								//alert("확인!");
-								//var reason = $("input[name='reason']").val();
+		$("#ok").click(function() {
+			if (confirm("취소하시겠습니까?") == true) {
+				//alert("확인!");
+				//var reason = $("input[name='reason']").val();
 
-								document
-										.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/cancel?";
-								document
-										.getElementById('reservationDetailForm')
-										.submit();
+				document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/cancel?";
+				document.getElementById('reservationDetailForm').submit();
 
-							} else {
-								//alert("취소!");
-							}
-
-						})
+			} else {
+				//alert("취소!");
+			}
+		})
 
 	})
 </script>
