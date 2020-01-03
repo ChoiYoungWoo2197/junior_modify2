@@ -18,12 +18,12 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 
 	@Override
-	public void insert(int employeeId) {
+	public void insertManager(int employeeId) {
 		sqlSession.insert(namespace + ".insert",employeeId);
 	}
 
 	@Override
-	public void delete(int employeeId) {
+	public void deleteManager(int employeeId) {
 		sqlSession.delete(namespace + ".delete",employeeId);
 	}
 

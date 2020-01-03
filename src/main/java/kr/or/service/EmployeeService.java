@@ -20,8 +20,8 @@ public interface EmployeeService {
 	public void updateKeyDateById(String memberId);
 	public List<Employee> searchEmployee(SearchCriteria criteria);
 	public int searchEmployeeCount(SearchCriteria criteria);
-	public void modify(Employee employee);
-	public void delete(String memberId);
+	public void modifyEmployee(Employee employee);
+	public void deleteEmployee(String memberId);
 	public void insertManager(int employeeId);
 	public void deleteManager(int employeeId);
 	public Employee checkEmployeeByEmployeeId(String employeeId);

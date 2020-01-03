@@ -129,26 +129,26 @@ public class EmployeeServiceImpl implements  EmployeeService{
 	}
 
 	@Override
-	public void modify(Employee employee) {
-		employeeDao.modify(employee);
+	public void modifyEmployee(Employee employee) {
+		employeeDao.modifyEmployee(employee);
 	}
 
 	@Override
 	public void insertManager(int employeeId) {
 		// TODO Auto-generated method stub
-		managerDao.insert(employeeId);
+		managerDao.insertManager(employeeId);
 	}
 
 	@Override
 	public void deleteManager(int employeeId) {
 		// TODO Auto-generated method stub
-		managerDao.delete(employeeId);
+		managerDao.deleteManager(employeeId);
 	}
 
 	@Override
-	public void delete(String memberId) {
+	public void deleteEmployee(String memberId) {
 		// TODO Auto-generated method stub
-		employeeDao.delete(memberId);
+		employeeDao.deleteEmployee(memberId);
 	}
 
 	@Override

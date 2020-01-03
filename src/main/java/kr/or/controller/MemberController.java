@@ -141,7 +141,7 @@ public class MemberController {
 		employee.setPassword(employeeService.encSHA256(request.getParameter("password")));
 		employee.setEmail(request.getParameter("email"));
 		employee.setPhone(request.getParameter("phone"));
-		employeeService.modify(employee);
+		employeeService.modifyEmployee(employee);
 		
 		
 		if(managerType.equals("yes")) {
@@ -162,7 +162,7 @@ public class MemberController {
 		logger.info("delete : " + memberId);
 		Employee employee = employeeService.checkEmployeeById(memberId);
 		employeeService.deleteManager(employee.getEmployeeId());
-		employeeService.delete(memberId);
+		employeeService.deleteEmployee(memberId);
 		
 		
 		return "redirect:/member/list";

@@ -46,7 +46,7 @@ table, th, td {
 }
 </style>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
 	//변수
 	var validateId = /^[A-Za-z0-9]+$/; //영어 + 숫자만 입력
@@ -61,7 +61,7 @@ table, th, td {
 
 	function check() {
 		checkRegister();
-		
+
 		clearError();
 
 		valideInput();
@@ -73,6 +73,7 @@ table, th, td {
 			var departmentType = $("#departmentType option:selected").val();
 			var manageType = $('input:radio[name="manager"][value="yes"]').is(':checked');
 			var register =checkRegister();
+			
 			//alert($("input[name='register']").val());
 			window.location.href = "${pageContext.request.contextPath}/insert?departmentType="+ departmentType + "&manager=" + manageType + "&register=" + register;
 			//window.location.href = "${pageContext.request.contextPath}/insert?departmentType="+ departmentType;
@@ -258,21 +259,20 @@ table, th, td {
 	}
 	
 	function checkRegister() {
-		var register =  <%=session.getAttribute("loginUser")%>;
-		var result = register.indexOf("manager=true", 0 );
-		alert(register);
-		if(result > 0) {
+		//alert("여익ㄴ가");
+		var register =  "<%=(String)session.getAttribute("loginUser")%>";
+
+		var result = register.indexOf("manager=true", 0);
+		//alert(register);
+		if (result > 0) {
 			$("input[name='register']").val("true");
 			return true;
-		}
-		else {
+		} else {
 			$("input[name='register']").val("false");
 			return false;
 		}
-		
-		
+
 	}
-	
 </script>
 
 
@@ -359,7 +359,6 @@ table, th, td {
 
 			</table>
 			<input type="hidden" id="register" name="register" value="">
-			<!-- <input type="submit" value="회원가입" /> -->
 			<c:if test="${empty loginUser}">
 				<input type="submit" value="회원가입" />
 			</c:if>
