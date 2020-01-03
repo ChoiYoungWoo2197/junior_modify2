@@ -21,7 +21,7 @@ public interface EmployeeService {
 	public List<Employee> searchEmployee(SearchCriteria criteria);
 	public int searchEmployeeCount(SearchCriteria criteria);
 	public void modify(Employee employee);
-	public void delete(int memberId);
+	public void delete(String memberId);
 	public void insertManager(int employeeId);
 	public void deleteManager(int employeeId);
 	public Employee checkEmployeeByEmployeeId(String employeeId);

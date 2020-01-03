@@ -103,9 +103,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/read", method = RequestMethod.GET) 
-	public String read(Model model, int memberId) {
+	public String read(Model model, String memberId) {
 		logger.info("read memberId : " + memberId);
-		Employee employee = employeeService.checkEmployeeById(String.valueOf(memberId));
+		Employee employee = employeeService.checkEmployeeById(memberId);
 		Department department = managementServcice.selectDepartmentById(Integer.parseInt(employee.getDepartmentId()));
 		Manager manager = employeeService.checkManager(employee.getEmployeeId());
 		
@@ -116,9 +116,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public String modifyPage(Model model, int memberId) {
+	public String modifyPage(Model model, String memberId) {
 		logger.info("modifyPage  memberId : " + memberId);
-		Employee employee = employeeService.checkEmployeeById(String.valueOf(memberId));
+		Employee employee = employeeService.checkEmployeeById(memberId);
 		Manager manager = employeeService.checkManager(employee.getEmployeeId());
 		
 		model.addAttribute("employeeModify", employee);
@@ -158,9 +158,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String delete(HttpServletRequest request, int memberId) {
+	public String delete(HttpServletRequest request, String memberId) {
 		logger.info("delete : " + memberId);
-		Employee employee = employeeService.checkEmployeeById(String.valueOf(memberId));
+		Employee employee = employeeService.checkEmployeeById(memberId);
 		employeeService.deleteManager(employee.getEmployeeId());
 		employeeService.delete(memberId);
 		

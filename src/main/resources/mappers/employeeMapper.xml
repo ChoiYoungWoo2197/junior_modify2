@@ -105,7 +105,7 @@
 		employee_id=#{employeeId}
 	</update>
 
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="String">
 		DELETE FROM
 		employee
 		WHERE

@@ -18,6 +18,6 @@ public interface EmployeeDao {
 	public List<Employee> searchEmployee(SearchCriteria searchCriteria);
 	public int searchEmployeeCount(SearchCriteria searchCriteria);
 	public void modify(Employee employee);
-	public void delete(int memberId);
+	public void delete(String memberId);
 	public Employee checkEmployeeByEmployeeId(String employeeId);
 }

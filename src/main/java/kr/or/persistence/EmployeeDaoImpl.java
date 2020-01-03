@@ -104,7 +104,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	@Override
-	public void delete(int memberId) {
+	public void delete(String memberId) {
 		sqlsession.delete(namespace + ".delete", memberId);
 		
 	}

@@ -24,7 +24,8 @@ $(function() {
 	})
 
 	$(document).on("click", ".readMember", function() {
-		var memberId = Number($(this).prev().text());
+		//var memberId = Number($(this).prev().text());
+		var memberId = $(this).prev().text();
 		location.href = "read?memberId=" + memberId;
 	})
 

@@ -146,7 +146,7 @@ public class EmployeeServiceImpl implements  EmployeeService{
 	}
 
 	@Override
-	public void delete(int memberId) {
+	public void delete(String memberId) {
 		// TODO Auto-generated method stub
 		employeeDao.delete(memberId);
 	}
