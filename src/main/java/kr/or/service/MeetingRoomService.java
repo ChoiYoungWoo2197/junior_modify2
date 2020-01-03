@@ -11,7 +11,7 @@ public interface MeetingRoomService {
 	
 	//MeetingRoom
 	public List<MeetingRoom> searchMeetingRoom(SearchCriteria searchCriteria);
-//	public int searchMeetingRoomCount(SearchCriteria searchCriteria);
+	public int searchMeetingRoomCount(SearchCriteria searchCriteria);
 	public int insertMeetingRoom(MeetingRoom meetingRoom);
 	public MeetingRoom selectMeetingRoomById(int meetingRoomId);
 	public void updateMeetingRoom(MeetingRoom meetingRoom);

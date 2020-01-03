@@ -15,6 +15,15 @@
 		</if>
 	</sql>
 	
+	<sql id="searchME">
+		<if test="searchType == 'meetingRoom'.toString()">
+			WHERE meeting_room.name LIKE '%${searchContent}%'
+		</if>
+		<if test="searchType == 'equipment'.toString()">
+			WHERE equipment.name LIKE '%${searchContent}%'
+		</if>
+	</sql>
+	
 	<select id="searchMeetingRoom" resultType="MeetingRoom">
 		SELECT meeting_room.* , GROUP_CONCAT(equipment.name) AS meetingRoomEquipmenet
 		FROM meeting_room 
@@ -28,7 +37,11 @@
 	</select>
 	
 	<select id="searchMeetingRoomCount" resultType="int">
-		SELECT COUNT(meeting_room_id) FROM meeting_room WHERE name LIKE '%${searchContent}%'
+		SELECT COUNT(DISTINCT meeting_room.meeting_room_id)
+		FROM meeting_room 
+		LEFT JOIN meeting_room_equipment ON meeting_room.meeting_room_id = meeting_room_equipment.meeting_room_id
+		LEFT JOIN equipment ON equipment.equipment_id = meeting_room_equipment.equipment_id
+		<include refid="searchME"></include>
 	</select>
 	
 	<insert id="insertMeetingRoom" parameterType="MeetingRoom" useGeneratedKeys="true" keyProperty="meetingRoomId">

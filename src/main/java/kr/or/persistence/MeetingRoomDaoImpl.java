@@ -22,10 +22,10 @@ public class MeetingRoomDaoImpl implements MeetingRoomDao {
 		return sqlSession.selectList(namespace + ".searchMeetingRoom", searchCriteria);
 	}
 	
-//	@Override
-//	public int searchMeetingRoomCount(SearchCriteria searchCriteria) {
-//		return sqlSession.selectOne(namespace + ".searchMeetingRoomCount", searchCriteria);
-//	}
+	@Override
+	public int searchMeetingRoomCount(SearchCriteria searchCriteria) {
+		return sqlSession.selectOne(namespace + ".searchMeetingRoomCount", searchCriteria);
+	}
 	
 	@Override
 	public int insertMeetingRoom(MeetingRoom meetingRoom) {
