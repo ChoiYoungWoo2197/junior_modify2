@@ -30,7 +30,6 @@ public class MeetingRoomController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(SearchCriteria searchCriteria, Model model) {
 		logger.info("meetingRoom list");
-		System.out.println(searchCriteria.getSearchType() + "----------------------------------");
 
 		List<MeetingRoom> meetingRoomList = meetingRoomService.searchMeetingRoom(searchCriteria);
 		//List<MeetingRoomEquipment> meetingRoomEquipmentList = meetingRoomService.searchMeetingRoomEquipment(searchCriteria);
@@ -38,7 +37,8 @@ public class MeetingRoomController {
 		model.addAttribute("meetingRoomList", meetingRoomList);
 		//model.addAttribute("meetingRoomEquipmentList", meetingRoomEquipmentList);
 		model.addAttribute("searchCriteria", searchCriteria);
-		model.addAttribute("page", new Page(meetingRoomService.searchMeetingRoomCount(searchCriteria), searchCriteria));		
+		model.addAttribute("page", new Page(meetingRoomService.searchMeetingRoomCount(searchCriteria), searchCriteria));
+		
 		return "meetingRoom/list";
 	}
 	

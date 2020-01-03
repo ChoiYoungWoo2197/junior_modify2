@@ -151,5 +151,15 @@ public class Reservation {
 	public void setMeetingRoomName(String meetingRoomName) {
 		this.meetingRoomName = meetingRoomName;
 	}
-	
+	@Override
+	public String toString() {
+		return "Reservation [reservationId=" + reservationId + ", employeeId=" + employeeId + ", meetingRoomId="
+				+ meetingRoomId + ", meetPurpose=" + meetPurpose + ", meetAttendess=" + meetAttendess + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", reservationDate=" + reservationDate + ", state=" + state
+				+ ", modifyDate=" + modifyDate + ", actualEndDate=" + actualEndDate + ", validateTime=" + validateTime
+				+ ", validateApplicant=" + validateApplicant + ", validateChecker=" + validateChecker + ", abnormality="
+				+ abnormality + ", cancelApplicant=" + cancelApplicant + ", cancelDate=" + cancelDate
+				+ ", cancelReason=" + cancelReason + ", employeeName=" + employeeName + ", departmentName="
+				+ departmentName + ", meetingRoomName=" + meetingRoomName + "]";
+	}
 }

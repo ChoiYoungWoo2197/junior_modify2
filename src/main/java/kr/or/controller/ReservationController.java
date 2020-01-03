@@ -1,5 +1,9 @@
 package kr.or.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
+import kr.or.domain.Page;
 import kr.or.domain.Reservation;
 import kr.or.domain.SearchCriteria;
 import kr.or.service.ReservationService;
@@ -34,6 +39,12 @@ public class ReservationController {
 		
 		List<Reservation> reservationList = reservationService.searchReservation(searchCriteria);
 		model.addAttribute("reservationList", reservationList);
+		
+		List<MeetingRoom> meetingRoomList = reservationService.selectMeetingRoom();
+		model.addAttribute("meetingRoomList", meetingRoomList);
+		
+		model.addAttribute("searchCriteria", searchCriteria);
+		model.addAttribute("page", new Page(reservationService.searchReservationCount(searchCriteria), searchCriteria));
 		
 		return "reservation/list";
 	}
@@ -56,6 +67,7 @@ public class ReservationController {
 		
 		MeetingRoom meetingRoom = reservationService.selectMeetingRoomById(meetingRoomId);
 		List<MeetingRoomEquipment> meetingRoomEquipmentList = reservationService.selectMeetingRoomEquipmentById(meetingRoomId);
+		//int meetingRoomSeats = reservationService.selectMeetingRoomSeatsById(meetingRoomId);
 		
 		map.put("meetingRoom", meetingRoom);
 		map.put("meetingRoomEquipmentList", meetingRoomEquipmentList);
@@ -75,9 +87,24 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insert() {
+	public String insert(Reservation reservation, String start, String end) {
 		logger.info("insert");
 		
+		Date startDate = null;
+		Date endDate = null;
+		try {
+			startDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(start); //String -> Date : parse & Date -> String : format
+			endDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(end);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println(startDate);
+		System.out.println(endDate);
+		
+		reservation.setStartDate(startDate);
+		reservation.setEndDate(endDate);
+		
+		reservationService.insertReservation(reservation);
 		
 		return "redirect:/reservation/list";
 	}

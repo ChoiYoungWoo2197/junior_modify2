@@ -32,4 +32,15 @@ private static final String namespace = "kr.or.mappers.reservationMapper";
 		return sqlSession.selectList(namespace + ".searchReservation", searchCriteria);
 	}
 
+	@Override
+	public int searchReservationCount(SearchCriteria searchCriteria) {
+		return sqlSession.selectOne(namespace + ".searchReservationCount", searchCriteria);
+	}
+	
+	@Override
+	public void insertReservation(Reservation reservation) {
+		sqlSession.insert(namespace + ".insertReservation", reservation);
+	}
+
+
 }

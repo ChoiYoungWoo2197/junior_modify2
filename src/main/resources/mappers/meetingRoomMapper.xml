@@ -3,12 +3,15 @@
 <mapper namespace="kr.or.mappers.meetingRoomMapper">
 	
 	<!-- 검색하기 위한 용도 -->
-	<sql id="search">
+	<sql id="searchM">
 		<if test="searchType == 'meetingRoom'.toString()">
 			WHERE meeting_room.name LIKE '%${searchContent}%'
 		</if>
+	</sql>
+	
+	<sql id="searchE">
 		<if test="searchType == 'equipment'.toString()">
-			WHERE equipment.name LIKE '%${searchContent}%'
+			HAVING meetingRoomEquipmenet LIKE '%${searchContent}%'
 		</if>
 	</sql>
 	
@@ -17,16 +20,15 @@
 		FROM meeting_room 
 		LEFT JOIN meeting_room_equipment ON meeting_room.meeting_room_id = meeting_room_equipment.meeting_room_id
 		LEFT JOIN equipment ON equipment.equipment_id = meeting_room_equipment.equipment_id
-		<include refid="search"></include>
+		<include refid="searchM"></include>
 		GROUP BY meeting_room_id
+		<include refid="searchE"></include>
 		ORDER BY meeting_room_id DESC 
 		LIMIT #{pageStart}, #{amount}
 	</select>
 	
 	<select id="searchMeetingRoomCount" resultType="int">
-		SELECT COUNT(meeting_room_id) 
-		FROM meeting_room 
-		WHERE name LIKE '%${searchContent}%'
+		SELECT COUNT(meeting_room_id) FROM meeting_room WHERE name LIKE '%${searchContent}%'
 	</select>
 	
 	<insert id="insertMeetingRoom" parameterType="MeetingRoom" useGeneratedKeys="true" keyProperty="meetingRoomId">
@@ -54,6 +56,12 @@
 	<select id="selectMeetingRoom" resultType="MeetingRoom">
 		SELECT * 
 		FROM meeting_room
-		WHERE availability = true
+		<!-- WHERE availability = true -->
 	</select>
+	
+	<!-- <select id="selectMeetingRoomSeatsById" resultType="int">
+		SELECT * 
+		FROM meeting_room
+		WHERE meeting_room_id = #{meetingRoomId}
+	</select> -->
 </mapper>
