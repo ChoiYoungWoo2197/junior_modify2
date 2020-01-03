@@ -4,7 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/managerHeader.jsp"%>
 
-<link href="${pageContext.request.contextPath}/resources/css/member/list.css" rel="stylesheet" type="text/css" />
+<link
+	href="${pageContext.request.contextPath}/resources/css/member/list.css"
+	rel="stylesheet" type="text/css" />
 <%-- <script src="${pageContext.request.contextPath}/resources/js/member/list.js" charset="UTF-8" type="text/javascript"></script> --%>
 <script>
 $(function() {
@@ -42,10 +44,14 @@ $(function() {
 	<h1>회원 관리</h1>
 	<div>
 		<select name="searchType">
-			<option value="memberId" ${searchCriteria.searchType == 'memberId' ? 'selected' : ''}>사번</option>
-			<option value="name"  ${searchCriteria.searchType == 'name' ? 'selected' : ''}>사원명</option>
-			<option value="department" ${searchCriteria.searchType == 'department' ? 'selected' : ''}>부서</option>
-		</select> <input type="text" name="searchContent" value="${searchCriteria.searchContent}">
+			<option value="memberId"
+				${searchCriteria.searchType == 'memberId' ? 'selected' : ''}>사번</option>
+			<option value="name"
+				${searchCriteria.searchType == 'name' ? 'selected' : ''}>사원명</option>
+			<option value="department"
+				${searchCriteria.searchType == 'department' ? 'selected' : ''}>부서명</option>
+		</select> <input type="text" name="searchContent"
+			value="${searchCriteria.searchContent}">
 		<button id="searchEquipment">검색</button>
 		<button id="AllMeetingRoom">전체보기</button>
 	</div>
@@ -75,13 +81,13 @@ $(function() {
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 				<li><a
-					href="list?management=${management}&page=${page.startPage-1}&searchContent=${page.criteria.searchContent}">&lt;</a>
+					href="list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}">&lt;</a>
 				</li>
 			</c:if>
 			<c:forEach var="index" begin="${page.startPage}"
 				end="${page.endPage}">
 				<li><a
-					href="list?management=${management}&page=${index}&searchContent=${page.criteria.searchContent}">
+					href="list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}">
 						<c:if test="${page.criteria.page == index}">
 							<span class="page_shape color_sky"></span>
 						</c:if> <c:if test="${page.criteria.page != index}">
@@ -91,7 +97,7 @@ $(function() {
 			</c:forEach>
 			<c:if test="${page.next}">
 				<li><a
-					href="list?management=${management}&page=${page.endPage+1}&searchContent=${page.criteria.searchContent}">&gt;</a>
+					href="list?page=${page.endPage+1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}">&gt;</a>
 				</li>
 			</c:if>
 		</ul>

@@ -46,8 +46,7 @@ table, th, td {
 }
 </style>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
 	//변수
 	var validateId = /^[A-Za-z0-9]+$/; //영어 + 숫자만 입력
@@ -259,18 +258,21 @@ table, th, td {
 	}
 	
 	function checkRegister() {
-		var register =  '<%=session.getAttribute("loginUser")%>';
-		var result = register.indexOf("manager=true", 0);
-
-		if (result > 0) {
+		var register =  <%=session.getAttribute("loginUser")%>;
+		var result = register.indexOf("manager=true", 0 );
+		alert(register);
+		if(result > 0) {
 			$("input[name='register']").val("true");
 			return true;
-		} else {
+		}
+		else {
 			$("input[name='register']").val("false");
 			return false;
 		}
-
+		
+		
 	}
+	
 </script>
 
 
@@ -283,12 +285,7 @@ table, th, td {
 			</c:if>
 		</c:if>
 		<c:if test="${empty loginUser}">
-			<div class="overflow">
-				<div class="float" style="position: relative;">
-					<h1>회원 가입</h1>
-				</div>
-			</div>
-
+			<h1>회원 가입</h1>
 		</c:if>
 
 		<br>
@@ -362,7 +359,15 @@ table, th, td {
 
 			</table>
 			<input type="hidden" id="register" name="register" value="">
-			<input type="submit" value="회원가입" />
+			<!-- <input type="submit" value="회원가입" /> -->
+			<c:if test="${empty loginUser}">
+				<input type="submit" value="회원가입" />
+			</c:if>
+			<c:if test="${not empty loginUser}">
+				<c:if test="${loginUser.manager eq 'true'}">
+					<input type="submit" value="회원등록" />
+				</c:if>
+			</c:if>
 		</form>
 
 	</section>
