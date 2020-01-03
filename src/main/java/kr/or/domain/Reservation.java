@@ -2,10 +2,13 @@ package kr.or.domain;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Reservation {
  	 private int reservationId;
 	 private int employeeId;
 	 private int meetingRoomId;
+	 @NotEmpty(message="회의목적을 입력하세요")
 	 private String meetPurpose;
 	 private int meetAttendess;
 	 private Date startDate;

@@ -1,6 +1,5 @@
 package kr.or.controller;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -87,8 +86,11 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insert(Reservation reservation, String start, String end) {
+	public String insert(Model model, Reservation reservation, String start, String end, String choiceDay) {
 		logger.info("insert");
+		
+//		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
+//		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(reservation.getMeetingRoomId(), choiceDate);
 		
 		Date startDate = null;
 		Date endDate = null;
@@ -101,6 +103,22 @@ public class ReservationController {
 		System.out.println(startDate);
 		System.out.println(endDate);
 		
+		/*
+		for(Reservation res : reservationList) {
+			if(res.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= res.getEndDate().getTime()) {
+				System.out.println("예약불가1");
+				model.addAttribute("msg", "이미 예약된 건이 있습니다. 다른 시간을 선택해주세요..");
+				return "reservation/insert";
+			}
+			if(res.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= res.getEndDate().getTime()) {
+				System.out.println("예약불가2");
+				model.addAttribute("msg", "이미 예약된 건이 있습니다. 다른 시간을 선택해주세요..");
+				return "reservation/insert";
+			}
+			
+		}
+		*/
+		
 		reservation.setStartDate(startDate);
 		reservation.setEndDate(endDate);
 		
@@ -108,4 +126,5 @@ public class ReservationController {
 		
 		return "redirect:/reservation/list";
 	}
+	
 }

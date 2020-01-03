@@ -47,7 +47,6 @@
 			준다. -->
 	</beans:bean>
 
-
 	<context:component-scan	base-package="kr.or.controller" /> <!-- 베이스 패키지 하위 모든 어노테이션을 스캔해서 빈으로 등록하겠다는 것 -->
 	<context:component-scan	base-package="kr.or.persistence" /> <!-- 베이스 패키지 하위 모든 어노테이션을 스캔해서 빈으로 등록하겠다는 것 -->
 	<context:component-scan	base-package="kr.or.interceptor" /> <!-- 베이스 패키지 하위 모든 어노테이션을 스캔해서 빈으로 등록하겠다는 것 -->
