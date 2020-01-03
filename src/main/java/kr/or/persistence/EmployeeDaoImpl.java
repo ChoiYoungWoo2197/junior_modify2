@@ -90,7 +90,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	@Override
-	public void modify(Employee employee) {
+	public void modifyEmployee(Employee employee) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("employeeId", employee.getEmployeeId());
 		map.put("departmentId", employee.getDepartmentId());
@@ -104,7 +104,7 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	@Override
-	public void delete(int memberId) {
+	public void deleteEmployee(String memberId) {
 		sqlsession.delete(namespace + ".delete", memberId);
 		
 	}

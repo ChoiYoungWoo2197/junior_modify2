@@ -8,22 +8,24 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- 인터셉터 연결하기 -->
-	<beans:bean id="loginInterceptor" class="kr.or.interceptor.LoginInterceptor"></beans:bean>
-	<interceptors>
-		<interceptor>
-			<mapping path="/login/check" />
-			<beans:ref bean="loginInterceptor" />
-		</interceptor>
-	</interceptors>
 
-	<!-- <beans:bean id="authInterceptor" class="kr.or.interceptor.AuthInterceptor"></beans:bean>
+	<beans:bean id="authInterceptor" class="kr.or.interceptor.AuthInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
+			<mapping path="/management/insert" />
+			<mapping path="/management/modify" />
 			<mapping path="/meetingRoom/list" />
+			<mapping path="/meetingRoom/insert" />
+			<mapping path="/meetingRoom/read" />
+			<mapping path="/meetingRoom/modify" />
+			<mapping path="/member/list" />
+			<mapping path="/member/read" />
+			<mapping path="/member/modify" />
+			<mapping path="/reservation/insert" />
+			<mapping path="/reservationDetail/read" />
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
-	</interceptors> -->
+	</interceptors>
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->

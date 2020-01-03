@@ -1,11 +1,11 @@
 $(function() {
 	$("#insertMember").click(function() {
-		alert("?");
+		//alert("?");
 		//location.href = "${pageContext.request.contextPath}/member/insert";
 	})
 
 	$("#searchEquipment").click(function() {
-		alert("???");
+		//alert("???");
 		if ($("input[name='searchContent']").val() == "") {
 			alert("검색할 내용을 입력해주세요.");
 			return false;
@@ -15,7 +15,11 @@ $(function() {
 	})
 
 	$(document).on("click", ".readMember", function() {
+		alert("???");
 		var memberId = Number($(this).prev().text());
+		
+		//var memberId = $(this).prev().text();
+		alert(memberId);
 		location.href = "read?memberId=" + memberId;
 	})
 

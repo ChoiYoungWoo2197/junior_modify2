@@ -4,7 +4,7 @@
 
 	<sql id="search">
 		<if test="searchType == 'memberId'.toString()">
-			WHERE employee.member_id = ${searchContent}
+			WHERE employee.member_id LIKE '%${searchContent}%'
 		</if>
 		<if test="searchType == 'name'.toString()">
 			WHERE employee.name LIKE '%${searchContent}%'
@@ -12,7 +12,20 @@
 		<if test="searchType == 'department'.toString()">
 			WHERE department.name LIKE '%${searchContent}%'
 		</if>
-		
+	</sql>
+
+	<sql id="searchB">
+		<if test="searchType == 'memberId'.toString()">
+			WHERE employee.member_id LIKE '%${searchContent}%'
+		</if>
+		<if test="searchType == 'name'.toString()">
+			WHERE employee.name LIKE '%${searchContent}%'
+		</if>
+		<if test="searchType == 'department'.toString()">
+			LEFT JOIN department ON department.department_id =
+			employee.department_id
+			WHERE department.name LIKE '%${searchContent}%'
+		</if>
 	</sql>
 
 
@@ -29,31 +42,34 @@
 		select *
 		from employee
 		where
-		member_id = #{memberId} and	password = #{password}
+		member_id = #{memberId} and password = #{password}
 	</select>
 
-	<select id="checkEmployeeById" parameterType="String" resultType="Employee">
+	<select id="checkEmployeeById" parameterType="String"
+		resultType="Employee">
 		select * from employee
 		where member_id = #{memberId}
 	</select>
 
-	<select id="checkEmployeeByEmail" parameterType="String" resultType="Employee">
+	<select id="checkEmployeeByEmail" parameterType="String"
+		resultType="Employee">
 		select * from employee
 		where email = #{email}
 	</select>
 
-	<select id="checkKeyByEmail" resultType="Employee">
+	<select id="checkKeyByMap" resultType="Employee">
 		select * from
-		employee where email = #{email} and authKey = #{authkey}
+		employee
+		where email = #{email} and authKey = #{authkey}
 	</select>
 
-	<update id="updateStateById">
+	<update id="updateStateByMap">
 		UPDATE employee
 		SET state = #{state} WHERE member_id =
 		#{memberId}
 	</update>
 
-	<update id="updateKeyById">
+	<update id="updateKeyByMap">
 		UPDATE employee
 		SET authkey = #{authKey} WHERE
 		member_id =
@@ -75,15 +91,13 @@
 	</select>
 
 	<select id="searchEmployee" resultType="Employee">
-		<!-- SELECT * FROM employee <include refid="search"></include> ORDER BY 
-			employee_id DESC LIMIT #{pageStart}, #{amount} -->
-
 		SELECT employee.employee_id, department.name AS departmentId,
 		employee.name, employee.member_id, employee.password, employee.email,
 		employee.phone, employee.authkey, employee.state,
 		employee.authkey_date
 		FROM employee
-		LEFT JOIN department ON department.department_id = employee.department_id
+		LEFT JOIN department ON
+		department.department_id = employee.department_id
 		<include refid="search"></include>
 		ORDER BY employee.employee_id DESC
 		LIMIT #{pageStart}, #{amount}
@@ -91,10 +105,9 @@
 	</select>
 
 	<select id="searchEmployeeCount" resultType="int">
-		SELECT
-		COUNT(employee_id)
-		FROM employee
-		WHERE name LIKE '%${searchContent}%'
+		<!-- SELECT COUNT(employee_id) FROM employee WHERE name LIKE '%${searchContent}%' -->
+		SELECT COUNT(*) FROM employee
+		<include refid="searchB"></include>
 	</select>
 
 	<update id="modify">
@@ -105,14 +118,15 @@
 		employee_id=#{employeeId}
 	</update>
 
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="String">
 		DELETE FROM
 		employee
 		WHERE
 		member_id = #{memberId}
 	</delete>
-	
-	<select id="checkEmployeeByEmployeeId" parameterType="String" resultType="Employee">
+
+	<select id="checkEmployeeByEmployeeId" parameterType="String"
+		resultType="Employee">
 		select * from employee
 		where employee_id = #{employeeId}
 	</select>

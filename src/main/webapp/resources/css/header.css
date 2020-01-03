@@ -31,10 +31,10 @@ nav {
 	height: 60px;
 }
 
-li {
+nav li {
 	list-style: none;
-	/* float: left; */
-	/* width: 20%;
+ 	/* float: left;
+	width: 20%;
 	text-align: center;
-	padding: 20px 0; */
+	padding: 20px 0;  */
 }

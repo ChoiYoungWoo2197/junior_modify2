@@ -42,7 +42,7 @@
 			var manageType = $('input:radio[name="manager"][value="yes"]').is(':checked');
 			var originalMemberId = $("input[name='originalMemberId']").val();
 			var memberId = $("input[name='modifyMemberId']").val();
-			alert(originalMemberId + " : " +memberId);
+			//alert(originalMemberId + " : " +memberId);
 			//alert("departmentType : " + departmentType + "  " + "manageType : " + manageType);
 			window.location.href = "${pageContext.request.contextPath}/modify?departmentType="+ departmentType + "&manager=" + manageType+ "&originalMemberId=" +originalMemberId;
 			//window.location.href = "/member/modify?departmentType="+ departmentType + "&manager=" + manageType + "&originalMemberId=" +originalMemberId;
