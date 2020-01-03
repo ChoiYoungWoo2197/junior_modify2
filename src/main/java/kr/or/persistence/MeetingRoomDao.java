@@ -8,7 +8,7 @@ import kr.or.domain.SearchCriteria;
 public interface MeetingRoomDao {
 	
 	public List<MeetingRoom> searchMeetingRoom(SearchCriteria searchCriteria);
-	public int searchMeetingRoomCount(SearchCriteria searchCriteria);
+//	public int searchMeetingRoomCount(SearchCriteria searchCriteria);
 	public int insertMeetingRoom(MeetingRoom meetingRoom);
 	public void updateMeetingRoom(MeetingRoom meetingRoom);
 	public void deleteMeetingRoom(int meetingRoomId);

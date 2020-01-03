@@ -37,7 +37,7 @@ public class MeetingRoomController {
 		model.addAttribute("meetingRoomList", meetingRoomList);
 		//model.addAttribute("meetingRoomEquipmentList", meetingRoomEquipmentList);
 		model.addAttribute("searchCriteria", searchCriteria);
-		model.addAttribute("page", new Page(meetingRoomService.searchMeetingRoomCount(searchCriteria), searchCriteria));
+		model.addAttribute("page", new Page(meetingRoomList.size(), searchCriteria));
 		
 		return "meetingRoom/list";
 	}

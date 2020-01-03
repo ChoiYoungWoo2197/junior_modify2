@@ -30,10 +30,10 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 		return meetingRoomDao.searchMeetingRoom(searchCriteria);
 	}
 	
-	@Override
-	public int searchMeetingRoomCount(SearchCriteria searchCriteria) {
-		return meetingRoomDao.searchMeetingRoomCount(searchCriteria);
-	}
+//	@Override
+//	public int searchMeetingRoomCount(SearchCriteria searchCriteria) {
+//		return meetingRoomDao.searchMeetingRoomCount(searchCriteria);
+//	}
 
 	@Override
 	public int insertMeetingRoom(MeetingRoom meetingRoom) {
