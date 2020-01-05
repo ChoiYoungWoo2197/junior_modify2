@@ -47,12 +47,12 @@
 				return false;
 			}
 			
-			if($("select[name='state']").val()!="0") {
+			if($("select[name='state']").val()!="none") {
 				location.href = "list?page=1&state="+$("select[name='state']").val();
 				return false;
 			}
 			
-			if($("select[name='meetingRoomId']").val()!="none") {
+			if($("select[name='meetingRoomId']").val()!="0") {
 				location.href = "list?page=1&meetingRoomId="+$("select[name='meetingRoomId']").val();
 				return false;
 			}

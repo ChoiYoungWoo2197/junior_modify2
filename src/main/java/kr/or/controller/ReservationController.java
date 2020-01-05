@@ -86,7 +86,7 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insert(Model model, Reservation reservation, String start, String end, String choiceDay) {
+	public String insert(Model model, Reservation reservation, String start, String end) {
 		logger.info("insert");
 		
 //		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
@@ -127,4 +127,22 @@ public class ReservationController {
 		return "redirect:/reservation/list";
 	}
 	
+	@RequestMapping(value = "/check", method = RequestMethod.GET)
+	public @ResponseBody String check(String choiceDay) {
+		logger.info("check");
+		
+//		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
+//		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(reservation.getMeetingRoomId(), choiceDate);
+//		
+//		for(Reservation res : reservationList) {
+//			if(res.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= res.getEndDate().getTime()) {
+//				return "false";
+//			}
+//			if(res.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= res.getEndDate().getTime()) {
+//				return "false";
+//			}
+//		}
+		
+		return "false";
+	}
 }

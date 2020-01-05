@@ -36,6 +36,8 @@
 
 		$("#meetingRoomSelect").change(function() {
 			$("td").removeClass("color_blue");
+			//select 시간, 분 첫번째 위치로 이동하게 
+			
 			if($("select[name='meetingRoomId']").val() != "none") {
 				var meetingRoomId = Number($("select[name='meetingRoomId']").val());
 				
@@ -81,6 +83,8 @@
 		var meetingStart = new Array(); //ajax로 받은 값을 담을 변수 지정
 		var meetingEnd = new Array();
 		var choiceDay;
+		var date = new Date();
+		var today = String(date.getFullYear())+String(('0'+(date.getMonth()+1)).slice(-2))+String(('0'+date.getDate()).slice(-2));
 		
 		$("#calendar").on("click", "td", function() {
 			$("td").removeClass("color_blue");
@@ -89,8 +93,6 @@
 			
 			var meetingRoomId = Number($("select[name='meetingRoomId']").val());
 			
-			var date = new Date();
-			var today = String(date.getFullYear())+String(('0'+(date.getMonth()+1)).slice(-2))+String(('0'+date.getDate()).slice(-2));
 			if(Number($(this).text()) < 10) {
 				choiceDay = $("#today").text().replace(".","")+'0'+$(this).text();
 			} else {
@@ -129,8 +131,7 @@
 			})
 		})
 		
-		var todayDate = new Date();
-		var currentDate = todayDate.getHours()+("00" + todayDate.getMinutes()).slice(-2);
+		var currentDate = today+String(("00" + date.getHours()).slice(-2))+String(("00" + date.getMinutes()).slice(-2));
 		
 		$("#insertReservationForm").submit(function() {
 			if($("select[name='meetingRoomId']").val() == "0") {
@@ -149,26 +150,34 @@
 				alert("시간을 잘못 입력하셨습니다.");
 				return false;
 			}
-			if(currentDate >= start || currentDate >= end) {
+			
+			var date;
+			for(var i=0; i<$("#calendar td").length; i++) {
+				if($("#calendar td").eq(i).hasClass("color_blue") == true) {
+					date = $("#calendar td").eq(i).attr("data-value");
+				}
+			}
+			
+			var startDate = $("#today").text().replace(".","-")+"-"+date+" "+$("select[name='startHour']").val()+":"+$("select[name='startMinute']").val();
+			var endDate = $("#today").text().replace(".","-")+"-"+date+" "+$("select[name='endHour']").val()+":"+$("select[name='endMinute']").val();
+			var startDate2 = $("#today").text().replace(".","")+date+$("select[name='startHour']").val()+$("select[name='startMinute']").val();
+			var endDate2 = $("#today").text().replace(".","")+date+$("select[name='endHour']").val()+$("select[name='endMinute']").val();
+			
+			//alert(currentDate);
+			//alert(startDate2);
+			//alert(endDate2)
+			if(currentDate >= startDate2 || currentDate >= endDate2) {
 				alert("지난 시간은 예약할 수 없습니다.");
 				$("select[name='startHour']").focus();
 				return false;
 			}
 			
-			var date;
-			for(var i=0; i<$("#calendar td").length; i++) {
-				if($("#calendar td").eq(i).hasClass("color_blue") == true) {
-					date = $("#calendar td").eq(i).text();
-				}
-			}
-			var startDate = $("#today").text().replace(".","-")+"-"+date+" "+$("select[name='startHour']").val()+":"+$("select[name='startMinute']").val();
-			var endDate = $("#today").text().replace(".","-")+"-"+date+" "+$("select[name='endHour']").val()+":"+$("select[name='endMinute']").val();
 			$("input[name='start']").val(startDate);
 			$("input[name='end']").val(endDate);
 			$("input[name='choiceDay']").val(choiceDay);
 			
-			/* alert(meetingStart);
-			alert(meetingEnd); */
+			alert(meetingStart);
+			alert(meetingEnd);
 			
 			for(var i=0; i<meetingStart.length; i++) {
 				if(Number(meetingStart[i].replace(":","")) <= start && start <= Number(meetingEnd[i].replace(":",""))) {
@@ -182,6 +191,21 @@
 					return false;
 				}
 			}
+			
+			var result = true;
+			$.ajax({
+				url : "/reservation/check",
+				type : "get",
+				async : false,
+				success : function(res) {
+					console.log(res);
+					
+					if(res == "false") {
+						result = false;
+					}
+				}
+			})
+			return result;
 		})
 	})
 </script>	
