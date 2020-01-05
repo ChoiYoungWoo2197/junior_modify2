@@ -130,8 +130,7 @@
 		})
 		
 		var todayDate = new Date();
-		var todayDate2 = todayDate.getHours()+("00" + todayDate.getMinutes()).slice(-2);
-		alert(todayDate2);
+		var currentDate = todayDate.getHours()+("00" + todayDate.getMinutes()).slice(-2);
 		
 		$("#insertReservationForm").submit(function() {
 			if($("select[name='meetingRoomId']").val() == "0") {
@@ -148,6 +147,11 @@
 			var end = Number($("select[name='endHour']").val() + $("select[name='endMinute']").val());
 			if(start >= end) {
 				alert("시간을 잘못 입력하셨습니다.");
+				return false;
+			}
+			if(currentDate >= start || currentDate >= end) {
+				alert("지난 시간은 예약할 수 없습니다.");
+				$("select[name='startHour']").focus();
 				return false;
 			}
 			
