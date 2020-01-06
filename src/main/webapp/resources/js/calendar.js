@@ -32,8 +32,14 @@ function displayCaldendar() {
 			if(i == 1 && j <= dayWeek || num > lastDate){ 
 			   calendar += "<td></td>";
 			} else {
-				calendar += "<td>"+num+"</td>";
-				num++;
+				if(num<10) {
+					calendar += "<td data-value=0"+num+">"+num+"</td>";
+					num++;
+				} else {
+					calendar += "<td data-value="+num+">"+num+"</td>";
+					num++;
+				}
+				
 			}           
 		}
 		calendar += "</tr>";

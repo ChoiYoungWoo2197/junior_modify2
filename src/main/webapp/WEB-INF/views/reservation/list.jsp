@@ -40,12 +40,19 @@
 		})
 		
 		$("#searchReservation").click(function() {
+			if($("input[name='searchStartDate']").val()!="" || $("input[name='searchEndDate']").val()!="") {
+				alert($("input[name='searchStartDate']").val());
+				alert($("input[name='searchEndDate']").val());
+				alert($("input[name='searchStartDate']").val()+$("input[name='searchEndDate']").val());
+				return false;
+			}
+			
 			if($("select[name='state']").val()!="none") {
 				location.href = "list?page=1&state="+$("select[name='state']").val();
 				return false;
 			}
 			
-			if($("select[name='meetingRoomId']").val()!="none") {
+			if($("select[name='meetingRoomId']").val()!="0") {
 				location.href = "list?page=1&meetingRoomId="+$("select[name='meetingRoomId']").val();
 				return false;
 			}
@@ -54,9 +61,6 @@
 				alert("검색할 내용을 입력해주세요.");
 				return false;
 			}
-			
-			alert($("input[name='searchStartDate']").val());
-			alert($("input[name='searchEndDate']").val());
 			
 			location.href = "list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
 		})
@@ -86,7 +90,7 @@
 				<option value="FV" ${searchCriteria.state == 'FV' ? 'selected' : ''}>종료확인</option>
 			</select>
 			<select name="meetingRoomId">
-				<option value="none">회의실</option>
+				<option value="0">회의실</option>
 				<c:forEach var="meetingRoom" items="${meetingRoomList}">
 					<c:if test="${meetingRoom.meetingRoomId == searchCriteria.meetingRoomId}">
 						<option value="${meetingRoom.meetingRoomId}" selected="selected">${meetingRoom.name}</option>
@@ -124,7 +128,8 @@
 					<td>
 						<c:choose>
 							<c:when test="${reservation.state == 'R'}">
-								예약
+								<jsp:useBean id="now" class="java.util.Date" />
+								${now < reservation.startDate == 'true'? '예약':'진행중'}
 							</c:when>
 							<c:when test="${reservation.state == 'RC'}">
 								예약취소
