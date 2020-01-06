@@ -42,5 +42,15 @@ private static final String namespace = "kr.or.mappers.reservationMapper";
 		sqlSession.insert(namespace + ".insertReservation", reservation);
 	}
 
+	@Override
+	public Reservation selectReservationById(int reservationId) {
+		return sqlSession.selectOne(namespace + ".selectReservationById", reservationId);
+	}
+
+	@Override
+	public void updateReservation(Reservation reservation) {
+		sqlSession.update(namespace + ".updateReservation", reservation);
+	}
+
 
 }

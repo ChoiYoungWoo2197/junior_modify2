@@ -52,12 +52,10 @@ public class MeetingRoomDaoImpl implements MeetingRoomDao {
 		return sqlSession.selectList(namespace + ".selectMeetingRoom");
 	}
 
-	
-
-//	@Override
-//	public int selectMeetingRoomSeatsById(int meetingRoomId) {
-//		return sqlSession.selectOne(namespace + ".selectMeetingRoomSeatsById", meetingRoomId);
-//	}
+	@Override
+	public int selectMeetingRoomSeatsById(int meetingRoomId) {
+		return sqlSession.selectOne(namespace + ".selectMeetingRoomSeatsById", meetingRoomId);
+	}
 
 	
 }

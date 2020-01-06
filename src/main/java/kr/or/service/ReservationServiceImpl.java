@@ -46,6 +46,16 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	
 	@Override
+	public Reservation selectReservationById(int reservationId) {
+		return reservationDao.selectReservationById(reservationId);
+	}
+	
+	@Override
+	public void updateReservation(Reservation reservation) {
+		reservationDao.updateReservation(reservation);
+	}
+	
+	@Override
 	public List<MeetingRoom> selectMeetingRoom() {
 		return meetingRoomDao.selectMeetingRoom();
 	}
@@ -55,21 +65,14 @@ public class ReservationServiceImpl implements ReservationService {
 		return meetingRoomDao.selectMeetingRoomById(meetingRoomId);
 	}
 	
-//	@Override
-//	public int selectMeetingRoomSeatsById(int meetingRoomId) {
-//		return meetingRoomDao.selectMeetingRoomSeatsById(meetingRoomId);
-//	}
+	@Override
+	public int selectMeetingRoomSeatsById(int meetingRoomId) {
+		return meetingRoomDao.selectMeetingRoomSeatsById(meetingRoomId);
+	}
 	
 	@Override
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId) {
 		return meetingRoomEquipmentDao.selectMeetingRoomEquipmentById(meetingRoomId);
 	}
 
-	
-
-	
-
-	
-
-	
 }

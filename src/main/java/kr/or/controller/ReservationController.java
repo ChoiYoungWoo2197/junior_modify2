@@ -107,8 +107,9 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(value = "/checkTime", method = RequestMethod.GET)
-	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId) {
+	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId, String employeeId) {
 		logger.info("checkTime");
+		System.out.println(employeeId);
 		String result = "true";
 		
 		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
@@ -123,16 +124,79 @@ public class ReservationController {
 			e.printStackTrace();
 		}
 		
-		for(Reservation res : reservationList) {
-			if(res.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= res.getEndDate().getTime()) {
-				result = "false";
-				
-			}
-			if(res.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= res.getEndDate().getTime()) {
-				result = "false";
+		for(Reservation reservation : reservationList) {
+			if(employeeId != null) {
+				if(Integer.parseInt(employeeId) != reservation.getEmployeeId()) {
+					System.out.println("다르다");
+					if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getEndDate().getTime()) {
+						result = "false";
+					}
+					if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getEndDate().getTime()) {
+						result = "false";
+					}
+					if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getEndDate().getTime() <= endDate.getTime()) {
+						result = "false";
+					}
+				}
+			} else {
+				if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getEndDate().getTime()) {
+					result = "false";
+				}
+				if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getEndDate().getTime()) {
+					result = "false";
+				}
+				if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getEndDate().getTime() <= endDate.getTime()) {
+					result = "false";
+				}
 			}
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String updatePage(int reservationId, Model model) {
+		logger.info("updatePage & reservationId : " + reservationId);
+		
+		List<MeetingRoom> meetingRoomList = reservationService.selectMeetingRoom();
+		model.addAttribute("meetingRoomList", meetingRoomList);
+		
+		Reservation reservation = reservationService.selectReservationById(reservationId);
+		model.addAttribute("reservation", reservation);
+		
+		List<MeetingRoomEquipment> meetingRoomEquipmentList = reservationService.selectMeetingRoomEquipmentById(reservation.getMeetingRoomId());
+		model.addAttribute("meetingRoomEquipmentList", meetingRoomEquipmentList);
+		
+		int seats = reservationService.selectMeetingRoomSeatsById(reservation.getMeetingRoomId());
+		model.addAttribute("seats", seats);
+		
+		Date startDate = reservation.getStartDate();
+		String start = new SimpleDateFormat("yyyy-MM-dd").format(startDate);
+		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(reservation.getMeetingRoomId(), start);
+		model.addAttribute("reservationList", reservationList);
+		
+		return "reservation/modify";
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(Reservation reservation, String start, String end) {
+		logger.info("update");
+		
+		Date startDate = null;
+		Date endDate = null;
+		try {
+			startDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(start); //String -> Date : parse & Date -> String : format
+			endDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(end);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		reservation.setStartDate(startDate);
+		reservation.setEndDate(endDate);
+		reservation.setModifyDate(new Date());
+		
+		reservationService.updateReservation(reservation);
+		
+		return "redirect:/reservationDetail/read?reservationId="+reservation.getReservationId();
 	}
 }

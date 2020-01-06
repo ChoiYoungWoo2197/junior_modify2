@@ -39,7 +39,7 @@
 		})
 		
 		$(document).on("click", ".updateMeetingRoom", function(){
-			var meetingRoomId = Number($(this).prev().text());
+			var meetingRoomId = Number($(this).find(".readMeetingRoom").text());
 			
 			location.href = "read?meetingRoomId="+meetingRoomId;
 		})
@@ -86,9 +86,9 @@
 			</c:if>
 			<c:if test="${!empty meetingRoomList}">
 				<c:forEach var="meetingRoom" items="${meetingRoomList}">
-					<tr>
-						<td>${meetingRoom.meetingRoomId}</td>
-						<td class="updateMeetingRoom">${meetingRoom.name}</td>
+					<tr class="updateMeetingRoom">
+						<td class="readMeetingRoom">${meetingRoom.meetingRoomId}</td>
+						<td>${meetingRoom.name}</td>
 						<td>${meetingRoom.seats}</td>
 						<td>${meetingRoom.meetingRoomEquipmenet}</td>
 						<td>${meetingRoom.availability eq "true" ? "가능" : "불가능"}</td>

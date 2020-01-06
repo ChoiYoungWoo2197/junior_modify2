@@ -19,8 +19,8 @@
 			$("#cancelReason").hide();
 		})
 
-		$("#okReservation").click(function() {
-			alert("예약수정!");
+		$("#updateReservation").click(function() {
+			location.href="${pageContext.request.contextPath}/reservation/update?reservationId="+${reservation.reservationId};
 		})
 
 		$("#ok")
@@ -102,7 +102,7 @@
 			<c:when test="${reservation.state eq 'R'}">
 				<div id="reservationDiv">
 					<input type="button" id="cancelReservation" value="예약취소" /> <input
-						type="button" id="okReservation" value="예약수정" />
+						type="button" id="updateReservation" value="예약수정" />
 				</div>
 				<div id="cancelDiv" class="hide">
 					<input type="button" id="cancel" value="취소" /> <input

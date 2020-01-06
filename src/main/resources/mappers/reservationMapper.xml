@@ -64,7 +64,15 @@
 		WHERE reservation_id = #{reservationId}
 	</update>
 	
-	<select id="">
+	<select id="selectReservationById" resultType="Reservation">
+		SELECT reservation.*, meeting_room.name AS meetingRoomName, employee.name AS employeeName, department.name AS departmentName
+		FROM reservation 
+		JOIN meeting_room ON meeting_room.meeting_room_id = reservation.meeting_room_id
+		JOIN employee ON employee.employee_id = reservation.employee_id
+		JOIN department ON department.department_id = employee.department_id
+		WHERE reservation_id = #{reservationId}
+	</select>
+	
 		<!-- select * from reservation where start_date >= '2020-01-01' and end_date <= '2020-01-05' -->
 		<!-- SELECT reservation.*, meeting_room.name AS meetingRoomName, employee.name AS employeeName, department.name AS departmentName
 FROM reservation 
@@ -74,6 +82,4 @@ JOIN department ON department.department_id = employee.department_id
 WHERE start_date BETWEEN DATE('2020-01-01') AND DATE('2020-01-1')+1
 ORDER BY reservation_id DESC 
 		 -->
-		
-	</select>
 </mapper>

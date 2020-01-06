@@ -16,6 +16,9 @@
 .clear_both {
 	clear: both;
 }
+.display_none {
+	display: none;
+}
 
 .width1200 {
 	width: 1200px;

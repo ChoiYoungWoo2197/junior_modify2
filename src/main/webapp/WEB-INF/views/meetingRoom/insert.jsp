@@ -80,7 +80,7 @@
 				<input type="hidden" name="checkTrue">
 			</div>
 			<div>
-				<input type="hidden" name="managerId" value="1">
+				<input type="hidden" name="managerId" value="${loginUser.user.employeeId}">
 				<input type="submit" value="등록">
 			</div>
 		</form>
