@@ -21,4 +21,13 @@ table, th, td {
 	display: none;
 }
 
+.overflow {
+	overflow: hidden;
+}
 
+.floatRight {
+	float: right;
+}
+.floatLeft {
+	float: left;
+}

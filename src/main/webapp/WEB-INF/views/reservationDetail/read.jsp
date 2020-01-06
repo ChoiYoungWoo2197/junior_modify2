@@ -4,11 +4,38 @@
 <%@ include file="../include/managerHeader.jsp"%>
 <jsp:useBean id="now" class="java.util.Date" />
 
-<link href="${pageContext.request.contextPath}/resources/css/reservationDetail/read.css" rel="stylesheet" type="text/css" />
+<style>
+table {
+	width: 100%;
+}
+
+table, th, td {
+	border: 1px solid #bcbcbc;
+}
+
+.width1200 {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.overflow {
+	overflow: hidden;
+}
+
+.floatRight {
+	float: right;
+}
+.floatLeft {
+	float: left;
+}
+
+</style>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
 	$(function() {
 		function hide() {
+			$("#listDiv").hide();
 			$("#reservationDiv").hide();
 			$("#processingDiv").hide();
 			$("#exitDiv").hide();
@@ -33,6 +60,7 @@
 		})
 		$(document).on("click", "#denyCancel", function() {
 			empty();
+			$("#listDiv").show();
 			$("#reservationDiv").show();
 		});
 
@@ -45,8 +73,6 @@
 					document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/cancel";
 					document.getElementById('reservationDetailForm').submit();
 				}
-
-
 			}
 		});
 
@@ -80,6 +106,7 @@
 
 		$(document).on("click", "#denyExit", function() {
 			empty();
+			$("#listDiv").show();
 			$("#processingDiv").show();
 		});
 
@@ -88,6 +115,8 @@
 				document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/exit";
 				document.getElementById('reservationDetailForm').submit();
 			}
+			
+			
 		});
 
 		//연장신청 클릭시
@@ -122,6 +151,7 @@
 
 		$(document).on("click", "#denyExtand", function() {
 			empty();
+			$("#listDiv").show();
 			$("#processingDiv").show();
 		});
 
@@ -141,7 +171,7 @@
 		$("#exitCheckReservation").click(function() {
 			hide();
 			var td = '<td> <b>이상유무확인</b></td>';
-			var abnormality = '<input type="text" name="abnormality"/>';
+			var abnormality = '<td><input type="text" name="abnormality" style="width:100%;"/></td>';
 			var cancel = '<input type="button" id="denyExitCheck" value="취소"/>';
 			var complete = '<input type="button" id="completeExitCheck" value="완료"/>';
 			$("#inputForm").append(td).append(abnormality);
@@ -150,14 +180,28 @@
 
 		$(document).on("click", "#denyExitCheck", function() {
 			empty();
+			$("#listDiv").show();
 			$("#exitDiv").show();
 		});
 
 		$(document).on("click", "#completeExitCheck", function() {
-			var abnormality = $("input[name='abnormality']").val()
-			alert(abnormality);
+			//var abnormality = $("input[name='abnormality']").val()
+
+			if (confirm("종료확인 하시겠습니까?") == true) {
+				if($("input[name='abnormality']").val() == "") {
+					alert("이상유무를 입력해주세요.");
+				}
+				else {
+					document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/exitCheck";
+					document.getElementById('reservationDetailForm').submit();	
+				}
+
+			}
 		});
 
+		$(document).on("click", "#list", function() {
+			location.href = "${pageContext.request.contextPath}/reservation/list";
+		});
 	})
 </script>
 
@@ -216,10 +260,13 @@
 						<c:when test="${reservation.state eq 'R'}">
 							<fmt:formatDate value="${now}" pattern="yyyy.MM.dd kk:mm" var="today" />
 							<fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd kk:mm" var="startDate" />
-							<fmt:formatDate value="${reservation.endDate}" pattern="yyyy.MM.dd kk:mm" var="endDate" />
+							<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" var="actualEndDate" />
 							<c:choose>
-								<c:when test="${today > startDate  &&  today < endDate}">
+								<c:when test="${today > startDate  &&  today < actualEndDate}">
 									<span>진행중</span>
+								</c:when>
+								<c:when test="${today >= actualEndDate}">
+									<span>종료</span>
 								</c:when>
 								<c:otherwise>
 									<span>예약</span>
@@ -294,7 +341,29 @@
 					<td>
 						<span>${extend.extendReason}</span>
 					</td>
+				</tr>	
+				</c:when>
+				
+				<c:when test="${reservation.state eq 'F' || reservation.state eq 'FV'}">
+				<tr>
+					<td>
+						<b>종료일시</b>
+					</td>
+					<td>
+						<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" />
+					</td>
 				</tr>
+				<c:if test="${not empty extend}">
+					<tr>
+						<td>
+							<b>연장사유</b>
+						</td>
+						<td>
+							<span>${extend.extendReason}</span>
+						</td>
+					</tr>
+				</c:if>
+	
 				</c:when>
 			</c:choose>
 
@@ -303,43 +372,49 @@
 
 		</table>
 		<div id="btnDiv"></div>
-		<c:if test="${reservation.state eq 'R' || reservation.state eq 'E'}">
-			<fmt:formatDate value="${now}" pattern="yyyy.MM.dd kk:mm" var="today" />
-			<fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd kk:mm" var="startDate" />
-			<fmt:formatDate value="${reservation.endDate}" pattern="yyyy.MM.dd kk:mm" var="endDate" />
-
-<%-- 			<h5>${today}</h5>
-			<h5>${startDate}</h5>
-			<h5>${endDate}</h5> --%>
-			<c:choose>
-				<c:when test="${today > startDate  &&  today < endDate || reservation.state eq 'E'}">
-					<div id="processingDiv">
-						<input type="button" id="exitReservation" value="조기종료" />
-
-						<c:if test="${loginUser.manager eq 'false' && extendIspossible eq 'true'}">
-							<input type="button" id="extandReservation" value="연장신청" />
-						</c:if>
-					</div>
-
-				</c:when>
-				<c:otherwise>
-					<div id="reservationDiv">
-						<input type="button" id="cancelReservation" value="예약취소" />
-						<c:if test="${loginUser.manager eq 'false'}">
-							<input type="button" id="updateReservation" value="예약수정" />
-						</c:if>
-					</div>
-				</c:otherwise>
-			</c:choose>
-		</c:if>
-		<c:if test="${reservation.state eq 'F'}">
-			<div id="exitDiv">
-				<c:if test="${loginUser.manager eq 'true'}">
-					<input type="button" id="exitCheckReservation" value="종료확인" />
-				</c:if>
+		<div class="overflow" >
+			<div id="listDiv" class="floatLeft">
+				<input type="button" id="list" value="목록" />
 			</div>
-		</c:if>
+			<c:if test="${loginUser.manager eq 'true' || isSelfReservation eq 'true'}">
+				<c:if test="${reservation.state eq 'R' || reservation.state eq 'E'}">
+					<fmt:formatDate value="${now}" pattern="yyyy.MM.dd kk:mm" var="today" />
+					<fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd kk:mm" var="startDate" />
+					<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" var="actualEndDate" />
+	
+					<c:choose>
+						<c:when test="${today > startDate  &&  today < actualEndDate}">
+							<div id="processingDiv"  class="floatRight">
+								<input type="button" id="exitReservation" value="조기종료" />
+								<c:if test="${loginUser.manager eq 'false' && extendIspossible eq 'true'}">
+									<input type="button" id="extandReservation" value="연장신청" />
+								</c:if>
+							</div>
+						</c:when>
+						<c:when test="${today >= actualEndDate}">
+							<c:set var="isExit" value="true" />
+						</c:when>
+						<c:otherwise>
+							<div id="reservationDiv" class="floatRight">
+								<input type="button" id="cancelReservation" value="예약취소" />
+								<c:if test="${loginUser.manager eq 'false'}">
+									<input type="button" id="updateReservation" value="예약수정" />
+								</c:if>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
 
+				<c:if test="${reservation.state eq 'F' || isExit eq 'true'}">
+					<div id="exitDiv" class="floatRight">
+						<c:if test="${loginUser.manager eq 'true'}">
+							<input type="button" id="exitCheckReservation" value="종료확인" />
+						</c:if>
+					</div>
+				</c:if>
+		
+			</c:if>
+		</div>
 		<input type="hidden" size="50" name="reservationId" value="${reservation.reservationId}" />
 	</form>
 </section>

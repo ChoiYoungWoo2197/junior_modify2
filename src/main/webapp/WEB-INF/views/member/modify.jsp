@@ -55,8 +55,7 @@
 
 	function valideInput() {
 		checkInput = true;
-		if ($("input[name='modifyMemberId']").val() == ""
-				|| validateId.test($("input[name='modifyMemberId']").val()) == false) {
+		if ($("input[name='modifyMemberId']").val() == "" || validateId.test($("input[name='modifyMemberId']").val()) == false) {
 			$("#valideId").css("display", "inline");
 			checkInput = false;
 			//alert("valideId :" + checkInput);
@@ -79,14 +78,12 @@
 			checkInput = false;
 			//alert("validePasswordCheck :" + checkInput);
 		}
-		if ($("input[name='email']").val() == ""
-				|| validateEmail.test($("input[name='email']").val()) == false) {
+		if ($("input[name='email']").val() == "" || validateEmail.test($("input[name='email']").val()) == false) {
 			$("#valideEmail").css("display", "inline");
 			checkInput = false;
 			//alert("valideEmail :" + checkInput);
 		}
-		if ($("input[name='phone']").val() == ""
-				|| validatePhone.test($("input[name='phone']").val()) == false) {
+		if ($("input[name='phone']").val() == "" || validatePhone.test($("input[name='phone']").val()) == false) {
 			$("#validePhone").css("display", "inline");
 			checkInput = false;
 			//alert("validePhone :" + checkInput);
@@ -130,7 +127,7 @@
 
 	function checkId() {
 		$("#valideId").css("display", "none");
-		if ($("input[name='modifyMemberId']").val() == ""	|| validateId.test($("input[name='modifyMemberId']").val()) == false) {
+		if ($("input[name='modifyMemberId']").val() == "" || validateId.test($("input[name='modifyMemberId']").val()) == false) {
 			$("#valideId").css("display", "inline");
 			return false;
 		}
@@ -162,8 +159,7 @@
 
 	function checkEmail() {
 		$("#valideEmail").css("display", "none");
-		if ($("input[name='email']").val() == ""
-				|| validateEmail.test($("input[name='email']").val()) == false) {
+		if ($("input[name='email']").val() == "" || validateEmail.test($("input[name='email']").val()) == false) {
 			$("#valideEmail").css("display", "inline");
 
 			return false;
@@ -251,18 +247,16 @@
 			<table>
 				<tr>
 					<td><b>사번</b><b class="red">*</b></td>
-					<td><input name="modifyMemberId" type="text" size="20" value="${employeeModify.memberId}" /> <span id="valideId"
-						class="error">사원번호를 입력하세요.</span> <span id="checkIdSuccess"
-						class="success">사용가능한 사원번호 입니다.</span> <span id="checkIdFail"
-						class="error">이미 존재하는 사원번호 입니다.</span></td>
-					<td colspan="2"><input type="button" onclick="checkId()"
-						value="중복체크"></td>
+					<td><input name="modifyMemberId" type="text" size="20" value="${employeeModify.memberId}" /> 
+					<span id="valideId"	class="error">사원번호를 입력하세요.</span>
+					<span id="checkIdSuccess" class="success">사용가능한 사원번호 입니다.</span>
+					<span id="checkIdFail"	class="error">이미 존재하는 사원번호 입니다.</span></td>
+					<td colspan="2"><input type="button" onclick="checkId()" value="중복체크"></td>
 				</tr>
 				<tr>
 					<td><b>사원명</b><b class="red">*</b></td>
-					<td><input name="name" type="text" size="20"
-						value="${employeeModify.name}" /> <span id="valideName"
-						class="error">이름을 입력하세요.</span></td>
+					<td><input name="name" type="text" size="20" value="${employeeModify.name}" />
+					<span id="valideName" class="error">이름을 입력하세요.</span></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
@@ -278,28 +272,27 @@
 				</tr>
 				<tr>
 					<td><b>비빌번호</b><b class="red">*</b></td>
-					<td><input name="password" type="password" size="20" /> <span
-						id="validePassword" class="error">비밀번호를 입력하세요.</span></td>
+					<td><input name="password" type="password" size="20" />
+					<span id="validePassword" class="error">비밀번호를 입력하세요.</span></td>
 
 					<td><b>비밀번호 확인</b><b class="red">*</b></td>
-					<td colspan="1"><input id="passwordCheck" name="passwordCheck"
-						type="password" size="20" /> <span id="validePasswordCheck"
-						class="error">비밀번호 확인을 입력하세요.</span> <span
-						id="checkPasswordSuccess" class="success">비밀번호가 일치합니다.</span> <span
-						id="checkPasswordFail" class="error">비밀번호가 일치하지 않습니다.</span></td>
+					<td colspan="1"><input id="passwordCheck" name="passwordCheck" type="password" size="20" />
+					<span id="validePasswordCheck"	class="error">비밀번호 확인을 입력하세요.</span>
+					<span id="checkPasswordSuccess" class="success">비밀번호가 일치합니다.</span>
+					<span id="checkPasswordFail" class="error">비밀번호가 일치하지 않습니다.</span></td>
 				</tr>
 				<tr>
 					<td><b>이메일</b><b class="red">*</b></td>
-					<td><input name="email" type="text" size="20" value="${employeeModify.email}" /> <span id="valideEmail"
-						class="error">이메일을 입력하세요.</span> <span id="checkEmailSuccess"
-						class="success">사용가능한 이메일 입니다.</span> <span id="checkEmailFail"
-						class="error">이미 존재하는 이메일 입니다.</span></td>
+					<td><input name="email" type="text" size="20" value="${employeeModify.email}" />
+					<span id="valideEmail"	class="error">이메일을 입력하세요.</span>
+					<span id="checkEmailSuccess" class="success">사용가능한 이메일 입니다.</span>
+					<span id="checkEmailFail" class="error">이미 존재하는 이메일 입니다.</span></td>
 					<td colspan="2"><input type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크"></td>
 				</tr>
 				<tr>
 					<td><label>전화번호</label></td>
-					<td><input name="phone" type="text" size="20" value="${employeeModify.phone}"/> <span
-						id="validePhone" class="error">전화번호를 입력하세요.</span></td>
+					<td><input name="phone" type="text" size="20" value="${employeeModify.phone}"/>
+					<span id="validePhone" class="error">전화번호를 입력하세요.</span></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>

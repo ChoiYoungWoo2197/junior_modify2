@@ -95,21 +95,18 @@ table, th, td {
 
 	function valideInput() {
 		checkInput = true;
-		if ($("input[name='memberId']").val() == ""
-				|| validateId.test($("input[name='memberId']").val()) == false) {
+		if ($("input[name='memberId']").val() == ""	|| validateId.test($("input[name='memberId']").val()) == false) {
 			$("#valideId").css("display", "inline");
 			checkInput = false;
 			//alert("valideId :" + checkInput);
 		}
-		if ($("input[name='name']").val() == ""
-				|| validateName.test($("input[name='name']").val()) == false) {
+		if ($("input[name='name']").val() == ""	|| validateName.test($("input[name='name']").val()) == false) {
 			$("#valideName").css("display", "inline");
 
 			checkInput = false;
 			//alert("valideName :" + checkInput);
 		}
-		if ($("input[name='password']").val() == ""
-				|| validatePassword.test($("input[name='password']").val()) == false) {
+		if ($("input[name='password']").val() == ""	|| validatePassword.test($("input[name='password']").val()) == false) {
 			$("#validePassword").css("display", "inline");
 			checkInput = false;
 			//alert("validePassword :" + checkInput);
@@ -119,14 +116,12 @@ table, th, td {
 			checkInput = false;
 			//alert("validePasswordCheck :" + checkInput);
 		}
-		if ($("input[name='email']").val() == ""
-				|| validateEmail.test($("input[name='email']").val()) == false) {
+		if ($("input[name='email']").val() == "" || validateEmail.test($("input[name='email']").val()) == false) {
 			$("#valideEmail").css("display", "inline");
 			checkInput = false;
 			//alert("valideEmail :" + checkInput);
 		}
-		if ($("input[name='phone']").val() == ""
-				|| validatePhone.test($("input[name='phone']").val()) == false) {
+		if ($("input[name='phone']").val() == "" || validatePhone.test($("input[name='phone']").val()) == false) {
 			$("#validePhone").css("display", "inline");
 			checkInput = false;
 			//alert("validePhone :" + checkInput);
@@ -169,8 +164,7 @@ table, th, td {
 
 	function checkId() {
 		$("#valideId").css("display", "none");
-		if ($("input[name='memberId']").val() == ""
-				|| validateId.test($("input[name='memberId']").val()) == false) {
+		if ($("input[name='memberId']").val() == ""	|| validateId.test($("input[name='memberId']").val()) == false) {
 			$("#valideId").css("display", "inline");
 
 			return false;
@@ -203,8 +197,7 @@ table, th, td {
 
 	function checkEmail() {
 		$("#valideEmail").css("display", "none");
-		if ($("input[name='email']").val() == ""
-				|| validateEmail.test($("input[name='email']").val()) == false) {
+		if ($("input[name='email']").val() == "" || validateEmail.test($("input[name='email']").val()) == false) {
 			$("#valideEmail").css("display", "inline");
 
 			return false;

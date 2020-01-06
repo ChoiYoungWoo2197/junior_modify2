@@ -1,6 +1,7 @@
 package kr.or.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,10 +57,15 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 	}
 
 	@Override
-	public Reservation searchNextReservationById(int reservationId) {
+	public List<Reservation> searchNextReservationById(int reservationId) {
 		// TODO Auto-generated method stub
 		return reservationDetailDao.searchNextReservationById(reservationId);
 	}
 
+	@Override
+	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality) {
+		// TODO Auto-generated method stub
+		reservationDetailDao.updateExitCheckByMap(reservationId, validateChecker, abnormality);
+	}
 
 }
