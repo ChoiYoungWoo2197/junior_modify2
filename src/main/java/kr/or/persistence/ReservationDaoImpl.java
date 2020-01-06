@@ -55,7 +55,7 @@ private static final String namespace = "kr.or.mappers.reservationMapper";
 
 	@Override
 	public void updateReservationByCurrentTime(Date currentTime) {
-		sqlSession.update(namespace + ".updateReservationByCurrentTime");
+		sqlSession.update(namespace + ".updateReservationByCurrentTime", currentTime);
 	}
 
 

@@ -40,7 +40,7 @@
 		})
 		
 		$(document).on("click", ".updateReservation", function(){
-			var reservationId = Number($(this).find(".readReservation").text());
+			var reservationId = Number($(this).find(".readReservation").attr("data-reservationId"));
 			location.href = "${pageContext.request.contextPath}/reservationDetail/read?reservationId="+ reservationId;
 		})
 		
@@ -207,9 +207,11 @@
 				</tr>
 			</c:if>
 			<c:if test="${!empty reservationList}">
+				<c:set var="listIndex" value="${fn:length(reservationList)}"/>
 				<c:forEach var="reservation" items="${reservationList}">
 					<tr class="updateReservation">
-						<td class="readReservation">${reservation.reservationId}</td>
+						<td class="readReservation" data-reservationId="${reservation.reservationId}">${listIndex}</td>
+						<c:set var="listIndex" value="${listIndex-1}"/>
 						<td><fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd"/></td>
 						<td><fmt:formatDate value="${reservation.startDate}" pattern="kk:mm"/> ~ <fmt:formatDate value="${reservation.endDate}" pattern="kk:mm"/></td>
 						<td>

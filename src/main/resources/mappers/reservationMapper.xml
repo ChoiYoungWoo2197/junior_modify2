@@ -84,7 +84,7 @@
 		JOIN employee ON employee.employee_id = reservation.employee_id
 		JOIN department ON department.department_id = employee.department_id
 		<include refid="search"></include>
-		ORDER BY reservation_id DESC 
+		ORDER BY start_date DESC, end_date DESC, reservation_date DESC 
 		LIMIT #{pageStart}, #{amount}
 	</select>
 	

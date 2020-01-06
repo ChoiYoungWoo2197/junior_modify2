@@ -39,7 +39,7 @@
 		})
 		
 		$(document).on("click", ".updateMeetingRoom", function(){
-			var meetingRoomId = Number($(this).find(".readMeetingRoom").text());
+			var meetingRoomId = Number($(this).find(".readMeetingRoom").attr("data-meetingRoomId"));
 			
 			location.href = "read?meetingRoomId="+meetingRoomId;
 		})
@@ -85,9 +85,11 @@
 				</tr>
 			</c:if>
 			<c:if test="${!empty meetingRoomList}">
+				<c:set var="listIndex" value="${fn:length(meetingRoomList)}"/>
 				<c:forEach var="meetingRoom" items="${meetingRoomList}">
 					<tr class="updateMeetingRoom">
-						<td class="readMeetingRoom">${meetingRoom.meetingRoomId}</td>
+						<td class="readMeetingRoom" data-meetingRoomId="${meetingRoom.meetingRoomId}">${listIndex}</td>
+						<c:set var="listIndex" value="${listIndex-1}"/>
 						<td>${meetingRoom.name}</td>
 						<td>${meetingRoom.seats}</td>
 						<td>${meetingRoom.meetingRoomEquipmenet}</td>
