@@ -3,26 +3,74 @@
 <mapper namespace="kr.or.mappers.reservationMapper">
 	
 	<sql id="search">
-		<if test="searchType == 'department'.toString()">
-			WHERE department.name LIKE '%${searchContent}%'
-		</if>
-		<if test="searchType == 'employee'.toString()">
-			WHERE employee.name LIKE '%${searchContent}%'
-		</if>
-		<if test="searchType == 'meetPurpose'.toString()">
-			WHERE reservation.meet_purpose LIKE '%${searchContent}%'
+		<if test="searchStart">
+			WHERE start_date BETWEEN DATE(#{searchStart}) <if test="searchEnd">AND DATE(#{searchEnd})+1 </if>
 		</if>
 		<if test="state">
-			WHERE reservation.state = #{state}
+			<if test="searchStart == null">
+				WHERE reservation.state = #{state}
+			</if>
+			<if test="searchStart != null">
+				AND reservation.state = #{state}
+			</if>
 		</if>
 		<if test="meetingRoomId">
-			WHERE reservation.meeting_room_id = #{meetingRoomId}
+			<if test="searchStart == null">
+				<if test="state == null">
+					WHERE reservation.meeting_room_id = #{meetingRoomId}
+				</if>
+				<if test="state != null">
+					AND reservation.meeting_room_id = #{meetingRoomId}
+				</if>
+			</if>
+			<if test="searchStart != null">
+				AND reservation.meeting_room_id = #{meetingRoomId}
+			</if>
 		</if>
-		<if test="searchStart">
-			WHERE start_date BETWEEN DATE(#{searchStart})
+		<if test="searchType == 'department'.toString()">
+			<if test="searchStart == null">
+				<if test="state == null">
+					<if test="meetingRoomId == null">
+						WHERE department.name LIKE '%${searchContent}%'
+					</if>
+				</if>
+				<if test="state != null || meetingRoomId != null">
+					AND department.name LIKE '%${searchContent}%'
+				</if>
+			</if>
+			<if test="searchStart != null">
+				AND department.name LIKE '%${searchContent}%'
+			</if>
 		</if>
-		<if test="searchEnd">
-			AND DATE(#{searchEnd})+1
+		<if test="searchType == 'employee'.toString()">
+			<if test="searchStart == null">
+				<if test="state == null">
+					<if test="meetingRoomId == null">
+						WHERE employee.name LIKE '%${searchContent}%'
+					</if>
+				</if>
+				<if test="state != null || meetingRoomId != null">
+					AND employee.name LIKE '%${searchContent}%'
+				</if>
+			</if>
+			<if test="searchStart != null">
+				AND employee.name LIKE '%${searchContent}%'
+			</if>
+		</if>
+		<if test="searchType == 'meetPurpose'.toString()">
+			<if test="searchStart == null">
+				<if test="state == null">
+					<if test="meetingRoomId == null">
+						WHERE reservation.meet_purpose LIKE '%${searchContent}%'
+					</if>
+				</if>
+				<if test="state != null || meetingRoomId != null">
+					AND reservation.meet_purpose LIKE '%${searchContent}%'
+				</if>
+			</if>
+			<if test="searchStart != null">
+				AND reservation.meet_purpose LIKE '%${searchContent}%'
+			</if>
 		</if>
 	</sql>
 	
@@ -65,14 +113,14 @@
 	</select>
 	
 	<insert id="insertReservation" parameterType="Reservation">
-		INSERT INTO reservation(employee_id, meeting_room_id, meet_purpose, meet_attendess, start_date, end_date)
-		VALUES (#{employeeId},#{meetingRoomId},#{meetPurpose},#{meetAttendess},#{startDate},#{endDate})
+		INSERT INTO reservation(employee_id, meeting_room_id, meet_purpose, meet_attendess, start_date, end_date, actual_end_date)
+		VALUES (#{employeeId},#{meetingRoomId},#{meetPurpose},#{meetAttendess},#{startDate},#{endDate},#{actualEndDate})
 	</insert>
 	
 	<update id="updateReservation" parameterType="Reservation">
 		UPDATE reservation 
 		SET meeting_room_id = #{meetingRoomId}, meet_purpose = #{meetPurpose}, meet_attendess = #{meetAttendess}, 
-		start_date = #{startDate}, end_date = #{endDate}, modify_date = #{modifyDate}
+		start_date = #{startDate}, end_date = #{endDate}, modify_date = #{modifyDate}, actual_end_date = #{actualEndDate}
 		WHERE reservation_id = #{reservationId}
 	</update>
 	
@@ -94,4 +142,7 @@ JOIN department ON department.department_id = employee.department_id
 WHERE start_date BETWEEN DATE('2020-01-01') AND DATE('2020-01-1')+1
 ORDER BY reservation_id DESC 
 		 -->
+	<update id="updateReservationByCurrentTime">
+		UPDATE reservation SET state = "F" WHERE end_date <![CDATA[<=]]> #{currentTime}
+	</update>
 </mapper>

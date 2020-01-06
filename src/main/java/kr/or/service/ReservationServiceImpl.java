@@ -1,9 +1,11 @@
 package kr.or.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
@@ -31,7 +33,9 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	
 	@Override
+	@Transactional
 	public List<Reservation> searchReservation(SearchCriteria searchCriteria) {
+		reservationDao.updateReservationByCurrentTime(new Date());
 		return reservationDao.searchReservation(searchCriteria);
 	}
 	

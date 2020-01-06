@@ -1,5 +1,6 @@
 package kr.or.persistence;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,11 @@ private static final String namespace = "kr.or.mappers.reservationMapper";
 	@Override
 	public void updateReservation(Reservation reservation) {
 		sqlSession.update(namespace + ".updateReservation", reservation);
+	}
+
+	@Override
+	public void updateReservationByCurrentTime(Date currentTime) {
+		sqlSession.update(namespace + ".updateReservationByCurrentTime");
 	}
 
 

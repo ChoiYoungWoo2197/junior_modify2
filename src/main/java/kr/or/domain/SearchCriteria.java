@@ -1,7 +1,5 @@
 package kr.or.domain;
 
-import java.util.Map;
-
 public class SearchCriteria {
 	private int page; //페이지번호
 	private int amount; //페이지당 몇개의 데이터를 보여줄 것인가?

@@ -100,6 +100,7 @@ public class ReservationController {
 		
 		reservation.setStartDate(startDate);
 		reservation.setEndDate(endDate);
+		reservation.setActualEndDate(endDate);
 		
 		reservationService.insertReservation(reservation);
 		
@@ -193,6 +194,7 @@ public class ReservationController {
 		
 		reservation.setStartDate(startDate);
 		reservation.setEndDate(endDate);
+		reservation.setActualEndDate(endDate);
 		reservation.setModifyDate(new Date());
 		
 		reservationService.updateReservation(reservation);
