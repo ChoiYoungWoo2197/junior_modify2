@@ -281,8 +281,8 @@
 					<select name="startHour">
 						<c:forEach var="hour" begin="9" end="22">
 							<fmt:formatDate value="${reservation.startDate}" pattern="kk" var="start"/>
-							<c:if test="${hour < 10} ">
-								<option value="0${hour}" ${hour == start ? 'selected':''}>${hour}</option>
+							<c:if test="${hour < 10}">
+								<option value="0${hour}" selected="selected">0${hour}</option>
 							</c:if>
 							<c:if test="${hour >= 10}">
 								<option value="${hour}" ${hour == start ? 'selected':''}>${hour}</option>
@@ -293,7 +293,7 @@
 						<c:forEach var="minute" begin="0" end="59">
 							<fmt:formatDate value="${reservation.startDate}" pattern="mm" var="start"/>
 							<c:if test="${minute < 10}">
-								<option value="0${minute}" ${minute == start ? 'selected':''}>${minute}</option>
+								<option value="0${minute}" ${minute == start ? 'selected':''}>0${minute}</option>
 							</c:if>
 							<c:if test="${minute >= 10}">
 								<option value="${minute}" ${minute == start ? 'selected':''}>${minute}</option>
@@ -306,7 +306,7 @@
 						<c:forEach var="hour" begin="9" end="22">
 							<fmt:formatDate value="${reservation.endDate}" pattern="kk" var="end"/>
 							<c:if test="${hour < 10}">
-								<option value="0${hour}" ${hour == end ? 'selected':''}>${hour}</option>
+								<option value="0${hour}" ${hour == end ? 'selected':''}>0${hour}</option>
 							</c:if>
 							<c:if test="${hour >= 10}">
 								<option value="${hour}" ${hour == end ? 'selected':''}>${hour}</option>
@@ -317,7 +317,7 @@
 						<c:forEach var="minute" begin="0" end="59">
 							<fmt:formatDate value="${reservation.endDate}" pattern="mm" var="end"/>
 							<c:if test="${minute < 10}">
-								<option value="0${minute}" ${minute == end ? 'selected':''}>${minute}</option>
+								<option value="0${minute}" ${minute == end ? 'selected':''}>0${minute}</option>
 							</c:if>
 							<c:if test="${minute >= 10}">
 								<option value="${minute}" ${minute == end ? 'selected':''}>${minute}</option>

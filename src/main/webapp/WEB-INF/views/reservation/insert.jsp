@@ -258,7 +258,7 @@
 					<select name="startHour">
 						<c:forEach var="hour" begin="9" end="22">
 							<c:if test="${hour < 10}">
-								<option value="0${hour}">${hour}</option>
+								<option value="0${hour}">0${hour}</option>
 							</c:if>
 							<c:if test="${hour >= 10}">
 								<option value="${hour}">${hour}</option>
@@ -268,7 +268,7 @@
 					<select name="startMinute">
 						<c:forEach var="minute" begin="0" end="59">
 							<c:if test="${minute < 10}">
-								<option value="0${minute}">${minute}</option>
+								<option value="0${minute}">0${minute}</option>
 							</c:if>
 							<c:if test="${minute >= 10}">
 								<option value="${minute}">${minute}</option>
@@ -280,7 +280,7 @@
 					<select name="endHour">
 						<c:forEach var="hour" begin="9" end="22">
 							<c:if test="${hour < 10}">
-								<option value="0${hour}">${hour}</option>
+								<option value="0${hour}">0${hour}</option>
 							</c:if>
 							<c:if test="${hour >= 10}">
 								<option value="${hour}">${hour}</option>
@@ -290,7 +290,7 @@
 					<select name="endMinute">
 						<c:forEach var="minute" begin="0" end="59">
 							<c:if test="${minute < 10}">
-								<option value="0${minute}">${minute}</option>
+								<option value="0${minute}">0${minute}</option>
 							</c:if>
 							<c:if test="${minute >= 10}">
 								<option value="${minute}">${minute}</option>
