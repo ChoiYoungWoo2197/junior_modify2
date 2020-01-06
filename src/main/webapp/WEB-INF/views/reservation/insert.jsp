@@ -80,8 +80,8 @@
 			}
 		})
 		
-		var meetingStart = new Array(); //ajax로 받은 값을 담을 변수 지정
-		var meetingEnd = new Array();
+		/* var meetingStart = new Array(); //ajax로 받은 값을 담을 변수 지정
+		var meetingEnd = new Array(); */
 		var choiceDay;
 		var date = new Date();
 		var today = String(date.getFullYear())+String(('0'+(date.getMonth()+1)).slice(-2))+String(('0'+date.getDate()).slice(-2));
@@ -123,8 +123,8 @@
 							var $reservationLi = $("<li>").html(startDate + "~" + endDate + "&ensp;" + element.meetPurpose +"<br>(" + element.employeeName + "("+ element.departmentName + "))" );
 							$("#reservationList ul").append($reservationLi);
 							
-							meetingStart[index] = startDate;
-							meetingEnd[index] = endDate;
+							/* meetingStart[index] = startDate;
+							meetingEnd[index] = endDate; */
 						})
 					}
 				}
@@ -163,9 +163,6 @@
 			var startDate2 = $("#today").text().replace(".","")+date+$("select[name='startHour']").val()+$("select[name='startMinute']").val();
 			var endDate2 = $("#today").text().replace(".","")+date+$("select[name='endHour']").val()+$("select[name='endMinute']").val();
 			
-			//alert(currentDate);
-			//alert(startDate2);
-			//alert(endDate2)
 			if(currentDate >= startDate2 || currentDate >= endDate2) {
 				alert("지난 시간은 예약할 수 없습니다.");
 				$("select[name='startHour']").focus();
@@ -176,10 +173,7 @@
 			$("input[name='end']").val(endDate);
 			$("input[name='choiceDay']").val(choiceDay);
 			
-			alert(meetingStart);
-			alert(meetingEnd);
-			
-			for(var i=0; i<meetingStart.length; i++) {
+			/* for(var i=0; i<meetingStart.length; i++) {
 				if(Number(meetingStart[i].replace(":","")) <= start && start <= Number(meetingEnd[i].replace(":",""))) {
 					alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.1");
 					$("select[name='startHour']").focus();
@@ -190,11 +184,11 @@
 					$("select[name='endHour']").focus();
 					return false;
 				}
-			}
+			} */
 			
 			var result = true;
 			$.ajax({
-				url : "/reservation/check",
+				url : "/reservation/check?choiceDay="+choiceDay+"&start="+startDate+"&end="+endDate+"&meetingRoomId="+$("select[name='meetingRoomId']").val(),
 				type : "get",
 				async : false,
 				success : function(res) {
@@ -202,6 +196,9 @@
 					
 					if(res == "false") {
 						result = false;
+						alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.");
+					} else {
+						result = true;
 					}
 				}
 			})

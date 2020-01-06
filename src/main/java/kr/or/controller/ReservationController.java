@@ -89,9 +89,6 @@ public class ReservationController {
 	public String insert(Model model, Reservation reservation, String start, String end) {
 		logger.info("insert");
 		
-//		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
-//		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(reservation.getMeetingRoomId(), choiceDate);
-		
 		Date startDate = null;
 		Date endDate = null;
 		try {
@@ -100,24 +97,6 @@ public class ReservationController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		System.out.println(startDate);
-		System.out.println(endDate);
-		
-		/*
-		for(Reservation res : reservationList) {
-			if(res.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= res.getEndDate().getTime()) {
-				System.out.println("예약불가1");
-				model.addAttribute("msg", "이미 예약된 건이 있습니다. 다른 시간을 선택해주세요..");
-				return "reservation/insert";
-			}
-			if(res.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= res.getEndDate().getTime()) {
-				System.out.println("예약불가2");
-				model.addAttribute("msg", "이미 예약된 건이 있습니다. 다른 시간을 선택해주세요..");
-				return "reservation/insert";
-			}
-			
-		}
-		*/
 		
 		reservation.setStartDate(startDate);
 		reservation.setEndDate(endDate);
@@ -127,22 +106,33 @@ public class ReservationController {
 		return "redirect:/reservation/list";
 	}
 	
-	@RequestMapping(value = "/check", method = RequestMethod.GET)
-	public @ResponseBody String check(String choiceDay) {
-		logger.info("check");
+	@RequestMapping(value = "/checkTime", method = RequestMethod.GET)
+	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId) {
+		logger.info("checkTime");
+		String result = "true";
 		
-//		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
-//		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(reservation.getMeetingRoomId(), choiceDate);
-//		
-//		for(Reservation res : reservationList) {
-//			if(res.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= res.getEndDate().getTime()) {
-//				return "false";
-//			}
-//			if(res.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= res.getEndDate().getTime()) {
-//				return "false";
-//			}
-//		}
+		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
+		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(Integer.parseInt(meetingRoomId), choiceDate);
 		
-		return "false";
+		Date startDate = null;
+		Date endDate = null;
+		try {
+			startDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(start); //String -> Date : parse & Date -> String : format
+			endDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(end);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		for(Reservation res : reservationList) {
+			if(res.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= res.getEndDate().getTime()) {
+				result = "false";
+				
+			}
+			if(res.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= res.getEndDate().getTime()) {
+				result = "false";
+			}
+		}
+		
+		return result;
 	}
 }

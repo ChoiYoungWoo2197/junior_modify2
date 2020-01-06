@@ -83,7 +83,7 @@
 			<input type="date" name="searchStartDate"> ~ <input type="date" name="searchEndDate">
 			<select name="state">
 				<option value="none">상태</option>
-				<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약</option>
+				<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약(진행중)</option>
 				<option value="RC" ${searchCriteria.state == 'RC' ? 'selected' : ''}>예약취소</option>
 				<option value="E" ${searchCriteria.state == 'E' ? 'selected' : ''}>연장</option>
 				<option value="F" ${searchCriteria.state == 'F' ? 'selected' : ''}>종료</option>
