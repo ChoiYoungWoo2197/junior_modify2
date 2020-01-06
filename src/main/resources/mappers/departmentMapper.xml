@@ -1,51 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.mappers.departmentMapper">
-	
+
 	<select id="searchDepartment" resultType="Department">
-		SELECT *, (SELECT count(employee_id) FROM employee WHERE employee.department_id = department.department_id) AS emoloyeeCount
-		FROM department WHERE name LIKE '%${searchContent}%' 
-		ORDER BY department_id DESC 
+		SELECT *, (SELECT
+		count(employee_id) FROM employee WHERE employee.department_id =
+		department.department_id) AS emoloyeeCount
+		FROM department WHERE name
+		LIKE '%${searchContent}%'
+		ORDER BY department_id DESC
 		LIMIT #{pageStart}, #{amount}
-    </select>
-	
-    <select id="searchDepartmentCount" resultType="int">
-		SELECT COUNT(department_id) 
-		FROM department 
+	</select>
+
+	<select id="searchDepartmentCount" resultType="int">
+		SELECT
+		COUNT(department_id)
+		FROM department
 		WHERE name LIKE '%${searchContent}%'
 	</select>
-	
+
 	<insert id="insertDepartment" parameterType="Department">
-		INSERT INTO department(name) 
+		INSERT INTO
+		department(name)
 		VALUES (#{name})
 	</insert>
-	
+
 	<select id="selectDepartmentById" resultType="Department">
-		SELECT * 
-		FROM department 
+		SELECT *
+		FROM department
 		WHERE department_id = #{departmentId}
 	</select>
-	
+
 	<update id="updateDepartment" parameterType="Department">
-		UPDATE department 
-		SET name = #{name} 
+		UPDATE department
+		SET name = #{name}
 		WHERE department_id = #{departmentId}
 	</update>
-	
+
 	<select id="selectEmployeeCountById" resultType="int">
-		SELECT (SELECT count(employee_id) FROM employee WHERE employee.department_id = department.department_id) AS emoloyeeCount 
-		FROM department 
+		SELECT (SELECT
+		count(employee_id) FROM employee WHERE employee.department_id =
+		department.department_id) AS emoloyeeCount
+		FROM department
 		WHERE department_id = #{departmentId}
 	</select>
-	
+
 	<delete id="deleteDepartment" parameterType="int">
-		DELETE FROM department 
+		DELETE FROM
+		department
 		WHERE department_id = #{departmentId}
 	</delete>
 	
-	<!-- <select id="selectEmployeeByDepartmentById" resultType="EmployeeByDepartment">
-    	SELECT department.department_id, department.name, employee.employee_id, employee.name AS employeeName, employee.email, employee.phone 
-		FROM department JOIN employee ON employee.department_id = department.department_id
-		WHERE department.department_id = #{departmentId}
-    </select> -->
+	<select id="searchDepartmentList" resultType="Department">
+		SELECT * FROM department
+	</select>
+	<!-- <select id="selectEmployeeByDepartmentById" resultType="EmployeeByDepartment"> 
+		SELECT department.department_id, department.name, employee.employee_id, employee.name 
+		AS employeeName, employee.email, employee.phone FROM department JOIN employee 
+		ON employee.department_id = department.department_id WHERE department.department_id 
+		= #{departmentId} </select> -->
 </mapper>

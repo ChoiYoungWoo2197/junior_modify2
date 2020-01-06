@@ -1,5 +1,6 @@
 package kr.or.persistence;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +40,23 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 		map.put("reservationId", reservationId);
 		map.put("state", state);
 		sqlSession.update(namespace + ".updateStateByMap", map);
+	}
+
+	@Override
+	public void updateExitByMap(int reservationId, String validateApplicant, Date actualEndDate) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("reservationId", reservationId);
+		map.put("validateApplicant", validateApplicant);
+		map.put("actualEndDate", actualEndDate);
+		sqlSession.update(namespace + ".updateExitByMap", map);
+		
+	}
+
+	@Override
+	public Reservation searchNextReservationById(int reservationId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".searchNextReservationById", reservationId);
 	}
 	
 

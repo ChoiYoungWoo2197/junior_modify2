@@ -4,7 +4,8 @@
 
 	<select id="searchReservationById" parameterType="int"	resultType="Reservation">
 		select * from reservation
-		where reservation_id =	#{reservationId}
+		where reservation_id =
+		#{reservationId}
 	</select>
 
 	<update id="updateCancelReasonByMap">
@@ -15,9 +16,25 @@
 		WHERE reservation_id = #{reservationId}
 	</update>
 
+	<update id="updateExitByMap">
+		UPDATE reservation
+		SET validate_applicant = #{validateApplicant}, actual_end_date = #{actualEndDate}
+		WHERE reservation_id = #{reservationId}
+	</update>
+
 	<update id="updateStateByMap">
 		UPDATE reservation
 		SET state = #{state}
-		WHERE reservation_id = #{reservationId}
+		WHERE
+		reservation_id = #{reservationId}
 	</update>
+	
+	<select id="searchNextReservationById" parameterType="int" resultType="Reservation">
+		SELECT reservationB.*  FROM reservation AS reservationA
+		LEFT JOIN reservation AS reservationB ON DATE(reservationB.start_date) = DATE(reservationA.end_date)
+		AND reservationB.start_date > reservationA.end_date
+		AND reservationB.meeting_room_id = reservationA.meeting_room_id
+		AND reservationB.state = 'R'
+		where reservationA.reservation_id = #{reservationId}
+	</select>
 </mapper>
