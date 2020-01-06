@@ -52,6 +52,12 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 		sqlSession.update(namespace + ".updateExitByMap", map);
 		
 	}
+
+	@Override
+	public int searchNextReservationById(int reservationId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".searchNextReservationById", reservationId);
+	}
 	
 
 }

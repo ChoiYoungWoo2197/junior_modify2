@@ -54,13 +54,12 @@ public class ReservationDetailController {
 		Department department = managementServcice.selectDepartmentById(Integer.parseInt(employee.getDepartmentId()));
 		MeetingRoom meetingRoom = meetingRoomService.selectMeetingRoomById(reservation.getMeetingRoomId());
 		Extend extend =  reservationDetailService.searchExtendReasonById(reservation.getReservationId());
+		boolean extendIspossible = (reservationDetailService.searchNextReservationById(reservation.getReservationId()) > 0)? false : true ;
 		
 		reservation.setEmployeeName(employee.getName());
 		reservation.setDepartmentName(department.getName());
 		reservation.setMeetingRoomName(meetingRoom.getName());
 		/*
-				
-				
 		Date date1 = setTime("2020.01.06 8:30");
 		Date date2 = setTime("2020.01.06 20:30"); 
 		
@@ -70,6 +69,7 @@ public class ReservationDetailController {
 		
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("extend", extend);
+		model.addAttribute("extendIspossible", extendIspossible);
 		return "reservationDetail/read";
 	}
 

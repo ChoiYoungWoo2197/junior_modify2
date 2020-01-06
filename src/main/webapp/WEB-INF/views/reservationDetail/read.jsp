@@ -304,7 +304,7 @@
 					<div id="processingDiv">
 						<input type="button" id="exitReservation" value="조기종료" />
 
-						<c:if test="${loginUser.manager eq 'false'}">
+						<c:if test="${loginUser.manager eq 'false' && extendIspossible eq 'true'}">
 							<input type="button" id="extandReservation" value="연장신청" />
 						</c:if>
 					</div>

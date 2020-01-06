@@ -55,5 +55,11 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 		return extendDao.searchExtendReasonById(reservationId);
 	}
 
+	@Override
+	public int searchNextReservationById(int reservationId) {
+		// TODO Auto-generated method stub
+		return reservationDetailDao.searchNextReservationById(reservationId);
+	}
+
 
 }

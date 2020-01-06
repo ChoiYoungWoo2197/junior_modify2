@@ -12,4 +12,5 @@ public interface ReservationDetailService {
 	public void updateExitByMap(int reservationId, String validateApplicant, Date actualEndDate);
 	public void insertExtendByMap(Extend extand);
 	public Extend searchExtendReasonById(int reservationId);
+	public int searchNextReservationById(int reservationId);
 }
