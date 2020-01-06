@@ -4,7 +4,10 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import kr.or.domain.Extend;
 import kr.or.domain.Reservation;
+import kr.or.persistence.ExtendDao;
 import kr.or.persistence.ReservationDetailDao;
 
 @Service
@@ -12,6 +15,9 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 
 	@Autowired
 	ReservationDetailDao reservationDetailDao;
+	
+	@Autowired
+	ExtendDao extendDao;
 
 	@Override
 	public Reservation searchReservationById(int reservationId) {
@@ -30,9 +36,15 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 		// TODO Auto-generated method stub
 		reservationDetailDao.updateStateByMap(reservationId, state);
 	}
+	
+	@Override
+	public void updateExitByMap(int reservationId, String validateApplicant, Date actualEndDate) {
+		// TODO Auto-generated method stub
+		reservationDetailDao.updateExitByMap(reservationId, validateApplicant, actualEndDate);
+	}
 
 	@Override
-	public String checkTime(Date startDate, Date endDate, Date currentDate, String state) {
+	public String checkStateByTime(Date startDate, Date endDate, Date currentDate) {
 		// TODO Auto-generated method stub
 		String resultState = "";
 		int resultStart =0;
@@ -51,12 +63,7 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 		}
 		// 시작일시 ~현재일시~ 종료일시
 		else if(resultStart >= 0 && resultEnd < 0) { //2. 현재일시가 시작일시 -- 종료일시사이에 있는 경우 => 진행중(P)
-			if(state.equals("R")) { // 진행중이라는걸 알려야 하는 경우
-				resultState = "P";
-			}
-			else if(state.equals("E")) { //연장에 들어간 경우
-				resultState = "E";
-			}
+			resultState = "P"; //연장도 여기에 포함된다.
 			
 		}
 		// 시작일시 ~ 종료일시 | 현재일시
@@ -66,4 +73,12 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 
 		return resultState;
 	}
+
+	@Override
+	public void insertExtendByMap(Extend extand) {
+		// TODO Auto-generated method stub
+		extendDao.insertExtendByMap(extand);
+	}
+
+
 }

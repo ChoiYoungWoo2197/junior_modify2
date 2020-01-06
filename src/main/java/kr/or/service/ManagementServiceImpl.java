@@ -85,4 +85,10 @@ public class ManagementServiceImpl implements ManagementService {
 		departmentDao.deleteDepartment(departmentId);
 	}
 
+	@Override
+	public List<Department> searchDepartmentList() {
+		// TODO Auto-generated method stub
+		return departmentDao.searchDepartmentList();
+	}
+
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.mappers.extendMapper">
+
+	<insert id="insertExtendByMap" parameterType="Extend">
+		INSERT INTO extend (reservation_id, application_date, end_date, extend_reason)
+		VALUES (#{reservationId}, now(), #{endDate}, #{extendReason})
+	</insert>
+
+</mapper>

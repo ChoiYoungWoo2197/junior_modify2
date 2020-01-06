@@ -51,4 +51,10 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		sqlSession.delete(namespace + ".deleteDepartment", departmentId);
 	}
 
+	@Override
+	public List<Department> searchDepartmentList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace + ".searchDepartmentList");
+	}
+
 }

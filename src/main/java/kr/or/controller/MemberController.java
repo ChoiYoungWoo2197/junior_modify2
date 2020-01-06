@@ -53,7 +53,8 @@ public class MemberController {
 
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insertPage(Locale locale, Model model) {
-
+		List<Department> departmentList = managementServcice.searchDepartmentList();
+		model.addAttribute("departmentList", departmentList);
 		return "/member/insert";
 	}
 	

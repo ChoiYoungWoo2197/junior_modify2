@@ -55,8 +55,8 @@
 
 	function valideInput() {
 		checkInput = true;
-		if ($("input[name='memberId']").val() == ""
-				|| validateId.test($("input[name='memberId']").val()) == false) {
+		if ($("input[name='modifyMemberId']").val() == ""
+				|| validateId.test($("input[name='modifyMemberId']").val()) == false) {
 			$("#valideId").css("display", "inline");
 			checkInput = false;
 			//alert("valideId :" + checkInput);
@@ -130,17 +130,17 @@
 
 	function checkId() {
 		$("#valideId").css("display", "none");
-		if ($("input[name='memberId']").val() == ""	|| validateId.test($("input[name='memberId']").val()) == false) {
+		if ($("input[name='modifyMemberId']").val() == ""	|| validateId.test($("input[name='modifyMemberId']").val()) == false) {
 			$("#valideId").css("display", "inline");
 			return false;
 		}
 
-		var memberId = $("input[name='memberId']").val();
+		var memberId = $("input[name='modifyMemberId']").val();
 		$.ajax({
 			url : "${pageContext.request.contextPath}/member/checkId",
 			type : "post",
 			data : {
-				"memberId" : $("input[name='memberId']").val()
+				"memberId" : $("input[name='modifyMemberId']").val()
 			},
 			dataType : "text",
 			success : function(res) {
