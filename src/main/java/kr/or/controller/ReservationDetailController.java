@@ -2,10 +2,8 @@ package kr.or.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,22 +53,23 @@ public class ReservationDetailController {
 		Employee employee = employeeService.checkEmployeeByEmployeeId(Integer.toString(reservation.getEmployeeId()));
 		Department department = managementServcice.selectDepartmentById(Integer.parseInt(employee.getDepartmentId()));
 		MeetingRoom meetingRoom = meetingRoomService.selectMeetingRoomById(reservation.getMeetingRoomId());
-
+		Extend extend =  reservationDetailService.searchExtendReasonById(reservation.getReservationId());
+		
 		reservation.setEmployeeName(employee.getName());
 		reservation.setDepartmentName(department.getName());
 		reservation.setMeetingRoomName(meetingRoom.getName());
-
-		Date date1 = setTime("2020.01.05 11:30");
-		Date date2 = setTime("2020.01.05 20:30"); 
+		/*
+				
+				
+		Date date1 = setTime("2020.01.06 8:30");
+		Date date2 = setTime("2020.01.06 20:30"); 
 		
 		reservation.setStartDate(date1);
 		reservation.setEndDate(date2);
-		//String currentStateByTime = reservationDetailService.checkStateByTime(reservation.getStartDate(), reservation.getEndDate(), new Date());
+		*/
 		
-		String currentStateByTime= currentStateByTime = reservationDetailService.checkStateByTime(date1, date2, new Date());
-			
 		model.addAttribute("reservation", reservation);
-		model.addAttribute("currentStateByTime", currentStateByTime);
+		model.addAttribute("extend", extend);
 		return "reservationDetail/read";
 	}
 

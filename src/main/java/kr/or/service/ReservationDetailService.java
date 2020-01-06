@@ -10,6 +10,6 @@ public interface ReservationDetailService {
 	public void updateCancelReasonByMap(int reservationId,String cancelApplicant, String cancelReason);
 	public void updateStateByMap(int reservationId, String state);
 	public void updateExitByMap(int reservationId, String validateApplicant, Date actualEndDate);
-	public String checkStateByTime(Date startDate, Date endDate, Date currentDate);
 	public void insertExtendByMap(Extend extand);
+	public Extend searchExtendReasonById(int reservationId);
 }

@@ -16,6 +16,7 @@
 
 		function empty() {
 			$("#inputForm").empty();
+			$("#reasonForm").empty();
 			$("#btnDiv").empty();
 		}
 
@@ -23,7 +24,7 @@
 		$("#cancelReservation").click(function() {
 			hide();
 			var td = '<td> <b>취소사유</b></td>';
-			var reason = '<input type="text" name="cancelReason"/>';
+			var reason = '<td><input type="text" name="cancelReason" style="width:100%;"/></td>';
 			var cancel = '<input type="button" id="denyCancel" value="취소"/>';
 			var complete = '<input type="button" id="completeCancel" value="완료"/>';
 			$("#inputForm").append(td).append(reason);
@@ -37,11 +38,8 @@
 
 		$(document).on("click",	"#completeCancel", function() {
 			if (confirm("취소하시겠습니까?") == true) {
-				document
-						.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/cancel";
-				document
-						.getElementById('reservationDetailForm')
-						.submit();
+				document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/cancel";
+				document.getElementById('reservationDetailForm').submit();
 
 			}
 		});
@@ -50,24 +48,27 @@
 		$("#exitReservation").click(function() {
 			hide();
 			var td = '<td> <b>조기종료시각</b></td>';
+			var exitTd = '<td id="exitTd"></td>';
 			var selectStart = '<select name="exitTimeHours" id="exitTimeHours"></select>';
 			var selectEnd = '<select name="exitTimeMinutes" id="exitTimeMinutes"></select>';
-			var spanHour = '<span> 시 </span>';
+			var spanHour = '<span> : </span>';
 			var spanMinutes = '<span> 분 </span>';
 			var cancel = '<input type="button" id="denyExit" value="취소"/>';
 			var complete = '<input type="button" id="completeExit" value="완료"/>';
 
-			$("#inputForm").append(td).append(selectStart);
+			$("#inputForm").append(td).append(exitTd);
+			$('#exitTd').append(selectStart);
 			for (var count = 9; count <= 22; count++) {
 				var option = $("<option>" + count + "</option>");
 				$('#exitTimeHours').append(option);
 			}
-			$("#inputForm").append(spanHour).append(selectEnd);
+			$('#exitTd').append(spanHour).append(selectEnd);
 			for (var count = 0; count <= 59; count++) {
 				var option = $("<option>" + count + "</option>");
 				$('#exitTimeMinutes').append(option);
 			}
-			$("#inputForm").append(spanMinutes);
+			
+			//$("#inputForm").append(spanMinutes);
 			$("#btnDiv").append(cancel).append(complete);
 		})
 
@@ -76,38 +77,40 @@
 			$("#processingDiv").show();
 		});
 
-		$(document).on("click",	"#completeExit", function() {
+		$(document).on("click",	"#completeExit",function() {
 			if (confirm("종료하시겠습니까?") == true) {
-				document
-						.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/exit";
-				document
-						.getElementById('reservationDetailForm')
-						.submit();
+				document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/exit";
+				document.getElementById('reservationDetailForm').submit();
 			}
 		});
 
 		//연장신청 클릭시
 		$("#extandReservation").click(function() {
 			hide();
-			var td = '<td> <b>종료시각</b></td>';
+			var td = '<td><b>종료시각</b></td>';
+			var extandTd = '<td id="extandTd"></td>';
+			var reasonTd = '<td id="reasonTd"><b>연장사유</b></td>';
 			var selectStart = '<select name="extandTimeHours" id="extandTimeHours"></select>';
 			var selectEnd = '<select name="extandTimeMinutes" id="extandTimeMinutes"></select>';
-			var spanHour = '<span> 시 </span>';
+			var spanHour = '<span> : </span>';
 			var spanMinutes = '<span> 분 </span>';
+			var reason = '<td><input type="text" name="extandReason" style="width:100%;"/></td>';
 			var cancel = '<input type="button" id="denyExtand" value="취소"/>';
 			var complete = '<input type="button" id="completeExtand" value="완료"/>';
 
-			$("#inputForm").append(td).append(selectStart);
+			$("#inputForm").append(td).append(extandTd);
+			$('#extandTd').append(selectStart);
 			for (var count = 9; count <= 22; count++) {
 				var option = $("<option>" + count + "</option>");
 				$('#extandTimeHours').append(option);
 			}
-			$("#inputForm").append(spanHour).append(selectEnd);
+			$('#extandTd').append(spanHour).append(selectEnd);
 			for (var count = 0; count <= 59; count++) {
 				var option = $("<option>" + count + "</option>");
 				$('#extandTimeMinutes').append(option);
 			}
-			$("#inputForm").append(spanMinutes);
+			
+			$("#reasonForm").append(reasonTd).append(reason);
 			$("#btnDiv").append(cancel).append(complete);
 		})
 
@@ -118,11 +121,8 @@
 
 		$(document).on("click",	"#completeExtand", function() {
 			if (confirm("연장하시겠습니까?") == true) {
-				document
-						.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/extand";
-				document
-						.getElementById('reservationDetailForm')
-						.submit();
+				document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/extand";
+				document.getElementById('reservationDetailForm').submit();
 			}
 		});
 
@@ -142,10 +142,9 @@
 		});
 
 		$(document).on("click", "#completeExitCheck", function() {
-			var abnormality =$("input[name='abnormality']").val()
+			var abnormality = $("input[name='abnormality']").val()
 			alert(abnormality);
 		});
-
 
 	})
 </script>
@@ -203,7 +202,17 @@
 				<td colspan="2">
 					<c:choose>
 						<c:when test="${reservation.state eq 'R'}">
-							<span>예약</span>
+							<fmt:formatDate value="${now}" pattern="yyyy.MM.dd kk:mm" var="today" />
+							<fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd kk:mm" var="startDate" />
+							<fmt:formatDate value="${reservation.endDate}" pattern="yyyy.MM.dd kk:mm" var="endDate" />
+							<c:choose>
+								<c:when test="${today > startDate  &&  today < endDate}">
+									<span>진행중</span>
+								</c:when>
+								<c:otherwise>
+									<span>예약</span>
+								</c:otherwise>
+							</c:choose>
 						</c:when>
 						<c:when test="${reservation.state eq 'RC'}">
 							<span>예약취소</span>
@@ -246,32 +255,52 @@
 			</tr>
 			<c:choose>
 				<c:when test="${reservation.state eq 'RC'}">
+				<tr>
 					<td>
 						<b>취소사유</b>
 					</td>
 					<td>
 						<span>${reservation.cancelReason}</span>
 					</td>
+				</tr>
+
 				</c:when>
 
+				<c:when test="${reservation.state eq 'E' && not empty extend}">
+				<tr>
+					<td>
+						<b>종료일시</b>
+					</td>
+					<td>
+						<fmt:formatDate value="${extend.endDate}" pattern="yyyy.MM.dd kk:mm" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<b>연장사유</b>
+					</td>
+					<td>
+						<span>${extend.extendReason}</span>
+					</td>
+				</tr>
+				</c:when>
 			</c:choose>
 
-			<tr id="inputForm">
-			</tr>
+			<tr id="inputForm"></tr>
+			<tr id="reasonForm"></tr>
 
 		</table>
 		<div id="btnDiv"></div>
-		<c:if test="${reservation.state eq 'R'}">
+		<c:if test="${reservation.state eq 'R' || reservation.state eq 'E'}">
 			<fmt:formatDate value="${now}" pattern="yyyy.MM.dd kk:mm" var="today" />
 			<fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd kk:mm" var="startDate" />
 			<fmt:formatDate value="${reservation.endDate}" pattern="yyyy.MM.dd kk:mm" var="endDate" />
 
-			<h5>${today}</h5>
+<%-- 			<h5>${today}</h5>
 			<h5>${startDate}</h5>
-			<h5>${endDate}</h5>
+			<h5>${endDate}</h5> --%>
 			<c:choose>
-				<c:when test="${today > startDate  &&  today < endDate}">
-					<h5>진행중</h5>
+				<c:when test="${today > startDate  &&  today < endDate || reservation.state eq 'E'}">
 					<div id="processingDiv">
 						<input type="button" id="exitReservation" value="조기종료" />
 

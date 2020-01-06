@@ -44,40 +44,15 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 	}
 
 	@Override
-	public String checkStateByTime(Date startDate, Date endDate, Date currentDate) {
-		// TODO Auto-generated method stub
-		String resultState = "";
-		int resultStart =0;
-		int resultEnd =0;
-		/*
-		 * 현재시간 < 기준시간  리턴값 -
-		 * 현재시간 > 기준시간  리턴값 +
-		 * 현재시간 = 기준시간  리턴값 =
-		*/
-		resultStart = currentDate.compareTo(startDate);
-		resultEnd = currentDate.compareTo(endDate);
-
-		// 현재일시 --- | 시작일시 ~ 종료일시
-		if(resultStart < 0 && resultEnd < 0) { //1. 현재일시가 시작일시 -- 종료일시보다 앞선 경우 => 예약 상태(R)
-			resultState = "R";
-		}
-		// 시작일시 ~현재일시~ 종료일시
-		else if(resultStart >= 0 && resultEnd < 0) { //2. 현재일시가 시작일시 -- 종료일시사이에 있는 경우 => 진행중(P)
-			resultState = "P"; //연장도 여기에 포함된다.
-			
-		}
-		// 시작일시 ~ 종료일시 | 현재일시
-		else if(resultStart > 0 && resultEnd > 0) { //3. 현재일시가 시작일시 -- 종료일시보다 지난 경우 => 종료 상태(F)
-			resultState = "F";
-		}
-
-		return resultState;
-	}
-
-	@Override
 	public void insertExtendByMap(Extend extand) {
 		// TODO Auto-generated method stub
 		extendDao.insertExtendByMap(extand);
+	}
+
+	@Override
+	public Extend searchExtendReasonById(int reservationId) {
+		// TODO Auto-generated method stub
+		return extendDao.searchExtendReasonById(reservationId);
 	}
 
 

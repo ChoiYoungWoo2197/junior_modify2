@@ -3,8 +3,16 @@
 <mapper namespace="kr.or.mappers.extendMapper">
 
 	<insert id="insertExtendByMap" parameterType="Extend">
-		INSERT INTO extend (reservation_id, application_date, end_date, extend_reason)
-		VALUES (#{reservationId}, now(), #{endDate}, #{extendReason})
+		INSERT INTO extend
+		(reservation_id, application_date, end_date, extend_reason)
+		VALUES
+		(#{reservationId}, now(), #{endDate}, #{extendReason})
 	</insert>
 
+	<select id="searchExtendReasonById" parameterType="int" resultType="Extend">
+		SELECT * FROM extend
+		WHERE reservation_id = #{reservationId}
+		ORDER BY application_date DESC
+		LIMIT 1
+	</select>
 </mapper>

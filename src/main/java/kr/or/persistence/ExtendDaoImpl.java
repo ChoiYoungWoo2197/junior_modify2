@@ -16,5 +16,10 @@ public class ExtendDaoImpl implements ExtendDao {
 		// TODO Auto-generated method stub
 		sqlsession.insert(namespace + ".insertExtendByMap", extend);
 	}
+	@Override
+	public Extend searchExtendReasonById(int reservationId) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne(namespace + ".searchExtendReasonById", reservationId);
+	}
 
 }
