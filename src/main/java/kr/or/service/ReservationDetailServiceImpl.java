@@ -56,7 +56,7 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 	}
 
 	@Override
-	public int searchNextReservationById(int reservationId) {
+	public Reservation searchNextReservationById(int reservationId) {
 		// TODO Auto-generated method stub
 		return reservationDetailDao.searchNextReservationById(reservationId);
 	}

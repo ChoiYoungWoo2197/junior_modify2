@@ -54,7 +54,7 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 	}
 
 	@Override
-	public int searchNextReservationById(int reservationId) {
+	public Reservation searchNextReservationById(int reservationId) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace + ".searchNextReservationById", reservationId);
 	}

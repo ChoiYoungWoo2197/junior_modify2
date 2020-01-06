@@ -10,5 +10,5 @@ public interface ReservationDetailDao {
 	public void updateCancelReasonByMap(int reservationId,String cancelApplicant, String cancelReason);
 	public void updateStateByMap(int reservationId, String state);
 	public void updateExitByMap(int reservationId, String validateApplicant, Date actualEndDate);
-	public int searchNextReservationById(int reservationId);
+	public Reservation searchNextReservationById(int reservationId);
 }

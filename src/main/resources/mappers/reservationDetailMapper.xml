@@ -29,10 +29,12 @@
 		reservation_id = #{reservationId}
 	</update>
 	
-	<select id="searchNextReservationById" parameterType="int" resultType="int">
-		SELECT COUNT(*) FROM reservation AS reservationA
-		LEFT JOIN reservation AS reservationB ON DATE(reservationB.start_date) = DATE(reservationA.end_date) 
+	<select id="searchNextReservationById" parameterType="int" resultType="Reservation">
+		SELECT reservationB.*  FROM reservation AS reservationA
+		LEFT JOIN reservation AS reservationB ON DATE(reservationB.start_date) = DATE(reservationA.end_date)
 		AND reservationB.start_date > reservationA.end_date
+		AND reservationB.meeting_room_id = reservationA.meeting_room_id
+		AND reservationB.state = 'R'
 		where reservationA.reservation_id = #{reservationId}
 	</select>
 </mapper>

@@ -38,8 +38,14 @@
 
 		$(document).on("click",	"#completeCancel", function() {
 			if (confirm("취소하시겠습니까?") == true) {
-				document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/cancel";
-				document.getElementById('reservationDetailForm').submit();
+				if($("input[name='cancelReason']").val() == "") {
+					alert("취소사유를 입력해주세요.");
+				}
+				else {
+					document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/cancel";
+					document.getElementById('reservationDetailForm').submit();
+				}
+
 
 			}
 		});
@@ -121,8 +127,14 @@
 
 		$(document).on("click",	"#completeExtand", function() {
 			if (confirm("연장하시겠습니까?") == true) {
-				document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/extand";
-				document.getElementById('reservationDetailForm').submit();
+				if($("input[name='extandReason']").val() == "") {
+					alert("연장사유를 입력해주세요.");
+				}
+				else {
+					document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/extand";
+					document.getElementById('reservationDetailForm').submit();	
+				}
+
 			}
 		});
 
