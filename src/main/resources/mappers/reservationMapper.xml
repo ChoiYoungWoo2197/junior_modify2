@@ -18,6 +18,12 @@
 		<if test="meetingRoomId">
 			WHERE reservation.meeting_room_id = #{meetingRoomId}
 		</if>
+		<if test="searchStart">
+			WHERE start_date BETWEEN DATE(#{searchStart})
+		</if>
+		<if test="searchEnd">
+			AND DATE(#{searchEnd})+1
+		</if>
 	</sql>
 	
 	<select id="searchReservation" resultType="Reservation">
@@ -35,8 +41,14 @@
 	</select>
 	
 	<select id="searchReservationCount" resultType="int">
-		SELECT COUNT(reservation_id) FROM reservation 
-		WHERE meet_purpose LIKE '%${searchContent}%'
+		<!-- SELECT COUNT(reservation_id) FROM reservation 
+		WHERE meet_purpose LIKE '%${searchContent}%' -->
+		SELECT COUNT(reservation.reservation_id)
+		FROM reservation 
+		JOIN meeting_room ON meeting_room.meeting_room_id = reservation.meeting_room_id
+		JOIN employee ON employee.employee_id = reservation.employee_id
+		JOIN department ON department.department_id = employee.department_id
+		<include refid="search"></include>
 	</select>
 	
 	<select id="selectReservationByMeetAndDate" resultType="Reservation">

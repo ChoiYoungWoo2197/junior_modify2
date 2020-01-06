@@ -1,5 +1,7 @@
 package kr.or.domain;
 
+import java.util.Map;
+
 public class SearchCriteria {
 	private int page; //페이지번호
 	private int amount; //페이지당 몇개의 데이터를 보여줄 것인가?
@@ -8,6 +10,8 @@ public class SearchCriteria {
 	//예약내역에서 검색할 때 필요
 	private String state;
 	private String meetingRoomId;
+	private String searchStart;
+	private String searchEnd;
 	
 	public SearchCriteria(int page, int amount) {
 		this.page = page;
@@ -55,5 +59,16 @@ public class SearchCriteria {
 	public void setMeetingRoomId(String meetingRoomId) {
 		this.meetingRoomId = meetingRoomId;
 	}
-	
+	public String getSearchStart() {
+		return searchStart;
+	}
+	public void setSearchStart(String searchStart) {
+		this.searchStart = searchStart;
+	}
+	public String getSearchEnd() {
+		return searchEnd;
+	}
+	public void setSearchEnd(String searchEnd) {
+		this.searchEnd = searchEnd;
+	}
 }

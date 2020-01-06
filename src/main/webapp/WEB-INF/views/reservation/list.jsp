@@ -45,10 +45,12 @@
 		})
 		
 		$("#searchReservation").click(function() {
-			if($("input[name='searchStartDate']").val()!="" || $("input[name='searchEndDate']").val()!="") {
-				alert($("input[name='searchStartDate']").val());
-				alert($("input[name='searchEndDate']").val());
-				alert($("input[name='searchStartDate']").val()+$("input[name='searchEndDate']").val());
+			if($("#searchStart").val()!="" || $("#searchEnd").val()!="") {
+				if($("#searchStart").val() > $("#searchEnd").val()!="") {
+					alert("기간을 잘못 선택하셨습니다.");
+					return false;
+				}
+				location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val();
 				return false;
 			}
 			
@@ -79,7 +81,8 @@
 	<section class="width1200">
 		<div>
 			<label>사용일</label>
-			<input type="date" name="searchStartDate"> ~ <input type="date" name="searchEndDate">
+			<input type="date" name="searchDate" id="searchStart" value="${searchCriteria.searchStart}"> ~ 
+			<input type="date" name="searchDate" id="searchEnd" value="${searchCriteria.searchEnd}">
 			<select name="state">
 				<option value="none">상태</option>
 				<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약(진행중)</option>
