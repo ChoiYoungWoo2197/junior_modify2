@@ -16,5 +16,6 @@ public interface MeetingRoomEquipmentDao {
 	public void insertMeetingRoomEquipment(int equipmentId, int meetingRoomId);
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId);
 	public void deleteMeetingRoomEquipment(int meetingRoomId);
+	public void deleteMeetingRoomEquipmentByEquipment(int equipmentId);
 	
 }

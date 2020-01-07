@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.domain.Department;
 import kr.or.domain.Equipment;
+import kr.or.domain.MeetingRoomEquipment;
 import kr.or.domain.SearchCriteria;
 import kr.or.persistence.DepartmentDao;
 import kr.or.persistence.EquipmentDao;
+import kr.or.persistence.MeetingRoomEquipmentDao;
 
 @Service
 public class ManagementServiceImpl implements ManagementService {
@@ -19,6 +22,9 @@ public class ManagementServiceImpl implements ManagementService {
 	
 	@Autowired
 	DepartmentDao departmentDao;
+	
+	@Autowired
+	MeetingRoomEquipmentDao meetingRoomEquipmentDao;
 	
 	@Override
 	public void insertEquipment(Equipment equipment) {
@@ -31,7 +37,9 @@ public class ManagementServiceImpl implements ManagementService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteEquipment(int equipmentId) {
+		meetingRoomEquipmentDao.deleteMeetingRoomEquipmentByEquipment(equipmentId);
 		equipmentDao.deleteEquipment(equipmentId);
 	}
 

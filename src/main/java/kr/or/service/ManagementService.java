@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.domain.Department;
 import kr.or.domain.Equipment;
+import kr.or.domain.MeetingRoomEquipment;
 import kr.or.domain.SearchCriteria;
 
 public interface ManagementService {

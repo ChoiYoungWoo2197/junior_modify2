@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.domain.Department;
 import kr.or.domain.Equipment;
+import kr.or.domain.MeetingRoomEquipment;
 import kr.or.domain.Page;
 import kr.or.domain.SearchCriteria;
 import kr.or.service.ManagementService;
@@ -110,7 +111,6 @@ public class ManagementController {
 		logger.info("countEmp & managementId : " + managementId);
 
 		int employeeCount = managementServcice.selectEmployeeCountById(managementId);
-		System.out.println(employeeCount + "--------------------");
 		String deleteAvailable = "false";
 		if(employeeCount == 0) {
 			deleteAvailable = "true";

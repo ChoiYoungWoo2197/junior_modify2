@@ -30,4 +30,9 @@
 		DELETE FROM meeting_room_equipment 
 		WHERE meeting_room_id = #{meetingRoomId}
 	</delete>
+	
+	<delete id="deleteMeetingRoomEquipmentByEquipment" parameterType="MeetingRoomEquipment">
+		DELETE FROM meeting_room_equipment 
+		WHERE equipment_id = #{equipmentId}
+	</delete>
 </mapper>
