@@ -68,4 +68,22 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 		reservationDetailDao.updateExitCheckByMap(reservationId, validateChecker, abnormality);
 	}
 
+	@Override
+	public void deleteExtendById(int reservationId) {
+		// TODO Auto-generated method stub
+		extendDao.deleteExtendById(reservationId);
+	}
+
+	@Override
+	public List<Reservation> searchReservationByEmployeeId(int employeeId) {
+		// TODO Auto-generated method stub
+		return reservationDetailDao.searchReservationByEmployeeId(employeeId);
+	}
+
+	@Override
+	public void deleteReservationById(int employeeId) {
+		// TODO Auto-generated method stub
+		reservationDetailDao.deleteReservationById(employeeId);
+	}
+
 }

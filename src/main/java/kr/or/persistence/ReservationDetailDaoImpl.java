@@ -70,6 +70,18 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 		sqlSession.update(namespace + ".updateExitCheckByMap", map);
 	}
 
+	@Override
+	public void deleteReservationById(int employeeId) {
+		// TODO Auto-generated method stub
+		sqlSession.delete(namespace + ".deleteReservationById", employeeId);
+	}
+
+	@Override
+	public List<Reservation> searchReservationByEmployeeId(int employeeId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace + ".searchReservationByEmployeeId", employeeId);
+	}
+
 	
 
 }

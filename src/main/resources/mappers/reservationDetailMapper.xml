@@ -44,4 +44,16 @@
 		WHERE
 		reservation_id = #{reservationId}
 	</update>
+
+	<select id="searchReservationByEmployeeId" parameterType="int" resultType="Reservation">
+		SELECT *  FROM reservation
+		where employee_id = #{employeeId}
+	</select>
+	
+	<delete id="deleteReservationById" parameterType="int">
+		DELETE FROM
+		reservation
+		WHERE
+		employee_id = #{employeeId}
+	</delete>
 </mapper>

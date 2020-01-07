@@ -15,4 +15,7 @@ public interface ReservationDetailService {
 	public Extend searchExtendReasonById(int reservationId);
 	public List<Reservation> searchNextReservationById(int reservationId);
 	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality);
+	public List<Reservation> searchReservationByEmployeeId(int employeeId);
+	public void deleteReservationById(int employeeId);
+	public void deleteExtendById(int reservationId);
 }
