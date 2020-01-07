@@ -21,8 +21,8 @@
 		font-size: 14px;
 	}
 </style>
-
-<script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reservation/insert.js"></script>
+<!-- <script>
 	$(function() {
 		displayCaldendar(new Date());
 		
@@ -212,7 +212,7 @@
 			return result;
 		})
 	})
-</script>	
+</script>	 -->
 	
 	<section class="width1200">
 		<form id="insertReservationForm" method="post" action="/reservation/insert">

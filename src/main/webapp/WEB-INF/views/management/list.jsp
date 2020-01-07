@@ -5,8 +5,8 @@
 <%@ include file="../include/managerHeader.jsp" %>
 
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
-
-<script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/management/list.js"></script>
+<!-- <script>
 	$(function() {
 		$("#insertManagement").click(function() {
 			location.href = "insert?management="+$("input[name=management]").val();
@@ -74,7 +74,7 @@
 			location.href = "list?management="+$("input[name=management]").val();
 		})
 	})
-</script>
+</script> -->
 
 	<section class="width1200">
 		<c:if test="${management eq 'equipment'}">

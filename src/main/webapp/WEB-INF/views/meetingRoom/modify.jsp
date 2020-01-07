@@ -11,7 +11,8 @@
 		display: none;
 	}
 </style>
-<script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/modify.js"></script>
+<!-- <script>
 	$(function() {
 		$("#listManagement").click(function() {
 			location.href = "list?management="+$("input[name='management']").val();
@@ -62,7 +63,7 @@
 			location.href = "read?meetingRoomId="+meetingRoomId;
 		})
 	})
-</script>
+</script> -->
 
 	<section class="width1200">
 		<form id="updateMeetingRoomForm" method="post" action="/meetingRoom/modify">

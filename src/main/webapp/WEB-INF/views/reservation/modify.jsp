@@ -21,8 +21,8 @@
 		font-size: 14px;
 	}
 </style>
-
-<script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reservation/modify.js"></script>
+<!-- <script>
 	$(function() {
 		displayCaldendar($("#reservationDate").text());
 		
@@ -211,7 +211,7 @@
 			location.href="${pageContext.request.contextPath}/reservationDetail/read?reservationId="+${reservation.reservationId};
 		})
 	})
-</script>	
+</script> -->	
 	
 	<section class="width1200">
 		<form id="updateReservationForm" method="post" action="/reservation/update">

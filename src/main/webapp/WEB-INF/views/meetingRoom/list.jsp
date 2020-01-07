@@ -3,8 +3,9 @@
 <%@ include file="../include/managerHeader.jsp" %>
 
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/list.js"></script>
 
-<script>
+<!-- <script>
 	$(function() {
 		$("#insertMeetingRoom").click(function() {
 			location.href = "insert";
@@ -29,14 +30,15 @@
 			location.href = "list";
 		})
 	})
-</script>
+</script> -->
 	<section class="width1200">
+		<h1>회의실관리</h1>
 		<div>
 			<select name="searchType">
 				<option value="meetingRoom" ${searchCriteria.searchType == 'meetingRoom' ? 'selected' : ''}>회의실</option>
 				<option value="equipment" ${searchCriteria.searchType == 'equipment' ? 'selected' : ''}>지원장비</option>
 			</select>
-			<input type="text" name="searchContent" value="${searchCriteria.searchContent}">
+			<input type="search" name="searchContent" value="${searchCriteria.searchContent}">
 			<button id="searchEquipment">검색</button>
 			<button id="allMeetingRoom">전체보기</button>
 		</div>

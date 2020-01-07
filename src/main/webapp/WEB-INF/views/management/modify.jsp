@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/managerHeader.jsp" %>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/management/modify.js"></script>
 
-<script>
+<!-- <script>
 	$(function() {
 		$("#listManagement").click(function() {
 			location.href = "list?management="+$("input[name='management']").val();
@@ -21,7 +22,7 @@
 			}
 		})
 	})
-</script>
+</script> -->
 	
 	<section class="width1200">
 		<form id="updateEquipmentForm" method="post" action="/management/modify">

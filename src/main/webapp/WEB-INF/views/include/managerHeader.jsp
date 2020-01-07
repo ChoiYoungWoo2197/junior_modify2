@@ -9,10 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap&subset=korean" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/calendar.js" charset="UTF-8" type="text/javascript"></script>
-
 </head>
 <body>
 	<div class="width1200">
@@ -40,15 +40,15 @@
 		<div class="width1200">
 			<ul>
 				<c:if test="${loginUser.manager eq 'true'}">
-					<li class="float_left"><a href="${pageContext.request.contextPath}/reservation/list">예약 현황</a></li>
-					<li class="float_left"><a href="${pageContext.request.contextPath}/management/list?management=department">부서 관리</a></li>
-					<li class="float_left"><a href="${pageContext.request.contextPath}/member/list">회원 관리</a></li>
-					<li class="float_left"><a href="${pageContext.request.contextPath}/meetingRoom/list">회의실 관리</a></li>
-					<li class="float_left"><a href="${pageContext.request.contextPath}/management/list?management=equipment">장비 관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/reservation/list">예약 현황</a></li>
+					<li><a href="${pageContext.request.contextPath}/management/list?management=department">부서 관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/member/list">회원 관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/meetingRoom/list">회의실 관리</a></li>
+					<li><a href="${pageContext.request.contextPath}/management/list?management=equipment">장비 관리</a></li>
 				</c:if>
 				<c:if test="${empty loginUser || loginUser.manager eq 'false'}">
-					<li class="float_left"><a href="${pageContext.request.contextPath}/reservation/list">예약 현황</a></li>
-					<li class="float_left"><a href="${pageContext.request.contextPath}/meetingRoom/list">회의실 현황</a></li>
+					<li><a href="${pageContext.request.contextPath}/reservation/list">예약 현황</a></li>
+					<li><a href="${pageContext.request.contextPath}/meetingRoom/list">회의실 현황</a></li>
 				</c:if>
 			</ul>
 		</div>

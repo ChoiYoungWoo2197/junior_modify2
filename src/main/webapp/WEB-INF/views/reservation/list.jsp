@@ -3,8 +3,8 @@
 <%@ include file="../include/managerHeader.jsp" %>
 
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
-
-<script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reservation/list.js"></script>
+<!-- <script>
 	$(function() {
 		$("#insertReservation").click(function() {
 			location.href = "insert";
@@ -126,9 +126,10 @@
 			location.href = "list";
 		})
 	})
-</script>	
+</script>	 -->
 	
 	<section class="width1200">
+		<h1>예약현황</h1>
 		<div>
 			<label>사용일</label>
 			<input type="date" name="searchDate" id="searchStart" value="${searchCriteria.searchStart}"> ~ 
@@ -157,7 +158,7 @@
 				<option value="employee" ${searchCriteria.searchType == 'employee' ? 'selected':''}>신청자</option>
 				<option value="meetPurpose" ${searchCriteria.searchType == 'meetPurpose' ? 'selected':''}>회의목적</option>
 			</select>
-			<input type="text" name="searchContent" value="${searchCriteria.searchContent}">
+			<input type="search" name="searchContent" value="${searchCriteria.searchContent}">
 			<button id="searchReservation">검색</button>
 			<button id="allReservation">전체보기</button>
 		</div>

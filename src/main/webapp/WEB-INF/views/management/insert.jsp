@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/managerHeader.jsp" %>
 
-<script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/management/insert.js"></script>
+<!-- <script>
 	$(function() {
 		$("#listManagement").click(function() {
 			location.href = "list?management="+$("input[name='management']").val();
@@ -15,7 +16,7 @@
 			}
 		})
 	})
-</script>	
+</script>	 -->
 	
 	<section class="width1200">
 		<form id="insertManagementForm" method="post" action="/management/insert">

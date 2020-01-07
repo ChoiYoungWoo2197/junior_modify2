@@ -11,7 +11,8 @@
 		display: none;
 	}
 </style>
-<script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/read.js"></script>
+<!-- <script>
 	$(function() {
 		$("#listMeetingRoom").click(function() {
 			location.href = "list";
@@ -31,7 +32,7 @@
 			}
 		})
 	})
-</script>
+</script> -->
 
 	<section class="width1200">
 		<table>

@@ -11,7 +11,8 @@
 		display: none;
 	}
 </style>
-<script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/insert.js"></script>
+<!-- <script>
 	$(function() {
 		$("#listMeetingRoom").click(function() {
 			location.href = "list";
@@ -51,7 +52,7 @@
 			return check;
 		})
 	})
-</script>
+</script> -->
 
 	<section class="width1200">
 		<form id="insertMeetingRoomForm" method="post" action="/meetingRoom/insert">

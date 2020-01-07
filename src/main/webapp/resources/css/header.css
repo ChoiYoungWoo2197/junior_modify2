@@ -3,41 +3,48 @@
 * {
 	margin: 0;
 	padding: 0;
+	font-family: 'Noto Sans KR', sans-serif;
 }
-
 .float_left {
 	float: left;
 }
-
 .float_right {
 	float: right;
 }
-
 .clear_both {
 	clear: both;
 }
 .display_none {
 	display: none;
 }
-
 .width1200 {
 	width: 1200px;
+	margin: 0 auto;
+}
+.width1300 {
+	width: 1300px;
 	margin: 0 auto;
 }
 
 header {
 	padding: 20px 0;
 }
-
 nav {
 	background-color: rgba(189, 189, 189, 0.5);
 	height: 60px;
 }
-
-nav li {
+nav ul li {
 	list-style: none;
- 	/* float: left;
+ 	float: left;
 	width: 20%;
 	text-align: center;
-	padding: 20px 0;  */
+	padding: 15px 0;
+}
+nav ul li a {
+	text-decoration: none;
+	color: black;
+}
+nav ul li a:hover {
+	font-weight: bold;
+	font-size: 1.1em;
 }
