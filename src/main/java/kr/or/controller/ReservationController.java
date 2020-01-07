@@ -38,6 +38,7 @@ public class ReservationController {
 		
 		List<Reservation> reservationList = reservationService.searchReservation(searchCriteria);
 		model.addAttribute("reservationList", reservationList);
+		model.addAttribute("reservationListSize",reservationList.size());
 		
 		List<MeetingRoom> meetingRoomList = reservationService.selectMeetingRoom();
 		model.addAttribute("meetingRoomList", meetingRoomList);

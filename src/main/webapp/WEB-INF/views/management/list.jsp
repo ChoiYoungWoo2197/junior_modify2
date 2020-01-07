@@ -41,7 +41,7 @@
 		})
 		
 		$(document).on("click", ".updateManagement", function(){
-			var managementId = Number($(this).find(".readManagement").text());
+			var managementId = Number($(this).find(".readManagement").attr("data-managementId"));
 			
 			var result = confirm("수정하시겠습니까?");
 			
@@ -133,9 +133,16 @@
 						<th>등록일시</th>
 						<th></th>
 					</tr>
+					<c:if test="${page.startPage == page.criteria.page}">
+						<c:set var="listIndex" value="${equipmentListSize}"/>
+					</c:if>
+					<c:if test="${page.startPage != page.criteria.page}">
+						<c:set var="listIndex" value="${equipmentListSize - (10*(page.criteria.page-1))}"/>
+					</c:if>
 					<c:forEach var="equipment" items="${equipmentList}">
 						<tr class="updateManagement">
-							<td class="readManagement">${equipment.equipmentId}</td>
+							<td class="readManagement" data-managementId="${equipment.equipmentId}">${listIndex}</td>
+							<c:set var="listIndex" value="${listIndex-1}"/>
 							<td>${equipment.name}</td>
 							<td><fmt:formatDate value="${equipment.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
 							<td><button class="deleteManagement" data-managementId="${equipment.equipmentId}">삭제</button></td>
@@ -166,9 +173,16 @@
 						<th>등록일시</th>
 						<th></th>
 					</tr>
+					<c:if test="${page.startPage == page.criteria.page}">
+						<c:set var="listIndex" value="${employeeByDepartmentListSize}"/>
+					</c:if>
+					<c:if test="${page.startPage != page.criteria.page}">
+						<c:set var="listIndex" value="${employeeByDepartmentListSize - (10*(page.criteria.page-1))}"/>
+					</c:if>
 					<c:forEach var="department" items="${employeeByDepartmentList}">
 						<tr class="updateManagement">
-							<td class="readManagement">${department.departmentId}</td>
+							<td class="readManagement"  data-managementId="${department.departmentId}">${listIndex}</td>
+							<c:set var="listIndex" value="${listIndex-1}"/>
 							<td>${department.name}</td>
 							<td>${department.emoloyeeCount}</td>
 							<td><fmt:formatDate value="${department.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>

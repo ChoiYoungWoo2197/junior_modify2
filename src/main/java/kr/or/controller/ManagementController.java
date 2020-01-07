@@ -33,12 +33,14 @@ public class ManagementController {
 		if(management.equals("equipment")) {
 			List<Equipment> equipmentList = managementServcice.searchEquipment(searchCriteria);
 			model.addAttribute("equipmentList", equipmentList);
+			model.addAttribute("equipmentListSize", managementServcice.searchEquipmentCount(searchCriteria));
 			
 			model.addAttribute("page", new Page(managementServcice.searchEquipmentCount(searchCriteria), searchCriteria));
 			model.addAttribute("management", management);
 		} else if(management.equals("department")) {
 			List<Department> employeeByDepartmentList = managementServcice.searchDepartment(searchCriteria);
 			model.addAttribute("employeeByDepartmentList", employeeByDepartmentList);
+			model.addAttribute("employeeByDepartmentListSize", managementServcice.searchDepartmentCount(searchCriteria));
 			
 			model.addAttribute("page", new Page(managementServcice.searchDepartmentCount(searchCriteria), searchCriteria));
 			model.addAttribute("management", management);

@@ -85,7 +85,12 @@
 				</tr>
 			</c:if>
 			<c:if test="${!empty meetingRoomList}">
-				<c:set var="listIndex" value="${fn:length(meetingRoomList)}"/>
+				<c:if test="${page.startPage == page.criteria.page}">
+					<c:set var="listIndex" value="${meetingRoomListSize}"/>
+				</c:if>
+				<c:if test="${page.startPage != page.criteria.page}">
+					<c:set var="listIndex" value="${meetingRoomListSize - (10*(page.criteria.page-1))}"/>
+				</c:if>
 				<c:forEach var="meetingRoom" items="${meetingRoomList}">
 					<tr class="updateMeetingRoom">
 						<td class="readMeetingRoom" data-meetingRoomId="${meetingRoom.meetingRoomId}">${listIndex}</td>
