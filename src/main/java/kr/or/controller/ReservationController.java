@@ -119,8 +119,6 @@ public class ReservationController {
 	@RequestMapping(value = "/checkTime", method = RequestMethod.GET)
 	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId, String employeeId, String insertEmployee) {
 		logger.info("checkTime");
-		System.out.println(meetingRoomId + "---");
-		System.out.println(choiceDay + "---");
 		String result = "true";
 		
 		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
@@ -156,8 +154,6 @@ public class ReservationController {
 		}
 		
 		Reservation reservation = reservationService.selectReservationByMemeberAndTime(Integer.parseInt(insertEmployee), startDate);
-		System.out.println(insertEmployee + "---");
-		System.out.println(reservation + "---");
 		if(reservation != null) {
 			result = "exist";
 		}
