@@ -185,8 +185,6 @@ table, th, td {
 		});
 
 		$(document).on("click", "#completeExitCheck", function() {
-			//var abnormality = $("input[name='abnormality']").val()
-
 			if (confirm("종료확인 하시겠습니까?") == true) {
 				if($("input[name='abnormality']").val() == "") {
 					alert("이상유무를 입력해주세요.");
@@ -266,15 +264,10 @@ table, th, td {
 							<fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd kk:mm" var="startDate" />
 							<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" var="actualEndDate" />
 							<c:choose>
-								<c:when test="${today > startDate  &&  today < actualEndDate}">
+								<c:when test="${today >= startDate  &&  today < actualEndDate}">
 									<span>진행중</span>
 								</c:when>
-								<c:when test="${today >= actualEndDate}">
-								
-									<span>종료</span>
-								</c:when>
 								<c:otherwise>
-								
 									<span>예약</span>
 								</c:otherwise>
 							</c:choose>
@@ -369,7 +362,16 @@ table, th, td {
 						</td>
 					</tr>
 				</c:if>
-	
+				<c:if test="${reservation.state eq 'FV'}">
+					<tr>
+						<td>
+							<b>이상유무</b>
+						</td>
+						<td>
+							<span>${reservation.abnormality}</span>
+						</td>
+					</tr>
+				</c:if>
 				</c:when>
 			</c:choose>
 
@@ -389,16 +391,13 @@ table, th, td {
 					<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" var="actualEndDate" />
 
 					<c:choose>
-						<c:when test="${today > startDate  &&  today < actualEndDate}">
+						<c:when test="${today >= startDate  &&  today < actualEndDate}">
 							<div id="processingDiv"  class="floatRight">
 								<input type="button" id="exitReservation" value="조기종료" />
 								<c:if test="${loginUser.manager eq 'false' && extendIspossible eq 'true'}">
 									<input type="button" id="extandReservation" value="연장신청" />
 								</c:if>
 							</div>
-						</c:when>
-						<c:when test="${today >= actualEndDate}">
-							<c:set var="isExit" value="true" />
 						</c:when>
 						<c:otherwise>
 							<div id="reservationDiv" class="floatRight">
@@ -411,7 +410,7 @@ table, th, td {
 					</c:choose>
 				</c:if>
 
-				<c:if test="${reservation.state eq 'F' || isExit eq 'true'}">
+				<c:if test="${reservation.state eq 'F'}">
 					<div id="exitDiv" class="floatRight">
 						<c:if test="${loginUser.manager eq 'true'}">
 							<input type="button" id="exitCheckReservation" value="종료확인" />

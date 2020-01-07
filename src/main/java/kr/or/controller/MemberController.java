@@ -46,6 +46,8 @@ public class MemberController {
 		logger.info("member list & searchContent :" + searchCriteria.getSearchContent());
 		List<Employee> employeeList = employeeService.searchEmployee(searchCriteria);
 		model.addAttribute("employeeList", employeeList);
+		model.addAttribute("employeeListSize", employeeService.searchEmployeeCount(searchCriteria));
+		
 		model.addAttribute("searchCriteria", searchCriteria);
 		model.addAttribute("page", new Page(employeeService.searchEmployeeCount(searchCriteria), searchCriteria));
 		return "/member/list";

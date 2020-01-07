@@ -65,7 +65,7 @@ CREATE TABLE meeting_room_equipment (
 -- 예약
 CREATE TABLE reservation (
    reservation_id INTEGER AUTO_INCREMENT,      -- 예약번호
-   employee_id INTEGER NOT NULL,            -- 사원번호
+   employee_id INTEGER NOT NULL,            -- 회원번호
    meeting_room_id INTEGER NOT NULL,         -- 회의실번호
    meet_purpose VARCHAR(100) NOT NULL,         -- 회의목적
    meet_attendess INTEGER NOT NULL,         -- 회의참석자
