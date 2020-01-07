@@ -27,6 +27,7 @@ public class Reservation {
 	 private String employeeName;
 	 private String departmentName;
 	 private String meetingRoomName;
+	 private Date extendEndDate;
 	 
 	 public int getReservationId() {
 		return reservationId;
@@ -154,4 +155,11 @@ public class Reservation {
 	public void setMeetingRoomName(String meetingRoomName) {
 		this.meetingRoomName = meetingRoomName;
 	}
+	public Date getExtendEndDate() {
+		return extendEndDate;
+	}
+	public void setExtendEndDate(Date extendEndDate) {
+		this.extendEndDate = extendEndDate;
+	}
+	
 }

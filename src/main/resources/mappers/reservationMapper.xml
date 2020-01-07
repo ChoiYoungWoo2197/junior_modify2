@@ -104,12 +104,14 @@
 		<!-- SELECT * FROM reservation 
 		WHERE meeting_room_id = #{meetingRoomId} AND start_date LIKE '%${startDate}%'
 		ORDER BY start_date ASC -->
-		SELECT reservation.*, employee.name AS employeeName, department.name AS departmentName
+		SELECT reservation.*, employee.name AS employeeName, department.name AS departmentName, extend.end_date AS extendEndDate
 		FROM reservation
 		JOIN employee ON employee.employee_id = reservation.employee_id
 		JOIN department ON department.department_id = employee.department_id
+		LEFT JOIN extend ON extend.reservation_id = reservation.reservation_id
 		WHERE meeting_room_id = #{meetingRoomId} AND start_date LIKE '${startDate}%'
-		ORDER BY start_date ASC
+		AND reservation.state = 'R' or reservation.state = 'RC' or reservation.state = 'E'
+		ORDER BY reservation.start_date ASC, extend.end_date DESC
 	</select>
 	
 	<insert id="insertReservation" parameterType="Reservation">

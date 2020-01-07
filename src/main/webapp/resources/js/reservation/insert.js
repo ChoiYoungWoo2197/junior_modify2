@@ -95,18 +95,21 @@ $(function() {
 					$("#reservationList p").text("예약 내역이 존재하지 않습니다.");	
 				}else {
 					$(res).each(function(index, element) {
-						if(element.state == "R" || element.state == "RC") {
-							var startDateOrigin = new Date(element.startDate);
-							var startDate = startDateOrigin.getHours()+":"+("00" + startDateOrigin.getMinutes()).slice(-2);
-							var endDateOrigin = new Date(element.endDate);
-							var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
-							
-							var $reservationLi = $("<li>").html(startDate + "~" + endDate + "&ensp;" + element.meetPurpose +"<br>(" + element.employeeName + "("+ element.departmentName + "))" );
-							$("#reservationList ul").append($reservationLi);
-							
-							/* meetingStart[index] = startDate;
-							meetingEnd[index] = endDate; */
+						var startDateOrigin = new Date(element.startDate);
+						var startDate = startDateOrigin.getHours()+":"+("00" + startDateOrigin.getMinutes()).slice(-2);
+						var endDateOrigin = new Date(element.endDate);
+						var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
+						
+						if(element.extendEndDate != null) {
+							var extendDateOrigin = new Date(element.extendEndDate);
+							endDate = extendDateOrigin.getHours()+":"+("00" + extendDateOrigin.getMinutes()).slice(-2);
 						}
+						
+						var $reservationLi = $("<li>").html(startDate + "~" + endDate + "&ensp;" + element.meetPurpose +"<br>(" + element.employeeName + "("+ element.departmentName + "))" );
+						$("#reservationList ul").append($reservationLi);
+						
+						/* meetingStart[index] = startDate;
+						meetingEnd[index] = endDate; */
 					})
 				}
 			}
