@@ -44,7 +44,7 @@
 			var memberId = $("input[name='modifyMemberId']").val();
 			//alert(originalMemberId + " : " +memberId);
 			//alert("departmentType : " + departmentType + "  " + "manageType : " + manageType);
-			window.location.href = "${pageContext.request.contextPath}/modify?departmentType="+ departmentType + "&manager=" + manageType+ "&originalMemberId=" +originalMemberId;
+			window.location.href = "/modify?departmentType="+ departmentType + "&manager=" + manageType+ "&originalMemberId=" +originalMemberId;
 			//window.location.href = "/member/modify?departmentType="+ departmentType + "&manager=" + manageType + "&originalMemberId=" +originalMemberId;
 
 		}
@@ -134,7 +134,7 @@
 
 		var memberId = $("input[name='modifyMemberId']").val();
 		$.ajax({
-			url : "${pageContext.request.contextPath}/member/checkId",
+			url : "/member/checkId",
 			type : "post",
 			data : {
 				"memberId" : $("input[name='modifyMemberId']").val()
@@ -167,7 +167,7 @@
 
 		var email = $("input[name='email']").val();
 		$.ajax({
-			url : "${pageContext.request.contextPath}/member/checkEmail",
+			url : "/member/checkEmail",
 			type : "post",
 			data : {
 				"email" : $("input[name='email']").val()
@@ -233,7 +233,7 @@
 	
 	function memberList() {
 		//alert("list");
-		window.location.href = "${pageContext.request.contextPath}/member/list"
+		window.location.href = "/member/list"
 	}
 </script>
 

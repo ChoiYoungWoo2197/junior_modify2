@@ -145,6 +145,6 @@ WHERE start_date BETWEEN DATE('2020-01-01') AND DATE('2020-01-1')+1
 ORDER BY reservation_id DESC 
 		 -->
 	<update id="updateReservationByCurrentTime">
-		UPDATE reservation SET state = "F" WHERE end_date <![CDATA[<=]]> #{currentTime}
+		UPDATE reservation SET state = "F" WHERE actual_end_date <![CDATA[<=]]> #{currentTime}
 	</update>
 </mapper>

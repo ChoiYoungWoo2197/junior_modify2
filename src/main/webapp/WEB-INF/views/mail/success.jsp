@@ -46,7 +46,7 @@
 	$(function() {
 		$("#sendReMail").click(function() {
 			$.ajax({
-				url : "${pageContext.request.contextPath}/mail/request",
+				url : "/mail/request",
 				type : "post",
 				data : {"mail" : $("input[name='mail']").val()},
 				dataType : "text",

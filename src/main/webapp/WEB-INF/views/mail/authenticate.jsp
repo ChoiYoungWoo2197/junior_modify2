@@ -30,7 +30,7 @@ table, th, td {
 	$(function() {
 		$("#sendReMail").click(function() {
 			$.ajax({
-				url : "${pageContext.request.contextPath}/mail/request",
+				url : "/mail/request",
 				type : "post",
 				data : {"mail" : $("input[name='mail']").val()},
 				dataType : "text",
@@ -48,7 +48,7 @@ table, th, td {
 		
 		$("#cancel").click(function() {
 			if(confirm("이메일 인증을 취소하시겠습니까?") == true) {
-				window.location.href = '${pageContext.request.contextPath}/';
+				window.location.href = '/reservation/list';
 			}
 			
 		})

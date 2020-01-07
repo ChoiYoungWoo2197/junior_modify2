@@ -70,7 +70,7 @@ table, th, td {
 					alert("취소사유를 입력해주세요.");
 				}
 				else {
-					document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/cancel";
+					document.getElementById('reservationDetailForm').action = "/reservationDetail/cancel";
 					document.getElementById('reservationDetailForm').submit();
 				}
 			}
@@ -112,7 +112,7 @@ table, th, td {
 
 		$(document).on("click",	"#completeExit",function() {
 			if (confirm("종료하시겠습니까?") == true) {
-				document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/exit";
+				document.getElementById('reservationDetailForm').action = "/reservationDetail/exit";
 				document.getElementById('reservationDetailForm').submit();
 			}
 			
@@ -158,10 +158,20 @@ table, th, td {
 		$(document).on("click",	"#completeExtand", function() {
 			if (confirm("연장하시겠습니까?") == true) {
 				if($("input[name='extandReason']").val() == "") {
-					alert("연장사유를 입력해주세요.");
+					var currentDate = new Date();
+					var actualDate = $("input[name='timeSet']").val();
+					alert(currentDate);
+					alert(actualDate);
+					
+					if(currentDate.getTime() < actualDate.getTime()) {
+						alert("연장사유를 입력해주세요.");
+					}
+					
 				}
 				else {
-					document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/extand";
+					
+					
+					document.getElementById('reservationDetailForm').action = "/reservationDetail/extand";
 					document.getElementById('reservationDetailForm').submit();	
 				}
 
@@ -190,7 +200,7 @@ table, th, td {
 					alert("이상유무를 입력해주세요.");
 				}
 				else {
-					document.getElementById('reservationDetailForm').action = "${pageContext.request.contextPath}/reservationDetail/exitCheck";
+					document.getElementById('reservationDetailForm').action = "/reservationDetail/exitCheck";
 					document.getElementById('reservationDetailForm').submit();	
 				}
 
@@ -198,11 +208,11 @@ table, th, td {
 		});
 
 		$(document).on("click", "#list", function() {
-			location.href = "${pageContext.request.contextPath}/reservation/list";
+			location.href = "/reservation/list";
 		});
 		
 		$("#updateReservation").click(function() {
-			location.href="${pageContext.request.contextPath}/reservation/update?reservationId="+${reservation.reservationId};
+			location.href="/reservation/update?reservationId="+${reservation.reservationId};
 		})
 	})
 </script>
@@ -225,7 +235,9 @@ table, th, td {
 					<b>예약사용일시</b>
 				</td>
 				<td colspan="2">
-					<span> <fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd" /> <fmt:formatDate value="${reservation.startDate}" pattern="kk:mm" /> ~ <fmt:formatDate value="${reservation.endDate}" pattern="kk:mm" />
+					<span>
+					<fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd" /> <fmt:formatDate value="${reservation.startDate}" pattern="kk:mm" /> ~ <fmt:formatDate value="${reservation.endDate}" pattern="kk:mm" />
+					<input type="hidden" size="50" name="timeSet" value="${reservation.endDate}" />
 					</span>
 				</td>
 			</tr>

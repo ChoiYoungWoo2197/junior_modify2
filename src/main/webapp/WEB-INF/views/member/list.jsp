@@ -8,7 +8,7 @@
 <script>
 	$(function() {
 		$("#insertMember").click(function() {
-			location.href = "${pageContext.request.contextPath}/member/insert";
+			location.href = "/member/insert";
 		})
 
 		$("#searchEquipment").click(function() {			
