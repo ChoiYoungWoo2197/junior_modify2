@@ -2,36 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/managerHeader.jsp" %>
 
-<style>
-	td, th {
-		border: 1px solid black;
-	}
-	table {
-		border-collapse: collapse;
-		width: 100%;
-	}
-	
-	/* ----------------- 페이지 ----------------- */
-	#page {
-		text-align: center;
-		margin-top: 20px;
-	}
-	.pagination li {
-		width: 20px;
-		list-style: none;
-		display: inline-block;
-	}
-	.color_sky {
-		background-color: #6799FF !important;
-	}
-	.page_shape {
-		background-color: rgb(189, 189, 189);
-		width: 10px;
-		height: 10px;
-		border-radius: 5px;
-		display: inline-block;
-	}
-</style>
+<link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
 
 <script>
 	$(function() {

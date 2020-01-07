@@ -13,7 +13,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/calendar.js" charset="UTF-8" type="text/javascript"></script>
 
-
 </head>
 <body>
 	<div class="width1200">
