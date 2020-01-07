@@ -183,11 +183,11 @@ $(function() {
 				if(res == "false") {
 					result = false;
 					alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.");
-				} else if(res == "exist") {
-					result = false;
-					alert("다른 회의실에 예약하셨습니다.");
-				} else {
+				} else if(res == "true") {
 					result = true;
+				} else {
+					result = false;
+					alert("해당시간에 '"+ res + "'에 예약한 내역이 있습니다.");
 				}
 			}
 		})

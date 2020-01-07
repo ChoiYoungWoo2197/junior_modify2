@@ -116,7 +116,7 @@ public class ReservationController {
 		return "redirect:/reservation/list";
 	}
 	
-	@RequestMapping(value = "/checkTime", method = RequestMethod.GET)
+	@RequestMapping(value = "/checkTime", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId, String employeeId, String insertEmployee) {
 		logger.info("checkTime");
 		String result = "true";
@@ -131,6 +131,11 @@ public class ReservationController {
 			endDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(end);
 		} catch (ParseException e) {
 			e.printStackTrace();
+		}
+		
+		Reservation res = reservationService.selectReservationByMemeberAndTime(Integer.parseInt(insertEmployee), startDate);
+		if(res != null) {
+			result = res.getMeetingRoomName();
 		}
 		
 		for(Reservation reservation : reservationList) {
@@ -151,11 +156,6 @@ public class ReservationController {
 					result = reservationService.checks(result, startDate, endDate, reservation, "noExtend");
 				}
 			}
-		}
-		
-		Reservation reservation = reservationService.selectReservationByMemeberAndTime(Integer.parseInt(insertEmployee), startDate);
-		if(reservation != null) {
-			result = "exist";
 		}
 		
 		return result;

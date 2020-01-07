@@ -150,6 +150,10 @@ ORDER BY reservation_id DESC
 	</update>
 	
 	<select id="selectReservationByMemeberAndTime" resultType="Reservation">
-		SELECT * FROM reservation WHERE employee_id = #{employeeId} AND #{time} BETWEEN start_date AND end_date AND state = 'R'
+		<!-- SELECT * FROM reservation WHERE employee_id = #{employeeId} AND #{time} BETWEEN start_date AND end_date AND state = 'R' -->
+		SELECT reservation.*, meeting_room.name AS meetingRoomName
+		FROM reservation 
+		JOIN meeting_room ON meeting_room.meeting_room_id = reservation.meeting_room_id
+		WHERE employee_id = #{employeeId} AND #{time} BETWEEN start_date AND end_date AND state = 'R'
 	</select>
 </mapper>

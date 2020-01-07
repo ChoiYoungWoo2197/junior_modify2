@@ -22,10 +22,10 @@ $(function() {
 	
 	$("#meetingRoomSelect").change(function() {
 		$("td").removeClass("color_blue");
-		$("select[name='startHour'] option").eq(0).prop("selected",true);
+		/*$("select[name='startHour'] option").eq(0).prop("selected",true);
 		$("select[name='startMinute'] option").eq(0).prop("selected",true);
 		$("select[name='endHour'] option").eq(0).prop("selected",true);
-		$("select[name='endMinute'] option").eq(0).prop("selected",true);
+		$("select[name='endMinute'] option").eq(0).prop("selected",true);*/
 		
 		if($("select[name='meetingRoomId']").val() != "none") {
 			var meetingRoomId = Number($("select[name='meetingRoomId']").val());
@@ -182,6 +182,6 @@ $(function() {
 	})
 	
 	$("#readReservation").click(function() {
-		location.href="reservationDetail/read?reservationId="+$("input[name='reservationId]").val();
+		location.href="/reservationDetail/read?reservationId="+$("input[name='reservationId']").val();
 	})
 })
