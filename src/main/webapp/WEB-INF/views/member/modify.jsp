@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ include file="../include/managerHeader.jsp"%>
+<%@ include file="../include/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -247,11 +247,9 @@
 			<table>
 				<tr>
 					<td><b>사번</b><b class="red">*</b></td>
-					<td><input name="modifyMemberId" type="text" size="20" value="${employeeModify.memberId}" /> 
+					<td><input name="modifyMemberId" type="text" size="20" value="${employeeModify.memberId}" readonly="readonly"/> 
 					<span id="valideId"	class="error">사원번호를 입력하세요.</span>
 					<span id="checkIdSuccess" class="success">사용가능한 사원번호 입니다.</span>
-					<span id="checkIdFail"	class="error">이미 존재하는 사원번호 입니다.</span></td>
-					<td colspan="2"><input type="button" onclick="checkId()" value="중복체크"></td>
 				</tr>
 				<tr>
 					<td><b>사원명</b><b class="red">*</b></td>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/managerHeader.jsp" %>
+<%@ include file="../include/header.jsp"%>
 
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reservation/list.js"></script>
@@ -128,7 +128,7 @@
 	})
 </script>	 -->
 	
-	<section class="width1200">
+	<section class="width1300">
 		<h1>예약현황</h1>
 		<div>
 			<label>사용일</label>

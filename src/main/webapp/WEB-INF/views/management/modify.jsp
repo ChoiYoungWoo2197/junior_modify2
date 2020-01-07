@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../include/managerHeader.jsp" %>
+<%@ include file="../include/header.jsp"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/management/modify.js"></script>
 
 <!-- <script>
