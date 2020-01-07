@@ -2,6 +2,7 @@ package kr.or.persistence;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -54,10 +55,21 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 	}
 
 	@Override
-	public Reservation searchNextReservationById(int reservationId) {
+	public List<Reservation> searchNextReservationById(int reservationId) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(namespace + ".searchNextReservationById", reservationId);
+		return sqlSession.selectList(namespace + ".searchNextReservationById", reservationId);
 	}
+
+	@Override
+	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("reservationId", reservationId);
+		map.put("validateChecker", validateChecker);
+		map.put("abnormality", abnormality);
+		sqlSession.update(namespace + ".updateExitCheckByMap", map);
+	}
+
 	
 
 }

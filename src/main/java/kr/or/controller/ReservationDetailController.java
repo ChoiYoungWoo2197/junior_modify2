@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,31 +47,32 @@ public class ReservationDetailController {
 	MeetingRoomService meetingRoomService;
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public String read(Model model,HttpServletRequest request) {
+	public String read(Model model,HttpServletRequest request, HttpSession session) {
 		//logger.info("reservation ID : " + request.getParameter("reservationId"));
-
+		Map<String, Object> map =  (Map<String, Object>) session.getAttribute("loginUser");
+		Employee who = (Employee) map.get("user");// 세션값을 이용해서 자신이 누구인지 알아낸다.
+		
 		Reservation reservation =  reservationDetailService.searchReservationById(Integer.parseInt(request.getParameter("reservationId")));
-		Employee employee = employeeService.checkEmployeeByEmployeeId(Integer.toString(reservation.getEmployeeId()));
-		Department department = managementServcice.selectDepartmentById(Integer.parseInt(employee.getDepartmentId()));
+		Employee register = employeeService.checkEmployeeByEmployeeId(Integer.toString(reservation.getEmployeeId()));
+		Department department = managementServcice.selectDepartmentById(Integer.parseInt(register.getDepartmentId()));
 		MeetingRoom meetingRoom = meetingRoomService.selectMeetingRoomById(reservation.getMeetingRoomId());
 		Extend extend =  reservationDetailService.searchExtendReasonById(reservation.getReservationId());
-		Reservation extendIspossible = reservationDetailService.searchNextReservationById(reservation.getReservationId());
+		List<Reservation> extendIspossible = reservationDetailService.searchNextReservationById(reservation.getReservationId());
 		
-		reservation.setEmployeeName(employee.getName());
+		reservation.setEmployeeName(register.getName());
 		reservation.setDepartmentName(department.getName());
 		reservation.setMeetingRoomName(meetingRoom.getName());
-		/*
-			
-		Date date1 = setTime("2020.01.06 8:30");
-		Date date2 = setTime("2020.01.06 15:30"); 
 		
-		reservation.setStartDate(date1);
-		reservation.setEndDate(date2);
-		*/	
+		//본인이 등록한 예약건을 선택한 경우
+		boolean isSelfReservation = false;
+		if(who.getName().equals(register.getName()) == true) {
+			isSelfReservation = true;
+		}
 		
+		model.addAttribute("isSelfReservation", isSelfReservation);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("extend", extend);
-		model.addAttribute("extendIspossible", (extendIspossible==null)? true : false);
+		model.addAttribute("extendIspossible", (extendIspossible.get(0) == null)? true : false);
 		return "reservationDetail/read";
 	}
 
@@ -87,7 +89,7 @@ public class ReservationDetailController {
 
 		reservationDetailService.updateCancelReasonByMap(reservationId, cancelApplicant, cancelReason);
 		reservationDetailService.updateStateByMap(reservationId, "RC");
-		return "redirect:/";
+		return "redirect:/reservation/list";
 	}
 
 	@RequestMapping(value = "/exit", method = RequestMethod.POST)
@@ -98,7 +100,7 @@ public class ReservationDetailController {
 		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
 		Reservation reservation =  reservationDetailService.searchReservationById(reservationId);
 		
-		Date actualEndDate = reservation.getStartDate();
+		Date actualEndDate = reservation.getEndDate();
 		actualEndDate.setHours(Integer.parseInt(request.getParameter("exitTimeHours")));
 		actualEndDate.setMinutes(Integer.parseInt(request.getParameter("exitTimeMinutes")));
 		
@@ -108,7 +110,7 @@ public class ReservationDetailController {
 		reservationDetailService.updateExitByMap(reservationId, validateApplicant, actualEndDate);
 		reservationDetailService.updateStateByMap(reservationId, "F");
 		
-		return "redirect:/";
+		return "redirect:/reservation/list";
 	}
 
 
@@ -120,28 +122,34 @@ public class ReservationDetailController {
 		Reservation reservation =  reservationDetailService.searchReservationById(reservationId);
 		Extend extend = new Extend();
 		
-		Date endDate = reservation.getStartDate();
-		endDate.setHours(Integer.parseInt(request.getParameter("extandTimeHours")));
-		endDate.setMinutes(Integer.parseInt(request.getParameter("extandTimeMinutes")));
+		Date actualEndDate = reservation.getEndDate();
+		actualEndDate.setHours(Integer.parseInt(request.getParameter("extandTimeHours")));
+		actualEndDate.setMinutes(Integer.parseInt(request.getParameter("extandTimeMinutes")));
 		extend.setReservationId(reservationId);
-		extend.setEndDate(endDate);
+		extend.setEndDate(actualEndDate);
 		extend.setExtendReason(request.getParameter("extandReason"));
 		
 		reservationDetailService.insertExtendByMap(extend);
+		reservationDetailService.updateExitByMap(reservationId, "", actualEndDate);
 		reservationDetailService.updateStateByMap(reservationId, "E");
-		return "redirect:/";
+		return "redirect:/reservation/list";
 	}
 
-	public Date setTime(String time) {
-		Date temp = new Date();
-		try {
-			DateFormat sdFormat = new SimpleDateFormat("yyyy.MM.dd kk:mm");
-			temp = sdFormat.parse(time);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return temp;
+	@RequestMapping(value = "/exitCheck", method = RequestMethod.POST)
+	public String exitCheck(HttpServletRequest request, HttpSession session) {
+		logger.info("종료확인");
+		Map<String, Object> map =  (Map<String, Object>) session.getAttribute("loginUser");
+		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
+		Reservation reservation =  reservationDetailService.searchReservationById(reservationId);
+		
+		Employee employee = (Employee) map.get("user");
+		String validateChecker = employee.getName();
+		String abnormality = request.getParameter("abnormality");
+		
+		reservationDetailService.updateExitCheckByMap(reservationId, validateChecker, abnormality);
+		reservationDetailService.updateStateByMap(reservationId, "FV");
+		
+		return "redirect:/reservation/list";
+		
 	}
-	
-
 }

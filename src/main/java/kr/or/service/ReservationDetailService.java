@@ -1,6 +1,7 @@
  package kr.or.service;
 
 import java.util.Date;
+import java.util.List;
 
 import kr.or.domain.Extend;
 import kr.or.domain.Reservation;
@@ -12,5 +13,6 @@ public interface ReservationDetailService {
 	public void updateExitByMap(int reservationId, String validateApplicant, Date actualEndDate);
 	public void insertExtendByMap(Extend extand);
 	public Extend searchExtendReasonById(int reservationId);
-	public Reservation searchNextReservationById(int reservationId);
+	public List<Reservation> searchNextReservationById(int reservationId);
+	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality);
 }

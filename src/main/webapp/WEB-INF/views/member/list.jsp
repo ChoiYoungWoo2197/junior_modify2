@@ -20,10 +20,7 @@
 						return false;
 					}
 
-					location.href = "list?page=1&searchType="
-							+ $("select[name='searchType']").val()
-							+ "&searchContent="
-							+ $("input[name='searchContent']").val();
+					location.href = "list?page=1&searchType="+ $("select[name='searchType']").val()	+ "&searchContent="	+ $("input[name='searchContent']").val();
 				})
 
 		$(document).on("click", ".readMember", function() {
@@ -79,7 +76,8 @@
 				<li><a href="list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}">&lt;</a></li>
 			</c:if>
 			<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
-				<li><a href="list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}"> <c:if test="${page.criteria.page == index}">
+				<li><a href="list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}">
+				 		<c:if test="${page.criteria.page == index}">
 							<span class="page_shape color_sky"></span>
 						</c:if> <c:if test="${page.criteria.page != index}">
 							<span class="page_shape"></span>

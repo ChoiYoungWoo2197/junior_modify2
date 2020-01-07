@@ -37,4 +37,11 @@
 		AND reservationB.state = 'R'
 		where reservationA.reservation_id = #{reservationId}
 	</select>
+	
+	<update id="updateExitCheckByMap">
+		UPDATE reservation
+		SET validate_checker = #{validateChecker} , validate_time = now(), abnormality = #{abnormality}
+		WHERE
+		reservation_id = #{reservationId}
+	</update>
 </mapper>
