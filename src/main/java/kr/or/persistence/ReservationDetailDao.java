@@ -13,4 +13,6 @@ public interface ReservationDetailDao {
 	public void updateExitByMap(int reservationId, String validateApplicant, Date actualEndDate);
 	public List<Reservation> searchNextReservationById(int reservationId);
 	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality);
+	public List<Reservation> searchReservationByEmployeeId(int employeeId);
+	public void deleteReservationById(int employeeId);
 }

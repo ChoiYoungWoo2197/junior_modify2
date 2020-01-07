@@ -5,4 +5,5 @@ import kr.or.domain.Extend;
 public interface ExtendDao {
 	public void insertExtendByMap(Extend extand);
 	public Extend searchExtendReasonById(int reservationId);
+	public void deleteExtendById(int reservationId);
 }

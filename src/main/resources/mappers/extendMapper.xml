@@ -15,4 +15,11 @@
 		ORDER BY application_date DESC
 		LIMIT 1
 	</select>
+	
+	<delete id="deleteExtendById" parameterType="int">
+		DELETE FROM
+		extend
+		WHERE
+		reservation_id = #{reservationId}
+	</delete>
 </mapper>

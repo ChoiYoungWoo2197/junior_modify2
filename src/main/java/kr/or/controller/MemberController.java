@@ -19,10 +19,12 @@ import kr.or.domain.Department;
 import kr.or.domain.Employee;
 import kr.or.domain.Manager;
 import kr.or.domain.Page;
+import kr.or.domain.Reservation;
 import kr.or.domain.SearchCriteria;
 import kr.or.service.EmployeeService;
 import kr.or.service.MailService;
 import kr.or.service.ManagementService;
+import kr.or.service.ReservationDetailService;
 
 
 /**
@@ -40,6 +42,9 @@ public class MemberController {
 	
 	@Autowired
 	ManagementService managementServcice;
+	
+	@Autowired
+	ReservationDetailService reservationDetailService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(SearchCriteria searchCriteria,Model model) {
@@ -89,7 +94,7 @@ public class MemberController {
 					employeeService.insertManager(tmp.getEmployeeId());
 				}
 			}
-			result = "redirect:/reservation/list";
+			result = "redirect:/member/list";
 		}
 		else {// 회원가입을 한경우
 			String title = "회원가입 인증 이메일 입니다.";
@@ -168,6 +173,14 @@ public class MemberController {
 	public String delete(HttpServletRequest request, String memberId) {
 		logger.info("delete : " + memberId);
 		Employee employee = employeeService.checkEmployeeById(memberId);
+		List<Reservation> reservationList = reservationDetailService.searchReservationByEmployeeId(employee.getEmployeeId());
+		
+		for (int i = 0; i < reservationList.size(); i++) {
+			reservationDetailService.deleteExtendById(reservationList.get(i).getReservationId());
+		}
+		
+		
+		reservationDetailService.deleteReservationById(employee.getEmployeeId());
 		employeeService.deleteManager(employee.getEmployeeId());
 		employeeService.deleteEmployee(memberId);
 		

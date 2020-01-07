@@ -21,5 +21,12 @@ public class ExtendDaoImpl implements ExtendDao {
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne(namespace + ".searchExtendReasonById", reservationId);
 	}
+	
+	@Override
+	public void deleteExtendById(int reservationId) {
+		// TODO Auto-generated method stub
+		sqlsession.delete(namespace + ".deleteExtendById", reservationId);
+	}
+
 
 }
