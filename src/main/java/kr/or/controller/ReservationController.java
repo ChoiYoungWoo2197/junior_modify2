@@ -136,8 +136,43 @@ public class ReservationController {
 		
 		for(Reservation reservation : reservationList) {
 			if(employeeId != null) {
-				if(Integer.parseInt(employeeId) != reservation.getEmployeeId()) {
-					System.out.println("다르다");
+				if(reservation.getExtendEndDate() != null) {
+					if(Integer.parseInt(employeeId) != reservation.getEmployeeId()) {
+						if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getExtendEndDate().getTime()) {
+							result = "false";
+						}
+						if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getExtendEndDate().getTime()) {
+							result = "false";
+						}
+						if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getExtendEndDate().getTime() <= endDate.getTime()) {
+							result = "false";
+						}
+					}
+				} else {
+					if(Integer.parseInt(employeeId) != reservation.getEmployeeId()) {
+						if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getEndDate().getTime()) {
+							result = "false";
+						}
+						if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getEndDate().getTime()) {
+							result = "false";
+						}
+						if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getEndDate().getTime() <= endDate.getTime()) {
+							result = "false";
+						}
+					}
+				}
+			} else {
+				if(reservation.getExtendEndDate() != null) {
+					if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getExtendEndDate().getTime()) {
+						result = "false";
+					}
+					if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getExtendEndDate().getTime()) {
+						result = "false";
+					}
+					if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getExtendEndDate().getTime() <= endDate.getTime()) {
+						result = "false";
+					}
+				} else {
 					if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getEndDate().getTime()) {
 						result = "false";
 					}
@@ -148,19 +183,8 @@ public class ReservationController {
 						result = "false";
 					}
 				}
-			} else {
-				if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getEndDate().getTime()) {
-					result = "false";
-				}
-				if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getEndDate().getTime()) {
-					result = "false";
-				}
-				if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getEndDate().getTime() <= endDate.getTime()) {
-					result = "false";
-				}
 			}
 		}
-		
 		return result;
 	}
 	
