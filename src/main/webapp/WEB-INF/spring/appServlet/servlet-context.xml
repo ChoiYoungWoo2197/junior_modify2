@@ -12,6 +12,7 @@
 	<beans:bean id="authInterceptor" class="kr.or.interceptor.AuthInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
+			<mapping path="/management/list" />
 			<mapping path="/management/insert" />
 			<mapping path="/management/modify" />
 			<mapping path="/meetingRoom/list" />

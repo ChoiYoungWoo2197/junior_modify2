@@ -28,20 +28,12 @@ public class LoginController {
 	@Autowired
 	EmployeeService employeeService;
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	
 	//로그인 화면 출력
 	@RequestMapping(value = "/login", method = RequestMethod.GET) 
 	public String login(Locale locale, Model model) {
 		return "login";
 	}
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	
+
 	//로그인 시도
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	public String check(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
@@ -67,9 +59,6 @@ public class LoginController {
 					map.put("user", employee);
 					//여기서 세션 저장한다.
 					session.setAttribute("loginUser", map);
-					
-					//model.addAttribute("Account", map);
-
 					result = "redirect:/reservation/list";
 				}
 				else {

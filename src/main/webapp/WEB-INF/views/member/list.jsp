@@ -57,16 +57,28 @@
 			<th>이메일</th>
 			<th>전화번호</th>
 		</tr>
-		<c:forEach var="member" items="${employeeList}">
-			<tr class="readMember">
-				<td>${member.employeeId}</td>
-				<td class="readMemberId" data-memberId="${member.memberId}">${member.memberId}</td>
-				<td >${member.name}</td>
-				<td>${member.departmentId}</td>
-				<td>${member.email}</td>
-				<td>${member.phone}</td>
-			</tr>
-		</c:forEach>
+		<c:if test="${not empty employeeList}">
+				<c:if test="${page.startPage == page.criteria.page}">
+					<c:set var="listIndex" value="${employeeListSize}"/>
+				</c:if>
+				<c:if test="${page.startPage != page.criteria.page}">
+					<c:set var="listIndex" value="${employeeListSize - (10*(page.criteria.page-1))}"/>
+				</c:if>
+				
+				<c:forEach var="member" items="${employeeList}">
+					<tr class="readMember">
+						<td data-employeeId="${member.employeeId}">${listIndex}</td>
+						<c:set var="listIndex" value="${listIndex-1}"/>
+						<td class="readMemberId" data-memberId="${member.memberId}">${member.memberId}</td>
+						<td >${member.name}</td>
+						<td>${member.departmentId}</td>
+						<td>${member.email}</td>
+						<td>${member.phone}</td>
+					</tr>
+				</c:forEach>
+		</c:if>
+		
+
 	</table>
 	<button id="insertMember">회원등록</button>
 

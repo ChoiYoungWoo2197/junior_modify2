@@ -1,15 +1,11 @@
 package kr.or.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import kr.or.domain.Department;
 import kr.or.domain.Employee;
 import kr.or.domain.Extend;
@@ -27,13 +22,11 @@ import kr.or.service.EmployeeService;
 import kr.or.service.ManagementService;
 import kr.or.service.MeetingRoomService;
 import kr.or.service.ReservationDetailService;
-
+ 
 @Controller
 @RequestMapping("/reservationDetail/*")
 public class ReservationDetailController {
-
 	private static final Logger logger = LoggerFactory.getLogger(ReservationDetailController.class);
-
 	@Autowired
 	EmployeeService employeeService;
 
