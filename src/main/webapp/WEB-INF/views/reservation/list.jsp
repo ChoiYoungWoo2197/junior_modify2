@@ -207,7 +207,12 @@
 				</tr>
 			</c:if>
 			<c:if test="${!empty reservationList}">
-				<c:set var="listIndex" value="${fn:length(reservationList)}"/>
+				<c:if test="${page.startPage == page.criteria.page}">
+					<c:set var="listIndex" value="${reservationListSize}"/>
+				</c:if>
+				<c:if test="${page.startPage != page.criteria.page}">
+					<c:set var="listIndex" value="${reservationListSize - (10*(page.criteria.page-1))}"/>
+				</c:if>
 				<c:forEach var="reservation" items="${reservationList}">
 					<tr class="updateReservation">
 						<td class="readReservation" data-reservationId="${reservation.reservationId}">${listIndex}</td>

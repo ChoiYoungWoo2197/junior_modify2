@@ -32,10 +32,9 @@ public class MeetingRoomController {
 		logger.info("meetingRoom list");
 
 		List<MeetingRoom> meetingRoomList = meetingRoomService.searchMeetingRoom(searchCriteria);
-		//List<MeetingRoomEquipment> meetingRoomEquipmentList = meetingRoomService.searchMeetingRoomEquipment(searchCriteria);
-		
 		model.addAttribute("meetingRoomList", meetingRoomList);
-		//model.addAttribute("meetingRoomEquipmentList", meetingRoomEquipmentList);
+		model.addAttribute("meetingRoomListSize", meetingRoomService.searchMeetingRoomCount(searchCriteria));
+		
 		model.addAttribute("searchCriteria", searchCriteria);
 		model.addAttribute("page", new Page(meetingRoomService.searchMeetingRoomCount(searchCriteria), searchCriteria));
 		
