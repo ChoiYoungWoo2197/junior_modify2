@@ -8,24 +8,24 @@
 <script>
 	$(function() {
 		$("#insertMember").click(function() {
-			//alert("?");
 			location.href = "${pageContext.request.contextPath}/member/insert";
 		})
 
-		$("#searchEquipment").click(
-				function() {
-					//alert("???");
-					if ($("input[name='searchContent']").val() == "") {
-						alert("검색할 내용을 입력해주세요.");
-						return false;
-					}
+		$("#searchEquipment").click(function() {			
+			if ($("input[name='searchContent']").val() == "") {
+				alert("검색할 내용을 입력해주세요.");
+				return false;
+			}
 
-					location.href = "list?page=1&searchType="+ $("select[name='searchType']").val()	+ "&searchContent="	+ $("input[name='searchContent']").val();
-				})
+			location.href = "list?page=1&searchType="+ $("select[name='searchType']").val()	+ "&searchContent="	+ $("input[name='searchContent']").val();
+		})
 
 		$(document).on("click", ".readMember", function() {
 			//var memberId = Number($(this).prev().text());
-			var memberId = $(this).prev().text();
+			//var memberId = $(this).prev().text();
+			//location.href = "read?memberId=" + memberId;
+			
+			var memberId = $(this).find(".readMemberId").attr("data-memberId");
 			location.href = "read?memberId=" + memberId;
 		})
 
@@ -58,10 +58,10 @@
 			<th>전화번호</th>
 		</tr>
 		<c:forEach var="member" items="${employeeList}">
-			<tr>
+			<tr class="readMember">
 				<td>${member.employeeId}</td>
-				<td>${member.memberId}</td>
-				<td class="readMember">${member.name}</td>
+				<td class="readMemberId" data-memberId="${member.memberId}">${member.memberId}</td>
+				<td >${member.name}</td>
 				<td>${member.departmentId}</td>
 				<td>${member.email}</td>
 				<td>${member.phone}</td>
