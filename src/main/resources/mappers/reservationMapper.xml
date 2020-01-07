@@ -109,8 +109,9 @@
 		JOIN employee ON employee.employee_id = reservation.employee_id
 		JOIN department ON department.department_id = employee.department_id
 		LEFT JOIN extend ON extend.reservation_id = reservation.reservation_id
-		WHERE meeting_room_id = #{meetingRoomId} AND start_date LIKE '${startDate}%'
-		AND reservation.state = 'R' or reservation.state = 'RC' or reservation.state = 'E'
+		WHERE meeting_room_id = #{meetingRoomId} 
+		AND start_date LIKE '%${startDate}%'
+		AND (reservation.state = 'R' OR 'E')
 		ORDER BY reservation.start_date ASC, extend.end_date DESC
 	</select>
 	
@@ -147,4 +148,8 @@ ORDER BY reservation_id DESC
 	<update id="updateReservationByCurrentTime">
 		UPDATE reservation SET state = "F" WHERE end_date <![CDATA[<=]]> #{currentTime}
 	</update>
+	
+	<select id="selectReservationByMemeberAndTime" resultType="Reservation">
+		SELECT * FROM reservation WHERE employee_id = #{employeeId} AND #{time} BETWEEN start_date AND end_date AND state = 'R'
+	</select>
 </mapper>
