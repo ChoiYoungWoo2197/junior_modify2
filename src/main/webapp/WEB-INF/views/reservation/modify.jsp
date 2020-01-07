@@ -24,7 +24,7 @@
 
 <script>
 	$(function() {
-		displayCaldendar(new Date());
+		displayCaldendar($("#reservationDate").text());
 		
 		$("#prevMonth").on("click", function() {
 			prevMonth();
@@ -34,10 +34,19 @@
 			nextMonth();
 		})
 
+		var choiceDay;
+		var choiceDay2;
+		$("#today").text($("#reservationDate").text().substring(0,$("#reservationDate").text().length-3).replace("-","."));
+		for(var i=0; i<$("#calendar td").length; i++) {
+			if($("#calendar td").eq(i).attr("data-value") == $("#reservationDate").text().substring($("#reservationDate").text().length-2,$("#reservationDate").text().length)) {
+				$("#calendar td").eq(i).addClass("color_blue");
+				choiceDay2 = $("#calendar td").eq(i).attr("data-value");
+			}
+		}
+		choiceDay = $("#today").text().replace(".","")+choiceDay2; //수정했을 때 달력 선택 안해도 값이 저장될 수 있도록
+		
 		$("#meetingRoomSelect").change(function() {
 			$("td").removeClass("color_blue");
-			//attr=> html attribute 취급 & prop=> javascript property취급
-			//attr은 html attribute값이 모두 string으로 넘어오고 prop은 javascript property값이 넘어오기 때문에 boolean, date 등도 가져올 수 있음
 			$("select[name='startHour'] option").eq(0).prop("selected",true);
 			$("select[name='startMinute'] option").eq(0).prop("selected",true);
 			$("select[name='endHour'] option").eq(0).prop("selected",true);
@@ -85,9 +94,6 @@
 			}
 		})
 		
-		/* var meetingStart = new Array(); //ajax로 받은 값을 담을 변수 지정
-		var meetingEnd = new Array(); */
-		var choiceDay;
 		var date = new Date();
 		var today = String(date.getFullYear())+String(('0'+(date.getMonth()+1)).slice(-2))+String(('0'+date.getDate()).slice(-2));
 		
@@ -99,9 +105,9 @@
 			var meetingRoomId = Number($("select[name='meetingRoomId']").val());
 			
 			if(Number($(this).text()) < 10) {
-				choiceDay = $("#today").text().replace(".","")+'0'+$(this).text();
+				choiceDay = $("#today").text().replace(".","")+$(this).attr("data-value");
 			} else {
-				choiceDay = $("#today").text().replace(".","")+$(this).text();
+				choiceDay = $("#today").text().replace(".","")+$(this).attr("data-value");
 			}
 			
 			if(Number(today) > Number(choiceDay)) {
@@ -113,25 +119,19 @@
 			$.ajax({
 				url : "/reservation/infoReserve?meetingRoomId="+meetingRoomId+"&choiceDay="+choiceDay,
 				type : "get",
-				//async : false,
 				success : function(res) {
 					console.log(res);
 					if(res.length == 0) {
 						$("#reservationList p").text("예약 내역이 존재하지 않습니다.");	
 					}else {
 						$(res).each(function(index, element) {
-							if(element.state == "R" || element.state == "RC") {
-								var startDateOrigin = new Date(element.startDate);
-								var startDate = startDateOrigin.getHours()+":"+("00" + startDateOrigin.getMinutes()).slice(-2);
-								var endDateOrigin = new Date(element.endDate);
-								var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
-								
-								var $reservationLi = $("<li>").html(startDate + "~" + endDate + "&ensp;" + element.meetPurpose +"<br>(" + element.employeeName + "("+ element.departmentName + "))" );
-								$("#reservationList ul").append($reservationLi);
-								
-								/* meetingStart[index] = startDate;
-								meetingEnd[index] = endDate; */
-							}
+							var startDateOrigin = new Date(element.startDate);
+							var startDate = startDateOrigin.getHours()+":"+("00" + startDateOrigin.getMinutes()).slice(-2);
+							var endDateOrigin = new Date(element.endDate);
+							var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
+							
+							var $reservationLi = $("<li>").html(startDate + "~" + endDate + "&ensp;" + element.meetPurpose +"<br>(" + element.employeeName + "("+ element.departmentName + "))" );
+							$("#reservationList ul").append($reservationLi);
 						})
 					}
 				}
@@ -140,7 +140,13 @@
 		
 		var currentDate = today+String(("00" + date.getHours()).slice(-2))+String(("00" + date.getMinutes()).slice(-2));
 		
-		$("#insertReservationForm").submit(function() {
+		$("#updateReservationForm").submit(function() {
+			var confirmResult = confirm("수정하시겠습니까?");
+			
+			if(confirmResult == false) {
+				return false;
+			}
+			
 			if($("select[name='meetingRoomId']").val() == "0") {
 				alert("회의실을 선택하세요.");
 				return false;
@@ -180,22 +186,10 @@
 			$("input[name='end']").val(endDate);
 			$("input[name='choiceDay']").val(choiceDay);
 			
-			/* for(var i=0; i<meetingStart.length; i++) {
-				if(Number(meetingStart[i].replace(":","")) <= start && start <= Number(meetingEnd[i].replace(":",""))) {
-					alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.1");
-					$("select[name='startHour']").focus();
-					return false;
-				}
-				if(Number(meetingStart[i].replace(":","")) <= end && end <= Number(meetingEnd[i].replace(":",""))) {
-					alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.2");
-					$("select[name='endHour']").focus();
-					return false;
-				}
-			} */
-			
 			var result = true;
 			$.ajax({
-				url : "/reservation/checkTime?choiceDay="+choiceDay+"&start="+startDate+"&end="+endDate+"&meetingRoomId="+$("select[name='meetingRoomId']").val(),
+				url : "/reservation/checkTime?choiceDay="+choiceDay+"&start="+startDate+"&end="+endDate
+						+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&employeeId="+$("input[name='employeeId']").val(),
 				type : "get",
 				async : false,
 				success : function(res) {
@@ -210,12 +204,17 @@
 				}
 			})
 			return result;
+			
+		})
+		
+		$("#readReservation").click(function() {
+			location.href="${pageContext.request.contextPath}/reservationDetail/read?reservationId="+${reservation.reservationId};
 		})
 	})
 </script>	
 	
 	<section class="width1200">
-		<form id="insertReservationForm" method="post" action="/reservation/insert">
+		<form id="updateReservationForm" method="post" action="/reservation/update">
 			<div class="color_red">* 필수입력</div>
 			<div class="width30 float_left">
 				<h4>1.회의실선택</h4>
@@ -224,7 +223,12 @@
 					<option value="0">회의실 선택</option>
 					<c:forEach var="meetingRoom" items="${meetingRoomList}">
 						<c:if test="${meetingRoom.availability eq 'true'}">
-							<option value="${meetingRoom.meetingRoomId}">${meetingRoom.name}</option>
+							<c:if test="${reservation.meetingRoomId == meetingRoom.meetingRoomId}">
+								<option value="${meetingRoom.meetingRoomId}" selected="selected">${meetingRoom.name}</option>
+							</c:if>
+							<c:if test="${reservation.meetingRoomId != meetingRoom.meetingRoomId}">
+								<option value="${meetingRoom.meetingRoomId}">${meetingRoom.name}</option>
+							</c:if>
 						</c:if>
 						<c:if test="${meetingRoom.availability eq 'false'}">
 							<option value="${meetingRoom.meetingRoomId}" disabled="disabled">${meetingRoom.name}(사용불가)</option>
@@ -232,24 +236,43 @@
 					</c:forEach>
 				</select>
 				<div id="meetingRoomEquipment">
-					<h5></h5> <!-- 지원장비라벨 -->
-					<ul></ul> <!-- 회의실 지원장비 리스트 -->
-					<p></p> <!-- 지원장비 없는 회의실 -->
+					<h5>지원장비</h5>
+					<ul>
+						<c:if test="${!empty meetingRoomEquipmentList}">
+							<c:forEach items="${meetingRoomEquipmentList}" var="meetingRoomEquipment">
+								<li>${meetingRoomEquipment.equipmentName}</li>
+							</c:forEach>
+						</c:if>
+					</ul>
+					<p>
+						<c:if test="${empty meetingRoomEquipmentList}">
+							지원하는 장비가 없습니다.
+						</c:if>
+					</p>
 				</div>
 				<div id="meetingRoomSeats">
-					<h5></h5> <!-- 좌석수라벨 -->
-					<span></span> <!-- 좌석수 정보 -->
+					<h5>좌석수</h5>
+					<span>${seats}</span>
 				</div>
 			</div>
 			<div class="width30 float_left">
 				<h4>2.회의일시</h4>
 				<div>
 					<div>
+						<span class="display_none" id="reservationDate"><fmt:formatDate value="${reservation.startDate}" pattern="yyyy-MM-dd"/></span>
 		        		<span id="prevMonth">&lt; </span><b id="today"></b><span id="nextMonth"> &gt;</span>
 						<div id="calendar"></div>
 					</div>
 					<div id="reservationList">
-						<ul></ul> <!-- 해당 날짜 및 회의실에 포함된 예약 리스트 -->
+						<ul>
+							<c:forEach items="${reservationList}" var="reservation">
+								<fmt:formatDate value="${reservation.startDate}" pattern="kk:mm" var="start"/>
+								<fmt:formatDate value="${reservation.endDate}" pattern="kk:mm" var="end"/>
+								<li>${start}~${end} &ensp; ${reservation.meetPurpose} <br>
+									(${reservation.employeeName}(${reservation.departmentName}))
+								</li>
+							</c:forEach>
+						</ul>
 						<p></p> <!-- 예약내역 없는 경우 -->
 					</div>
 				</div>
@@ -257,21 +280,23 @@
 					<label>시작시간 <span class="color_red">*</span> : </label>
 					<select name="startHour">
 						<c:forEach var="hour" begin="9" end="22">
+							<fmt:formatDate value="${reservation.startDate}" pattern="kk" var="start"/>
 							<c:if test="${hour < 10}">
-								<option value="0${hour}">0${hour}</option>
+								<option value="0${hour}" selected="selected">0${hour}</option>
 							</c:if>
 							<c:if test="${hour >= 10}">
-								<option value="${hour}">${hour}</option>
+								<option value="${hour}" ${hour == start ? 'selected':''}>${hour}</option>
 							</c:if>
 						</c:forEach>
 					</select>시
 					<select name="startMinute">
 						<c:forEach var="minute" begin="0" end="59">
+							<fmt:formatDate value="${reservation.startDate}" pattern="mm" var="start"/>
 							<c:if test="${minute < 10}">
-								<option value="0${minute}">0${minute}</option>
+								<option value="0${minute}" ${minute == start ? 'selected':''}>0${minute}</option>
 							</c:if>
 							<c:if test="${minute >= 10}">
-								<option value="${minute}">${minute}</option>
+								<option value="${minute}" ${minute == start ? 'selected':''}>${minute}</option>
 							</c:if>
 						</c:forEach>
 					</select>분
@@ -279,21 +304,23 @@
 					<label>종료시간 <span class="color_red">*</span> : </label>
 					<select name="endHour">
 						<c:forEach var="hour" begin="9" end="22">
+							<fmt:formatDate value="${reservation.endDate}" pattern="kk" var="end"/>
 							<c:if test="${hour < 10}">
-								<option value="0${hour}">0${hour}</option>
+								<option value="0${hour}" ${hour == end ? 'selected':''}>0${hour}</option>
 							</c:if>
 							<c:if test="${hour >= 10}">
-								<option value="${hour}">${hour}</option>
+								<option value="${hour}" ${hour == end ? 'selected':''}>${hour}</option>
 							</c:if>
 						</c:forEach>
 					</select>시
 					<select name="endMinute">
 						<c:forEach var="minute" begin="0" end="59">
+							<fmt:formatDate value="${reservation.endDate}" pattern="mm" var="end"/>
 							<c:if test="${minute < 10}">
-								<option value="0${minute}">0${minute}</option>
+								<option value="0${minute}" ${minute == end ? 'selected':''}>0${minute}</option>
 							</c:if>
 							<c:if test="${minute >= 10}">
-								<option value="${minute}">${minute}</option>
+								<option value="${minute}" ${minute == end ? 'selected':''}>${minute}</option>
 							</c:if>
 						</c:forEach>
 					</select>분
@@ -303,22 +330,24 @@
 				<h4>3.회의정보</h4>
 				<div>
 					<label>회의목적 <span class="color_red">*</span></label> <br>
-					<input type="text" placeholder="회의목적(주제)를 입력해주세요." name="meetPurpose">
+					<input type="text" placeholder="회의목적(주제)를 입력해주세요." name="meetPurpose" value="${reservation.meetPurpose}">
 				</div>
 				<div>
 					<label>회의참석자 <span class="color_red">*</span></label> <br>
 					<select name="meetAttendess">
-						<%-- <c:forEach var="index" begin="1" end="10">
-							<option>${index}</option>
-						</c:forEach> --%>
+						<c:forEach var="index" begin="1" end="${seats}">
+							<option ${index == reservation.meetAttendess ? 'selected':''}>${index}</option>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
 			<input type="hidden" name="start">
 			<input type="hidden" name="end">
 			<input type="hidden" name="employeeId" value="${loginUser.user.employeeId}">
+			<input type="hidden" name="reservationId" value="${reservation.reservationId}">
 			<input type="hidden" name="choiceDay">
-			<input type="submit" value="예약등록">
+			<input type="submit" value="예약수정">
+			<input type="button" value="취소" id="readReservation">
 		</form>
 	</section>
 </body>

@@ -3,20 +3,74 @@
 <mapper namespace="kr.or.mappers.reservationMapper">
 	
 	<sql id="search">
-		<if test="searchType == 'department'.toString()">
-			WHERE department.name LIKE '%${searchContent}%'
-		</if>
-		<if test="searchType == 'employee'.toString()">
-			WHERE employee.name LIKE '%${searchContent}%'
-		</if>
-		<if test="searchType == 'meetPurpose'.toString()">
-			WHERE reservation.meet_purpose LIKE '%${searchContent}%'
+		<if test="searchStart">
+			WHERE start_date BETWEEN DATE(#{searchStart}) <if test="searchEnd">AND DATE(#{searchEnd})+1 </if>
 		</if>
 		<if test="state">
-			WHERE reservation.state = #{state}
+			<if test="searchStart == null">
+				WHERE reservation.state = #{state}
+			</if>
+			<if test="searchStart != null">
+				AND reservation.state = #{state}
+			</if>
 		</if>
 		<if test="meetingRoomId">
-			WHERE reservation.meeting_room_id = #{meetingRoomId}
+			<if test="searchStart == null">
+				<if test="state == null">
+					WHERE reservation.meeting_room_id = #{meetingRoomId}
+				</if>
+				<if test="state != null">
+					AND reservation.meeting_room_id = #{meetingRoomId}
+				</if>
+			</if>
+			<if test="searchStart != null">
+				AND reservation.meeting_room_id = #{meetingRoomId}
+			</if>
+		</if>
+		<if test="searchType == 'department'.toString()">
+			<if test="searchStart == null">
+				<if test="state == null">
+					<if test="meetingRoomId == null">
+						WHERE department.name LIKE '%${searchContent}%'
+					</if>
+				</if>
+				<if test="state != null || meetingRoomId != null">
+					AND department.name LIKE '%${searchContent}%'
+				</if>
+			</if>
+			<if test="searchStart != null">
+				AND department.name LIKE '%${searchContent}%'
+			</if>
+		</if>
+		<if test="searchType == 'employee'.toString()">
+			<if test="searchStart == null">
+				<if test="state == null">
+					<if test="meetingRoomId == null">
+						WHERE employee.name LIKE '%${searchContent}%'
+					</if>
+				</if>
+				<if test="state != null || meetingRoomId != null">
+					AND employee.name LIKE '%${searchContent}%'
+				</if>
+			</if>
+			<if test="searchStart != null">
+				AND employee.name LIKE '%${searchContent}%'
+			</if>
+		</if>
+		<if test="searchType == 'meetPurpose'.toString()">
+			<if test="searchStart == null">
+				<if test="state == null">
+					<if test="meetingRoomId == null">
+						WHERE reservation.meet_purpose LIKE '%${searchContent}%'
+					</if>
+				</if>
+				<if test="state != null || meetingRoomId != null">
+					AND reservation.meet_purpose LIKE '%${searchContent}%'
+				</if>
+			</if>
+			<if test="searchStart != null">
+				AND reservation.meet_purpose LIKE '%${searchContent}%'
+			</if>
 		</if>
 	</sql>
 	
@@ -30,13 +84,19 @@
 		JOIN employee ON employee.employee_id = reservation.employee_id
 		JOIN department ON department.department_id = employee.department_id
 		<include refid="search"></include>
-		ORDER BY reservation_id DESC 
+		ORDER BY start_date DESC, end_date DESC, reservation_date DESC 
 		LIMIT #{pageStart}, #{amount}
 	</select>
 	
 	<select id="searchReservationCount" resultType="int">
-		SELECT COUNT(reservation_id) FROM reservation 
-		WHERE meet_purpose LIKE '%${searchContent}%'
+		<!-- SELECT COUNT(reservation_id) FROM reservation 
+		WHERE meet_purpose LIKE '%${searchContent}%' -->
+		SELECT COUNT(reservation.reservation_id)
+		FROM reservation 
+		JOIN meeting_room ON meeting_room.meeting_room_id = reservation.meeting_room_id
+		JOIN employee ON employee.employee_id = reservation.employee_id
+		JOIN department ON department.department_id = employee.department_id
+		<include refid="search"></include>
 	</select>
 	
 	<select id="selectReservationByMeetAndDate" resultType="Reservation">
@@ -53,18 +113,26 @@
 	</select>
 	
 	<insert id="insertReservation" parameterType="Reservation">
-		INSERT INTO reservation(employee_id, meeting_room_id, meet_purpose, meet_attendess, start_date, end_date)
-		VALUES (#{employeeId},#{meetingRoomId},#{meetPurpose},#{meetAttendess},#{startDate},#{endDate})
+		INSERT INTO reservation(employee_id, meeting_room_id, meet_purpose, meet_attendess, start_date, end_date, actual_end_date)
+		VALUES (#{employeeId},#{meetingRoomId},#{meetPurpose},#{meetAttendess},#{startDate},#{endDate},#{actualEndDate})
 	</insert>
 	
 	<update id="updateReservation" parameterType="Reservation">
 		UPDATE reservation 
 		SET meeting_room_id = #{meetingRoomId}, meet_purpose = #{meetPurpose}, meet_attendess = #{meetAttendess}, 
-		start_date = #{startDate}, end_date = #{endDate}, modify_date = #{modifyDate}
+		start_date = #{startDate}, end_date = #{endDate}, modify_date = #{modifyDate}, actual_end_date = #{actualEndDate}
 		WHERE reservation_id = #{reservationId}
 	</update>
 	
-	<select id="">
+	<select id="selectReservationById" resultType="Reservation">
+		SELECT reservation.*, meeting_room.name AS meetingRoomName, employee.name AS employeeName, department.name AS departmentName
+		FROM reservation 
+		JOIN meeting_room ON meeting_room.meeting_room_id = reservation.meeting_room_id
+		JOIN employee ON employee.employee_id = reservation.employee_id
+		JOIN department ON department.department_id = employee.department_id
+		WHERE reservation_id = #{reservationId}
+	</select>
+	
 		<!-- select * from reservation where start_date >= '2020-01-01' and end_date <= '2020-01-05' -->
 		<!-- SELECT reservation.*, meeting_room.name AS meetingRoomName, employee.name AS employeeName, department.name AS departmentName
 FROM reservation 
@@ -74,6 +142,7 @@ JOIN department ON department.department_id = employee.department_id
 WHERE start_date BETWEEN DATE('2020-01-01') AND DATE('2020-01-1')+1
 ORDER BY reservation_id DESC 
 		 -->
-		
-	</select>
+	<update id="updateReservationByCurrentTime">
+		UPDATE reservation SET state = "F" WHERE end_date <![CDATA[<=]]> #{currentTime}
+	</update>
 </mapper>

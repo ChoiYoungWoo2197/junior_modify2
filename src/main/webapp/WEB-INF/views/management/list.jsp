@@ -41,7 +41,7 @@
 		})
 		
 		$(document).on("click", ".updateManagement", function(){
-			var managementId = Number($(this).attr("data-managementId"));
+			var managementId = Number($(this).find(".readManagement").text());
 			
 			var result = confirm("수정하시겠습니까?");
 			
@@ -134,9 +134,9 @@
 						<th></th>
 					</tr>
 					<c:forEach var="equipment" items="${equipmentList}">
-						<tr>
-							<td>${equipment.equipmentId}</td>
-							<td class="updateManagement" data-managementId="${equipment.equipmentId}">${equipment.name}</td>
+						<tr class="updateManagement">
+							<td class="readManagement">${equipment.equipmentId}</td>
+							<td>${equipment.name}</td>
 							<td><fmt:formatDate value="${equipment.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
 							<td><button class="deleteManagement" data-managementId="${equipment.equipmentId}">삭제</button></td>
 						</tr>
@@ -167,9 +167,9 @@
 						<th></th>
 					</tr>
 					<c:forEach var="department" items="${employeeByDepartmentList}">
-						<tr>
-							<td>${department.departmentId}</td>
-							<td class="updateManagement" data-managementId="${department.departmentId}">${department.name}</td>
+						<tr class="updateManagement">
+							<td class="readManagement">${department.departmentId}</td>
+							<td>${department.name}</td>
 							<td>${department.emoloyeeCount}</td>
 							<td><fmt:formatDate value="${department.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
 							<td><button class="deleteManagement" data-managementId="${department.departmentId}">삭제</button></td>

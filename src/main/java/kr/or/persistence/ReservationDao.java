@@ -1,5 +1,6 @@
 package kr.or.persistence;
 
+import java.util.Date;
 import java.util.List;
 
 import kr.or.domain.Reservation;
@@ -11,6 +12,8 @@ public interface ReservationDao {
 	public List<Reservation> searchReservation(SearchCriteria searchCriteria);
 	public int searchReservationCount (SearchCriteria searchCriteria);
 	public void insertReservation(Reservation reservation);
-	/*public void updateReservation(Reservation reservation);*/
+	public Reservation selectReservationById(int reservationId);
+	public void updateReservation(Reservation reservation);
+	public void updateReservationByCurrentTime(Date currentTime);
 	
 }

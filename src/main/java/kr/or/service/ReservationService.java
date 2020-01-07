@@ -14,12 +14,13 @@ public interface ReservationService {
 	public List<Reservation> searchReservation(SearchCriteria searchCriteria);
 	public int searchReservationCount (SearchCriteria searchCriteria);
 	public void insertReservation(Reservation reservation);
-//	public void updateReservation(Reservation reservation);
+	public Reservation selectReservationById(int reservationId);
+	public void updateReservation(Reservation reservation);
 	
 	//MeetingRoom
 	public List<MeetingRoom> selectMeetingRoom();
 	public MeetingRoom selectMeetingRoomById(int meetingRoomId);
-//	public int selectMeetingRoomSeatsById(int meetingRoomId);
+	public int selectMeetingRoomSeatsById(int meetingRoomId);
 	
 	//MeetingRoomEquipment
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId);

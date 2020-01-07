@@ -1,9 +1,11 @@
 package kr.or.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
@@ -31,7 +33,9 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	
 	@Override
+	@Transactional
 	public List<Reservation> searchReservation(SearchCriteria searchCriteria) {
+		reservationDao.updateReservationByCurrentTime(new Date());
 		return reservationDao.searchReservation(searchCriteria);
 	}
 	
@@ -46,6 +50,16 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	
 	@Override
+	public Reservation selectReservationById(int reservationId) {
+		return reservationDao.selectReservationById(reservationId);
+	}
+	
+	@Override
+	public void updateReservation(Reservation reservation) {
+		reservationDao.updateReservation(reservation);
+	}
+	
+	@Override
 	public List<MeetingRoom> selectMeetingRoom() {
 		return meetingRoomDao.selectMeetingRoom();
 	}
@@ -55,21 +69,14 @@ public class ReservationServiceImpl implements ReservationService {
 		return meetingRoomDao.selectMeetingRoomById(meetingRoomId);
 	}
 	
-//	@Override
-//	public int selectMeetingRoomSeatsById(int meetingRoomId) {
-//		return meetingRoomDao.selectMeetingRoomSeatsById(meetingRoomId);
-//	}
+	@Override
+	public int selectMeetingRoomSeatsById(int meetingRoomId) {
+		return meetingRoomDao.selectMeetingRoomSeatsById(meetingRoomId);
+	}
 	
 	@Override
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId) {
 		return meetingRoomEquipmentDao.selectMeetingRoomEquipmentById(meetingRoomId);
 	}
 
-	
-
-	
-
-	
-
-	
 }

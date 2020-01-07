@@ -261,13 +261,14 @@
 				</tr>
 				<tr>
 					<td><b>소속부서</b><b class="red">*</b></td>
-					<td><select name="departmentType" id="departmentType">
+					<td>
+						<select name="departmentType" id="departmentType">
 							<option value="">부서선택</option>
-							<option value="1">개발부</option>
-							<option value="2">기획부</option>
-							<option value="3">영업부</option>
-							<option value="4">인사부</option>
-					</select> <span id="valideDepartmentType" class="error">부서를 선택하세요.</span></td>
+							<c:forEach var="list" items="${departmentList}" varStatus="i">
+								<option value="${list.departmentId}">${list.name}</option>
+							</c:forEach>
+						</select>
+					<span id="valideDepartmentType" class="error">부서를 선택하세요.</span></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>

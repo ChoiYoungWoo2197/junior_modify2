@@ -87,7 +87,7 @@ public class MemberController {
 					employeeService.insertManager(tmp.getEmployeeId());
 				}
 			}
-			result = "redirect:/";
+			result = "redirect:/reservation/list";
 		}
 		else {// 회원가입을 한경우
 			String title = "회원가입 인증 이메일 입니다.";
@@ -119,11 +119,15 @@ public class MemberController {
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyPage(Model model, String memberId) {
 		logger.info("modifyPage  memberId : " + memberId);
+		
 		Employee employee = employeeService.checkEmployeeById(memberId);
 		Manager manager = employeeService.checkManager(employee.getEmployeeId());
+		List<Department> departmentList = managementServcice.searchDepartmentList();
+		
 		
 		model.addAttribute("employeeModify", employee);
 		model.addAttribute("managerType", (manager != null)? true : false);
+		model.addAttribute("departmentList", departmentList);
 		
 		return "member/modify";
 	}
@@ -155,7 +159,7 @@ public class MemberController {
 			employeeService.deleteManager(employee.getEmployeeId());
 		}
 		
-		return "redirect:/";
+		return "redirect:/reservation/list";
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)

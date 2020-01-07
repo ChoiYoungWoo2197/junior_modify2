@@ -69,14 +69,6 @@ public class ReservationDetailController {
 			isSelfReservation = true;
 		}
 		
-		/*
-			
-		Date date1 = setTime("2020.01.06 8:30");
-		Date date2 = setTime("2020.01.06 16:30"); 
-		
-		reservation.setStartDate(date1);
-		reservation.setEndDate(date2);
-		*/	
 		model.addAttribute("isSelfReservation", isSelfReservation);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("extend", extend);
@@ -160,16 +152,4 @@ public class ReservationDetailController {
 		return "redirect:/reservation/list";
 		
 	}
-	public Date setTime(String time) {
-		Date temp = new Date();
-		try {
-			DateFormat sdFormat = new SimpleDateFormat("yyyy.MM.dd kk:mm");
-			temp = sdFormat.parse(time);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return temp;
-	}
-	
-
 }

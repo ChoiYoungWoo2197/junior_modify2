@@ -70,7 +70,7 @@ public class LoginController {
 					
 					//model.addAttribute("Account", map);
 
-					result = "redirect:/";
+					result = "redirect:/reservation/list";
 				}
 				else {
 					result = "redirect:/mail/authenticate?memberId="+employee.getMemberId();
@@ -88,7 +88,7 @@ public class LoginController {
 	@RequestMapping(value = "/out", method = RequestMethod.GET)
 	public String out(HttpSession session) {
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:/reservation/list";
 	}
 
 }

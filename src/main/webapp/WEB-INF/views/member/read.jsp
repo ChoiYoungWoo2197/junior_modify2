@@ -1,9 +1,36 @@
-</html><%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/managerHeader.jsp"%>
 <link href="${pageContext.request.contextPath}/resources/css/member/modify.css" rel="stylesheet" type="text/css" />
-<script src="${pageContext.request.contextPath}/resources/js/member/read.js" charset="UTF-8" type="text/javascript"></script>
+<script>
+$(function() {
+	$("#list").click(function() {
+		location.href = "list";
+	})
+
+	$("#update").click(function() {
+		//var memberId = Number($("input[name=memberId]").val());
+		//alert( $("input[name=memberId]").val());
+		var memberId = $("input[name=memberId]").val();
+		location.href = "modify?memberId="+memberId;
+	})
+
+	$("#delete").click(function() {
+		var name = '${employeeDetail.name}';
+		var result = confirm(name +"님을 삭제하시겠습니까?");
+
+		if(result == true) {
+			//var memberId = Number($("input[name=memberId]").val());
+			var memberId = $("input[name=memberId]").val();
+			location.href = "delete?memberId="+memberId;
+		}
+	})
+})
+</script>
+
+
 
 <section class="width1200">
 	<h1>회원 상세내역</h1>

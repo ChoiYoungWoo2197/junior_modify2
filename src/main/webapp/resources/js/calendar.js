@@ -1,6 +1,8 @@
 var today = new Date();
 
-function displayCaldendar() {      
+function displayCaldendar(str) { 
+	today = new Date(str);
+	
 	var year = today.getFullYear();
 	var month = today.getMonth();
 	var date = today.getDate();
@@ -49,11 +51,11 @@ function displayCaldendar() {
 } 
 
 function prevMonth(){//한달 전
-   today.setMonth(today.getMonth() - 1);
-   displayCaldendar();
+	//today.setMonth(today.getMonth() - 1);
+	displayCaldendar(today.setMonth(today.getMonth() - 1));
 }
 
 function nextMonth(){//한달 후
-   today.setMonth(today.getMonth() + 1);   
-   displayCaldendar();
+	//today.setMonth(today.getMonth() + 1);   
+	displayCaldendar(today.setMonth(today.getMonth() + 1));
 }

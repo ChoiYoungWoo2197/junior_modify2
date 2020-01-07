@@ -202,6 +202,10 @@ table, th, td {
 		$(document).on("click", "#list", function() {
 			location.href = "${pageContext.request.contextPath}/reservation/list";
 		});
+		
+		$("#updateReservation").click(function() {
+			location.href="${pageContext.request.contextPath}/reservation/update?reservationId="+${reservation.reservationId};
+		})
 	})
 </script>
 
@@ -266,9 +270,11 @@ table, th, td {
 									<span>진행중</span>
 								</c:when>
 								<c:when test="${today >= actualEndDate}">
+								
 									<span>종료</span>
 								</c:when>
 								<c:otherwise>
+								
 									<span>예약</span>
 								</c:otherwise>
 							</c:choose>
@@ -381,7 +387,7 @@ table, th, td {
 					<fmt:formatDate value="${now}" pattern="yyyy.MM.dd kk:mm" var="today" />
 					<fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd kk:mm" var="startDate" />
 					<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" var="actualEndDate" />
-	
+
 					<c:choose>
 						<c:when test="${today > startDate  &&  today < actualEndDate}">
 							<div id="processingDiv"  class="floatRight">

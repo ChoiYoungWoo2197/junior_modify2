@@ -39,21 +39,107 @@
 			location.href = "insert";
 		})
 		
+		$(document).on("click", ".updateReservation", function(){
+			var reservationId = Number($(this).find(".readReservation").attr("data-reservationId"));
+			location.href = "${pageContext.request.contextPath}/reservationDetail/read?reservationId="+ reservationId;
+		})
+		
 		$("#searchReservation").click(function() {
-			if($("input[name='searchStartDate']").val()!="" || $("input[name='searchEndDate']").val()!="") {
-				alert($("input[name='searchStartDate']").val());
-				alert($("input[name='searchEndDate']").val());
-				alert($("input[name='searchStartDate']").val()+$("input[name='searchEndDate']").val());
+			//기간별로 검색할 경우
+			if($("#searchStart").val()!="" || $("#searchEnd").val()!="") {
+				if($("#searchStart").val() > $("#searchEnd").val()!="") {
+					alert("기간을 잘못 선택하셨습니다.");
+					return false;
+				}
+				
+				//기간별 & 상태로 검색하는 경우
+				if($("select[name='state']").val()!="none") {
+					location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
+							+"&state="+$("select[name='state']").val();
+					//기간별 & 상태 & 회의실로 검색하는 경우
+					if($("select[name='meetingRoomId']").val()!="0") {
+						location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
+								+"&state="+$("select[name='state']").val()+"&meetingRoomId="+$("select[name='meetingRoomId']").val();
+						
+						//기간별 & 상태 & 회의실 & input내용으로 검색하는 경우
+						if($("input[name='searchContent']").val()!="") {
+							location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
+									+"&state="+$("select[name='state']").val()+"&meetingRoomId="+$("select[name='meetingRoomId']").val()
+									+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+							return false;
+						}
+						return false;
+					}
+					
+					//기간별 & 상태 & input내용으로 검색하는 경우
+					if($("input[name='searchContent']").val()!="") {
+						location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
+								+"&state="+$("select[name='state']").val()+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+						return false;
+					}
+					return false;
+				}
+				
+				//기간별 & 회의실로 검색하는 경우
+				if($("select[name='meetingRoomId']").val()!="0") {
+					location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
+							+"&meetingRoomId="+$("select[name='meetingRoomId']").val();
+					
+					//기간별 & 회의실 & input내용으로 검색하는 경우
+					if($("input[name='searchContent']").val()!="") {
+						location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
+						+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+						return false;
+					}
+					return false;
+				}
+				
+				//기간별 & input내용으로 검색하는 경우
+				if($("input[name='searchContent']").val()!="") {
+					location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
+							+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+					return false;
+				}
+				
+				location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val();
 				return false;
 			}
 			
+			//상태로 검색할 경우
 			if($("select[name='state']").val()!="none") {
+				//상태 & 회의실로 검색하는 경우
+				if($("select[name='meetingRoomId']").val()!="0") {
+					location.href = "list?page=1&state="+$("select[name='state']").val()+"&meetingRoomId="+$("select[name='meetingRoomId']").val();
+					
+					//상태 & 회의실 & input내용으로 검색하는 경우
+					if($("input[name='searchContent']").val()!="") {
+						location.href = "list?page=1&state="+$("select[name='state']").val()+"&meetingRoomId="+$("select[name='meetingRoomId']").val()
+								+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+						return false;
+					}
+					return false;
+				}
+				
+				//상태 & input내용으로 검색하는 경우
+				if($("input[name='searchContent']").val()!="") {
+					location.href = "list?page=1&state="+$("select[name='state']").val()
+							+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+					return false;
+				}
 				location.href = "list?page=1&state="+$("select[name='state']").val();
 				return false;
 			}
 			
+			//회의실로 검색할 경우
 			if($("select[name='meetingRoomId']").val()!="0") {
 				location.href = "list?page=1&meetingRoomId="+$("select[name='meetingRoomId']").val();
+				
+				//회의실 & input내용으로 검색하는 경우
+				if($("input[name='searchContent']").val()!="") {
+					location.href = "list?page=1&meetingRoomId="+$("select[name='meetingRoomId']").val()
+							+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+					return false;
+				}
 				return false;
 			}
 			
@@ -68,22 +154,17 @@
 		$("#allReservation").click(function() {
 			location.href = "list";
 		})
-		
-		$(document).on("click", ".readReservation", function() {
-			var reservationId = Number($(this).text());
-			window.location.href = "${pageContext.request.contextPath}/reservationDetail/read?reservationId="+ reservationId;
-			//location.href = "read?memberId=" + memberId;
-		})
 	})
 </script>	
 	
 	<section class="width1200">
 		<div>
 			<label>사용일</label>
-			<input type="date" name="searchStartDate"> ~ <input type="date" name="searchEndDate">
+			<input type="date" name="searchDate" id="searchStart" value="${searchCriteria.searchStart}"> ~ 
+			<input type="date" name="searchDate" id="searchEnd" value="${searchCriteria.searchEnd}">
 			<select name="state">
 				<option value="none">상태</option>
-				<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약</option>
+				<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약(진행중)</option>
 				<option value="RC" ${searchCriteria.state == 'RC' ? 'selected' : ''}>예약취소</option>
 				<option value="E" ${searchCriteria.state == 'E' ? 'selected' : ''}>연장</option>
 				<option value="F" ${searchCriteria.state == 'F' ? 'selected' : ''}>종료</option>
@@ -101,9 +182,9 @@
 				</c:forEach>
 			</select>
 			<select name="searchType">
-				<option value="department">부서</option>
-				<option value="employee">신청자</option>
-				<option value="meetPurpose">회의목적</option>
+				<option value="department" ${searchCriteria.searchType == 'department' ? 'selected':''}>부서</option>
+				<option value="employee" ${searchCriteria.searchType == 'employee' ? 'selected':''}>신청자</option>
+				<option value="meetPurpose" ${searchCriteria.searchType == 'meetPurpose' ? 'selected':''}>회의목적</option>
 			</select>
 			<input type="text" name="searchContent" value="${searchCriteria.searchContent}">
 			<button id="searchReservation">검색</button>
@@ -120,37 +201,46 @@
 				<th>신청자</th>
 				<th>신청일시</th>
 			</tr>
-			<c:forEach var="reservation" items="${reservationList}">
+			<c:if test="${empty reservationList}">
 				<tr>
-					<td class="readReservation">${reservation.reservationId}</td>
-					<td><fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd"/></td>
-					<td><fmt:formatDate value="${reservation.startDate}" pattern="kk:mm"/> ~ <fmt:formatDate value="${reservation.endDate}" pattern="kk:mm"/></td>
-					<td>
-						<c:choose>
-							<c:when test="${reservation.state == 'R'}">
-								<jsp:useBean id="now" class="java.util.Date" />
-								${now < reservation.startDate == 'true'? '예약':'진행중'}
-							</c:when>
-							<c:when test="${reservation.state == 'RC'}">
-								예약취소
-							</c:when>
-							<c:when test="${reservation.state == 'E'}">
-								연장
-							</c:when>
-							<c:when test="${reservation.state == 'F'}">
-								종료
-							</c:when>
-							<c:when test="${reservation.state == 'FV'}">
-								종료확인
-							</c:when>
-						</c:choose>
-					</td>
-					<td>${reservation.meetingRoomName}</td>
-					<td>${reservation.meetPurpose}</td>
-					<td>${reservation.employeeName}(${reservation.departmentName})</td>
-					<td><fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd kk:mm"/></td>
+					<td colspan="8">예약내역이 없습니다.</td>
 				</tr>
-			</c:forEach>
+			</c:if>
+			<c:if test="${!empty reservationList}">
+				<c:set var="listIndex" value="${fn:length(reservationList)}"/>
+				<c:forEach var="reservation" items="${reservationList}">
+					<tr class="updateReservation">
+						<td class="readReservation" data-reservationId="${reservation.reservationId}">${listIndex}</td>
+						<c:set var="listIndex" value="${listIndex-1}"/>
+						<td><fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd"/></td>
+						<td><fmt:formatDate value="${reservation.startDate}" pattern="kk:mm"/> ~ <fmt:formatDate value="${reservation.endDate}" pattern="kk:mm"/></td>
+						<td>
+							<c:choose>
+								<c:when test="${reservation.state == 'R'}">
+									<jsp:useBean id="now" class="java.util.Date" />
+									${now < reservation.startDate == 'true'? '예약':'진행중'}
+								</c:when>
+								<c:when test="${reservation.state == 'RC'}">
+									예약취소
+								</c:when>
+								<c:when test="${reservation.state == 'E'}">
+									연장
+								</c:when>
+								<c:when test="${reservation.state == 'F'}">
+									종료
+								</c:when>
+								<c:when test="${reservation.state == 'FV'}">
+									종료확인
+								</c:when>
+							</c:choose>
+						</td>
+						<td>${reservation.meetingRoomName}</td>
+						<td>${reservation.meetPurpose}</td>
+						<td>${reservation.employeeName}(${reservation.departmentName})</td>
+						<td><fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd kk:mm"/></td>
+					</tr>
+				</c:forEach>
+			</c:if>
 		</table>
 		<button id="insertReservation">예약등록</button>
 		
