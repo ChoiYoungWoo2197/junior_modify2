@@ -82,18 +82,18 @@
 			<div>
 				<label>예약가능여부 <span class="color_red">*</span></label>
 				<c:if test="${meetingRoom.availability eq 'true'}">
-					<input type="radio" name="availability" value="true" checked="checked">가능
-					<input type="radio" name="availability" value="false">불가능
+					<label for="availabilityTrue"><input type="radio" name="availability" value="true" checked="checked" id="availabilityTrue">가능</label>
+					<label for="availabilityFalse"><input type="radio" name="availability" value="false" id="availabilityFalse">불가능</label>
 				</c:if>
 				<c:if test="${meetingRoom.availability eq 'false'}">
-					<input type="radio" name="availability" value="true">가능
-					<input type="radio" name="availability" value="false" checked="checked">불가능
+					<label for="availabilityTrue"><input type="radio" name="availability" value="true" id="availabilityTrue">가능</label>
+					<label for="availabilityFalse"><input type="radio" name="availability" value="false" checked="checked" id="availabilityFalse">불가능</label>
 				</c:if>	
 			</div>
 			<div>
 				<label>지원설비</label>
 				<c:forEach var="equipment" items="${equipmentList}">
-					<input type="checkbox" name="equipmentId" value="${equipment.equipmentId}" id="${equipment.equipmentId}">${equipment.name}
+					<label for="${equipment.equipmentId}"><input type="checkbox" name="equipmentId" value="${equipment.equipmentId}" id="${equipment.equipmentId}">${equipment.name}</label>
 					<c:forEach var="meetingRoomEquipment" items="${meetingRoomEquipmentList}" varStatus="status">
 						<c:if test="${meetingRoomEquipment.equipmentName eq equipment.name}">
 							<script>

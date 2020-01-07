@@ -193,4 +193,8 @@ $(function() {
 		})
 		return result;
 	})
+	
+	$("#listReservation").click(function() {
+		location.href = "list";
+	})
 })

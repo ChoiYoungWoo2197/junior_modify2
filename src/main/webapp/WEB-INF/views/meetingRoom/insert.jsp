@@ -70,13 +70,13 @@
 			</div>
 			<div>
 				<label>예약가능여부 <span class="color_red">*</span></label>
-				<input type="radio" name="availability" checked="checked" value="true">가능
-				<input type="radio" name="availability" value="false">불가능
+				<label for="availabilityTrue"><input type="radio" name="availability" checked="checked" value="true" id="availabilityTrue">가능</label>
+				<label for="availabilityFalse"><input type="radio" name="availability" value="false" id="availabilityFalse">불가능</label>
 			</div>
 			<div>
 				<label>지원설비</label>
 				<c:forEach var="equipment" items="${equipmentList}">
-					<input type="checkbox" name="equipmentId" value="${equipment.equipmentId}">${equipment.name}
+					<label for="${equipment.equipmentId}"><input type="checkbox" name="equipmentId" value="${equipment.equipmentId}" id="${equipment.equipmentId}">${equipment.name}</label>
 				</c:forEach>
 				<input type="hidden" name="checkTrue">
 			</div>
