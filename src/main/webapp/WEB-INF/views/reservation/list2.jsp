@@ -3,40 +3,7 @@
 <%@ include file="../include/header.jsp"%>
 
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
-
-<style>
-	img {
-		width: 30px;
-		height: 30px;
-		padding-right: 5px;
-	}
-</style>
-
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.min.js"></script>
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reservation/list.js"></script>
-<script>
-	$(function() {
-		$("#startImg").click(function() {
-			$("#searchStart").focus();
-		})
-		$("#endImg").click(function() {
-			$("#searchEnd").focus();
-		})
-		
-		$.datepicker.setDefaults($.datepicker.regional['ko']); //한국어 설정
-	    $("#searchStart").datepicker({ 
-	        dateFormat:"yy-mm-dd",    // 날짜 출력폼 설정
-	    })
-	    
-	    $("#searchEnd").datepicker({ 
-	        dateFormat:"yy-mm-dd",    // 날짜 출력폼 설정
-	    })
-	})
-</script>
 <!-- <script>
 	$(function() {
 		$("#insertReservation").click(function() {
@@ -164,12 +131,9 @@
 	<section class="width1300">
 		<h1>예약현황</h1>
 		<div>
-			<label class="float_left">사용일</label>
-			<input type="text" name="searchDate" id="searchStart" value="${searchCriteria.searchStart}" class="float_left">
-			<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="startImg" class="float_left"> 
-			<span class="float_left">~&nbsp;</span> 
-			<input type="text" name="searchDate" id="searchEnd" value="${searchCriteria.searchEnd}" class="float_left">
-			<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="endImg" class="float_left">
+			<label>사용일</label>
+			<input type="date" name="searchDate" id="searchStart" value="${searchCriteria.searchStart}"> ~ 
+			<input type="date" name="searchDate" id="searchEnd" value="${searchCriteria.searchEnd}">
 			<select name="state">
 				<option value="none">상태</option>
 				<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약(진행중)</option>
