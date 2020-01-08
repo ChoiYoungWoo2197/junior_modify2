@@ -14,7 +14,7 @@
 	//변수
 	var validateId = /^[A-Za-z0-9]+$/; //영어 + 숫자만 입력
 	var validateName = /^[가-힣]{2,5}$/; //한글만 입력
-	var validatePassword = /^[a-z][a-z0-9!@#$*%]{3,14}$/i; //비밀번호 양식 (3-14)
+	var validatePassword = /^[a-z][a-z0-9!@#$*%]{3,12}$/i; //비밀번호 양식 (3-12)
 	var validateEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //이메일 양식
 	var validatePhone = /^\d{2,3}-\d{3,4}-\d{4}$/; //전화번호 양식
 	var checkInput = true;
@@ -247,13 +247,14 @@
 			<table>
 				<tr>
 					<td><b>사번</b><b class="red">*</b></td>
-					<td><input name="modifyMemberId" type="text" size="20" value="${employeeModify.memberId}" readonly="readonly"/> 
+					<td><input name="modifyMemberId" type="text" size="20" value="${employeeModify.memberId}" placeholder=" 사원번호는 영문,숫자 조합입니다."  readonly="readonly"/> 
 					<span id="valideId"	class="error">사원번호를 입력하세요.</span>
 					<span id="checkIdSuccess" class="success">사용가능한 사원번호 입니다.</span>
 				</tr>
 				<tr>
 					<td><b>사원명</b><b class="red">*</b></td>
-					<td><input name="name" type="text" size="20" value="${employeeModify.name}" />
+					<td>
+					<input name="name" type="text" size="20" value="${employeeModify.name}" placeholder=" 이름은 한글만 입력해주세요. [2자리이상 5자리이하]"/>
 					<span id="valideName" class="error">이름을 입력하세요.</span></td>
 					<td colspan="2"></td>
 				</tr>
@@ -271,18 +272,22 @@
 				</tr>
 				<tr>
 					<td><b>비빌번호</b><b class="red">*</b></td>
-					<td><input name="password" type="password" size="20" />
-					<span id="validePassword" class="error">비밀번호를 입력하세요.</span></td>
+					<td>
+					<input name="password" type="password" size="20" placeholder=" 비밀번호는 영문,숫자 조합입니다.[3자리이상 12자리이하]"/>
+					<span id="validePassword" class="error">비밀번호를 입력하세요.</span>
+					</td>
 
 					<td><b>비밀번호 확인</b><b class="red">*</b></td>
-					<td colspan="1"><input id="passwordCheck" name="passwordCheck" type="password" size="20" />
+					<td colspan="1">
+					<input id="passwordCheck" name="passwordCheck" type="password" size="20" />
 					<span id="validePasswordCheck"	class="error">비밀번호 확인을 입력하세요.</span>
 					<span id="checkPasswordSuccess" class="success">비밀번호가 일치합니다.</span>
 					<span id="checkPasswordFail" class="error">비밀번호가 일치하지 않습니다.</span></td>
 				</tr>
 				<tr>
 					<td><b>이메일</b><b class="red">*</b></td>
-					<td><input name="email" type="text" size="20" value="${employeeModify.email}" />
+					<td>
+					<input name="email" type="text" size="20" value="${employeeModify.email}" placeholder=" 예)abc@naver.com"/>
 					<span id="valideEmail"	class="error">이메일을 입력하세요.</span>
 					<span id="checkEmailSuccess" class="success">사용가능한 이메일 입니다.</span>
 					<span id="checkEmailFail" class="error">이미 존재하는 이메일 입니다.</span></td>
@@ -290,7 +295,7 @@
 				</tr>
 				<tr>
 					<td><label>전화번호</label></td>
-					<td><input name="phone" type="text" size="20" value="${employeeModify.phone}"/>
+					<td><input name="phone" type="text" size="20" value="${employeeModify.phone}" placeholder=" 예)010.0000.0000"/>
 					<span id="validePhone" class="error">전화번호를 입력하세요.</span></td>
 					<td colspan="2"></td>
 				</tr>

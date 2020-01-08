@@ -50,8 +50,9 @@ table, th, td {
 	//변수
 	var validateId = /^[A-Za-z0-9]+$/; //영어 + 숫자만 입력
 	var validateName = /^[가-힣]{2,5}$/; //한글만 입력
-	var validatePassword = /^[a-z][a-z0-9!@#$*%]{3,14}$/i; //비밀번호 양식 (3-14)
-	var validateEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //이메일 양식
+	var validatePassword = /^[a-z][a-z0-9!@#$*%]{3,12}$/i; //비밀번호 양식 (3-12)
+	//var validateEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //이메일 양식
+	var validateEmail = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
 	var validatePhone = /^\d{2,3}-\d{3,4}-\d{4}$/; //전화번호 양식
 	var checkInput = true;
 	var checkMemberId = true;
@@ -72,64 +73,77 @@ table, th, td {
 			var departmentType = $("#departmentType option:selected").val();
 			var manageType = $('input:radio[name="manager"][value="yes"]').is(':checked');
 			var register =checkRegister();
-			
-			//alert($("input[name='register']").val());
 			window.location.href = "/insert?departmentType="+ departmentType + "&manager=" + manageType + "&register=" + register;
-			//window.location.href = "${pageContext.request.contextPath}/insert?departmentType="+ departmentType;
-			
 		}
 
 		return check;
 	}
 	
-	function valideRadio(name) {
-		//document에서 함수의 인자와 같은 태그요소를 가져오기 위해 사용
-		var chk_radio = document.getElementsByName(name);
-		var sel_type = null;
-		for(var i=0;i<chk_radio.length;i++){
-			if(chk_radio[i].checked == true){ 
-				return chk_radio[i].value;
-			}
-		}
-	}
-
 	function valideInput() {
 		checkInput = true;
 		if ($("input[name='memberId']").val() == ""	|| validateId.test($("input[name='memberId']").val()) == false) {
-			$("#valideId").css("display", "inline");
 			checkInput = false;
-			//alert("valideId :" + checkInput);
+			$("#valideId").css("display", "inline");
+			if(validateId.test($("input[name='memberId']").val()) == false && $("input[name='memberId']").val() != "") {
+				$("#valideId").html('사원번호 형식이 틀렸습니다.');
+			}
+			else {
+				$("#valideId").html('사원번호를 입력해 주세요.');
+			}
 		}
 		if ($("input[name='name']").val() == ""	|| validateName.test($("input[name='name']").val()) == false) {
-			$("#valideName").css("display", "inline");
-
 			checkInput = false;
-			//alert("valideName :" + checkInput);
+			$("#valideName").css("display", "inline");
+			
+			if(validateName.test($("input[name='name']").val()) == false && $("input[name='name']").val() != "") {
+				$("#valideName").html('이름 형식이 틀렸습니다.');
+			}
+			else {
+				$("#valideName").html('이름을 입력해주세요.');
+			}
 		}
 		if ($("input[name='password']").val() == ""	|| validatePassword.test($("input[name='password']").val()) == false) {
-			$("#validePassword").css("display", "inline");
 			checkInput = false;
-			//alert("validePassword :" + checkInput);
+			$("#validePassword").css("display", "inline");
+			
+			if(validatePassword.test($("input[name='password']").val()) == false && $("input[name='password']").val() != "") {
+				$("#validePassword").html('패스워드 형식이 틀렸습니다.');
+			}
+			else {
+				$("#validePassword").html('패스워드를 입력해주세요.');
+			}
 		}
 		if ($("input[name='passwordCheck']").val() == "") {
 			$("#validePasswordCheck").css("display", "inline");
 			checkInput = false;
-			//alert("validePasswordCheck :" + checkInput);
 		}
 		if ($("input[name='email']").val() == "" || validateEmail.test($("input[name='email']").val()) == false) {
+			checkInput = false;
 			$("#valideEmail").css("display", "inline");
-			checkInput = false;
-			//alert("valideEmail :" + checkInput);
+			if(validateEmail.test($("input[name='email']").val()) == false && $("input[name='email']").val() != "") {
+				$("#valideEmail").html('이메일 형식이 틀렸습니다.');
+			}
+			else {
+				$("#valideEmail").html('이메일을 입력해주세요.');
+			}
 		}
+
+
 		if ($("input[name='phone']").val() == "" || validatePhone.test($("input[name='phone']").val()) == false) {
-			$("#validePhone").css("display", "inline");
 			checkInput = false;
-			//alert("validePhone :" + checkInput);
+			$("#validePhone").css("display", "inline");
+			
+			if(validatePhone.test($("input[name='phone']").val()) == false && $("input[name='phone']").val() != "") {
+				$("#validePhone").html('전화번호 형식이 틀렸습니다.');
+			}
+			else {
+				$("#validePhone").html('전화번호를 입력해주세요.');
+			}
+			
 		}
 		if ($("select[name='departmentType']").val() == "") {
 			$("#valideDepartmentType").css("display", "inline");
 			checkInput = false;
-			//alert("valideDepartmentType :" + checkInput);
 		}
 	}
 
@@ -154,10 +168,8 @@ table, th, td {
 
 	function checkAll() {
 		if (checkInput == true && checkMemberId == true && checkMemberEmail == true && checkMemberPassword == true) {
-			//alert("true");
 			return true;
 		} else {
-			//alert("checkInput : " + checkInput + " checkMemberId : " + checkMemberId + " checkMemberEmail : " + checkMemberEmail + " checkMemberPassword : " + checkMemberPassword);
 			return false;
 		}
 	}
@@ -180,7 +192,6 @@ table, th, td {
 			dataType : "text",
 			success : function(res) {
 				console.log(res);
-				//alert(res);
 				if (res == "true") {
 					$("#checkIdSuccess").css("display", "none");
 					$("#checkIdFail").css("display", "inline");
@@ -251,11 +262,9 @@ table, th, td {
 	}
 	
 	function checkRegister() {
-		//alert("여익ㄴ가");
 		var register =  '<%=session.getAttribute("loginUser")%>';
 
 		var result = register.indexOf("manager=true", 0);
-		//alert(register);
 		if (result > 0) {
 			$("input[name='register']").val("true");
 			return true;
@@ -288,7 +297,8 @@ table, th, td {
 						<b>사번</b><b class="red">*</b>
 					</td>
 					<td>
-						<input name="memberId" type="text" size="20" /> <span id="valideId" class="error">사원번호를 입력하세요.</span>
+						<input name="memberId" type="text" size="20" placeholder=" 사원번호는 영문,숫자 조합입니다." />
+						<span id="valideId" class="error">사원번호를 입력하세요.</span>
 						<span id="checkIdSuccess" class="success">사용가능한 사원번호 입니다.</span>
 						<span id="checkIdFail" class="error">이미 존재하는 사원번호 입니다.</span>
 					</td>
@@ -301,7 +311,8 @@ table, th, td {
 						<b>사원명</b><b class="red">*</b>
 					</td>
 					<td>
-						<input name="name" type="text" size="20" /> <span id="valideName" class="error">이름을 입력하세요.</span>
+						<input name="name" type="text" size="20" placeholder=" 이름은 한글만 입력해주세요."/>
+						<span id="valideName" class="error">이름을 입력하세요.</span>
 					</td>
 					<td colspan="2"></td>
 				</tr>
@@ -325,7 +336,7 @@ table, th, td {
 						<b>비빌번호</b><b class="red">*</b>
 					</td>
 					<td>
-						<input name="password" type="password" size="20" />
+						<input name="password" type="password" size="20" placeholder=" 비밀번호는 영문,숫자 조합입니다.[3자리이상 12자리이하]"/>
 						<span id="validePassword" class="error">비밀번호를 입력하세요.</span>
 					</td>
 
@@ -344,7 +355,7 @@ table, th, td {
 						<b>이메일</b><b class="red">*</b>
 					</td>
 					<td>
-						<input name="email" type="text" size="20" />
+						<input name="email" type="text" size="20" placeholder=" 예)abc@naver.com"/>
 						<span id="valideEmail" class="error">이메일을 입력하세요.</span>
 						<span id="checkEmailSuccess" class="success">사용가능한 이메일 입니다.</span>
 						<span id="checkEmailFail" class="error">이미 존재하는 이메일 입니다.</span>
@@ -358,7 +369,7 @@ table, th, td {
 						<label>전화번호</label>
 					</td>
 					<td>
-						<input name="phone" type="text" size="20" />
+						<input name="phone" type="text" size="20" placeholder=" 예)010.0000.0000"/>
 						<span id="validePhone" class="error">전화번호를 입력하세요.</span>
 					</td>
 					<td colspan="2"></td>
