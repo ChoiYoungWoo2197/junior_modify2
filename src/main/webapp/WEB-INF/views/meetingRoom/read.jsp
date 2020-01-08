@@ -1,14 +1,16 @@
 </html><%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-
 <style>
 	.color_red {
 		color: red;
 		font-size: 14px;
 	}
-	.display_none {
-		display: none;
+	table {
+		border-collapse: collapse;
+	}
+	td, th {
+		border: 1px solid black;
 	}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/read.js"></script>
