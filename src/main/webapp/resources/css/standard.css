@@ -24,6 +24,10 @@ table {
 input[type='text'], input[type='search'], input[type='date'], select {
 	padding: 3px 0;
 }
+input[type='text'], input[type='search'], input[type='date'] {
+	padding: 3px 0;
+	width: 150px;
+}
 button {
 	padding: 3px;
 }
