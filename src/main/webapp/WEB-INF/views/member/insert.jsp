@@ -74,7 +74,7 @@ table, th, td {
 			var register =checkRegister();
 			
 			//alert($("input[name='register']").val());
-			window.location.href = "${pageContext.request.contextPath}/insert?departmentType="+ departmentType + "&manager=" + manageType + "&register=" + register;
+			window.location.href = "/insert?departmentType="+ departmentType + "&manager=" + manageType + "&register=" + register;
 			//window.location.href = "${pageContext.request.contextPath}/insert?departmentType="+ departmentType;
 			
 		}
@@ -172,7 +172,7 @@ table, th, td {
 
 		var memberId = $("input[name='memberId']").val();
 		$.ajax({
-			url : "${pageContext.request.contextPath}/member/checkId",
+			url : "/member/checkId",
 			type : "post",
 			data : {
 				"memberId" : $("input[name='memberId']").val()
@@ -205,7 +205,7 @@ table, th, td {
 
 		var email = $("input[name='email']").val();
 		$.ajax({
-			url : "${pageContext.request.contextPath}/member/checkEmail",
+			url : "/member/checkEmail",
 			type : "post",
 			data : {
 				"email" : $("input[name='email']").val()
