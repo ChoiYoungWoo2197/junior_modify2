@@ -21,8 +21,8 @@ $(function() {
 	choiceDay = $("#today").text().replace(".","")+choiceDay2; //수정했을 때 달력 선택 안해도 값이 저장될 수 있도록
 	
 	$("#meetingRoomSelect").change(function() {
-		$("td").removeClass("color_blue");
-		/*$("select[name='startHour'] option").eq(0).prop("selected",true);
+		/*$("td").removeClass("color_blue");
+		$("select[name='startHour'] option").eq(0).prop("selected",true);
 		$("select[name='startMinute'] option").eq(0).prop("selected",true);
 		$("select[name='endHour'] option").eq(0).prop("selected",true);
 		$("select[name='endMinute'] option").eq(0).prop("selected",true);*/
@@ -151,6 +151,8 @@ $(function() {
 		var startDate2 = $("#today").text().replace(".","")+date+$("select[name='startHour']").val()+$("select[name='startMinute']").val();
 		var endDate2 = $("#today").text().replace(".","")+date+$("select[name='endHour']").val()+$("select[name='endMinute']").val();
 		
+		alert(startDate);
+		
 		if(currentDate >= startDate2 || currentDate >= endDate2) {
 			alert("지난 시간은 예약할 수 없습니다.");
 			$("select[name='startHour']").focus();
@@ -173,8 +175,11 @@ $(function() {
 				if(res == "false") {
 					result = false;
 					alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.");
-				} else {
+				} else if(res == "true") {
 					result = true;
+				} else {
+					result = false;
+					alert("해당시간에 '"+ res + "'에 예약한 내역이 있습니다.");
 				}
 			}
 		})

@@ -319,7 +319,6 @@
 			<input type="hidden" name="employeeId" value="${loginUser.user.employeeId}">
 			<input type="hidden" name="choiceDay">
 			<input type="submit" value="예약등록">
-			<input type="button" value="취소" id="listReservation">
 		</form>
 	</section>
 </body>

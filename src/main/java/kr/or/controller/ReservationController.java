@@ -198,6 +198,11 @@ public class ReservationController {
 			e.printStackTrace();
 		}
 		
+		System.out.println(start);
+		System.out.println(end);
+		System.out.println(startDate);
+		System.out.println(endDate);
+		
 		reservation.setStartDate(startDate);
 		reservation.setEndDate(endDate);
 		reservation.setActualEndDate(endDate);
