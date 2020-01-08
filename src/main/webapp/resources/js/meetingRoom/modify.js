@@ -1,6 +1,6 @@
 $(function() {
-	$("#listManagement").click(function() {
-		location.href = "list?management="+$("input[name='management']").val();
+	$("#listMeetingRoom").click(function() {
+		location.href = "list";
 	})
 	
 	$("#updateMeetingRoomForm").submit(function() {

@@ -8,9 +8,16 @@
 	}
 	table {
 		border-collapse: collapse;
+		width: 100%;
+		margin: 20px 0 10px 0;
 	}
 	td, th {
 		border: 1px solid black;
+		padding: 5px;
+	}
+	td {
+		padding-left: 20px;
+		width: 70%;
 	}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/read.js"></script>
@@ -66,8 +73,10 @@
 		</table>
 		<input type="hidden" name="meetingRoomId" value="${meetingRoom.meetingRoomId}">
 		<button id="listMeetingRoom">목록</button>
-		<button id="updateMeetingRoom">수정</button>
-		<button id="deleteMeetingRoom">삭제</button>
+		<div class="float_right">
+			<button id="updateMeetingRoom">수정</button>
+			<button id="deleteMeetingRoom">삭제</button>
+		</div>
 	</section>
 </body>
 </html>

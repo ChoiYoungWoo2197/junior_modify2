@@ -6,11 +6,11 @@
 	.width30 {
 		width: 30%;
 	}
+	.width40 {
+		width: 40%;
+	}
 	section ul li {
 		list-style: disc;
-	}
-	td, th {
-		border: 1px solid black;
 	}
 	.color_blue {
 		color: blue;
@@ -20,6 +20,19 @@
 		color: red;
 		font-size: 14px;
 	}
+	 table {
+		border-collapse: collapse;
+	  	width: 50%;
+	}
+	td, th {
+	   	padding: 10px 0;
+	   	text-align: center;
+	   	border: 1px solid #bbb;
+	}
+	th {
+	   	background-color: #D8D8D8;
+	}
+	
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reservation/insert.js"></script>
 <!-- <script>
@@ -214,7 +227,7 @@
 	})
 </script>	 -->
 	
-	<section class="width1200">
+	<section class="width1300">
 		<form id="insertReservationForm" method="post" action="/reservation/insert">
 			<div class="color_red">* 필수입력</div>
 			<div class="width30 float_left">
@@ -241,7 +254,7 @@
 					<span></span> <!-- 좌석수 정보 -->
 				</div>
 			</div>
-			<div class="width30 float_left">
+			<div class="width40 float_left">
 				<h4>2.회의일시</h4>
 				<div>
 					<div>
@@ -314,11 +327,12 @@
 					</select>
 				</div>
 			</div>
+			<div class="clear_both"></div>
 			<input type="hidden" name="start">
 			<input type="hidden" name="end">
 			<input type="hidden" name="employeeId" value="${loginUser.user.employeeId}">
 			<input type="hidden" name="choiceDay">
-			<input type="submit" value="예약등록">
+			<input type="submit" value="예약등록" class="float_right">
 		</form>
 	</section>
 </body>
