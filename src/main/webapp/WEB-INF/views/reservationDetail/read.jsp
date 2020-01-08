@@ -107,6 +107,7 @@ table, th, td {
 					
 				}
 				else {
+					//location.href = "/reservationDetail/exit";
 					document.getElementById('reservationDetailForm').action = "/reservationDetail/exit";
 					document.getElementById('reservationDetailForm').submit();
 				}
