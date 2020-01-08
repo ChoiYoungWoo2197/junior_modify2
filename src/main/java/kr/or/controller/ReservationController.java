@@ -82,7 +82,7 @@ public class ReservationController {
 		
 		String startDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(meetingRoomId, startDate);
-		
+		System.out.println(reservationList.size());
 		for(int i=0; i<reservationList.size()-1; i++) {
 			Reservation reservation = reservationList.get(i);
 			Reservation reservation2 = reservationList.get(i+1);
@@ -116,10 +116,9 @@ public class ReservationController {
 		return "redirect:/reservation/list";
 	}
 	
-	@RequestMapping(value = "/checkTime", method = RequestMethod.GET)
-	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId, String employeeId) {
+	@RequestMapping(value = "/checkTime", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId, String employeeId, String insertEmployee) {
 		logger.info("checkTime");
-		System.out.println(employeeId);
 		String result = "true";
 		
 		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
@@ -134,36 +133,34 @@ public class ReservationController {
 			e.printStackTrace();
 		}
 		
+		Reservation res = reservationService.selectReservationByMemeberAndTime(Integer.parseInt(insertEmployee), startDate);
+		if(res != null) {
+			result = res.getMeetingRoomName();
+		}
+		
 		for(Reservation reservation : reservationList) {
 			if(employeeId != null) {
-				if(Integer.parseInt(employeeId) != reservation.getEmployeeId()) {
-					System.out.println("다르다");
-					if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getEndDate().getTime()) {
-						result = "false";
+				if(reservation.getExtendEndDate() != null) {
+					if(Integer.parseInt(employeeId) != reservation.getEmployeeId()) {
+						result = reservationService.checks(result, startDate, endDate, reservation, "extend");
 					}
-					if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getEndDate().getTime()) {
-						result = "false";
-					}
-					if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getEndDate().getTime() <= endDate.getTime()) {
-						result = "false";
+				} else {
+					if(Integer.parseInt(employeeId) != reservation.getEmployeeId()) {
+						result = reservationService.checks(result, startDate, endDate, reservation, "noExtend");
 					}
 				}
 			} else {
-				if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getEndDate().getTime()) {
-					result = "false";
-				}
-				if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getEndDate().getTime()) {
-					result = "false";
-				}
-				if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getEndDate().getTime() <= endDate.getTime()) {
-					result = "false";
+				if(reservation.getExtendEndDate() != null) {
+					result = reservationService.checks(result, startDate, endDate, reservation, "extend");
+				} else {
+					result = reservationService.checks(result, startDate, endDate, reservation, "noExtend");
 				}
 			}
 		}
 		
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String updatePage(int reservationId, Model model) {
 		logger.info("updatePage & reservationId : " + reservationId);

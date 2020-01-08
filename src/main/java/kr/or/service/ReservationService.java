@@ -1,5 +1,6 @@
 package kr.or.service;
 
+import java.util.Date;
 import java.util.List;
 
 import kr.or.domain.MeetingRoom;
@@ -16,6 +17,7 @@ public interface ReservationService {
 	public void insertReservation(Reservation reservation);
 	public Reservation selectReservationById(int reservationId);
 	public void updateReservation(Reservation reservation);
+	public Reservation selectReservationByMemeberAndTime(int employeeId, Date time);
 	
 	//MeetingRoom
 	public List<MeetingRoom> selectMeetingRoom();
@@ -24,4 +26,7 @@ public interface ReservationService {
 	
 	//MeetingRoomEquipment
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId);
+	
+	//함수
+	public String checks(String result, Date startDate, Date endDate, Reservation reservation, String string);
 }

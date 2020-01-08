@@ -173,7 +173,8 @@ $(function() {
 		
 		var result = true;
 		$.ajax({
-			url : "/reservation/checkTime?choiceDay="+choiceDay+"&start="+startDate+"&end="+endDate+"&meetingRoomId="+$("select[name='meetingRoomId']").val(),
+			url : "/reservation/checkTime?choiceDay="+choiceDay+"&start="+startDate+"&end="+endDate
+				+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&insertEmployee="+$("input[name='employeeId']").val(),
 			type : "get",
 			async : false,
 			success : function(res) {
@@ -182,11 +183,18 @@ $(function() {
 				if(res == "false") {
 					result = false;
 					alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.");
-				} else {
+				} else if(res == "true") {
 					result = true;
+				} else {
+					result = false;
+					alert("해당시간에 '"+ res + "'에 예약한 내역이 있습니다.");
 				}
 			}
 		})
 		return result;
+	})
+	
+	$("#listReservation").click(function() {
+		location.href = "list";
 	})
 })

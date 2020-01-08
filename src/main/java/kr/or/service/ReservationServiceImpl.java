@@ -60,6 +60,11 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	
 	@Override
+	public Reservation selectReservationByMemeberAndTime(int employeeId, Date time) {
+		return reservationDao.selectReservationByMemeberAndTime(employeeId, time);
+	}
+	
+	@Override
 	public List<MeetingRoom> selectMeetingRoom() {
 		return meetingRoomDao.selectMeetingRoom();
 	}
@@ -77,6 +82,32 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId) {
 		return meetingRoomEquipmentDao.selectMeetingRoomEquipmentById(meetingRoomId);
+	}
+	
+	@Override
+	public String checks(String result, Date startDate, Date endDate, Reservation reservation, String string) {
+		if(string.equals("extend")) {
+			if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getExtendEndDate().getTime()) {
+				result = "false";
+			}
+			if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getExtendEndDate().getTime()) {
+				result = "false";
+			}
+			if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getExtendEndDate().getTime() <= endDate.getTime()) {
+				result = "false";
+			}
+		} else {
+			if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getEndDate().getTime()) {
+				result = "false";
+			}
+			if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getEndDate().getTime()) {
+				result = "false";
+			}
+			if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getEndDate().getTime() <= endDate.getTime()) {
+				result = "false";
+			}
+		}
+		return result;
 	}
 
 }
