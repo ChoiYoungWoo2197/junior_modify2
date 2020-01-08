@@ -29,6 +29,7 @@ table, th, td {
 <script>
 	$(function() {
 		$("#sendReMail").click(function() {
+			$("input[name='authKey']").val("");
 			$.ajax({
 				url : "/mail/request",
 				type : "post",

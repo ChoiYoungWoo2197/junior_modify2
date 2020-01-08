@@ -55,9 +55,9 @@ table, th, td {
 	var validateEmail = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
 	var validatePhone = /^\d{2,3}-\d{3,4}-\d{4}$/; //전화번호 양식
 	var checkInput = true;
-	var checkMemberId = true;
-	var checkMemberEmail = true;
-	var checkMemberPassword = true;
+	var checkMemberId = false;
+	var checkMemberEmail = false;
+	var checkMemberPassword = false;
 
 	function check() {
 		checkRegister();
@@ -74,6 +74,9 @@ table, th, td {
 			var manageType = $('input:radio[name="manager"][value="yes"]').is(':checked');
 			var register =checkRegister();
 			window.location.href = "/insert?departmentType="+ departmentType + "&manager=" + manageType + "&register=" + register;
+		}
+		else {
+			alert("입력값 혹은 중복체크를 확인해주세요.");
 		}
 
 		return check;
