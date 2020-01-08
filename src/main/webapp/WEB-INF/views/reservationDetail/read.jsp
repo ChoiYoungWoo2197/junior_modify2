@@ -79,29 +79,7 @@ table, th, td {
 		//조기종료 클릭시
 		$("#exitReservation").click(function() {
 			hide();
-			var td = '<td> <b>조기종료시각</b></td>';
-			var exitTd = '<td id="exitTd"></td>';
-			var selectStart = '<select name="exitTimeHours" id="exitTimeHours"></select>';
-			var selectEnd = '<select name="exitTimeMinutes" id="exitTimeMinutes"></select>';
-			var spanHour = '<span> : </span>';
-			var spanMinutes = '<span> 분 </span>';
-			var cancel = '<input type="button" id="denyExit" value="취소"/>';
-			var complete = '<input type="button" id="completeExit" value="완료"/>';
-
-			$("#inputForm").append(td).append(exitTd);
-			$('#exitTd').append(selectStart);
-			for (var count = 9; count <= 22; count++) {
-				var option = $("<option>" + count + "</option>");
-				$('#exitTimeHours').append(option);
-			}
-			$('#exitTd').append(spanHour).append(selectEnd);
-			for (var count = 0; count <= 59; count++) {
-				var option = $("<option>" + count + "</option>");
-				$('#exitTimeMinutes').append(option);
-			}
-			
-			//$("#inputForm").append(spanMinutes);
-			$("#btnDiv").append(cancel).append(complete);
+			creatExitTag();
 		})
 
 		$(document).on("click", "#denyExit", function() {
@@ -111,42 +89,35 @@ table, th, td {
 		});
 
 		$(document).on("click",	"#completeExit",function() {
-			if (confirm("종료하시겠습니까?") == true) {
-				document.getElementById('reservationDetailForm').action = "/reservationDetail/exit";
-				document.getElementById('reservationDetailForm').submit();
+			if (confirm("종료하시겠습니까?") == true) {			
+				var actualDay = $("input[name='actualEndDay']").val();
+				var actualDayArray = actualDay.split('.');				
+				var startTime = $("input[name='startTime']").val();
+				var actualTime = $("input[name='actualEndTime']").val();		
+				var startDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+startTime);
+				var actualDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+actualTime);		
+				var exitDateHour = $("#exitTimeHours option:selected").val();
+				var exitDateMinutes = $("#exitTimeMinutes option:selected").val();
+				var exitDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+exitDateHour+ ':'+exitDateMinutes);
+				
+				if(exitDate <  startDate || exitDate > actualDate) {
+					empty();
+					creatExitTag();
+					$('#exitTd').append('<label style="color:red"> 시작일시와 종료일시 사이에 종료하실수 있습니다. 다시입력해주세요.</label>');
+					
+				}
+				else {
+					document.getElementById('reservationDetailForm').action = "/reservationDetail/exit";
+					document.getElementById('reservationDetailForm').submit();
+				}
 			}
-			
-			
+		
 		});
 
 		//연장신청 클릭시
 		$("#extandReservation").click(function() {
 			hide();
-			var td = '<td><b>종료시각</b></td>';
-			var extandTd = '<td id="extandTd"></td>';
-			var reasonTd = '<td id="reasonTd"><b>연장사유</b></td>';
-			var selectStart = '<select name="extandTimeHours" id="extandTimeHours"></select>';
-			var selectEnd = '<select name="extandTimeMinutes" id="extandTimeMinutes"></select>';
-			var spanHour = '<span> : </span>';
-			var spanMinutes = '<span> 분 </span>';
-			var reason = '<td><input type="text" name="extandReason" style="width:100%;"/></td>';
-			var cancel = '<input type="button" id="denyExtand" value="취소"/>';
-			var complete = '<input type="button" id="completeExtand" value="완료"/>';
-
-			$("#inputForm").append(td).append(extandTd);
-			$('#extandTd').append(selectStart);
-			for (var count = 9; count <= 22; count++) {
-				var option = $("<option>" + count + "</option>");
-				$('#extandTimeHours').append(option);
-			}
-			$('#extandTd').append(spanHour).append(selectEnd);
-			for (var count = 0; count <= 59; count++) {
-				var option = $("<option>" + count + "</option>");
-				$('#extandTimeMinutes').append(option);
-			}
-			
-			$("#reasonForm").append(reasonTd).append(reason);
-			$("#btnDiv").append(cancel).append(complete);
+			createExtandTag();
 		})
 
 		$(document).on("click", "#denyExtand", function() {
@@ -158,21 +129,28 @@ table, th, td {
 		$(document).on("click",	"#completeExtand", function() {
 			if (confirm("연장하시겠습니까?") == true) {
 				if($("input[name='extandReason']").val() == "") {
-					var currentDate = new Date();
-					var actualDate = $("input[name='timeSet']").val();
-					alert(currentDate);
-					alert(actualDate);
-					
-					if(currentDate.getTime() < actualDate.getTime()) {
-						alert("연장사유를 입력해주세요.");
-					}
-					
+					alert("연장사유를 입력해주세요.");	
 				}
 				else {
+					var actualDay = $("input[name='actualEndDay']").val();
+					var actualDayArray = actualDay.split('.');
+					var actualTime = $("input[name='actualEndTime']").val();
+					var actualDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+actualTime);
 					
+					var extandDateHour = $("#extandTimeHours option:selected").val();
+					var extandDateMinutes = $("#extandTimeMinutes option:selected").val();
+					var extandDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+extandDateHour+ ':'+extandDateMinutes);
 					
-					document.getElementById('reservationDetailForm').action = "/reservationDetail/extand";
-					document.getElementById('reservationDetailForm').submit();	
+					if(actualDate.getTime() < extandDate.getTime()) {
+						document.getElementById('reservationDetailForm').action = "/reservationDetail/extand";
+						document.getElementById('reservationDetailForm').submit();	
+					}
+					else {
+						empty();
+						createExtandTag();
+						$('#extandTd').append('<label style="color:red"> 예약일시보다 빠릅니다. 다시입력해주세요.</label>');
+					}
+
 				}
 
 			}
@@ -214,6 +192,61 @@ table, th, td {
 		$("#updateReservation").click(function() {
 			location.href="/reservation/update?reservationId="+${reservation.reservationId};
 		})
+		
+		function creatExitTag() {
+			var td = '<td> <b>조기종료시각</b></td>';
+			var exitTd = '<td id="exitTd"></td>';
+			var selectStart = '<select name="exitTimeHours" id="exitTimeHours"></select>';
+			var selectEnd = '<select name="exitTimeMinutes" id="exitTimeMinutes"></select>';
+			var spanHour = '<span> : </span>';
+			var spanMinutes = '<span> 분 </span>';
+			var cancel = '<input type="button" id="denyExit" value="취소"/>';
+			var complete = '<input type="button" id="completeExit" value="완료"/>';
+
+			$("#inputForm").append(td).append(exitTd);
+			$('#exitTd').append(selectStart);
+			for (var count = 9; count <= 22; count++) {
+				var option = $("<option>" + count + "</option>");
+				$('#exitTimeHours').append(option);
+			}
+			$('#exitTd').append(spanHour).append(selectEnd);
+			for (var count = 0; count <= 59; count++) {
+				var option = $("<option>" + count + "</option>");
+				$('#exitTimeMinutes').append(option);
+			}
+			
+			//$("#inputForm").append(spanMinutes);
+			$("#btnDiv").append(cancel).append(complete);
+		}
+		
+		function createExtandTag() {
+			var td = '<td><b>종료시각</b></td>';
+			var extandTd = '<td id="extandTd"></td>';
+			var reasonTd = '<td id="reasonTd"><b>연장사유</b></td>';
+			var selectStart = '<select name="extandTimeHours" id="extandTimeHours"></select>';
+			var selectEnd = '<select name="extandTimeMinutes" id="extandTimeMinutes"></select>';
+			var spanHour = '<span> : </span>';
+			var spanMinutes = '<span> 분 </span>';
+			var reason = '<td><input type="text" name="extandReason" style="width:100%;"/></td>';
+			var cancel = '<input type="button" id="denyExtand" value="취소"/>';
+			var complete = '<input type="button" id="completeExtand" value="완료"/>';
+
+			$("#inputForm").append(td).append(extandTd);
+			$('#extandTd').append(selectStart);
+			for (var count = 9; count <= 22; count++) {
+				var option = $("<option>" + count + "</option>");
+				$('#extandTimeHours').append(option);
+			}
+			$('#extandTd').append(spanHour).append(selectEnd);
+			for (var count = 0; count <= 59; count++) {
+				var option = $("<option>" + count + "</option>");
+				$('#extandTimeMinutes').append(option);
+			}
+			
+			$("#reasonForm").append(reasonTd).append(reason);
+			$("#btnDiv").append(cancel).append(complete);
+		}
+		
 	})
 </script>
 
@@ -237,7 +270,9 @@ table, th, td {
 				<td colspan="2">
 					<span>
 					<fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd" /> <fmt:formatDate value="${reservation.startDate}" pattern="kk:mm" /> ~ <fmt:formatDate value="${reservation.endDate}" pattern="kk:mm" />
-					<input type="hidden" size="50" name="timeSet" value="${reservation.endDate}" />
+					<input type="hidden" size="50" name="startTime" value=<fmt:formatDate value="${reservation.startDate}" pattern="kk:mm" /> />
+					<input type="hidden" size="50" name="actualEndDay" value=<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd" /> />
+					<input type="hidden" size="50" name="actualEndTime" value=<fmt:formatDate value="${reservation.actualEndDate}" pattern="kk:mm" /> />
 					</span>
 				</td>
 			</tr>

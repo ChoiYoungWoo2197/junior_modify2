@@ -115,8 +115,8 @@
 	}
 
 	function checkAll() {
-		if (checkInput == true && checkMemberId == true
-				&& checkMemberEmail == true && checkMemberPassword == true) {
+		//if (checkInput == true && checkMemberId == true	&& checkMemberEmail == true && checkMemberPassword == true) {
+		if (checkInput == true && checkMemberId == true	&& checkMemberPassword == true) {
 			//alert("true");
 			return true;
 		} else {
@@ -286,7 +286,7 @@
 					<span id="valideEmail"	class="error">이메일을 입력하세요.</span>
 					<span id="checkEmailSuccess" class="success">사용가능한 이메일 입니다.</span>
 					<span id="checkEmailFail" class="error">이미 존재하는 이메일 입니다.</span></td>
-					<td colspan="2"><input type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크"></td>
+					<!-- <td colspan="2"><input type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크"></td> -->
 				</tr>
 				<tr>
 					<td><label>전화번호</label></td>
