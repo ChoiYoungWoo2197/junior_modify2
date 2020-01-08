@@ -226,7 +226,7 @@
 						<td class="readReservation" data-reservationId="${reservation.reservationId}">${listIndex}</td>
 						<c:set var="listIndex" value="${listIndex-1}"/>
 						<td><fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd"/></td>
-						<td><fmt:formatDate value="${reservation.startDate}" pattern="kk:mm"/> ~ <fmt:formatDate value="${reservation.endDate}" pattern="kk:mm"/></td>
+						<td><fmt:formatDate value="${reservation.startDate}" pattern="kk:mm"/> ~ <fmt:formatDate value="${reservation.actualEndDate}" pattern="kk:mm"/></td>
 						<td>
 							<c:choose>
 								<c:when test="${reservation.state == 'R'}">

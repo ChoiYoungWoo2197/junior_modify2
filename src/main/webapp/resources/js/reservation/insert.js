@@ -97,13 +97,8 @@ $(function() {
 					$(res).each(function(index, element) {
 						var startDateOrigin = new Date(element.startDate);
 						var startDate = startDateOrigin.getHours()+":"+("00" + startDateOrigin.getMinutes()).slice(-2);
-						var endDateOrigin = new Date(element.endDate);
+						var endDateOrigin = new Date(element.actualEndDate);
 						var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
-						
-						if(element.extendEndDate != null) {
-							var extendDateOrigin = new Date(element.extendEndDate);
-							endDate = extendDateOrigin.getHours()+":"+("00" + extendDateOrigin.getMinutes()).slice(-2);
-						}
 						
 						var $reservationLi = $("<li>").html(startDate + "~" + endDate + "&ensp;" + element.meetPurpose +"<br>(" + element.employeeName + "("+ element.departmentName + "))" );
 						$("#reservationList ul").append($reservationLi);
@@ -174,7 +169,8 @@ $(function() {
 		var result = true;
 		$.ajax({
 			url : "/reservation/checkTime?choiceDay="+choiceDay+"&start="+startDate+"&end="+endDate
-				+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&insertEmployee="+$("input[name='employeeId']").val(),
+				+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&insertEmployee="+$("input[name='employeeId']").val()
+				+"&check=insert",
 			type : "get",
 			async : false,
 			success : function(res) {
@@ -183,11 +179,8 @@ $(function() {
 				if(res == "false") {
 					result = false;
 					alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.");
-				} else if(res == "true") {
-					result = true;
 				} else {
-					result = false;
-					alert("해당시간에 '"+ res + "'에 예약한 내역이 있습니다.");
+					result = true;
 				}
 			}
 		})
