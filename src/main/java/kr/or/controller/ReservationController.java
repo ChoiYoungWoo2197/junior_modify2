@@ -7,10 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.domain.Employee;
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
 import kr.or.domain.Page;
@@ -30,16 +25,15 @@ import kr.or.service.ReservationService;
 @RequestMapping("/reservation/*")
 public class ReservationController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
 	
 	@Autowired
 	ReservationService reservationService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(SearchCriteria searchCriteria, Model model) {
-		logger.info("list");
-		
 		List<Reservation> reservationList = reservationService.searchReservation(searchCriteria);
+		
 		model.addAttribute("reservationList", reservationList);
 		model.addAttribute("reservationListSize", reservationService.searchReservationCount(searchCriteria));
 		
@@ -54,8 +48,6 @@ public class ReservationController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insertPage(Model model) {
-		logger.info("insertPage");
-		
 		List<MeetingRoom> meetingRoomList = reservationService.selectMeetingRoom();
 		model.addAttribute("meetingRoomList", meetingRoomList);
 		
@@ -64,8 +56,6 @@ public class ReservationController {
 	
 	@RequestMapping(value = "/infoMeet", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> infoMeet(int meetingRoomId) {
-		logger.info("infoMeet & meetingRoomId : " + meetingRoomId);
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		MeetingRoom meetingRoom = reservationService.selectMeetingRoomById(meetingRoomId);
@@ -80,9 +70,6 @@ public class ReservationController {
 	
 	@RequestMapping(value = "/infoReserve", method = RequestMethod.GET)
 	public @ResponseBody List<Reservation> infoReserve(int meetingRoomId, String choiceDay) {
-		logger.info("infoReserve & meetingRoomId : " + meetingRoomId);
-		logger.info("infoReserve & choiceDay : " + choiceDay);
-		
 		String startDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(meetingRoomId, startDate);
 		System.out.println(reservationList.size());
@@ -99,8 +86,6 @@ public class ReservationController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(Model model, Reservation reservation, String start, String end) {
-		logger.info("insert");
-		
 		Date startDate = null;
 		Date endDate = null;
 		try {
@@ -120,12 +105,8 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(value = "/checkTime", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId, String check, String insertEmployee, HttpSession session) {
-		logger.info("checkTime");
+	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId, String reservationId, String employeeId) {
 		String result = "true";
-		
-		Map<String, Object> map =  (Map<String, Object>) session.getAttribute("loginUser");
-		Employee who = (Employee) map.get("user");// 세션값을 이용해서 자신이 누구인지 알아낸다.
 		
 		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(Integer.parseInt(meetingRoomId), choiceDate);
@@ -139,10 +120,9 @@ public class ReservationController {
 			e.printStackTrace();
 		}
 		
-		if(check.equals("insert")) {
-			Reservation res = reservationService.selectReservationByMemeberAndTime(who.getEmployeeId(), startDate);
-			if(res != null) {
-				System.out.println(res);
+		if(reservationId == null) { //등록
+			Reservation reservation = reservationService.selectReservationByMemeberAndTime(Integer.parseInt(employeeId), startDate);
+			if(reservation != null) {
 				result = "false";
 			}
 		}
@@ -151,11 +131,11 @@ public class ReservationController {
 			for(Reservation reservation : reservationList) {
 				boolean b;
 				
-				if(check.equals("update")) {
-					if(who.getEmployeeId() != reservation.getEmployeeId()) {
+				if(reservationId != null) {
+					if(Integer.parseInt(reservationId) != reservation.getReservationId()) {
 						b = reservationService.availableReservation(reservation, startDate, endDate);
 						result = String.valueOf(b);
-					} 
+					}
 				} else {
 					b = reservationService.availableReservation(reservation, startDate, endDate);
 					result = String.valueOf(b);
@@ -168,8 +148,6 @@ public class ReservationController {
 
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String updatePage(int reservationId, Model model) {
-		logger.info("updatePage & reservationId : " + reservationId);
-		
 		List<MeetingRoom> meetingRoomList = reservationService.selectMeetingRoom();
 		model.addAttribute("meetingRoomList", meetingRoomList);
 		
@@ -192,8 +170,6 @@ public class ReservationController {
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(Reservation reservation, String start, String end) {
-		logger.info("update");
-		
 		Date startDate = null;
 		Date endDate = null;
 		try {
@@ -202,12 +178,7 @@ public class ReservationController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println(start);
-		System.out.println(end);
-		System.out.println(startDate);
-		System.out.println(endDate);
-		
+
 		reservation.setStartDate(startDate);
 		reservation.setEndDate(endDate);
 		reservation.setActualEndDate(endDate);

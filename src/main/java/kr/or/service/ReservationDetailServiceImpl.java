@@ -80,4 +80,22 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 		reservationDetailDao.deleteReservationById(employeeId);
 	}
 
+	@Override
+	public List<Reservation> availableNextExtendByMap(int meetingRoomId, Date actualEndDate1, Date actualEndDate2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reservation> searchNextReservationById(int meetingRoomId, Date actualEndDate1, Date actualEndDate2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reservation> limitExtendById(int meetingRoomId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -14,8 +14,10 @@ public interface ReservationDetailService {
 	public void insertExtendByMap(Extend extand);
 	public Extend searchExtendReasonById(int reservationId);
 	public List<Reservation> availableNextExtendByMap(int meetingRoomId, Date actualEndDate1, Date actualEndDate2);
+	public List<Reservation> searchNextReservationById(int meetingRoomId, Date actualEndDate1, Date actualEndDate2);
 	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality);
 	public List<Reservation> searchReservationByEmployeeId(int employeeId);
 	public void deleteReservationById(int employeeId);
 	public void deleteExtendById(int reservationId);
+	public List<Reservation> limitExtendById(int meetingRoomId);
 }

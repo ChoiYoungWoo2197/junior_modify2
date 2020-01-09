@@ -30,4 +30,5 @@ public interface ReservationService {
 	//함수
 	public String checks(String result, Date startDate, Date endDate, Reservation reservation);
 	public boolean availableReservation(Reservation reservation, Date startDate, Date endDate);
+	public boolean availableReservation(Date actualEndDate, Date nextStartDate);
 }

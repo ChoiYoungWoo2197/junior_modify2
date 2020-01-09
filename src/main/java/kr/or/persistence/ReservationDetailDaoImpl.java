@@ -40,6 +40,7 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 		Map<String, Object> map = new HashMap<>();
 		map.put("reservationId", reservationId);
 		map.put("state", state);
+		map.put("currentTime", new Date());
 		sqlSession.update(namespace + ".updateStateByMap", map);
 	}
 
@@ -52,6 +53,16 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 		map.put("actualEndDate", actualEndDate);
 		sqlSession.update(namespace + ".updateExitByMap", map);
 		
+	}
+
+	@Override
+	public List<Reservation> searchNextReservationById(int meetingRoomId, Date actualEndDate1, Date actualEndDate2) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("meetingRoomId", meetingRoomId);
+		map.put("actualEndDate1", actualEndDate1);
+		map.put("actualEndDate2", actualEndDate2);
+		return sqlSession.selectList(namespace + ".searchNextReservationById", map);
 	}
 
 	@Override
@@ -87,6 +98,9 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 		return sqlSession.selectList(namespace + ".availableNextExtendByMap", map);
 	}
 
-	
+	public List<Reservation> limitExtendById(int meetingRoomId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace + ".limitExtendById", meetingRoomId);
+	}
 
 }

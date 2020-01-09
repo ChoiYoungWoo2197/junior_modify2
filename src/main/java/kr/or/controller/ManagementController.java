@@ -2,8 +2,6 @@ package kr.or.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.domain.Department;
 import kr.or.domain.Equipment;
-import kr.or.domain.MeetingRoomEquipment;
 import kr.or.domain.Page;
 import kr.or.domain.SearchCriteria;
 import kr.or.service.ManagementService;
@@ -22,15 +19,13 @@ import kr.or.service.ManagementService;
 @RequestMapping("/management/*")
 public class ManagementController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
 	
 	@Autowired
 	ManagementService managementServcice;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(SearchCriteria searchCriteria, Model model, String management) {
-		logger.info("management list & searchContent : " + searchCriteria.getSearchContent());
-		
 		if(management.equals("equipment")) {
 			List<Equipment> equipmentList = managementServcice.searchEquipment(searchCriteria);
 			model.addAttribute("equipmentList", equipmentList);
@@ -51,16 +46,12 @@ public class ManagementController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insertPage(Model model, String management) {
-		logger.info("insertPage");
-		
 		model.addAttribute("management", management);
 		return "management/insert";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(String management, String name) {
-		logger.info("equipment insert & name : " + name);
-		
 		if(management.equals("equipment")) {
 			Equipment equipment = new Equipment();
 			equipment.setName(name);
@@ -78,8 +69,6 @@ public class ManagementController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyPage(Model model, String management, int managementId) {
-		logger.info("modifyPage & managementId : " + managementId);
-		
 		if(management.equals("equipment")) {
 			Equipment equipment = managementServcice.selectEquipmentById(managementId);
 			model.addAttribute("equipment", equipment);
@@ -94,9 +83,6 @@ public class ManagementController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST) 
 	public String modify(Equipment equipment, Department department, String management) {
-		logger.info("equipment update & name : " + equipment.getName() + " & equipmentId : " + equipment.getEquipmentId());
-		logger.info("department update & name : " + department.getName() + " & departmentId : " + department.getDepartmentId());
-		
 		if(management.equals("equipment")) {
 			managementServcice.updateEquipment(equipment);
 		} else if(management.equals("department")) {
@@ -108,8 +94,6 @@ public class ManagementController {
 	
 	@RequestMapping(value = "/countEmp", method = RequestMethod.GET)
 	public @ResponseBody String countEmp(String management, int managementId) {
-		logger.info("countEmp & managementId : " + managementId);
-
 		int employeeCount = managementServcice.selectEmployeeCountById(managementId);
 		String deleteAvailable = "false";
 		if(employeeCount == 0) {
@@ -121,8 +105,6 @@ public class ManagementController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String delete(int managementId, String management) {
-		logger.info("equipment delete & managementId : " + managementId);
-		
 		if(management.equals("equipment")) {
 			managementServcice.deleteEquipment(managementId);
 		} else if(management.equals("department")) {

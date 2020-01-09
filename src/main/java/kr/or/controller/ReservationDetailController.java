@@ -1,5 +1,6 @@
 package kr.or.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import kr.or.domain.Department;
 import kr.or.domain.Employee;
 import kr.or.domain.Extend;
@@ -22,6 +25,7 @@ import kr.or.service.EmployeeService;
 import kr.or.service.ManagementService;
 import kr.or.service.MeetingRoomService;
 import kr.or.service.ReservationDetailService;
+import kr.or.service.ReservationService;
  
 @Controller
 @RequestMapping("/reservationDetail/*")
@@ -38,6 +42,9 @@ public class ReservationDetailController {
 
 	@Autowired
 	MeetingRoomService meetingRoomService;
+	
+	@Autowired
+	ReservationService reservationService;
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String read(Model model,HttpServletRequest request, HttpSession session) {
@@ -50,11 +57,26 @@ public class ReservationDetailController {
 		Department department = managementServcice.selectDepartmentById(Integer.parseInt(register.getDepartmentId()));
 		MeetingRoom meetingRoom = meetingRoomService.selectMeetingRoomById(reservation.getMeetingRoomId());
 		Extend extend =  reservationDetailService.searchExtendReasonById(reservation.getReservationId());
-		List<Reservation> extendIspossible = reservationDetailService.searchNextReservationById(reservation.getReservationId());
-		
 		reservation.setEmployeeName(register.getName());
 		reservation.setDepartmentName(department.getName());
 		reservation.setMeetingRoomName(meetingRoom.getName());
+		
+		long date2 = reservation.getActualEndDate().getTime()+60000;
+		Date actualEndDate2  = new Date(date2);
+		
+		List<Reservation> extendIspossible = reservationDetailService.searchNextReservationById(reservation.getMeetingRoomId(), reservation.getActualEndDate(), actualEndDate2);
+		List<Reservation> limitReservationList = reservationDetailService.limitExtendById(reservation.getMeetingRoomId());
+		
+		Date limitReservation = null;
+		if((extendIspossible.size() == 0) && limitReservationList.size() >1) {
+			for(int i=0; i<limitReservationList.size(); i++) {
+				if(limitReservationList.get(i).getReservationId() == reservation.getReservationId()) {
+					limitReservation = limitReservationList.get(i+1).getStartDate();
+					break;
+				}
+			}
+		}
+
 		
 		//본인이 등록한 예약건을 선택한 경우
 		boolean isSelfReservation = false;
@@ -65,7 +87,8 @@ public class ReservationDetailController {
 		model.addAttribute("isSelfReservation", isSelfReservation);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("extend", extend);
-		model.addAttribute("extendIspossible", (extendIspossible.get(0) == null)? true : false);
+		model.addAttribute("extendIspossible", (extendIspossible.size() == 0)? true : false);
+		model.addAttribute("limitReservation", limitReservation);
 		return "reservationDetail/read";
 	}
 
@@ -101,11 +124,33 @@ public class ReservationDetailController {
 		String validateApplicant = employee.getName();
 		
 		reservationDetailService.updateExitByMap(reservationId, validateApplicant, actualEndDate);
-		reservationDetailService.updateStateByMap(reservationId, "F");
+//		reservationDetailService.updateStateByMap(reservationId, "F");
 		
 		return "redirect:/reservation/list";
 	}
 
+	@RequestMapping(value = "/checkTime", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	public @ResponseBody String checkTime(String end, String meetingRoomId, String reservationId) {
+		String result = "true";
+		int id = Integer.parseInt(reservationId);
+		Reservation reservation =  reservationDetailService.searchReservationById(id);
+		SimpleDateFormat smdf = new SimpleDateFormat("yyyy-MM-dd");
+		String strDate = smdf.format(reservation.getActualEndDate());
+		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(id, strDate);
+		
+		//reservationList -> 현재 회의실에 대해 예약이나, 연장된 내용을 가져오는 리스트.(같은 날짜대)
+		boolean availableExtend = true;
+		for (int i = 0; i < reservationList.size(); i++) {
+			if((reservationList.get(i).getReservationId() == id) && ( i != reservationList.size()-1)) {
+				availableExtend = reservationService.availableReservation(reservationList.get(i).getActualEndDate(), reservationList.get(i+1).getStartDate());
+				break;
+			}
+		}
+		
+		result = String.valueOf(availableExtend);
+		return result;
+	}
+	
 
 	@RequestMapping(value = "/extand", method = RequestMethod.POST)
 	public String extand(HttpServletRequest request) {
@@ -115,6 +160,7 @@ public class ReservationDetailController {
 		Reservation reservation =  reservationDetailService.searchReservationById(reservationId);
 		Extend extend = new Extend();
 		
+	
 		Date actualEndDate = reservation.getEndDate();
 		actualEndDate.setHours(Integer.parseInt(request.getParameter("extandTimeHours")));
 		actualEndDate.setMinutes(Integer.parseInt(request.getParameter("extandTimeMinutes")));
@@ -122,11 +168,14 @@ public class ReservationDetailController {
 		extend.setEndDate(actualEndDate);
 		extend.setExtendReason(request.getParameter("extandReason"));
 		
+
+		
 		reservationDetailService.insertExtendByMap(extend);
 		reservationDetailService.updateExitByMap(reservationId, "", actualEndDate);
 		reservationDetailService.updateStateByMap(reservationId, "E");
 		return "redirect:/reservation/list";
 	}
+	
 
 	@RequestMapping(value = "/exitCheck", method = RequestMethod.POST)
 	public String exitCheck(HttpServletRequest request, HttpSession session) {
