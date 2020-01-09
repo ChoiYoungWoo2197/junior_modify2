@@ -28,5 +28,6 @@ public interface ReservationService {
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId);
 	
 	//함수
-	public String checks(String result, Date startDate, Date endDate, Reservation reservation, String string);
+	public String checks(String result, Date startDate, Date endDate, Reservation reservation);
+	public boolean availableReservation(Reservation reservation, Date startDate, Date endDate);
 }

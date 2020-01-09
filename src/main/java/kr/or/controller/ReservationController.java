@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.domain.Employee;
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
 import kr.or.domain.Page;
@@ -117,9 +120,12 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(value = "/checkTime", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId, String employeeId, String insertEmployee) {
+	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId, String check, String insertEmployee, HttpSession session) {
 		logger.info("checkTime");
 		String result = "true";
+		
+		Map<String, Object> map =  (Map<String, Object>) session.getAttribute("loginUser");
+		Employee who = (Employee) map.get("user");// 세션값을 이용해서 자신이 누구인지 알아낸다.
 		
 		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(Integer.parseInt(meetingRoomId), choiceDate);
@@ -133,27 +139,26 @@ public class ReservationController {
 			e.printStackTrace();
 		}
 		
-		Reservation res = reservationService.selectReservationByMemeberAndTime(Integer.parseInt(insertEmployee), startDate);
-		if(res != null) {
-			result = res.getMeetingRoomName();
+		if(check.equals("insert")) {
+			Reservation res = reservationService.selectReservationByMemeberAndTime(who.getEmployeeId(), startDate);
+			if(res != null) {
+				System.out.println(res);
+				result = "false";
+			}
 		}
 		
-		for(Reservation reservation : reservationList) {
-			if(employeeId != null) {
-				if(reservation.getExtendEndDate() != null) {
-					if(Integer.parseInt(employeeId) != reservation.getEmployeeId()) {
-						result = reservationService.checks(result, startDate, endDate, reservation, "extend");
-					}
+		if(result.equals("true")) {
+			for(Reservation reservation : reservationList) {
+				boolean b;
+				
+				if(check.equals("update")) {
+					if(who.getEmployeeId() != reservation.getEmployeeId()) {
+						b = reservationService.availableReservation(reservation, startDate, endDate);
+						result = String.valueOf(b);
+					} 
 				} else {
-					if(Integer.parseInt(employeeId) != reservation.getEmployeeId()) {
-						result = reservationService.checks(result, startDate, endDate, reservation, "noExtend");
-					}
-				}
-			} else {
-				if(reservation.getExtendEndDate() != null) {
-					result = reservationService.checks(result, startDate, endDate, reservation, "extend");
-				} else {
-					result = reservationService.checks(result, startDate, endDate, reservation, "noExtend");
+					b = reservationService.availableReservation(reservation, startDate, endDate);
+					result = String.valueOf(b);
 				}
 			}
 		}
