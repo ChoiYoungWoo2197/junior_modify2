@@ -55,12 +55,6 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 	}
 
 	@Override
-	public List<Reservation> searchNextReservationById(int reservationId) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList(namespace + ".searchNextReservationById", reservationId);
-	}
-
-	@Override
 	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<>();
@@ -80,6 +74,17 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 	public List<Reservation> searchReservationByEmployeeId(int employeeId) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace + ".searchReservationByEmployeeId", employeeId);
+	}
+
+	@Override
+	public List<Reservation> availableNextExtendByMap(int meetingRoomId, Date actualEndDate1, Date actualEndDate2) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("meetingRoomId", meetingRoomId);
+		map.put("actualEndDate1", actualEndDate1);
+		map.put("actualEndDate2", actualEndDate2);
+		
+		return sqlSession.selectList(namespace + ".availableNextExtendByMap", map);
 	}
 
 	

@@ -13,7 +13,7 @@ public interface ReservationDetailService {
 	public void updateExitByMap(int reservationId, String validateApplicant, Date actualEndDate);
 	public void insertExtendByMap(Extend extand);
 	public Extend searchExtendReasonById(int reservationId);
-	public List<Reservation> searchNextReservationById(int reservationId);
+	public List<Reservation> availableNextExtendByMap(int meetingRoomId, Date actualEndDate1, Date actualEndDate2);
 	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality);
 	public List<Reservation> searchReservationByEmployeeId(int employeeId);
 	public void deleteReservationById(int employeeId);

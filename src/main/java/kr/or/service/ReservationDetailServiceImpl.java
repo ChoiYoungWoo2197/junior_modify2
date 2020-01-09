@@ -57,12 +57,6 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 	}
 
 	@Override
-	public List<Reservation> searchNextReservationById(int reservationId) {
-		// TODO Auto-generated method stub
-		return reservationDetailDao.searchNextReservationById(reservationId);
-	}
-
-	@Override
 	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality) {
 		// TODO Auto-generated method stub
 		reservationDetailDao.updateExitCheckByMap(reservationId, validateChecker, abnormality);
