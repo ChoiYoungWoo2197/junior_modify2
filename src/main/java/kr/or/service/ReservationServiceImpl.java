@@ -65,8 +65,8 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	
 	@Override
-	public Reservation selectReservationByMemeberAndTime(int employeeId, Date time) {
-		return reservationDao.selectReservationByMemeberAndTime(employeeId, time);
+	public Reservation selectReservationByMemeberAndTime(int employeeId, Date startTime, Date endTime) {
+		return reservationDao.selectReservationByMemeberAndTime(employeeId, startTime, endTime);
 	}
 	
 	@Override

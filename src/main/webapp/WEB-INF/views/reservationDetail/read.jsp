@@ -107,7 +107,6 @@ table, th, td {
 					
 				}
 				else {
-					//location.href = "/reservationDetail/exit";
 					document.getElementById('reservationDetailForm').action = "/reservationDetail/exit";
 					document.getElementById('reservationDetailForm').submit();
 				}
@@ -142,12 +141,14 @@ table, th, td {
 					var extandDateMinutes = $("#extandTimeMinutes option:selected").val();
 					var extandDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+extandDateHour+ ':'+extandDateMinutes);
 					
-					var endDate = actualDay + " " + extandDateHour + ":" + extandDateMinutes;
+					alert(actualDayArray[0]+'-' +actualDayArray[1]+'-'+actualDayArray[2]);
+					var endDate = actualDayArray[0]+'-' +actualDayArray[1]+'-'+actualDayArray[2] + " " + extandDateHour + ":" + extandDateMinutes;
+					//var endDate = "2020-01-09" + " " + extandDateHour + ":" + extandDateMinutes;
 					
 					var result = true;
 					$.ajax({
 						//연장신청날짜, 연장종료일시, 연장사유, 회의실 번호, 실제종료일시
-						url : "/reservationDetail/checkTime?end="+endDate+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&reservationId="+$("input[name='reservationId']").val(),
+						url : "/reservationDetail/checkTime?end="+endDate+"&meetingRoomId="+$("input[name='meetingRoomId']").val()+"&reservationId="+$("input[name='reservationId']").val(),
 						type : "get",
 						async : false,
 						success : function(res) {
@@ -169,7 +170,7 @@ table, th, td {
 					else {
 						empty();
 						createExtandTag();
-						$('#extandTd').append('<label style="color:red"> 예약일시보다 빠릅니다. 다시입력해주세요.</label>');
+						//$('#extandTd').append('<label style="color:red"> 예약일시보다 빠릅니다. 다시입력해주세요.</label>');
 					}
 
 				}

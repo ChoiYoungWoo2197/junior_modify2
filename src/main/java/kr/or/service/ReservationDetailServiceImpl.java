@@ -57,6 +57,12 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 	}
 
 	@Override
+	public List<Reservation> searchNextReservationById(int meetingRoomId, Date actualEndDate1, Date actualEndDate2) {
+		// TODO Auto-generated method stub
+		return reservationDetailDao.searchNextReservationById(meetingRoomId,actualEndDate1,actualEndDate2);
+	}
+
+	@Override
 	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality) {
 		// TODO Auto-generated method stub
 		reservationDetailDao.updateExitCheckByMap(reservationId, validateChecker, abnormality);
@@ -81,21 +87,9 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 	}
 
 	@Override
-	public List<Reservation> availableNextExtendByMap(int meetingRoomId, Date actualEndDate1, Date actualEndDate2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Reservation> searchNextReservationById(int meetingRoomId, Date actualEndDate1, Date actualEndDate2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Reservation> limitExtendById(int meetingRoomId) {
 		// TODO Auto-generated method stub
-		return null;
+		return reservationDetailDao.limitExtendById(meetingRoomId);
 	}
 
 }

@@ -16,6 +16,6 @@ public interface ReservationDao {
 	public void updateReservation(Reservation reservation);
 	public void updateReservationByCurrentTime(Date currentTime);
 	public void updateReservationByFinishTime(Date currentTime);
-	public Reservation selectReservationByMemeberAndTime(int employeeId, Date time);
+	public Reservation selectReservationByMemeberAndTime(int employeeId, Date startTime, Date endTime);
 	
 }

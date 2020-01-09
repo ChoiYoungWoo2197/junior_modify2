@@ -17,7 +17,7 @@ public interface ReservationService {
 	public void insertReservation(Reservation reservation);
 	public Reservation selectReservationById(int reservationId);
 	public void updateReservation(Reservation reservation);
-	public Reservation selectReservationByMemeberAndTime(int employeeId, Date time);
+	public Reservation selectReservationByMemeberAndTime(int employeeId, Date startTime, Date endTime);
 	
 	//MeetingRoom
 	public List<MeetingRoom> selectMeetingRoom();

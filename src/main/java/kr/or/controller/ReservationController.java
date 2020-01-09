@@ -121,7 +121,7 @@ public class ReservationController {
 		}
 		
 		if(reservationId == null) { //등록
-			Reservation reservation = reservationService.selectReservationByMemeberAndTime(Integer.parseInt(employeeId), startDate);
+			Reservation reservation = reservationService.selectReservationByMemeberAndTime(Integer.parseInt(employeeId), startDate, endDate);
 			if(reservation != null) {
 				result = "false";
 			}

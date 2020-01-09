@@ -68,14 +68,13 @@ public class ReservationDetailController {
 		List<Reservation> limitReservationList = reservationDetailService.limitExtendById(reservation.getMeetingRoomId());
 		
 		Date limitReservation = null;
-		if((extendIspossible.size() == 0) && limitReservationList.size() >1) {
-			for(int i=0; i<limitReservationList.size(); i++) {
-				if(limitReservationList.get(i).getReservationId() == reservation.getReservationId()) {
-					limitReservation = limitReservationList.get(i+1).getStartDate();
-					break;
-				}
-			}
-		}
+		/*
+		 * if((extendIspossible.size() == 0) && limitReservationList.size() >1) {
+		 * for(int i=0; i<limitReservationList.size(); i++) {
+		 * if(limitReservationList.get(i).getReservationId() ==
+		 * reservation.getReservationId()) { limitReservation =
+		 * limitReservationList.get(i+1).getStartDate(); break; } } }
+		 */
 
 		
 		//본인이 등록한 예약건을 선택한 경우
@@ -130,24 +129,34 @@ public class ReservationDetailController {
 	}
 
 	@RequestMapping(value = "/checkTime", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-	public @ResponseBody String checkTime(String end, String meetingRoomId, String reservationId) {
+	public @ResponseBody String checkTime(HttpServletRequest request, String end, String meetingRoomId, String reservationId) {
 		String result = "true";
-		int id = Integer.parseInt(reservationId);
-		Reservation reservation =  reservationDetailService.searchReservationById(id);
-		SimpleDateFormat smdf = new SimpleDateFormat("yyyy-MM-dd");
-		String strDate = smdf.format(reservation.getActualEndDate());
-		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(id, strDate);
-		
-		//reservationList -> 현재 회의실에 대해 예약이나, 연장된 내용을 가져오는 리스트.(같은 날짜대)
-		boolean availableExtend = true;
-		for (int i = 0; i < reservationList.size(); i++) {
-			if((reservationList.get(i).getReservationId() == id) && ( i != reservationList.size()-1)) {
-				availableExtend = reservationService.availableReservation(reservationList.get(i).getActualEndDate(), reservationList.get(i+1).getStartDate());
-				break;
+		//Enumeration enums = request.getParameterNames();
+		try {
+			int id = Integer.parseInt(reservationId);
+			int roomId = Integer.parseInt(meetingRoomId);
+			Reservation reservation =  reservationDetailService.searchReservationById(id);
+			SimpleDateFormat smdf = new SimpleDateFormat("yyyy-MM-dd");
+			String strDate = smdf.format(reservation.getActualEndDate());
+			List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(roomId, strDate);
+			
+			//reservationList -> 현재 회의실에 대해 예약이나, 연장된 내용을 가져오는 리스트.(같은 날짜대)
+			boolean availableExtend = true;
+			for (int i = 0; i < reservationList.size(); i++) {
+				if((reservationList.get(i).getReservationId() == id) && ( i != reservationList.size()-1)) {
+					Date extendDate = null;
+					extendDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(end); //String -> Date : parse & Date -> String : format
+					
+					availableExtend = reservationService.availableReservation(extendDate, reservationList.get(i+1).getStartDate());
+					break;
+				}
 			}
+			
+			result = String.valueOf(availableExtend);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		
-		result = String.valueOf(availableExtend);
+
 		return result;
 	}
 	
