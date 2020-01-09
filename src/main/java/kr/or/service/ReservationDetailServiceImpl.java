@@ -57,9 +57,9 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 	}
 
 	@Override
-	public List<Reservation> searchNextReservationById(int reservationId) {
+	public List<Reservation> searchNextReservationById(int meetingRoomId, Date actualEndDate1, Date actualEndDate2) {
 		// TODO Auto-generated method stub
-		return reservationDetailDao.searchNextReservationById(reservationId);
+		return reservationDetailDao.searchNextReservationById(meetingRoomId,actualEndDate1,actualEndDate2);
 	}
 
 	@Override
@@ -84,6 +84,12 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 	public void deleteReservationById(int employeeId) {
 		// TODO Auto-generated method stub
 		reservationDetailDao.deleteReservationById(employeeId);
+	}
+
+	@Override
+	public List<Reservation> limitExtendById(int meetingRoomId) {
+		// TODO Auto-generated method stub
+		return reservationDetailDao.limitExtendById(meetingRoomId);
 	}
 
 }

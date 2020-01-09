@@ -141,7 +141,27 @@ table, th, td {
 					var extandDateMinutes = $("#extandTimeMinutes option:selected").val();
 					var extandDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+extandDateHour+ ':'+extandDateMinutes);
 					
-					if(actualDate.getTime() < extandDate.getTime()) {
+					var endDate = actualDay + " " + extandDateHour + ":" + extandDateMinutes;
+					
+					var result = true;
+					$.ajax({
+						//연장신청날짜, 연장종료일시, 연장사유, 회의실 번호, 실제종료일시
+						url : "/reservationDetail/checkTime?end="+endDate+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&reservationId="+$("input[name='reservationId']").val(),
+						type : "get",
+						async : false,
+						success : function(res) {
+							console.log(res);
+							
+							if(res == "false") {
+								result = false;
+								alert("다른 시간을 선택해주세요.");
+							} else {
+								result = true;
+							}
+						}
+					})
+					
+					if(result) {
 						document.getElementById('reservationDetailForm').action = "/reservationDetail/extand";
 						document.getElementById('reservationDetailForm').submit();	
 					}
@@ -203,6 +223,9 @@ table, th, td {
 			var cancel = '<input type="button" id="denyExit" value="취소"/>';
 			var complete = '<input type="button" id="completeExit" value="완료"/>';
 
+			
+			
+			
 			$("#inputForm").append(td).append(exitTd);
 			$('#exitTd').append(selectStart);
 			for (var count = 9; count <= 22; count++) {
@@ -231,9 +254,12 @@ table, th, td {
 			var cancel = '<input type="button" id="denyExtand" value="취소"/>';
 			var complete = '<input type="button" id="completeExtand" value="완료"/>';
 
+			var actualEndTime = $("input[name='actualEndTime']").val().substring(0,2);
+			var limitReservation = $("input[name='limitReservation']").val() == null ? 22 : $("input[name='limitReservation']").val().substring(0,2);
+			
 			$("#inputForm").append(td).append(extandTd);
 			$('#extandTd').append(selectStart);
-			for (var count = 9; count <= 22; count++) {
+			for (var count = actualEndTime; count <= limitReservation; count++) {
 				var option = $("<option>" + count + "</option>");
 				$('#extandTimeHours').append(option);
 			}
@@ -241,6 +267,11 @@ table, th, td {
 			for (var count = 0; count <= 59; count++) {
 				var option = $("<option>" + count + "</option>");
 				$('#extandTimeMinutes').append(option);
+			}
+			
+			if($("input[name='limitReservation']").val() != null) {
+				var label = '<label> 이 후' +$("input[name='limitReservation']").val() +' 예약건이 있습니다. </label>';
+				$('#extandTd').append(label);
 			}
 			
 			$("#reasonForm").append(reasonTd).append(reason);
@@ -273,6 +304,10 @@ table, th, td {
 					<input type="hidden" size="50" name="startTime" value=<fmt:formatDate value="${reservation.startDate}" pattern="kk:mm" /> />
 					<input type="hidden" size="50" name="actualEndDay" value=<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd" /> />
 					<input type="hidden" size="50" name="actualEndTime" value=<fmt:formatDate value="${reservation.actualEndDate}" pattern="kk:mm" /> />
+					<c:if test="${not empty limitReservation}">
+					<input type="hidden" size="50" name="limitReservation" value=<fmt:formatDate value="${limitReservation}" pattern="kk:mm" /> />
+					</c:if>
+					
 					</span>
 				</td>
 			</tr>
@@ -467,6 +502,7 @@ table, th, td {
 		
 			</c:if>
 		</div>
+		<input type="hidden" size="50" name="meetingRoomId" value="${reservation.meetingRoomId}" />
 		<input type="hidden" size="50" name="reservationId" value="${reservation.reservationId}" />
 	</form>
 </section>

@@ -169,8 +169,7 @@ $(function() {
 		var result = true;
 		$.ajax({
 			url : "/reservation/checkTime?choiceDay="+choiceDay+"&start="+startDate+"&end="+endDate
-				+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&insertEmployee="+$("input[name='employeeId']").val()
-				+"&check=insert",
+				+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&employeeId="+$("input[name='employeeId']").val(),
 			type : "get",
 			async : false,
 			success : function(res) {

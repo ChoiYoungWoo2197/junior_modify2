@@ -29,13 +29,22 @@
 		reservation_id = #{reservationId}
 	</update>
 	
-	<select id="searchNextReservationById" parameterType="int" resultType="Reservation">
-		SELECT reservationB.*  FROM reservation AS reservationA
+	
+	
+	<select id="searchNextReservationById"  resultType="Reservation">
+<!-- 		SELECT reservationB.*  FROM reservation AS reservationA
 		LEFT JOIN reservation AS reservationB ON DATE(reservationB.start_date) = DATE(reservationA.end_date)
 		AND reservationB.start_date > reservationA.end_date
 		AND reservationB.meeting_room_id = reservationA.meeting_room_id
 		AND reservationB.state = 'R'
-		where reservationA.reservation_id = #{reservationId}
+		where reservationA.reservation_id = #{reservationId} -->
+		
+		<!-- where start_date BETWEEN #{actualEndDate1} and #{actualEndDate2} -->
+		select * from reservation
+		where #{actualEndDate1} <![CDATA[<=]]> start_date and #{actualEndDate2} <![CDATA[>]]> start_date
+		and meeting_room_id = #{meetingRoomId}
+		and state = 'R'
+		
 	</select>
 	
 	<update id="updateExitCheckByMap">
@@ -56,4 +65,11 @@
 		WHERE
 		employee_id = #{employeeId}
 	</delete>
+	
+	<select id="limitExtendById" parameterType="int"	resultType="Reservation">
+		select * from reservation
+		where meeting_room_id = #{meetingRoomId}
+		and state = 'R'
+		ORDER BY start_date asc
+	</select>
 </mapper>

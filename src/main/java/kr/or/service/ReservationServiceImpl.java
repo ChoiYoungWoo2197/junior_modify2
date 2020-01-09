@@ -14,6 +14,7 @@ import kr.or.domain.SearchCriteria;
 import kr.or.persistence.MeetingRoomDao;
 import kr.or.persistence.MeetingRoomEquipmentDao;
 import kr.or.persistence.ReservationDao;
+import kr.or.persistence.ReservationDetailDao;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -27,6 +28,9 @@ public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	MeetingRoomEquipmentDao meetingRoomEquipmentDao;
 	
+	@Autowired
+	ReservationDetailDao reservationDetailDao;
+	
 	@Override
 	public List<Reservation> selectReservationByMeetAndDate(int meetingRoomId, String startDate) {
 		return reservationDao.selectReservationByMeetAndDate(meetingRoomId, startDate);
@@ -36,6 +40,7 @@ public class ReservationServiceImpl implements ReservationService {
 	@Transactional
 	public List<Reservation> searchReservation(SearchCriteria searchCriteria) {
 		reservationDao.updateReservationByCurrentTime(new Date());
+		reservationDao.updateReservationByFinishTime(new Date());
 		return reservationDao.searchReservation(searchCriteria);
 	}
 	
@@ -107,7 +112,6 @@ public class ReservationServiceImpl implements ReservationService {
 //				result = "false";
 //			}
 //		}
-		
 		if (reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getActualEndDate().getTime()) {
 			result = "false";
 		} else if (reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getActualEndDate().getTime()) {
@@ -121,16 +125,34 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public boolean availableReservation(Reservation reservation, Date startDate, Date endDate) {
-		if(reservation.getStartDate().getTime() > new Date().getTime()) { //등록 & 수정
-			if (reservation.getStartDate().getTime() < startDate.getTime() && startDate.getTime() < reservation.getActualEndDate().getTime()) {
-				return false;
-			} else if (reservation.getStartDate().getTime() < endDate.getTime() && endDate.getTime() < reservation.getActualEndDate().getTime()) {
-				return false;
-			} else if (startDate.getTime() < reservation.getStartDate().getTime() && reservation.getActualEndDate().getTime() < endDate.getTime()) {
-				return false;
-			}
-		} else if(reservation.getStartDate().getTime() <= new Date().getTime()){ //연장신청
-			
+//		if(reservation.getStartDate().getTime() > new Date().getTime()) { //등록 & 수정
+//			if (reservation.getStartDate().getTime() < startDate.getTime() && startDate.getTime() < reservation.getActualEndDate().getTime()) {
+//				return false;
+//			} else if (reservation.getStartDate().getTime() < endDate.getTime() && endDate.getTime() < reservation.getActualEndDate().getTime()) {
+//				return false;
+//			} else if ((startDate.getTime() <= reservation.getStartDate().getTime()) && (reservation.getActualEndDate().getTime() <= endDate.getTime())) {
+//				return false;
+//			}
+//		} else if(reservation.getStartDate().getTime() <= new Date().getTime()){ //연장신청
+//			if (reservation.getStartDate().getTime() < endDate.getTime() && endDate.getTime() <= reservation.getActualEndDate().getTime()) {
+//				
+//			}
+//			
+//		}
+		if (reservation.getStartDate().getTime() < startDate.getTime() && startDate.getTime() < reservation.getActualEndDate().getTime()) {
+			return false;
+		} else if (reservation.getStartDate().getTime() < endDate.getTime() && endDate.getTime() < reservation.getActualEndDate().getTime()) {
+			return false;
+		} else if ((startDate.getTime() <= reservation.getStartDate().getTime()) && (reservation.getActualEndDate().getTime() <= endDate.getTime())) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean availableReservation(Date actualEndDate, Date nextStartDate) { //연장
+		if(actualEndDate.getTime() > nextStartDate.getTime()) {
+			return false;
 		}
 		return true;
 	}

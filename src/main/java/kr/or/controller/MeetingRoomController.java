@@ -3,8 +3,6 @@ package kr.or.controller;
 import java.util.Arrays;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,15 +20,13 @@ import kr.or.service.MeetingRoomService;
 @RequestMapping("/meetingRoom/*")
 public class MeetingRoomController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MeetingRoomController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(MeetingRoomController.class);
 	
 	@Autowired
 	MeetingRoomService meetingRoomService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(SearchCriteria searchCriteria, Model model) {
-		logger.info("meetingRoom list");
-
 		List<MeetingRoom> meetingRoomList = meetingRoomService.searchMeetingRoom(searchCriteria);
 		model.addAttribute("meetingRoomList", meetingRoomList);
 		model.addAttribute("meetingRoomListSize", meetingRoomService.searchMeetingRoomCount(searchCriteria));
@@ -43,8 +39,6 @@ public class MeetingRoomController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String insertPage(Model model) {
-		logger.info("insertPage");
-		
 		List<Equipment> equipmentList = meetingRoomService.selectEquipment();
 		model.addAttribute("equipmentList", equipmentList);
 		
@@ -53,8 +47,6 @@ public class MeetingRoomController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(MeetingRoom meetingRoom, String checkTrue) {
-		logger.info("insert & checkTrue : " + checkTrue);
-		logger.info("name : " + meetingRoom.getName() + " & seats : " + meetingRoom.getSeats());
 		
 		meetingRoomService.insertMeetingRoom(meetingRoom);
 		
@@ -70,8 +62,6 @@ public class MeetingRoomController {
 	
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String read(Model model, int meetingRoomId) {
-		logger.info("read & meetingRoomId : " + meetingRoomId);
-		
 		MeetingRoom meetingRoom = meetingRoomService.selectMeetingRoomById(meetingRoomId);
 		model.addAttribute("meetingRoom", meetingRoom);
 		
@@ -83,8 +73,6 @@ public class MeetingRoomController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyPage(Model model, int meetingRoomId) {
-		logger.info("modifyPage & meetingRoomId : " + meetingRoomId);
-		
 		MeetingRoom meetingRoom = meetingRoomService.selectMeetingRoomById(meetingRoomId);
 		model.addAttribute("meetingRoom", meetingRoom);
 		
@@ -99,13 +87,10 @@ public class MeetingRoomController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST) 
 	public String modify(MeetingRoom meetingRoom, String checkTrue) {
-		logger.info("modify & meetingRoomId : " + meetingRoom.getMeetingRoomId());
-		
 		meetingRoomService.updateMeetingRoom(meetingRoom);
 		
 		if(!checkTrue.equals("")) {
 			List<String> equipmentList = Arrays.asList(checkTrue.split(","));
-			System.out.println(equipmentList);
 			
 			meetingRoomService.deleteMeetingRoomEquipment(meetingRoom.getMeetingRoomId());
 			meetingRoomService.insertMeetingRoomEquipment(meetingRoom.getMeetingRoomId(), equipmentList);
@@ -116,8 +101,6 @@ public class MeetingRoomController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(Model model, int meetingRoomId) {
-		logger.info("delete & meetingRoomId : " + meetingRoomId);
-		
 		meetingRoomService.deleteMeetingRoomEquipment(meetingRoomId);
 		meetingRoomService.deleteMeetingRoom(meetingRoomId);
 		

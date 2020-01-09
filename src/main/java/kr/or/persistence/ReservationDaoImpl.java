@@ -57,7 +57,12 @@ private static final String namespace = "kr.or.mappers.reservationMapper";
 	public void updateReservationByCurrentTime(Date currentTime) {
 		sqlSession.update(namespace + ".updateReservationByCurrentTime", currentTime);
 	}
-
+	
+	@Override
+	public void updateReservationByFinishTime(Date currentTime) {
+		sqlSession.update(namespace + ".updateReservationByFinishTime", currentTime);
+	}
+	
 	@Override
 	public Reservation selectReservationByMemeberAndTime(int employeeId, Date time) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -66,6 +71,5 @@ private static final String namespace = "kr.or.mappers.reservationMapper";
 		
 		return sqlSession.selectOne(namespace + ".selectReservationByMemeberAndTime", map);
 	}
-
 
 }

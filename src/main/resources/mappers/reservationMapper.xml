@@ -149,11 +149,18 @@ ORDER BY reservation_id DESC
 		UPDATE reservation SET state = "F" WHERE actual_end_date <![CDATA[<=]]> #{currentTime}
 	</update>
 	
+	<update id="updateReservationByFinishTime">
+		UPDATE reservation SET state = 'F' WHERE validate_applicant IS NOT NULL AND actual_end_date <![CDATA[<=]]> #{currentTime}
+	</update>
+	
 	<select id="selectReservationByMemeberAndTime" resultType="Reservation">
-		<!-- SELECT * FROM reservation WHERE employee_id = #{employeeId} AND #{time} BETWEEN start_date AND end_date AND state = 'R' -->
+		<!-- SELECT reservation.*, meeting_room.name AS meetingRoomName
+		FROM reservation 
+		JOIN meeting_room ON meeting_room.meeting_room_id = reservation.meeting_room_id
+		WHERE employee_id = #{employeeId} AND #{time} BETWEEN start_date AND end_date AND state = 'R' -->
 		SELECT reservation.*, meeting_room.name AS meetingRoomName
 		FROM reservation 
 		JOIN meeting_room ON meeting_room.meeting_room_id = reservation.meeting_room_id
-		WHERE employee_id = #{employeeId} AND #{time} BETWEEN start_date AND end_date AND state = 'R'
+		WHERE employee_id = #{employeeId} AND state = 'R' AND (#{time} = start_date AND #{time} = end_date)
 	</select>
 </mapper>
