@@ -29,7 +29,6 @@ public class MeetingRoomController {
 	public String list(SearchCriteria searchCriteria, Model model) {
 		List<MeetingRoom> meetingRoomList = meetingRoomService.searchMeetingRoom(searchCriteria);
 		model.addAttribute("meetingRoomList", meetingRoomList);
-		model.addAttribute("meetingRoomListSize", meetingRoomService.searchMeetingRoomCount(searchCriteria));
 		
 		model.addAttribute("searchCriteria", searchCriteria);
 		model.addAttribute("page", new Page(meetingRoomService.searchMeetingRoomCount(searchCriteria), searchCriteria));

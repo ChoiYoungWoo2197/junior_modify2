@@ -58,7 +58,7 @@ $(function() {
 			return false;
 		}
 		
-		location.href = "list?management="+$("input[name=management]").val()+"&page=1&searchContent="+$("input[name='searchContent']").val();
+		location.href = encodeURI("list?management="+$("input[name=management]").val()+"&page=1&searchContent="+$("input[name='searchContent']").val());
 	})
 	
 	$("#AllManagement").click(function() {

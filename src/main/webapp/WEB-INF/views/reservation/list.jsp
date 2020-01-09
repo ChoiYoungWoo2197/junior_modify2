@@ -216,10 +216,10 @@
 			</c:if>
 			<c:if test="${!empty reservationList}">
 				<c:if test="${page.startPage == page.criteria.page}">
-					<c:set var="listIndex" value="${reservationListSize}"/>
+					<c:set var="listIndex" value="${page.total}"/>
 				</c:if>
 				<c:if test="${page.startPage != page.criteria.page}">
-					<c:set var="listIndex" value="${reservationListSize - (10*(page.criteria.page-1))}"/>
+					<c:set var="listIndex" value="${page.total - (10*(page.criteria.page-1))}"/>
 				</c:if>
 				<c:forEach var="reservation" items="${reservationList}">
 					<tr class="updateReservation">
