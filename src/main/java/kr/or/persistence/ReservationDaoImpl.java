@@ -64,10 +64,11 @@ private static final String namespace = "kr.or.mappers.reservationMapper";
 	}
 	
 	@Override
-	public Reservation selectReservationByMemeberAndTime(int employeeId, Date time) {
+	public Reservation selectReservationByMemeberAndTime(int employeeId, Date startTime, Date endTime) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("employeeId", employeeId);
-		map.put("time", time);
+		map.put("startTime", startTime);
+		map.put("endTime", endTime);
 		
 		return sqlSession.selectOne(namespace + ".selectReservationByMemeberAndTime", map);
 	}
