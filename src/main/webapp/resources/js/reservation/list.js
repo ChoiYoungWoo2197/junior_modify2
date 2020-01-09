@@ -27,9 +27,9 @@ $(function() {
 					
 					//기간별 & 상태 & 회의실 & input내용으로 검색하는 경우
 					if($("input[name='searchContent']").val()!="") {
-						location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
+						location.href=encodeURI("list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
 								+"&state="+$("select[name='state']").val()+"&meetingRoomId="+$("select[name='meetingRoomId']").val()
-								+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+								+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val());
 						return false;
 					}
 					return false;
@@ -37,8 +37,8 @@ $(function() {
 				
 				//기간별 & 상태 & input내용으로 검색하는 경우
 				if($("input[name='searchContent']").val()!="") {
-					location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
-							+"&state="+$("select[name='state']").val()+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+					location.href=encodeURI("list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
+							+"&state="+$("select[name='state']").val()+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val());
 					return false;
 				}
 				return false;
@@ -51,8 +51,8 @@ $(function() {
 				
 				//기간별 & 회의실 & input내용으로 검색하는 경우
 				if($("input[name='searchContent']").val()!="") {
-					location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
-					+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+					location.href=encodeURI("list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
+					+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val());
 					return false;
 				}
 				return false;
@@ -60,8 +60,8 @@ $(function() {
 			
 			//기간별 & input내용으로 검색하는 경우
 			if($("input[name='searchContent']").val()!="") {
-				location.href="list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
-						+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+				location.href=encodeURI("list?page=1&searchStart="+$("#searchStart").val()+"&searchEnd="+$("#searchEnd").val()
+						+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val());
 				return false;
 			}
 			
@@ -77,8 +77,8 @@ $(function() {
 				
 				//상태 & 회의실 & input내용으로 검색하는 경우
 				if($("input[name='searchContent']").val()!="") {
-					location.href = "list?page=1&state="+$("select[name='state']").val()+"&meetingRoomId="+$("select[name='meetingRoomId']").val()
-							+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+					location.href = encodeURI("list?page=1&state="+$("select[name='state']").val()+"&meetingRoomId="+$("select[name='meetingRoomId']").val()
+							+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val());
 					return false;
 				}
 				return false;
@@ -86,8 +86,8 @@ $(function() {
 			
 			//상태 & input내용으로 검색하는 경우
 			if($("input[name='searchContent']").val()!="") {
-				location.href = "list?page=1&state="+$("select[name='state']").val()
-						+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+				location.href = encodeURI("list?page=1&state="+$("select[name='state']").val()
+						+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val());
 				return false;
 			}
 			location.href = "list?page=1&state="+$("select[name='state']").val();
@@ -100,8 +100,8 @@ $(function() {
 			
 			//회의실 & input내용으로 검색하는 경우
 			if($("input[name='searchContent']").val()!="") {
-				location.href = "list?page=1&meetingRoomId="+$("select[name='meetingRoomId']").val()
-						+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+				location.href = encodeURI("list?page=1&meetingRoomId="+$("select[name='meetingRoomId']").val()
+						+"&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val());
 				return false;
 			}
 			return false;
@@ -112,7 +112,7 @@ $(function() {
 			return false;
 		}
 		
-		location.href = "list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+		location.href = encodeURI("list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val());
 	})
 	
 	$("#allReservation").click(function() {

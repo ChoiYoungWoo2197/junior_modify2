@@ -31,7 +31,6 @@
 	}
 	input[type='text'] {
 		width: 80%;
-		border: none;
 	}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/insert.js"></script>

@@ -161,6 +161,7 @@ ORDER BY reservation_id DESC
 		SELECT reservation.*, meeting_room.name AS meetingRoomName
 		FROM reservation 
 		JOIN meeting_room ON meeting_room.meeting_room_id = reservation.meeting_room_id
-		WHERE employee_id = #{employeeId} AND state = 'R' AND (#{time} = start_date AND #{time} = end_date)
+		WHERE employee_id = #{employeeId} AND state = 'R' AND (#{startTime} = start_date AND #{endTime} = end_date)
+		<!-- OR (#{startTime} <![CDATA[>]]> start_date AND #{startTime} <![CDATA[<]]> end_date) -->
 	</select>
 </mapper>

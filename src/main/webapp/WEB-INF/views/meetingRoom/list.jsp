@@ -60,10 +60,10 @@
 			</c:if>
 			<c:if test="${!empty meetingRoomList}">
 				<c:if test="${page.startPage == page.criteria.page}">
-					<c:set var="listIndex" value="${meetingRoomListSize}"/>
+					<c:set var="listIndex" value="${page.total}"/>
 				</c:if>
 				<c:if test="${page.startPage != page.criteria.page}">
-					<c:set var="listIndex" value="${meetingRoomListSize - (10*(page.criteria.page-1))}"/>
+					<c:set var="listIndex" value="${page.total - (10*(page.criteria.page-1))}"/>
 				</c:if>
 				<c:forEach var="meetingRoom" items="${meetingRoomList}">
 					<tr class="updateMeetingRoom">

@@ -15,7 +15,7 @@ $(function() {
 			return false;
 		}
 		
-		location.href = "list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
+		location.href = encodeURI("list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val());
 	})
 	
 	$("#allMeetingRoom").click(function() {
