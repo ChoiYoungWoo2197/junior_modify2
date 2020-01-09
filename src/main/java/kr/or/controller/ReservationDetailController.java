@@ -68,14 +68,13 @@ public class ReservationDetailController {
 		List<Reservation> limitReservationList = reservationDetailService.limitExtendById(reservation.getMeetingRoomId());
 		
 		Date limitReservation = null;
-		if((extendIspossible.size() == 0) && limitReservationList.size() >1) {
-			for(int i=0; i<limitReservationList.size(); i++) {
-				if(limitReservationList.get(i).getReservationId() == reservation.getReservationId()) {
-					limitReservation = limitReservationList.get(i+1).getStartDate();
-					break;
-				}
-			}
-		}
+		/*
+		 * if((extendIspossible.size() == 0) && limitReservationList.size() >1) {
+		 * for(int i=0; i<limitReservationList.size(); i++) {
+		 * if(limitReservationList.get(i).getReservationId() ==
+		 * reservation.getReservationId()) { limitReservation =
+		 * limitReservationList.get(i+1).getStartDate(); break; } } }
+		 */
 
 		
 		//본인이 등록한 예약건을 선택한 경우

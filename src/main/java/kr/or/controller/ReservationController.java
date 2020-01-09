@@ -72,7 +72,6 @@ public class ReservationController {
 	public @ResponseBody List<Reservation> infoReserve(int meetingRoomId, String choiceDay) {
 		String startDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(meetingRoomId, startDate);
-		System.out.println(reservationList.size());
 		for(int i=0; i<reservationList.size()-1; i++) {
 			Reservation reservation = reservationList.get(i);
 			Reservation reservation2 = reservationList.get(i+1);

@@ -143,7 +143,7 @@ $(function() {
 		var startDate2 = $("#today").text().replace(".","")+date+$("select[name='startHour']").val()+$("select[name='startMinute']").val();
 		var endDate2 = $("#today").text().replace(".","")+date+$("select[name='endHour']").val()+$("select[name='endMinute']").val();
 		
-		if(currentDate >= startDate2 || currentDate >= endDate2) {
+		if(currentDate > startDate2 || currentDate > endDate2) {
 			alert("지난 시간은 예약할 수 없습니다.");
 			$("select[name='startHour']").focus();
 			return false;
