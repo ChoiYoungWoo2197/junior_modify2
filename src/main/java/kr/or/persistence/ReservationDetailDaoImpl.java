@@ -25,12 +25,13 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 	}
 	
 	@Override
-	public void updateCancelReasonByMap(int reservationId, String cancelApplicant, String cancelReason) {
+	public void updateCancelReasonByMap(int reservationId, String cancelApplicant, String cancelReason, Date cancelDate) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<>();
 		map.put("reservationId", reservationId);
 		map.put("cancelApplicant", cancelApplicant);
 		map.put("cancelReason", cancelReason);
+		map.put("cancelDate", cancelDate);
 		sqlSession.update(namespace + ".updateCancelReasonByMap", map);
 	}
 
@@ -40,7 +41,6 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 		Map<String, Object> map = new HashMap<>();
 		map.put("reservationId", reservationId);
 		map.put("state", state);
-		map.put("currentTime", new Date());
 		sqlSession.update(namespace + ".updateStateByMap", map);
 	}
 
@@ -66,11 +66,12 @@ private static final String namespace = "kr.or.mappers.reservationDetailMapper";
 	}
 
 	@Override
-	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality) {
+	public void updateExitCheckByMap(int reservationId, String validateChecker, Date validateTime, String abnormality) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<>();
 		map.put("reservationId", reservationId);
 		map.put("validateChecker", validateChecker);
+		map.put("validateTime", validateTime);
 		map.put("abnormality", abnormality);
 		sqlSession.update(namespace + ".updateExitCheckByMap", map);
 	}

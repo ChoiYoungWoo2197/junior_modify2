@@ -11,8 +11,7 @@
 	<update id="updateCancelReasonByMap">
 		UPDATE reservation
 		SET cancel_reason =
-		#{cancelReason}, cancel_applicant = #{cancelApplicant}, cancel_date =
-		now()
+		#{cancelReason}, cancel_applicant = #{cancelApplicant}, cancel_date = #{cancelDate}
 		WHERE reservation_id = #{reservationId}
 	</update>
 
@@ -49,7 +48,7 @@
 	
 	<update id="updateExitCheckByMap">
 		UPDATE reservation
-		SET validate_checker = #{validateChecker} , validate_time = now(), abnormality = #{abnormality}
+		SET validate_checker = #{validateChecker} , validate_time = #{validateTime}, abnormality = #{abnormality}
 		WHERE
 		reservation_id = #{reservationId}
 	</update>

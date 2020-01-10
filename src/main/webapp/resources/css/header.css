@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
-* {
+*,  ::after, ::before {
 	margin: 0;
 	padding: 0;
 	font-family: 'Noto Sans KR', sans-serif;
+	box-sizing: border-box;
 }
 .float_left {
 	float: left;

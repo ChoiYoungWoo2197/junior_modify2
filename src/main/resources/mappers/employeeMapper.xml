@@ -31,11 +31,8 @@
 
 	<insert id="insertEmployee" parameterType="Employee">
 		INSERT INTO employee
-		(department_id, name, member_id, password, email, phone, authkey,
-		state, authkey_date)
-		VALUES (#{departmentId}, #{name}, #{memberId},
-		#{password},
-		#{email}, #{phone}, #{authkey}, #{state}, now());
+		(department_id, name, member_id, password, email, phone, authkey, state, authkey_date)
+		VALUES (#{departmentId}, #{name}, #{memberId}, #{password}, #{email}, #{phone}, #{authkey}, #{state}, #{authKeyDate});
 	</insert>
 
 	<select id="checkUser" resultType="Employee">
@@ -76,10 +73,10 @@
 		#{memberId}
 	</update>
 
-	<update id="updateKeyDateById" parameterType="String">
+	<update id="updateKeyDateByMap">
 		UPDATE employee
 		SET
-		authkey_date = now()
+		authkey_date = #{currentTime}
 		WHERE member_id = #{memberId}
 	</update>
 

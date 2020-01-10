@@ -255,6 +255,7 @@ table, th, td {
 		
 			</c:if>
 		</div>
+		<input type="hidden" size="50" name="oldUrl" value="${oldUrl}" />
 		<input type="hidden" size="50" name="meetingRoomId" value="${reservation.meetingRoomId}" />
 		<input type="hidden" size="50" name="reservationId" value="${reservation.reservationId}" />
 	</form>

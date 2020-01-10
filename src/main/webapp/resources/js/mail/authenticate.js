@@ -4,6 +4,7 @@
 			$.ajax({
 				url : "/mail/request",
 				type : "post",
+				cache: false,
 				data : {"mail" : $("input[name='mail']").val()},
 				dataType : "text",
 				success : function(res) {

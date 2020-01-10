@@ -27,9 +27,9 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 	}
 
 	@Override
-	public void updateCancelReasonByMap(int reservationId, String cancelApplicant, String cancelReason) {
+	public void updateCancelReasonByMap(int reservationId, String cancelApplicant, String cancelReason, Date cancelDate) {
 		// TODO Auto-generated method stub
-		reservationDetailDao.updateCancelReasonByMap(reservationId, cancelApplicant, cancelReason);
+		reservationDetailDao.updateCancelReasonByMap(reservationId, cancelApplicant, cancelReason, cancelDate);
 	}
 
 	@Override
@@ -63,9 +63,9 @@ public class ReservationDetailServiceImpl implements ReservationDetailService {
 	}
 
 	@Override
-	public void updateExitCheckByMap(int reservationId, String validateChecker, String abnormality) {
+	public void updateExitCheckByMap(int reservationId, String validateChecker, Date validateTime, String abnormality) {
 		// TODO Auto-generated method stub
-		reservationDetailDao.updateExitCheckByMap(reservationId, validateChecker, abnormality);
+		reservationDetailDao.updateExitCheckByMap(reservationId, validateChecker, validateTime, abnormality);
 	}
 
 	@Override

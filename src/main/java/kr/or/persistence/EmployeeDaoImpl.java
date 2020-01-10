@@ -1,5 +1,6 @@
 package kr.or.persistence;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,8 +76,11 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	@Override
-	public void updateKeyDateById(String memberId) {
-		sqlsession.update(namespace + ".updateKeyDateById", memberId);
+	public void updateKeyDateByMap(String memberId,  Date currentTime) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("currentTime", currentTime);
+		sqlsession.update(namespace + ".updateKeyDateByMap", map);
 	}
 
 	@Override

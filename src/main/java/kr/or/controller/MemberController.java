@@ -1,5 +1,6 @@
 package kr.or.controller;
 
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
@@ -80,6 +81,7 @@ public class MemberController {
 		employee.setPhone(request.getParameter("phone"));
 		employee.setAuthkey(mailService.getAuthKey());
 		employee.setState("N");
+		employee.setAuthKeyDate(new Date());
 		employeeService.insertEmployee(employee);
 		
 		if(register.equals("true") == true) {//관리자가 회원등록을 한경우
@@ -97,7 +99,7 @@ public class MemberController {
 		else {// 회원가입을 한경우
 			String title = "회원가입 인증 이메일 입니다.";
 			StringBuilder text = new StringBuilder();
-			text.append("귀화의 인증번호는 : " + employee.getAuthkey() + " 입니다.");
+			text.append("귀하의 인증번호는 : " + employee.getAuthkey() + " 입니다.");
 			
 			mailService.sendMail(mailService.sendTo(), employee.getEmail(),title, text.toString());
 			
@@ -160,7 +162,7 @@ public class MemberController {
 			employeeService.deleteManager(employee.getEmployeeId());
 		}
 		
-		return "redirect:/reservation/list";
+		return "/member/list";
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
