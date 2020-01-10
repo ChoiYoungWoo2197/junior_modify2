@@ -58,11 +58,11 @@ public class MailController {
 			if(employee != null) {
 				String authKey = mailService.getAuthKey();
 				employeeService.updateKeyByMap(employee.getMemberId(), authKey); //난수를 업데이트 한다.
-				employeeService.updateKeyDateById(employee.getMemberId());  //인증요청 일시를 업데이트 한다.
+				employeeService.updateKeyDateByMap(employee.getMemberId(), new Date());  //인증요청 일시를 업데이트 한다.
 				
 				String title = "회원가입 인증 이메일 입니다.";
 				StringBuilder text = new StringBuilder();
-				text.append("귀화의 인증번호는 : " + authKey + " 입니다.");
+				text.append("귀하의 인증번호는 : " + authKey + " 입니다.");
 
 				mailService.sendMail(mailService.sendTo(), employee.getEmail(), title, text.toString());
 				result = true;

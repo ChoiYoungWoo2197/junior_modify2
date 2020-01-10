@@ -48,6 +48,7 @@ public class ReservationDetailController {
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String read(Model model,HttpServletRequest request, HttpSession session) {
+		String oldUrl = request.getHeader("referer");
 		Map<String, Object> map =  (Map<String, Object>) session.getAttribute("loginUser");
 		Employee who = (Employee) map.get("user");// 세션값을 이용해서 자신이 누구인지 알아낸다.
 		
@@ -87,6 +88,7 @@ public class ReservationDetailController {
 		model.addAttribute("extend", extend);
 		model.addAttribute("extendIspossible", (extendIspossible.size() == 0)? true : false);
 		model.addAttribute("limitReservation", limitReservation);
+		model.addAttribute("oldUrl", oldUrl);
 		return "reservationDetail/read";
 	}
 
@@ -99,8 +101,9 @@ public class ReservationDetailController {
 
 		String cancelApplicant = employee.getName();
 		String cancelReason = request.getParameter("cancelReason");
+		Date cancelDate = new Date();
 
-		reservationDetailService.updateCancelReasonByMap(reservationId, cancelApplicant, cancelReason);
+		reservationDetailService.updateCancelReasonByMap(reservationId, cancelApplicant, cancelReason, cancelDate);
 		reservationDetailService.updateStateByMap(reservationId, "RC");
 		return "redirect:/reservation/list";
 	}
@@ -136,18 +139,29 @@ public class ReservationDetailController {
 			SimpleDateFormat smdf = new SimpleDateFormat("yyyy-MM-dd");
 			String strDate = smdf.format(reservation.getActualEndDate());
 			List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(roomId, strDate);
+			Reservation findNextReservation = new Reservation();
+			boolean availableExtend = true;
 			
 			//reservationList -> 현재 회의실에 대해 예약이나, 연장된 내용을 가져오는 리스트.(같은 날짜대)
-			boolean availableExtend = true;
-			for (int i = 0; i < reservationList.size(); i++) {
-				if((reservationList.get(i).getReservationId() == id) && ( i != reservationList.size()-1)) {
-					Date extendDate = null;
-					extendDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(end); //String -> Date : parse & Date -> String : format
-					
-					availableExtend = reservationService.availableReservation(extendDate, reservationList.get(i+1).getStartDate());
-					break;
+			for(int i=reservationList.size()-1; i>=0; i--) {
+				if(reservationList.get(i).getReservationId() == id) {
+					if(i != reservationList.size()-1) {
+						findNextReservation = reservationList.get(i+1);
+						Date extendDate = null;
+						extendDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(end); //String -> Date : parse & Date -> String : format
+						
+						availableExtend = reservationService.availableReservation(extendDate, reservationList.get(i+1).getStartDate());
+						
+						break;
+					}
+					else {
+						availableExtend = true;
+						break;
+					}
 				}
 			}
+			
+			
 			
 			result = String.valueOf(availableExtend);
 		} catch (Exception e) {
@@ -190,9 +204,10 @@ public class ReservationDetailController {
 		
 		Employee employee = (Employee) map.get("user");
 		String validateChecker = employee.getName();
+		Date validateTime = new Date();
 		String abnormality = request.getParameter("abnormality");
 		
-		reservationDetailService.updateExitCheckByMap(reservationId, validateChecker, abnormality);
+		reservationDetailService.updateExitCheckByMap(reservationId, validateChecker, validateTime, abnormality);
 		reservationDetailService.updateStateByMap(reservationId, "FV");
 		
 		return "redirect:/reservation/list";

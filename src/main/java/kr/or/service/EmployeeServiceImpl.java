@@ -2,6 +2,7 @@ package kr.or.service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,9 +110,9 @@ public class EmployeeServiceImpl implements  EmployeeService{
 
 
 	@Override
-	public void updateKeyDateById(String memberId) {
+	public void updateKeyDateByMap(String memberId, Date currentTime) {
 		// TODO Auto-generated method stub
-		employeeDao.updateKeyDateById(memberId);
+		employeeDao.updateKeyDateByMap(memberId, currentTime);
 	}
 
 

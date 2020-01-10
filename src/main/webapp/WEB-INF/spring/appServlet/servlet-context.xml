@@ -12,9 +12,10 @@
 	<beans:bean id="authInterceptor" class="kr.or.interceptor.AuthInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
-<!-- 		 	<mapping path="/**" /> 
-		 	<mapping path="/login/login" />
-		 	<mapping path="/reservation/list" /> -->
+<!--  		 	<mapping path="/**" /> 
+		 	<exclude-mapping path="/login/login" />
+		 	<exclude-mapping path="/login/insert" />
+		 	<exclude-mapping path="/reservation/list" />  -->
  			<mapping path="/management/list" />
 			<mapping path="/management/insert" />
 			<mapping path="/management/modify" />

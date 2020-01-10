@@ -58,10 +58,10 @@ public class LoginController {
 					map.put("user", employee);
 					//여기서 세션 저장한다.
 					session.setAttribute("loginUser", map);
-					result = "/reservation/list";
+					result = "redirect:/reservation/list";
 				}
 				else {
-					result = "/mail/authenticate?memberId="+employee.getMemberId();
+					result = "redirect:/mail/authenticate?memberId="+employee.getMemberId();
 				}
 			}
 

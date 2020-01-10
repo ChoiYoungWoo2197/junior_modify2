@@ -65,6 +65,8 @@ $(function() {
 				var exitDateMinutes = $("#exitTimeMinutes option:selected").val();
 				var exitDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+exitDateHour+ ':'+exitDateMinutes);
 				
+				var currentTime = new Date();
+				
 				if(exitDate <  startDate || exitDate > actualDate) {
 					empty();
 					creatExitTag();
@@ -72,8 +74,17 @@ $(function() {
 					
 				}
 				else {
-					document.getElementById('reservationDetailForm').action = "/reservationDetail/exit";
-					document.getElementById('reservationDetailForm').submit();
+					if(currentTime < exitDate) {
+						document.getElementById('reservationDetailForm').action = "/reservationDetail/exit";
+						document.getElementById('reservationDetailForm').submit();
+					}
+					else {
+						empty();
+						creatExitTag();
+						$('#exitTd').append('<label style="color:red"> 현재일시보다 일찍 종료할수 없습니다. 다시입력해주세요.</label>');
+					}
+					
+
 				}
 			}
 		
@@ -122,6 +133,7 @@ $(function() {
 							//연장신청날짜, 연장종료일시, 연장사유, 회의실 번호, 실제종료일시
 							url : "/reservationDetail/checkTime?end="+endDate+"&meetingRoomId="+$("input[name='meetingRoomId']").val()+"&reservationId="+$("input[name='reservationId']").val(),
 							type : "get",
+							cache: false,
 							async : false,
 							success : function(res) {
 								console.log(res);
@@ -177,7 +189,8 @@ $(function() {
 		});
 
 		$(document).on("click", "#list", function() {
-			location.href = "/reservation/list";
+			//location.href = "/reservation/list";
+			location.href=$("input[name='oldUrl']").val();
 		});
 		
 		$("#updateReservation").click(function() {

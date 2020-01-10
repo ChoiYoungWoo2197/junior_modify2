@@ -1,5 +1,6 @@
 package kr.or.service;
 
+import java.util.Date;
 import java.util.List;
 
 import kr.or.domain.Employee;
@@ -17,7 +18,7 @@ public interface EmployeeService {
 	public Employee checkKeyByMap(String email, String authKey);
 	public void updateStateByMap(String memberId, String state);
 	public void updateKeyByMap(String memberId, String authKey);
-	public void updateKeyDateById(String memberId);
+	public void updateKeyDateByMap(String memberId, Date currentTime);
 	public List<Employee> searchEmployee(SearchCriteria criteria);
 	public int searchEmployeeCount(SearchCriteria criteria);
 	public void modifyEmployee(Employee employee);
