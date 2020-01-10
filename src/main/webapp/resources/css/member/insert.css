@@ -1,13 +1,7 @@
 @charset "UTF-8";
 
-* , ::after, ::before {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-table {
-	width: 100%;
+tr:first-child {
+	border-top: 2px solid black;
 }
 
 table, th, td {
@@ -28,18 +22,42 @@ table, th, td {
 	display: none;
 }
 
-.width1200 {
-	width: 1200px;
-	margin: 0 auto;
+.text_left {
+	text-align: left;
 }
 
-.overflow {
-	overflow: hidden;
+.width20 {
+	width: 20%;
+}	
+
+.width100 {
+	width: 100%;
+}	
+
+input[type="text"],
+input[type="password"] {
+	width: 100%; /* 원하는 너비 설정 */
+	height: auto; /* 높이값 초기화 */
+	line-height: normal; /* line-height 초기화 */
+	padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+	font-family: inherit; /* 폰트 상속 */
+	border: 1px solid #999;
+	border-radius: 0; /* iSO 둥근모서리 제거 */
+	outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
+	-webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */
 }
 
-.floatRight {
-	float: right;
+input[type='submit'], 
+input[type='button'] {
+	padding: 10px 50px;
+	margin-top: 20px;
+	margin: 5px 0 10px 0;
+	border-radius: 3px;
+	border: 1px solid rgb(169,169,169);
 }
-.floatLeft {
-	float: right;
-}
+
+input[name="memberId"],
+input[name="email"] {
+	width: 73%;
+}	
+	
