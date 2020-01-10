@@ -16,7 +16,7 @@ import kr.or.domain.SearchCriteria;
 import kr.or.service.ManagementService;
 
 @Controller
-@RequestMapping("/management/*")
+@RequestMapping("/management")
 public class ManagementController {
 	
 	//private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);

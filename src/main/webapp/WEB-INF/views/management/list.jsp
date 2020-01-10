@@ -150,10 +150,10 @@
 						<th></th>
 					</tr>
 					<c:if test="${page.startPage == page.criteria.page}">
-						<c:set var="listIndex" value="${employeeByDepartmentListSize}"/>
+						<c:set var="listIndex" value="${page.total}"/>
 					</c:if>
 					<c:if test="${page.startPage != page.criteria.page}">
-						<c:set var="listIndex" value="${employeeByDepartmentListSize - (10*(page.criteria.page-1))}"/>
+						<c:set var="listIndex" value="${page.total - (10*(page.criteria.page-1))}"/>
 					</c:if>
 					<c:forEach var="department" items="${employeeByDepartmentList}">
 						<tr class="updateManagement">

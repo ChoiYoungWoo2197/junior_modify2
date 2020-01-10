@@ -35,6 +35,7 @@ $(function() {
 			$.ajax({
 				url : "/reservation/infoMeet?meetingRoomId="+meetingRoomId,
 				type : "get",
+				cache : false,
 				success : function(res) {
 					console.log(res);
 					
@@ -89,6 +90,7 @@ $(function() {
 			url : "/reservation/infoReserve?meetingRoomId="+meetingRoomId+"&choiceDay="+choiceDay,
 			type : "get",
 			//async : false,
+			cache : false, //IE의 경우 ajax로 호출하는 URL이 동일하고 파라미터가 없거나 할 경우 매번 URL을 호출하지 않고 Cache를 이용해서 이상한 값을 보내줌(서버에 요청을 안함). 이 옵션은 false로 하면 IE 에러 사라짐.
 			success : function(res) {
 				console.log(res);
 				if(res.length == 0) {
@@ -172,6 +174,7 @@ $(function() {
 				+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&employeeId="+$("input[name='employeeId']").val(),
 			type : "get",
 			async : false,
+			cache : false,
 			success : function(res) {
 				console.log(res);
 				

@@ -44,6 +44,7 @@ $(function() {
 			$.ajax({
 				url : "/reservation/infoMeet?meetingRoomId="+meetingRoomId,
 				type : "get",
+				cache : false,
 				success : function(res) {
 					console.log(res);
 					
@@ -94,6 +95,7 @@ $(function() {
 		$.ajax({
 			url : "/reservation/infoReserve?meetingRoomId="+meetingRoomId+"&choiceDay="+choiceDay,
 			type : "get",
+			cache : false,
 			success : function(res) {
 				console.log(res);
 				if(res.length == 0) {
@@ -167,6 +169,7 @@ $(function() {
 					+"&meetingRoomId="+$("select[name='meetingRoomId']").val()+"&reservationId="+$("input[name='reservationId']").val(),
 			type : "get",
 			async : false,
+			cache : false,
 			success : function(res) {
 				console.log(res);
 				

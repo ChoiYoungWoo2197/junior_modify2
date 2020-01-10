@@ -22,7 +22,7 @@ import kr.or.domain.SearchCriteria;
 import kr.or.service.ReservationService;
 
 @Controller
-@RequestMapping("/reservation/*")
+@RequestMapping("/reservation")
 public class ReservationController {
 	
 	//private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);

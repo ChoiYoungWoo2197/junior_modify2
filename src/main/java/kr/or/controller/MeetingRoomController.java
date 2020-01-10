@@ -17,7 +17,7 @@ import kr.or.domain.SearchCriteria;
 import kr.or.service.MeetingRoomService;
 
 @Controller
-@RequestMapping("/meetingRoom/*")
+@RequestMapping("/meetingRoom")
 public class MeetingRoomController {
 	
 	//private static final Logger logger = LoggerFactory.getLogger(MeetingRoomController.class);
