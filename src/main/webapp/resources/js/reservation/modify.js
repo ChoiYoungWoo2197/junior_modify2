@@ -24,10 +24,10 @@ $(function() {
 		if($("select[name='meetingRoomId']").val() != "none") {
 			var meetingRoomId = Number($("select[name='meetingRoomId']").val());
 			
-			$("#meetingRoomEquipment h5").empty();
+			$("#meetingRoomEquipment h4").empty();
 			$("#meetingRoomEquipment ul").empty();
 			$("#meetingRoomEquipment p").empty();
-			$("#meetingRoomSeats h5").empty();
+			$("#meetingRoomSeats h4").empty();
 			$("#meetingRoomSeats span").empty();
 			$("#reservationList ul").empty(); //회의실 변경 시 예약내역 리셋
 			$("#reservationList p").empty(); //회의실 변경 시 예약내역 리셋
@@ -42,7 +42,7 @@ $(function() {
 				success : function(res) {
 					console.log(res);
 					
-					$("#meetingRoomEquipment h5").text("지원장비");
+					$("#meetingRoomEquipment h4").text("지원장비");
 					if(res.meetingRoomEquipmentList.length != 0) {
 						$(res.meetingRoomEquipmentList).each(function(index, element) {
 							var $equipmentLi = $("<li>").text(element.equipmentName);
@@ -52,7 +52,7 @@ $(function() {
 						$("#meetingRoomEquipment p").text("지원하는 장비가 없습니다.");
 					}
 					
-					$("#meetingRoomSeats h5").text("좌석수");
+					$("#meetingRoomSeats h4").text("좌석수");
 					$("#meetingRoomSeats span").text(res.meetingRoom.seats + "석");
 					
 					for(var i=1; i<=res.meetingRoom.seats; i++) {

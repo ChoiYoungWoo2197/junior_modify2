@@ -25,6 +25,22 @@
 	width: 1300px;
 	margin: 0 auto;
 }
+.color_gray {
+	color: gray;
+}
+.overflow_ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 300px;
+	display: inline-block;
+}
+.text_left {
+	text-align: left;	
+}
+.text_center {
+	text-align: center;	
+}
 
 header {
 	padding: 20px 0;
@@ -47,4 +63,15 @@ nav ul li a {
 nav ul li a:hover {
 	font-weight: bold;
 	font-size: 1.1em;
+}
+section {
+	padding-top: 20px;	
+}
+
+
+input, select, td, img, button {
+	cursor: pointer;
+}
+input[type='text'], input[type='search'] {
+	cursor: text;
 }

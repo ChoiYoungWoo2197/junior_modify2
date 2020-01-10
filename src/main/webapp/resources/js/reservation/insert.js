@@ -9,7 +9,10 @@ $(function() {
 		nextMonth();
 	})
 
+	$("#reservationList").hide();
+	
 	$("#meetingRoomSelect").change(function() {
+		$("#reservationList").hide();
 		$("td").removeClass("color_blue");
 		//attr=> html attribute 취급 & prop=> javascript property취급
 		//attr은 html attribute값이 모두 string으로 넘어오고 prop은 javascript property값이 넘어오기 때문에 boolean, date 등도 가져올 수 있음
@@ -21,43 +24,47 @@ $(function() {
 		if($("select[name='meetingRoomId']").val() != "none") {
 			var meetingRoomId = Number($("select[name='meetingRoomId']").val());
 			
-			$("#meetingRoomEquipment h5").empty();
+			$("#meetingRoomEquipment h4").empty();
 			$("#meetingRoomEquipment ul").empty();
 			$("#meetingRoomEquipment p").empty();
-			$("#meetingRoomSeats h5").empty();
+			$("#meetingRoomSeats h4").empty();
 			$("#meetingRoomSeats span").empty();
 			$("#reservationList ul").empty(); //회의실 변경 시 예약내역 리셋
 			$("#reservationList p").empty(); //회의실 변경 시 예약내역 리셋
 			$("select[name='meetAttendess']").find("option").each(function(){
-				$(this).remove();
-			})
-			
-			$.ajax({
-				url : "/reservation/infoMeet?meetingRoomId="+meetingRoomId,
-				type : "get",
-				cache : false,
-				success : function(res) {
-					console.log(res);
-					
-					$("#meetingRoomEquipment h5").text("지원장비");
-					if(res.meetingRoomEquipmentList.length != 0) {
-						$(res.meetingRoomEquipmentList).each(function(index, element) {
-							var $equipmentLi = $("<li>").text(element.equipmentName);
-							$("#meetingRoomEquipment ul").append($equipmentLi);
-						})
-					} else {
-						$("#meetingRoomEquipment p").text("지원하는 장비가 없습니다.");
-					}
-					
-					$("#meetingRoomSeats h5").text("좌석수");
-					$("#meetingRoomSeats span").text(res.meetingRoom.seats + "석");
-					
-					for(var i=1; i<=res.meetingRoom.seats; i++) {
-						var $meetingRoomSeatsOption = $("<option>").attr("value",i).text(i);
-						$("select[name='meetAttendess']").append($meetingRoomSeatsOption);
-					}
+				if($(this).val() != 0) {
+					$(this).remove();
 				}
 			})
+			
+			if(meetingRoomId != 0) {
+				$.ajax({
+					url : "/reservation/infoMeet?meetingRoomId="+meetingRoomId,
+					type : "get",
+					cache : false,
+					success : function(res) {
+						console.log(res);
+						
+						$("#meetingRoomEquipment h4").text("지원장비");
+						if(res.meetingRoomEquipmentList.length != 0) {
+							$(res.meetingRoomEquipmentList).each(function(index, element) {
+								var $equipmentLi = $("<li>").text(element.equipmentName);
+								$("#meetingRoomEquipment ul").append($equipmentLi);
+							})
+						} else {
+							$("#meetingRoomEquipment p").text("지원하는 장비가 없습니다.");
+						}
+						
+						$("#meetingRoomSeats h4").text("좌석수");
+						$("#meetingRoomSeats span").text(res.meetingRoom.seats + "석");
+						
+						for(var i=1; i<=res.meetingRoom.seats; i++) {
+							var $meetingRoomSeatsOption = $("<option>").attr("value",i).text(i);
+							$("select[name='meetAttendess']").append($meetingRoomSeatsOption);
+						}
+					}
+				})
+			}
 		}
 	})
 	
@@ -67,7 +74,7 @@ $(function() {
 	var date = new Date();
 	var today = String(date.getFullYear())+String(('0'+(date.getMonth()+1)).slice(-2))+String(('0'+date.getDate()).slice(-2));
 	
-	$("#calendar").on("click", "td", function() {
+	$("#calendar").on("click", "td", function(e) {
 		$("td").removeClass("color_blue");
 		$("#reservationList ul").empty();
 		$("#reservationList p").empty();
@@ -92,6 +99,8 @@ $(function() {
 			//async : false,
 			cache : false, //IE의 경우 ajax로 호출하는 URL이 동일하고 파라미터가 없거나 할 경우 매번 URL을 호출하지 않고 Cache를 이용해서 이상한 값을 보내줌(서버에 요청을 안함). 이 옵션은 false로 하면 IE 에러 사라짐.
 			success : function(res) {
+				$("#reservationList").show();
+				
 				console.log(res);
 				if(res.length == 0) {
 					$("#reservationList p").text("예약 내역이 존재하지 않습니다.");	
@@ -102,7 +111,7 @@ $(function() {
 						var endDateOrigin = new Date(element.actualEndDate);
 						var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
 						
-						var $reservationLi = $("<li>").html(startDate + "~" + endDate + "&ensp;" + element.meetPurpose +"<br>(" + element.employeeName + "("+ element.departmentName + "))" );
+						var $reservationLi = $("<li>").html("<span>"+ startDate + "</span><span>&ensp;~&ensp;</span><span>" + endDate + "</span>&ensp;<span class='overflow_ellipsis'>&ensp;&ensp;" + element.meetPurpose +"</span><br>(" + element.employeeName + "("+ element.departmentName + "))" );
 						$("#reservationList ul").append($reservationLi);
 						
 						/* meetingStart[index] = startDate;
@@ -121,15 +130,20 @@ $(function() {
 			return false;
 		}
 		
+		var start = Number($("select[name='startHour']").val() + $("select[name='startMinute']").val());
+		var end = Number($("select[name='endHour']").val() + $("select[name='endMinute']").val());
+		if(start >= end) {
+			alert("시간을 잘못 입력하셨습니다.");
+			return false;
+		}
+		
 		if($("input[name='meetPurpose']").val() == "") {
 			alert("회의목적을 입력하세요.");
 			return false;
 		}
 		
-		var start = Number($("select[name='startHour']").val() + $("select[name='startMinute']").val());
-		var end = Number($("select[name='endHour']").val() + $("select[name='endMinute']").val());
-		if(start >= end) {
-			alert("시간을 잘못 입력하셨습니다.");
+		if($("select[name='meetAttendess']").val() == "0") {
+			alert("참가 인원수를 선택하세요.");
 			return false;
 		}
 		
