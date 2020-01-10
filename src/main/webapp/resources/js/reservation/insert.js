@@ -20,6 +20,12 @@ $(function() {
 		$("select[name='startMinute'] option").eq(0).prop("selected",true);
 		$("select[name='endHour'] option").eq(0).prop("selected",true);
 		$("select[name='endMinute'] option").eq(0).prop("selected",true);
+		$("input[name='meetPurpose']").val("");
+		$("select[name='meetAttendess']").find("option").each(function(){
+			if($(this).val() != 0) {
+				$(this).remove();
+			}
+		})
 		
 		if($("select[name='meetingRoomId']").val() != "none") {
 			var meetingRoomId = Number($("select[name='meetingRoomId']").val());
@@ -31,11 +37,6 @@ $(function() {
 			$("#meetingRoomSeats span").empty();
 			$("#reservationList ul").empty(); //회의실 변경 시 예약내역 리셋
 			$("#reservationList p").empty(); //회의실 변경 시 예약내역 리셋
-			$("select[name='meetAttendess']").find("option").each(function(){
-				if($(this).val() != 0) {
-					$(this).remove();
-				}
-			})
 			
 			if(meetingRoomId != 0) {
 				$.ajax({
@@ -190,11 +191,16 @@ $(function() {
 			async : false,
 			cache : false,
 			success : function(res) {
-				console.log(res);
-				
-				if(res == "false") {
-					result = false;
-					alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.");
+				console.log(res.result);
+
+				if(res.result == "false") {
+					if(res.meetingRoom == "none") {
+						alert("이미 예약된 내역이 있습니다. 다른 시간을 선택해주세요.");
+						result = false;
+					} else {
+						alert("동일한 시간에 '"+res.meetingRoom+"' 예약 내역이 있습니다.");
+						result = false;
+					}
 				} else {
 					result = true;
 				}

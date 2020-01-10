@@ -73,10 +73,12 @@
 		</table>
 		<input type="hidden" name="meetingRoomId" value="${meetingRoom.meetingRoomId}">
 		<button id="listMeetingRoom">목록</button>
-		<div class="float_right">
-			<button id="updateMeetingRoom">수정</button>
-			<button id="deleteMeetingRoom">삭제</button>
-		</div>
+		<c:if test="${loginUser.manager eq 'true'}"> 
+			<div class="float_right">
+				<button id="updateMeetingRoom">수정</button>
+				<button id="deleteMeetingRoom">삭제</button>
+			</div>
+		</c:if>
 	</section>
 </body>
 </html>

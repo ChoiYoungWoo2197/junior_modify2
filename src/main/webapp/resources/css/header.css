@@ -62,7 +62,8 @@ section {
 }
 
 
-input, select, td, img, button {
+/*--*/
+input, button, select, img {
 	cursor: pointer;
 }
 input[type='text'], input[type='search'] {

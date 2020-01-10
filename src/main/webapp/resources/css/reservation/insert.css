@@ -51,22 +51,22 @@ th {
 	cursor: default;
 }
 input, select {
-	padding: 5px;
+	padding: 3px 0;
 	margin: 5px 0 10px 0;
 	border-radius: 3px;
 	border: 1px solid rgb(169,169,169);
 }
-input[type='text'], select[name='meetingRoomId'] {
+input[type='text'], select[name='meetingRoomId'], select[name='meetAttendess'] {
 	width: 100%;
 }
-select[name='meetAttendess'] {
-	width: 105%;
-}
-input[type='submit'], input[type='button'] {
+/* input[type='submit'], input[type='button'] {
 	padding: 10px 50px;
 	margin-top: 20px;
+} */
+img {
+	width: 30px;
+	height: 30px;	
 }
-
 
 
 .width65 {
