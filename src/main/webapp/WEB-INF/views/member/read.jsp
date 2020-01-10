@@ -4,32 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp"%>
 <link href="${pageContext.request.contextPath}/resources/css/member/modify.css" rel="stylesheet" type="text/css" />
-<script>
-$(function() {
-	$("#list").click(function() {
-		location.href = "list";
-	})
-
-	$("#update").click(function() {
-		//var memberId = Number($("input[name=memberId]").val());
-		//alert( $("input[name=memberId]").val());
-		var memberId = $("input[name=memberId]").val();
-		location.href = "modify?memberId="+memberId;
-	})
-
-	$("#delete").click(function() {
-		var name = '${employeeDetail.name}';
-		var result = confirm(name +"님을 삭제하시겠습니까?");
-
-		if(result == true) {
-			//var memberId = Number($("input[name=memberId]").val());
-			var memberId = $("input[name=memberId]").val();
-			location.href = "delete?memberId="+memberId;
-		}
-	})
-})
-</script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/member/read.js"></script>
 
 
 <section class="width1200">
@@ -102,7 +77,7 @@ $(function() {
 	</table>
 
 
-
+	<input type="hidden" name="name" value="${employeeDetail.name}">
 	<input type="hidden" name="memberId" value="${employeeDetail.memberId}">
 	<button id="list">목록</button>
 	<button id="update">수정</button>

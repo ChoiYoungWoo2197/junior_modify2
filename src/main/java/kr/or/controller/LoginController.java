@@ -21,9 +21,9 @@ import kr.or.service.EmployeeService;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping("/login/*")
+@RequestMapping("/login")
 public class LoginController {
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	EmployeeService employeeService;
@@ -37,7 +37,6 @@ public class LoginController {
 	//로그인 시도
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	public String check(Locale locale, Model model, HttpServletRequest request, HttpSession session) {
-		logger.info("사원번호 : " + request.getParameter("loginId") + " " + "비밀번호 : " + request.getParameter("loginPw"));
 		String result = "redirect:/login/login";
 		try {
 			Employee employee = employeeService.checkUser(request.getParameter("loginId"), employeeService.encSHA256(request.getParameter("loginPw")));
@@ -59,21 +58,20 @@ public class LoginController {
 					map.put("user", employee);
 					//여기서 세션 저장한다.
 					session.setAttribute("loginUser", map);
-					result = "redirect:/reservation/list";
+					result = "/reservation/list";
 				}
 				else {
-					result = "redirect:/mail/authenticate?memberId="+employee.getMemberId();
+					result = "/mail/authenticate?memberId="+employee.getMemberId();
 				}
 			}
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(e);
 		}
 		
 		return result;
 	}
-	//로그인 시도
+	//로그인 아웃
 	@RequestMapping(value = "/out", method = RequestMethod.GET)
 	public String out(HttpSession session) {
 		session.invalidate();

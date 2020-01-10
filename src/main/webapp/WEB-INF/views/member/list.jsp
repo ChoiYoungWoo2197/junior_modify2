@@ -4,37 +4,7 @@
 <%@ include file="../include/header.jsp"%>
 
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
-<%-- <script src="${pageContext.request.contextPath}/resources/js/member/list.js" charset="UTF-8" type="text/javascript"></script> --%>
-<script>
-	$(function() {
-		$("#insertMember").click(function() {
-			location.href = "/member/insert";
-		})
-
-		$("#searchEquipment").click(function() {			
-			if ($("input[name='searchContent']").val() == "") {
-				alert("검색할 내용을 입력해주세요.");
-				return false;
-			}
-
-			location.href = encodeURI("list?page=1&searchType="+ $("select[name='searchType']").val()	+ "&searchContent="	+ $("input[name='searchContent']").val());
-		})
-
-		$(document).on("click", ".readMember", function() {
-			//var memberId = Number($(this).prev().text());
-			//var memberId = $(this).prev().text();
-			//location.href = "read?memberId=" + memberId;
-			
-			var memberId = $(this).find(".readMemberId").attr("data-memberId");
-			location.href = "read?memberId=" + memberId;
-		})
-
-		$("#AllMeetingRoom").click(function() {
-			location.href = "list";
-		})
-
-	})
-</script>
+<script src="${pageContext.request.contextPath}/resources/js/member/list.js" charset="UTF-8" type="text/javascript"></script>
 
 <section class="width1200">
 	<h1>회원 관리</h1>

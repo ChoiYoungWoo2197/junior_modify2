@@ -31,9 +31,9 @@ import kr.or.service.ReservationDetailService;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping("/member/*")
+@RequestMapping("/member")
 public class MemberController {
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired
 	EmployeeService employeeService;
 	
@@ -48,7 +48,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(SearchCriteria searchCriteria,Model model) {
-		logger.info("member list & searchContent :" + searchCriteria.getSearchContent());
 		List<Employee> employeeList = employeeService.searchEmployee(searchCriteria);
 		model.addAttribute("employeeList", employeeList);
 		model.addAttribute("employeeListSize", employeeService.searchEmployeeCount(searchCriteria));
@@ -67,7 +66,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {
-		logger.info("member register :" + request.getParameter("register"));
 		String result;
 		//Enumeration enums = request.getParameterNames();
 		String register = request.getParameter("register");
@@ -112,7 +110,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/read", method = RequestMethod.GET) 
 	public String read(Model model, String memberId) {
-		logger.info("read memberId : " + memberId);
 		Employee employee = employeeService.checkEmployeeById(memberId);
 		Department department = managementServcice.selectDepartmentById(Integer.parseInt(employee.getDepartmentId()));
 		Manager manager = employeeService.checkManager(employee.getEmployeeId());
@@ -125,8 +122,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modifyPage(Model model, String memberId) {
-		logger.info("modifyPage  memberId : " + memberId);
-		
 		Employee employee = employeeService.checkEmployeeById(memberId);
 		Manager manager = employeeService.checkManager(employee.getEmployeeId());
 		List<Department> departmentList = managementServcice.searchDepartmentList();
@@ -141,7 +136,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(HttpServletRequest request) {
-		logger.info("modify originalMemberId :" + request.getParameter("originalMemberId"));
 		//Enumeration enums = request.getParameterNames();
 		String originalMemberId = request.getParameter("originalMemberId");
 		String managerType = request.getParameter("manager");
@@ -171,7 +165,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(HttpServletRequest request, String memberId) {
-		logger.info("delete : " + memberId);
 		Employee employee = employeeService.checkEmployeeById(memberId);
 		List<Reservation> reservationList = reservationDetailService.searchReservationByEmployeeId(employee.getEmployeeId());
 		
@@ -190,7 +183,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/checkId", method = RequestMethod.POST)
 	public @ResponseBody String checkId(HttpServletRequest request) {
-		logger.info("memberId:" + request.getParameter("memberId"));
 		String memberId = request.getParameter("memberId");
 		String result = "false";
 		Employee employee = employeeService.checkEmployeeById(memberId);
@@ -203,7 +195,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
 	public @ResponseBody String checkEmail(HttpServletRequest request) {
-		logger.info("email :" + request.getParameter("email"));
 		String email = request.getParameter("email");
 		String result = "false";
 		Employee employee = employeeService.checkEmployeeByEmail(email);

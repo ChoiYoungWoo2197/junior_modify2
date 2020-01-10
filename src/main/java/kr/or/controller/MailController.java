@@ -24,9 +24,9 @@ import kr.or.service.MailService;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping("/mail/*")
+@RequestMapping("/mail")
 public class MailController {
-	private static final Logger logger = LoggerFactory.getLogger(MailController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(MailController.class);
 	@Autowired
 	EmployeeService employeeService;
 
@@ -39,8 +39,6 @@ public class MailController {
 	//이메일 인증페이지 출력
 	@RequestMapping(value = "/authenticate", method = RequestMethod.GET)
 	public String authenticate(Locale locale, Model model, HttpServletRequest request) {
-		logger.info("mail > memberId :" + request.getParameter("memberId"));
-		
 		Employee employee = employeeService.checkEmployeeById(request.getParameter("memberId"));
 		model.addAttribute("mail", employee.getEmail());
 		return "/mail/authenticate";
@@ -77,7 +75,6 @@ public class MailController {
 	//이메일 인증완료 
 	@RequestMapping(value = "/complete", method = RequestMethod.POST)
 	public String complete(HttpServletRequest request, Model model) {
-		logger.info("mail > complete :" + request.getParameter("mail") + " : " + request.getParameter("authKey"));
 		String result = "";
 		Employee employee = employeeService.checkKeyByMap(request.getParameter("mail"), request.getParameter("authKey"));
 
@@ -106,14 +103,6 @@ public class MailController {
 		
 		compare = currentDate.compareTo(limitAuthKeyDate);
 
-		
- 		if(compare > 0) {
- 			//System.out.println("현재일시가 제한일시보다 큰 경우.");
- 		}
- 		else if(compare <0) {
- 			//제한일시보다 앞선경우니깐 이메일 재발송을 못한다.
- 			//System.out.println("현재일시가 제한일시보다 작은 경우.");
- 		}
 		
 		return compare;
 	}

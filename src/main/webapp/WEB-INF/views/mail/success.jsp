@@ -41,29 +41,7 @@
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-<script>
-	$(function() {
-		$("#sendReMail").click(function() {
-			$.ajax({
-				url : "/mail/request",
-				type : "post",
-				data : {"mail" : $("input[name='mail']").val()},
-				dataType : "text",
-				success : function(res) {
-					console.log(res);
-					if(res == "true") {
-						alert("이메일이 재발송되었습니다. 인증번호를 입력해주세요.");
-					}
-					else {
-						alert("이메일발송이 실패했습니다.");
-					}
-				}
-			})
-		})
-	})
-</script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mail/success.js"></script>
 
 </head>
 <body>

@@ -28,9 +28,9 @@ import kr.or.service.ReservationDetailService;
 import kr.or.service.ReservationService;
  
 @Controller
-@RequestMapping("/reservationDetail/*")
+@RequestMapping("/reservationDetail")
 public class ReservationDetailController {
-	private static final Logger logger = LoggerFactory.getLogger(ReservationDetailController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(ReservationDetailController.class);
 	@Autowired
 	EmployeeService employeeService;
 
@@ -48,7 +48,6 @@ public class ReservationDetailController {
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String read(Model model,HttpServletRequest request, HttpSession session) {
-		//logger.info("reservation ID : " + request.getParameter("reservationId"));
 		Map<String, Object> map =  (Map<String, Object>) session.getAttribute("loginUser");
 		Employee who = (Employee) map.get("user");// 세션값을 이용해서 자신이 누구인지 알아낸다.
 		
@@ -93,7 +92,6 @@ public class ReservationDetailController {
 
 	@RequestMapping(value = "/cancel", method = RequestMethod.POST)
 	public String cancel(HttpServletRequest request, HttpSession session) {
-		logger.info("예약취소 사유 : " + request.getParameter("cancelReason") + " 예약번호 : " + request.getParameter("reservationId"));
 		Map<String, Object> map =  (Map<String, Object>) session.getAttribute("loginUser");
 		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
 		Reservation reservation =  reservationDetailService.searchReservationById(reservationId);
@@ -109,7 +107,6 @@ public class ReservationDetailController {
 
 	@RequestMapping(value = "/exit", method = RequestMethod.POST)
 	public String exit(HttpServletRequest request, HttpSession session) {
-		logger.info("조기종료 : " +request.getParameter("exitTimeHours") + " " + request.getParameter("exitTimeMinutes"));
 		//Enumeration enums = request.getParameterNames();
 		Map<String, Object> map =  (Map<String, Object>) session.getAttribute("loginUser");
 		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
@@ -161,9 +158,8 @@ public class ReservationDetailController {
 	}
 	
 
-	@RequestMapping(value = "/extand", method = RequestMethod.POST)
-	public String extand(HttpServletRequest request) {
-		logger.info("연장신청");
+	@RequestMapping(value = "/extend", method = RequestMethod.POST)
+	public String extend(HttpServletRequest request) {
 		Enumeration enums = request.getParameterNames();
 		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
 		Reservation reservation =  reservationDetailService.searchReservationById(reservationId);
@@ -171,11 +167,11 @@ public class ReservationDetailController {
 		
 	
 		Date actualEndDate = reservation.getEndDate();
-		actualEndDate.setHours(Integer.parseInt(request.getParameter("extandTimeHours")));
-		actualEndDate.setMinutes(Integer.parseInt(request.getParameter("extandTimeMinutes")));
+		actualEndDate.setHours(Integer.parseInt(request.getParameter("extendTimeHours")));
+		actualEndDate.setMinutes(Integer.parseInt(request.getParameter("extendTimeMinutes")));
 		extend.setReservationId(reservationId);
 		extend.setEndDate(actualEndDate);
-		extend.setExtendReason(request.getParameter("extandReason"));
+		extend.setExtendReason(request.getParameter("extendReason"));
 		
 
 		
@@ -188,7 +184,6 @@ public class ReservationDetailController {
 
 	@RequestMapping(value = "/exitCheck", method = RequestMethod.POST)
 	public String exitCheck(HttpServletRequest request, HttpSession session) {
-		logger.info("종료확인");
 		Map<String, Object> map =  (Map<String, Object>) session.getAttribute("loginUser");
 		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
 		Reservation reservation =  reservationDetailService.searchReservationById(reservationId);
