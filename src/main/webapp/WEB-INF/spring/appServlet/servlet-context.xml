@@ -10,11 +10,26 @@
 	<beans:bean id="authInterceptor" class="kr.or.interceptor.AuthInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
- 		 	<mapping path="/**" /> 
+<!--  		 	<mapping path="/**" /> 
  		 	<exclude-mapping path="/" />
 		 	<exclude-mapping path="/login/**" />
 		 	<exclude-mapping path="/member/insert" />
-		 	<exclude-mapping path="/reservation/list" /> 
+		 	<exclude-mapping path="/reservation/list" />  -->
+		 	
+		 	
+ 		 	<mapping path="/management/list" />
+			<mapping path="/management/insert" />
+			<mapping path="/management/modify" />
+			<mapping path="/meetingRoom/list" />
+			<mapping path="/meetingRoom/insert" />
+			<mapping path="/meetingRoom/read" />
+			<mapping path="/meetingRoom/modify" />
+			<mapping path="/member/list" />
+			<mapping path="/member/read" />
+			<mapping path="/member/modify" />
+			<mapping path="/reservation/insert" />
+			<mapping path="/reservationDetail/read" /> 
+		 	
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 	</interceptors>
