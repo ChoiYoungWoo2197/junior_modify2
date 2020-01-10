@@ -103,10 +103,11 @@ public class ReservationController {
 		return "redirect:/reservation/list";
 	}
 	
-	@RequestMapping(value = "/checkTime", method = RequestMethod.GET, produces = "application/text; charset=utf8")
-	public @ResponseBody String checkTime(String choiceDay, String start, String end, String meetingRoomId, String reservationId, String employeeId) {
+	@RequestMapping(value = "/checkTime", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	public @ResponseBody Map<String, String> checkTime(String choiceDay, String start, String end, String meetingRoomId, String reservationId, String employeeId) {
 		String result = "true";
-		
+		Map<String, String> map = new HashMap<String, String>();
+
 		String choiceDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(Integer.parseInt(meetingRoomId), choiceDate);
 		
@@ -119,9 +120,11 @@ public class ReservationController {
 			e.printStackTrace();
 		}
 		
+		map.put("meetingRoom", "none");
 		if(reservationId == null) { //등록
 			Reservation reservation = reservationService.selectReservationByMemeberAndTime(Integer.parseInt(employeeId), startDate, endDate);
 			if(reservation != null) {
+				map.put("meetingRoom", reservation.getMeetingRoomName());
 				result = "false";
 			}
 		}
@@ -141,8 +144,9 @@ public class ReservationController {
 				}
 			}
 		}
+		map.put("result", result);
 		
-		return result;
+		return map;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.GET)

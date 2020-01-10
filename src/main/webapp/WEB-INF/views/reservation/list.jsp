@@ -22,7 +22,7 @@
 <section class="width1300">
 	<h1>예약현황</h1>
 	<div>
-		<label class="float_left">사용일</label>
+		<label class="float_left">사용일&nbsp;</label>
 		<input type="text" name="searchDate" id="searchStart" value="${searchCriteria.searchStart}" class="float_left">
 		<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="startImg" class="float_left"> 
 		<span class="float_left">~&nbsp;</span> 
@@ -113,7 +113,9 @@
 			</c:forEach>
 		</c:if>
 	</table>
-	<button id="insertReservation">예약등록</button>
+	<div class="clear_both"></div>
+	<button id="insertReservation" class="float_right">예약등록</button>
+	<div class="clear_both"></div>
 	
 	<div id="page">
 		<ul class="pagination">
