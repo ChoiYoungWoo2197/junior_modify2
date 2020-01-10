@@ -126,7 +126,7 @@
 					</c:forEach>
 				</c:if>
 			</table>
-			<button id="insertManagement">장비등록</button>
+			<button id="insertManagement" class="float_right">장비등록</button>
 		</c:if>
 		<c:if test="${management eq 'department'}">
 			<table>
@@ -167,8 +167,10 @@
 					</c:forEach>
 				</c:if>
 			</table>
-			<button id="insertManagement">부서등록</button>
+			<button id="insertManagement" class="float_right">부서등록</button>
 		</c:if>
+		
+		<div class="clear_both"></div>
 		
 		<form id="deleteForm">
 			<input type="hidden" name="managementId">
