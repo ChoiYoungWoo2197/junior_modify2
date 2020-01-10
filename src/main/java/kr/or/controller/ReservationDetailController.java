@@ -187,7 +187,7 @@ public class ReservationDetailController {
 		extend.setEndDate(actualEndDate);
 		extend.setExtendReason(request.getParameter("extendReason"));
 		
-
+		
 		
 		reservationDetailService.insertExtendByMap(extend);
 		reservationDetailService.updateExitByMap(reservationId, "", actualEndDate);

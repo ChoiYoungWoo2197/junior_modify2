@@ -60,13 +60,28 @@ $(function() {
 				var startTime = $("input[name='startTime']").val();
 				var actualTime = $("input[name='actualEndTime']").val();		
 				var startDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+startTime);
+				//Date가 크롬에서는 먹히는데 IE에서는 Invalid Date뜸 그래서 오류처리해줌.
+				if(startDate.toString() == 'Invalid Date') {
+					startDate = parseDate(actualDay + ' '+startTime);	
+				}
+
 				var actualDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+actualTime);		
+				//Date가 크롬에서는 먹히는데 IE에서는 Invalid Date뜸 그래서 오류처리해줌.
+				if(actualDate.toString() == 'Invalid Date') {
+					actualDate = parseDate(actualDay + ' '+actualTime);	
+				}
+
 				var exitDateHour = $("#exitTimeHours option:selected").val();
 				var exitDateMinutes = $("#exitTimeMinutes option:selected").val();
 				var exitDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+exitDateHour+ ':'+exitDateMinutes);
-				
+
+				//Date가 크롬에서는 먹히는데 IE에서는 Invalid Date뜸 그래서 오류처리해줌.
+				if(exitDate.toString() == 'Invalid Date') {
+					exitDate = parseDate(actualDay + ' '+exitDateHour+ ':'+exitDateMinutes);	
+				}
+
 				var currentTime = new Date();
-				
+	
 				if(exitDate <  startDate || exitDate > actualDate) {
 					empty();
 					creatExitTag();
@@ -112,15 +127,21 @@ $(function() {
 					var actualDayArray = actualDay.split('.');
 					var actualTime = $("input[name='actualEndTime']").val();
 					var actualDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+actualTime);
+					//Date가 크롬에서는 먹히는데 IE에서는 Invalid Date뜸 그래서 오류처리해줌.
+					if(actualDate.toString() == 'Invalid Date') {
+						actualDate = parseDate(actualDay + ' '+actualTime);	
+					}
 					
 					var extendDateHour = $("#extendTimeHours option:selected").val();
 					var extendDateMinutes = $("#extendTimeMinutes option:selected").val();
 					var extendDate = new Date(actualDayArray[0]+'/' +actualDayArray[1]+'/'+actualDayArray[2]+'/'+extendDateHour+ ':'+extendDateMinutes);
+					//Date가 크롬에서는 먹히는데 IE에서는 Invalid Date뜸 그래서 오류처리해줌.
+					if(extendDate.toString() == 'Invalid Date') {
+						extendDate = parseDate(actualDay + ' '+extendDateHour+ ':'+extendDateMinutes);	
+					}
 					
-					alert(actualDayArray[0]+'-' +actualDayArray[1]+'-'+actualDayArray[2]);
 					var endDate = actualDayArray[0]+'-' +actualDayArray[1]+'-'+actualDayArray[2] + " " + extendDateHour + ":" + extendDateMinutes;
-
-					
+	
 					if(actualDate >= extendDate) {
 						empty();
 						createExtendTag();
@@ -223,6 +244,33 @@ $(function() {
 			//$("#inputForm").append(spanMinutes);
 			$("#btnDiv").append(cancel).append(complete);
 		}
+		
+		function parseDate(strDate) {
+		    var _strDate = strDate;
+		    var _dateObj = new Date(_strDate);
+		    if (_dateObj.toString() == 'Invalid Date') {
+		        _strDate = _strDate.split('.').join('-');
+		        _dateObj = new Date(_strDate);
+		    }
+		    if (_dateObj.toString() == 'Invalid Date') {
+		        var _parts = _strDate.split(' ');
+		 
+		        var _dateParts = _parts[0];
+		        _dateObj = new Date(_dateParts);
+		 
+		        if (_parts.length > 1) {
+		            var _timeParts = _parts[1].split(':');
+		            _dateObj.setHours(_timeParts[0]);
+		            _dateObj.setMinutes(_timeParts[1]);
+	            if (_timeParts.length > 2) {
+		                _dateObj.setSeconds(_timeParts[2]);
+		            }
+		        }
+		    }
+		 
+		    return _dateObj;
+		}
+
 		
 		function createExtendTag() {
 			var td = '<td><b>종료시각</b></td>';
