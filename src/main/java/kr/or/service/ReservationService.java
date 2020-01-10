@@ -22,7 +22,7 @@ public interface ReservationService {
 	//MeetingRoom
 	public List<MeetingRoom> selectMeetingRoom();
 	public MeetingRoom selectMeetingRoomById(int meetingRoomId);
-	public int selectMeetingRoomSeatsById(int meetingRoomId);
+//	public int selectMeetingRoomSeatsById(int meetingRoomId);
 	
 	//MeetingRoomEquipment
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId);

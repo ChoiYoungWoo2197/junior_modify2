@@ -1,4 +1,20 @@
 $(function() {
+	$("#startImg").click(function() {
+		$("#searchStart").focus();
+	})
+	$("#endImg").click(function() {
+		$("#searchEnd").focus();
+	})
+	
+	$.datepicker.setDefaults($.datepicker.regional['ko']); //한국어 설정
+    $("#searchStart").datepicker({ 
+        dateFormat:"yy-mm-dd",    // 날짜 출력폼 설정
+    })
+    
+    $("#searchEnd").datepicker({ 
+        dateFormat:"yy-mm-dd",    // 날짜 출력폼 설정
+    })
+    
 	$("#insertReservation").click(function() {
 		location.href = "insert";
 	})

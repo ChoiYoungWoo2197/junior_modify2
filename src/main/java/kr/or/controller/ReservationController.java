@@ -155,7 +155,7 @@ public class ReservationController {
 		List<MeetingRoomEquipment> meetingRoomEquipmentList = reservationService.selectMeetingRoomEquipmentById(reservation.getMeetingRoomId());
 		model.addAttribute("meetingRoomEquipmentList", meetingRoomEquipmentList);
 		
-		int seats = reservationService.selectMeetingRoomSeatsById(reservation.getMeetingRoomId());
+		int seats = reservation.getMeetAttendess();
 		model.addAttribute("seats", seats);
 		
 		Date startDate = reservation.getStartDate();

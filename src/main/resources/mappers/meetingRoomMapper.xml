@@ -72,9 +72,9 @@
 		<!-- WHERE availability = true -->
 	</select>
 	
-	<select id="selectMeetingRoomSeatsById" resultType="int">
+	<!-- <select id="selectMeetingRoomSeatsById" resultType="int">
 		SELECT seats 
 		FROM meeting_room
 		WHERE meeting_room_id = #{meetingRoomId}
-	</select>
+	</select> -->
 </mapper>

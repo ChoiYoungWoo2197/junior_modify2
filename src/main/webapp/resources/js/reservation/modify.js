@@ -21,12 +21,6 @@ $(function() {
 	choiceDay = $("#today").text().replace(".","")+choiceDay2; //수정했을 때 달력 선택 안해도 값이 저장될 수 있도록
 	
 	$("#meetingRoomSelect").change(function() {
-		/*$("td").removeClass("color_blue");
-		$("select[name='startHour'] option").eq(0).prop("selected",true);
-		$("select[name='startMinute'] option").eq(0).prop("selected",true);
-		$("select[name='endHour'] option").eq(0).prop("selected",true);
-		$("select[name='endMinute'] option").eq(0).prop("selected",true);*/
-		
 		if($("select[name='meetingRoomId']").val() != "none") {
 			var meetingRoomId = Number($("select[name='meetingRoomId']").val());
 			
@@ -62,8 +56,35 @@ $(function() {
 					$("#meetingRoomSeats span").text(res.meetingRoom.seats + "석");
 					
 					for(var i=1; i<=res.meetingRoom.seats; i++) {
-						var $meetingRoomSeatsOption = $("<option>").attr("value",i).text(i);
+						var $meetingRoomSeatsOption;
+						if($("input[name='seats").val() == i) {
+							$meetingRoomSeatsOption = $("<option selected>").attr("value",i).text(i);
+						} else {
+							$meetingRoomSeatsOption = $("<option>").attr("value",i).text(i);
+						}
 						$("select[name='meetAttendess']").append($meetingRoomSeatsOption);
+					}
+				}
+			})
+			
+			$.ajax({
+				url : "/reservation/infoReserve?meetingRoomId="+meetingRoomId+"&choiceDay="+choiceDay,
+				type : "get",
+				cache : false,
+				success : function(res) {
+					console.log(res);
+					if(res.length == 0) {
+						$("#reservationList p").text("예약 내역이 존재하지 않습니다.");	
+					}else {
+						$(res).each(function(index, element) {
+							var startDateOrigin = new Date(element.startDate);
+							var startDate = startDateOrigin.getHours()+":"+("00" + startDateOrigin.getMinutes()).slice(-2);
+							var endDateOrigin = new Date(element.endDate);
+							var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
+							
+							var $reservationLi = $("<li>").html(startDate + "~" + endDate + "&ensp;" + element.meetPurpose +"<br>(" + element.employeeName + "("+ element.departmentName + "))" );
+							$("#reservationList ul").append($reservationLi);
+						})
 					}
 				}
 			})

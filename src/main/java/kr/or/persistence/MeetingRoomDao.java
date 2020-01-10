@@ -14,6 +14,6 @@ public interface MeetingRoomDao {
 	public void deleteMeetingRoom(int meetingRoomId);
 	public MeetingRoom selectMeetingRoomById(int meetingRoomId);
 	public List<MeetingRoom> selectMeetingRoom();
-	public int selectMeetingRoomSeatsById(int meetingRoomId);
+//	public int selectMeetingRoomSeatsById(int meetingRoomId);
 	
 }

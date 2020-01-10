@@ -79,10 +79,10 @@ public class ReservationServiceImpl implements ReservationService {
 		return meetingRoomDao.selectMeetingRoomById(meetingRoomId);
 	}
 	
-	@Override
-	public int selectMeetingRoomSeatsById(int meetingRoomId) {
-		return meetingRoomDao.selectMeetingRoomSeatsById(meetingRoomId);
-	}
+//	@Override
+//	public int selectMeetingRoomSeatsById(int meetingRoomId) {
+//		return meetingRoomDao.selectMeetingRoomSeatsById(meetingRoomId);
+//	}
 	
 	@Override
 	public List<MeetingRoomEquipment> selectMeetingRoomEquipmentById(int meetingRoomId) {
