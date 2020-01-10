@@ -78,7 +78,7 @@
 						<c:forEach var="hour" begin="9" end="22">
 							<fmt:formatDate value="${reservation.startDate}" pattern="kk" var="start"/>
 							<c:if test="${hour < 10}">
-								<option value="0${hour}" selected="selected">0${hour}</option>
+								<option value="0${hour}" ${09 == start ? 'selected class="font_bold"':''}>0${hour}</option>
 							</c:if>
 							<c:if test="${hour >= 10}">
 								<option value="${hour}" ${hour == start ? 'selected class="font_bold"':''}>${hour}</option>
@@ -133,7 +133,7 @@
 				<label>회의참석자 <span class="color_red">*</span></label> <br>
 				<select name="meetAttendess">
 					<c:forEach var="index" begin="1" end="${seats}">
-						<option ${index == reservation.meetAttendess ? 'selected':''}>${index}</option>
+						<option ${index == reservation.meetAttendess ? 'selected class="font_bold"':''}>${index}</option>
 					</c:forEach>
 				</select>
 			</div>

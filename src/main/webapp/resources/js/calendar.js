@@ -35,7 +35,7 @@ function displayCaldendar(str) {
 			   calendar += "<td></td>";
 			} else {
 				if(num<10) {
-					if(num < date && month == new Date().getMonth() && year == new Date().getFullYear()) {
+					if(num < new Date().getDate() && month == new Date().getMonth() && year == new Date().getFullYear()) {
 						calendar += "<td data-value=0"+num+" class=color_gray>"+num+"</td>";
 						num++;
 					} else {
@@ -43,7 +43,7 @@ function displayCaldendar(str) {
 						num++;
 					}
 				} else {
-					if(num < date && month == new Date().getMonth() && year == new Date().getFullYear()) {
+					if(num <  new Date().getDate() && month == new Date().getMonth() && year == new Date().getFullYear()) {
 						calendar += "<td data-value="+num+" class=color_gray>"+num+"</td>";
 						num++;
 					} else {

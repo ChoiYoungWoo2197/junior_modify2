@@ -29,13 +29,6 @@
 .color_gray {
 	color: gray;
 }
-.overflow_ellipsis {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	width: 300px;
-	display: inline-block;
-}
 .text_left {
 	text-align: left;	
 }

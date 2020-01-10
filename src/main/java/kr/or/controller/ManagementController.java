@@ -1,5 +1,6 @@
 package kr.or.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,11 +54,13 @@ public class ManagementController {
 		if(management.equals("equipment")) {
 			Equipment equipment = new Equipment();
 			equipment.setName(name);
+			equipment.setRegisterDate(new Date());
 			
 			managementServcice.insertEquipment(equipment);
 		} else if(management.equals("department")) {
 			Department department = new Department();
 			department.setName(name);
+			department.setRegisterDate(new Date());
 			
 			managementServcice.insertDepartment(department);
 		}

@@ -20,9 +20,8 @@
 	</select>
 
 	<insert id="insertDepartment" parameterType="Department">
-		INSERT INTO
-		department(name)
-		VALUES (#{name})
+		INSERT INTO department(name, register_date) 
+		VALUES (#{name}, #{registerDate})
 	</insert>
 
 	<select id="selectDepartmentById" resultType="Department">

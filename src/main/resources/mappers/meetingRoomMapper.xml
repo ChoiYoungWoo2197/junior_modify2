@@ -45,8 +45,8 @@
 	</select>
 	
 	<insert id="insertMeetingRoom" parameterType="MeetingRoom" useGeneratedKeys="true" keyProperty="meetingRoomId">
-		INSERT INTO meeting_room(manager_id, name, seats, availability) 
-		VALUES (#{managerId},#{name},#{seats},#{availability})
+		INSERT INTO meeting_room(manager_id, name, seats, availability, register_date) 
+		VALUES (#{managerId},#{name},#{seats},#{availability}, #{registerDate})
 	</insert>
 	
 	<update id="updateMeetingRoom" parameterType="MeetingRoom">

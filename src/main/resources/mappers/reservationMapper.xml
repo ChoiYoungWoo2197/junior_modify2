@@ -116,8 +116,8 @@
 	</select>
 	
 	<insert id="insertReservation" parameterType="Reservation">
-		INSERT INTO reservation(employee_id, meeting_room_id, meet_purpose, meet_attendess, start_date, end_date, actual_end_date)
-		VALUES (#{employeeId},#{meetingRoomId},#{meetPurpose},#{meetAttendess},#{startDate},#{endDate},#{actualEndDate})
+		INSERT INTO reservation(employee_id, meeting_room_id, meet_purpose, meet_attendess, start_date, end_date, reservation_date, actual_end_date)
+		VALUES (#{employeeId},#{meetingRoomId},#{meetPurpose},#{meetAttendess},#{startDate},#{endDate},#{reservationDate},#{actualEndDate})
 	</insert>
 	
 	<update id="updateReservation" parameterType="Reservation">
