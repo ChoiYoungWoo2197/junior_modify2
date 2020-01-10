@@ -1,6 +1,7 @@
 package kr.or.controller;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class MeetingRoomController {
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(MeetingRoom meetingRoom, String checkTrue) {
-		
+		meetingRoom.setRegisterDate(new Date());
 		meetingRoomService.insertMeetingRoom(meetingRoom);
 		
 		if(!checkTrue.equals("")) {

@@ -58,7 +58,7 @@ $(function() {
 					for(var i=1; i<=res.meetingRoom.seats; i++) {
 						var $meetingRoomSeatsOption;
 						if($("input[name='seats").val() == i) {
-							$meetingRoomSeatsOption = $("<option selected>").attr("value",i).text(i);
+							$meetingRoomSeatsOption = $("<option selected class='font_bold'>").attr("value",i).text(i);
 						} else {
 							$meetingRoomSeatsOption = $("<option>").attr("value",i).text(i);
 						}
@@ -82,7 +82,7 @@ $(function() {
 							var endDateOrigin = new Date(element.endDate);
 							var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
 							
-							var $reservationLi = $("<li>").html(startDate + "~" + endDate + "&ensp;" + element.meetPurpose +"<br>(" + element.employeeName + "("+ element.departmentName + "))" );
+							var $reservationLi = $("<li>").html("<span>"+ startDate + "</span><span>&ensp;~&ensp;</span><span>" + endDate + "</span>&ensp;<span class='overflow_ellipsis'>&ensp;&ensp;" + element.meetPurpose +"</span><br>(" + element.employeeName + "("+ element.departmentName + "))" );
 							$("#reservationList ul").append($reservationLi);
 						})
 					}
@@ -128,7 +128,7 @@ $(function() {
 						var endDateOrigin = new Date(element.endDate);
 						var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
 						
-						var $reservationLi = $("<li>").html(startDate + "~" + endDate + "&ensp;" + element.meetPurpose +"<br>(" + element.employeeName + "("+ element.departmentName + "))" );
+						var $reservationLi = $("<li>").html("<span>"+ startDate + "</span><span>&ensp;~&ensp;</span><span>" + endDate + "</span>&ensp;<span class='overflow_ellipsis'>&ensp;&ensp;" + element.meetPurpose +"</span><br>(" + element.employeeName + "("+ element.departmentName + "))" );
 						$("#reservationList ul").append($reservationLi);
 					})
 				}

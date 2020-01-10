@@ -17,8 +17,8 @@
 	</select>
 	
 	<insert id="insertEquipment" parameterType="Equipment">
-		INSERT INTO equipment(name) 
-		VALUES (#{name})
+		INSERT INTO equipment(name, register_date) 
+		VALUES (#{name}, #{registerDate})
 	</insert>
 	
 	<select id="selectEquipmentById" resultType="Equipment">
