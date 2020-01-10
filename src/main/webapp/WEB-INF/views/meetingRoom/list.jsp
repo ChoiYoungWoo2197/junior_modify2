@@ -81,8 +81,10 @@
 			</c:if>
 		</table>
 		<c:if test="${loginUser.manager eq 'true'}">
-			<button id="insertMeetingRoom">회의실등록</button>
+			<button id="insertMeetingRoom" class="float_right">회의실등록</button>
 		</c:if>
+		
+		<div class="clear_both"></div>
 		
 		<div id="page">
 			<ul class="pagination">
