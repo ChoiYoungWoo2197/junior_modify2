@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +16,11 @@
 			<form id="loginForm" name="loginForm" method="post" action="${pageContext.request.contextPath}/login/check">
 				<div class="login-frame">
 					<div class="login-unit">
-						<img class="login-img" src="../resources/images/loginID.jpg">
+						<img class="login-img" src="${pageContext.request.contextPath}/resources/images/loginID.jpg">
 						<input id="loginId" name="loginId" type="text" placeholder="ID">
 					</div>
 					<div class="login-unit">
-						<img class="login-img" src="../resources/images/loginPw.png">
+						<img class="login-img" src="${pageContext.request.contextPath}/resources/images/loginPw.png">
 						<input id="loginPw" name="loginPw" type="password" placeholder="Password">
 					</div>
 				</div>
