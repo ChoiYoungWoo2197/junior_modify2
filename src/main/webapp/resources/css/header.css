@@ -7,7 +7,6 @@
 	box-sizing: border-box;
 }
 
-
 body {
 	background-color: #f8f9fa;
 }
@@ -90,3 +89,4 @@ input, button, select, img {
 input[type='text'], input[type='search'] {
 	cursor: text;
 }
+

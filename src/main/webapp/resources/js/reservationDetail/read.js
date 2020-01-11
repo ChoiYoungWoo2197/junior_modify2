@@ -16,7 +16,7 @@ $(function() {
 		$("#cancelReservation").click(function() {
 			hide();
 			var td = '<td> <b>취소사유</b></td>';
-			var reason = '<td><input type="text" name="cancelReason" style="width:100%;"/></td>';
+			var reason = '<td class="td_input"><input type="text" name="cancelReason" style="width:100%;"/></td>';
 			var cancel = '<input type="button" id="denyCancel" value="취소"/>';
 			var complete = '<input type="button" id="completeCancel" value="완료"/>';
 			$("#inputForm").append(td).append(reason);
@@ -183,7 +183,7 @@ $(function() {
 		$("#exitCheckReservation").click(function() {
 			hide();
 			var td = '<td> <b>이상유무확인</b></td>';
-			var abnormality = '<td><input type="text" name="abnormality" style="width:100%;"/></td>';
+			var abnormality = '<td class="td_input"><input type="text" name="abnormality" style="width:100%;"/></td>';
 			var cancel = '<input type="button" id="denyExitCheck" value="취소"/>';
 			var complete = '<input type="button" id="completeExitCheck" value="완료"/>';
 			$("#inputForm").append(td).append(abnormality);
@@ -225,7 +225,7 @@ $(function() {
 			var selectEnd = '<select name="exitTimeMinutes" id="exitTimeMinutes"></select>';
 			var spanHour = '<span> : </span>';
 			var spanMinutes = '<span> 분 </span>';
-			var cancel = '<input type="button" id="denyExit" value="취소"/>';
+			var cancel = '<input type="button" id="denyExit"  value="취소"/>';
 			var complete = '<input type="button" id="completeExit" value="완료"/>';
 
 			var startTime= $("input[name='startTime']").val();
@@ -236,6 +236,7 @@ $(function() {
 			
 			
 			$("#inputForm").append(td).append(exitTd);
+			$('#exitTd').addClass('td_input');
 			$('#exitTd').append(selectStart);
 			for (var count = startTimeArray[0]; count <= actualEndTimeArray[0]; count++) {
 				var option = $("<option>" + count + "</option>");
@@ -249,6 +250,46 @@ $(function() {
 			
 			//$("#inputForm").append(spanMinutes);
 			$("#btnDiv").append(cancel).append(complete);
+			$('#btnDiv').addClass('float_right');
+		}
+		
+		function createExtendTag() {
+			var td = '<td><b>종료시각</b></td>';
+			var extendTd = '<td id="extendTd"></td>';
+			var reasonTd = '<td id="reasonTd"><b>연장사유</b></td>';
+			var selectStart = '<select name="extendTimeHours" id="extendTimeHours"></select>';
+			var selectEnd = '<select name="extendTimeMinutes" id="extendTimeMinutes"></select>';
+			var spanHour = '<span> : </span>';
+			var spanMinutes = '<span> 분 </span>';
+			var reason = '<td><input type="text" name="extendReason" style="width:100%;"/></td>';
+			var cancel = '<input type="button" id="denyExtend" value="취소"/>';
+			var complete = '<input type="button" id="completeExtend" value="완료"/>';
+
+			var actualEndTime = $("input[name='actualEndTime']").val().substring(0,2);
+			var limitReservation = $("input[name='limitReservation']").val() == null ? 22 : $("input[name='limitReservation']").val().substring(0,2);
+			
+			$("#inputForm").append(td).append(extendTd);
+			$('#extendTd').addClass('td_input');
+			$('#extendTd').append(selectStart);
+
+			for (var count = actualEndTime; count <= limitReservation; count++) {
+				var option = $("<option>" + count + "</option>");
+				$('#extendTimeHours').append(option);
+			}
+			$('#extendTd').append(spanHour).append(selectEnd);
+			for (var count = 0; count <= 59; count++) {
+				var option = $("<option>" + count + "</option>");
+				$('#extendTimeMinutes').append(option);
+			}
+			
+			if($("input[name='limitReservation']").val() != null) {
+				var label = '<label> 이 후' +$("input[name='limitReservation']").val() +' 예약건이 있습니다. </label>';
+				$('#extendTd').append(label);
+			}
+			
+			$("#reasonForm").append(reasonTd).append(reason);
+			$("#btnDiv").append(cancel).append(complete);
+			$('#btnDiv').addClass('float_right');
 		}
 		
 		function parseDate(strDate) {
@@ -275,43 +316,6 @@ $(function() {
 		    }
 		 
 		    return _dateObj;
-		}
-
-		
-		function createExtendTag() {
-			var td = '<td><b>종료시각</b></td>';
-			var extendTd = '<td id="extendTd"></td>';
-			var reasonTd = '<td id="reasonTd"><b>연장사유</b></td>';
-			var selectStart = '<select name="extendTimeHours" id="extendTimeHours"></select>';
-			var selectEnd = '<select name="extendTimeMinutes" id="extendTimeMinutes"></select>';
-			var spanHour = '<span> : </span>';
-			var spanMinutes = '<span> 분 </span>';
-			var reason = '<td><input type="text" name="extendReason" style="width:100%;"/></td>';
-			var cancel = '<input type="button" id="denyExtend" value="취소"/>';
-			var complete = '<input type="button" id="completeExtend" value="완료"/>';
-
-			var actualEndTime = $("input[name='actualEndTime']").val().substring(0,2);
-			var limitReservation = $("input[name='limitReservation']").val() == null ? 22 : $("input[name='limitReservation']").val().substring(0,2);
-			
-			$("#inputForm").append(td).append(extendTd);
-			$('#extendTd').append(selectStart);
-			for (var count = actualEndTime; count <= limitReservation; count++) {
-				var option = $("<option>" + count + "</option>");
-				$('#extendTimeHours').append(option);
-			}
-			$('#extendTd').append(spanHour).append(selectEnd);
-			for (var count = 0; count <= 59; count++) {
-				var option = $("<option>" + count + "</option>");
-				$('#extendTimeMinutes').append(option);
-			}
-			
-			if($("input[name='limitReservation']").val() != null) {
-				var label = '<label> 이 후' +$("input[name='limitReservation']").val() +' 예약건이 있습니다. </label>';
-				$('#extendTd').append(label);
-			}
-			
-			$("#reasonForm").append(reasonTd).append(reason);
-			$("#btnDiv").append(cancel).append(complete);
 		}
 		
 	})

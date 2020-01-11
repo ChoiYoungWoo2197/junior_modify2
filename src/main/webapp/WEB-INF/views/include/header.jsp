@@ -18,8 +18,9 @@
 	<div class="width1200">
 		<header>
 			<c:if test="${empty loginUser}">
-				<button id="loginButton" class="float_right" type="button"
-					onclick="location.href='${pageContext.request.contextPath}/login/login'">로그인</button>
+				<button id="loginButton" class="float_right" type="button" onclick="location.href='${pageContext.request.contextPath}/login/login'">
+				로그인</button>
+				<%-- <img src="${pageContext.request.contextPath}/resources/images/login-settings-d5d36526fafc0c97402ee5a867f341a2.png"> --%>
 				<div class="clear_both"></div>
 			</c:if>
 			<c:if test="${not empty loginUser}">
@@ -30,7 +31,9 @@
 					<c:if test="${loginUser.manager eq 'false'}">
 						<span>${loginUser.user.name} 님</span>
 					</c:if>
-					<button id="loginButton" class="float_right" type="button" onclick="location.href='${pageContext.request.contextPath}/login/out'">로그아웃</button>
+					<button id="loginButton" class="float_right" type="button" onclick="location.href='${pageContext.request.contextPath}/login/out'">
+					<%-- <img src="${pageContext.request.contextPath}/resources/images/gnome-session-logout-exit-sign-out-quit-log-out-6ad132376351f285c08d5133fd0b1d16.png"> --%>
+					로그아웃</button>
 				</div>
 				<div class="clear_both"></div>
 			</c:if>
