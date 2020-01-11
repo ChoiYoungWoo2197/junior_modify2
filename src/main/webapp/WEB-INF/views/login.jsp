@@ -16,7 +16,7 @@
 			<form id="loginForm" name="loginForm" method="post" action="${pageContext.request.contextPath}/login/check">
 				<div class="login-frame">
 					<div class="login-unit">
-						<img class="login-img" src="${pageContext.request.contextPath}/resources/images/loginID.jpg">
+						<img class="login-img" src="${pageContext.request.contextPath}/resources/images/loginId.png">
 						<input id="loginId" name="loginId" type="text" placeholder="ID">
 					</div>
 					<div class="login-unit">
