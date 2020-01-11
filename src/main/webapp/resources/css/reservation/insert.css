@@ -27,13 +27,13 @@
 .font_bold {
 	font-weight: bold;	
 }
-.overflow_ellipsis {
+/* .overflow_ellipsis {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 300px;
 	display: inline-block;
-}
+} */
 
 table {
 	border-collapse: collapse;

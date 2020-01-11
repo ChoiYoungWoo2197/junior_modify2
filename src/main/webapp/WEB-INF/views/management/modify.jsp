@@ -25,7 +25,7 @@
 </script> -->
 	
 	<section class="width1200">
-		<form id="updateEquipmentForm" method="post" action="/management/modify">
+		<form id="updateManagementForm" method="post" action="/management/modify">
 			<input type="hidden" name="management" value="${management}">
 			<c:if test="${management eq 'equipment'}">
 				<label>장비명</label>

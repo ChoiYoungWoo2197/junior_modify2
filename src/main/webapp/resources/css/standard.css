@@ -31,9 +31,6 @@ input[type='text'], input[type='search'], input[type='date'] {
 	padding: 3px 0;
 	width: 150px;
 }
-button {
-	padding: 3px;
-}
 
 img {
 	width: 30px;

@@ -31,6 +31,9 @@ body {
 .overflow_hidden {
 	overflow: hidden;
 }
+.display_inline {
+	display: inline;
+}
 
 .width1200 {
 	width: 1200px;
@@ -53,6 +56,7 @@ body {
 .text_center {
 	text-align: center;
 }
+
 
 header {
 	padding: 20px 0;
@@ -107,4 +111,12 @@ input[type='button'] {
 	color: white;
 	border: 1px solid gray;
 	border-radius: 3px;
+}
+button {
+	padding: 3px;
+}
+img {
+	width: 30px;
+	height: 30px;
+	padding-right: 5px;
 }

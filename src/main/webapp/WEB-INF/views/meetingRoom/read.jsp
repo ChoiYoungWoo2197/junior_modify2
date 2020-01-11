@@ -9,7 +9,7 @@
 	table {
 		border-collapse: collapse;
 		width: 100%;
-		margin: 20px 0 10px 0;
+		margin: 10px 0;
 	}
 	td, th {
 		border: 1px solid black;
@@ -44,6 +44,9 @@
 </script> -->
 
 	<section class="width1200">
+		<div>
+			<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="listMeetingRoom" class="float_right">
+		</div>
 		<table>
 			<tr>
 				<th>회의실명</th>
@@ -72,7 +75,7 @@
 			</tr>
 		</table>
 		<input type="hidden" name="meetingRoomId" value="${meetingRoom.meetingRoomId}">
-		<button id="listMeetingRoom">목록</button>
+		<!-- <button id="listMeetingRoom">목록</button> -->
 		<c:if test="${loginUser.manager eq 'true'}"> 
 			<div class="float_right">
 				<button id="updateMeetingRoom">수정</button>
