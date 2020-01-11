@@ -1,5 +1,24 @@
 @charset "UTF-8";
 
+/* CSS 공통 부분 */
+.width20 {
+	width: 20%;
+}	
+
+.width100 {
+	width: 100%;
+}	
+
+/* input[type="text"] 지정해준것에 의해서 width속성이 안먹혀서 강제로 먹히게 함. */
+.width100_Important {
+	width: 100% !important;
+}
+
+.width30_Important {
+	width: 30% !important;
+}
+
+
 tr:first-child {
 	border-top: 2px solid black;
 }
@@ -29,18 +48,7 @@ tr:first-child {
 	/* border-right: 1px solid #f8f9fa; */
 }
 
-.width20 {
-	width: 20%;
-}	
 
-.width100 {
-	width: 100%;
-}	
-
-/* input[type="text"] 지정해준것에 의해서 width속성이 안먹혀서 강제로 먹히게 함. */
-.width100_Important {
-	width: 100% !important;
-}
 
 input[type="text"],
 input[type="password"] {
@@ -70,3 +78,10 @@ input[name="email"] {
 	margin-right: 1.5px;
 }	
 	
+#search > input[type="button"] { 
+	padding: 5px 50px;
+}
+ 
+#search > input[type="text"] { 
+	padding: .3em .4em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+} 

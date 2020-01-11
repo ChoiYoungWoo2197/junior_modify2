@@ -3,20 +3,24 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp"%>
 
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/member/insert.css" rel="stylesheet" type="text/css" />
 <script src="${pageContext.request.contextPath}/resources/js/member/list.js" charset="UTF-8" type="text/javascript"></script>
 
 <section class="width1200">
 	<h1>회원 관리</h1>
-	<div>
+	<div id="search">
 		<select name="searchType">
 			<option value="memberId" ${searchCriteria.searchType == 'memberId' ? 'selected' : ''}>사번</option>
 			<option value="name" ${searchCriteria.searchType == 'name' ? 'selected' : ''}>사원명</option>
 			<option value="department" ${searchCriteria.searchType == 'department' ? 'selected' : ''}>부서명</option>
 		</select>
-		<input type="text" name="searchContent" value="${searchCriteria.searchContent}">
-		<button id="searchEquipment">검색</button>
-		<button id="AllMeetingRoom">전체보기</button>
+		<input class="width30_Important" type="text" name="searchContent" value="${searchCriteria.searchContent}">
+		<input type="button" id="searchEquipment" name="searchEquipment" value="검색">
+		<input type="button" id="AllMeetingRoom" name="AllMeetingRoom" value="전체보기">
+<!-- 		<button id="searchEquipment">검색</button>
+		<button id="AllMeetingRoom">전체보기</button> -->
 	</div>
 	<table>
 		<tr>
@@ -50,7 +54,13 @@
 		
 
 	</table>
-	<button id="insertMember">회원등록</button>
+	
+	<div class="float_right">
+		<input type="button" id="insertMember" name="insertMember" value="회원등록">
+		<div class="clear_both"></div>
+	</div>
+	
+	<!-- <button id="insertMember">회원등록</button> -->
 
 	<div id="page">
 		<ul class="pagination">
