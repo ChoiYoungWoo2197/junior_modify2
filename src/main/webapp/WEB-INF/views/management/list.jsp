@@ -85,10 +85,14 @@
 		</c:if>
 		
 		<h1>${title}관리</h1>
-		<div>
-			<input type="search" name="searchContent" value="${searchCriteria.searchContent}">
-			<button id="searchManagement">검색</button>
-			<button id="AllManagement">전체보기</button>
+		<div class="overflow_hidden">
+			<div class="float_left">
+				<input type="search" name="searchContent" value="${searchCriteria.searchContent}">&nbsp;
+			</div>
+			<!-- <button id="searchManagement">검색</button> -->
+			<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchManagement" class="float_left">
+			<!-- <button id="AllManagement">전체보기</button> -->
+			<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="AllManagement" class="float_right">
 		</div>
 		<c:if test="${management eq 'equipment'}">
 			<table>

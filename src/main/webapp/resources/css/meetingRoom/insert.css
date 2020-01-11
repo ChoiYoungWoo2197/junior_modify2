@@ -3,6 +3,10 @@
 	color: red;
 	font-size: 14px;
 }
+span {
+	display: block;
+	padding-left: 10px;
+}
 form {
 	margin-top: 10px;
 }

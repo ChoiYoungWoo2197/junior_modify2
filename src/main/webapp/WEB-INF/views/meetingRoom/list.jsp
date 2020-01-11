@@ -33,14 +33,18 @@
 </script> -->
 	<section class="width1200">
 		<h1>회의실관리</h1>
-		<div>
-			<select name="searchType">
-				<option value="meetingRoom" ${searchCriteria.searchType == 'meetingRoom' ? 'selected' : ''}>회의실</option>
-				<option value="equipment" ${searchCriteria.searchType == 'equipment' ? 'selected' : ''}>지원장비</option>
-			</select>
-			<input type="search" name="searchContent" value="${searchCriteria.searchContent}">
-			<button id="searchEquipment">검색</button>
-			<button id="allMeetingRoom">전체보기</button>
+		<div class="overflow_hidden">
+			<div class="float_left">
+				<select name="searchType">
+					<option value="meetingRoom" ${searchCriteria.searchType == 'meetingRoom' ? 'selected' : ''}>회의실</option>
+					<option value="equipment" ${searchCriteria.searchType == 'equipment' ? 'selected' : ''}>지원장비</option>
+				</select>
+				<input type="search" name="searchContent" value="${searchCriteria.searchContent}">&nbsp;
+			</div>
+			<!-- <button id="searchEquipment">검색</button> -->
+			<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchManagement" class="float_left">
+			<!-- <button id="allMeetingRoom">전체보기</button> -->
+			<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allMeetingRoom" class="float_right">
 		</div>
 		<table>
 			<tr>

@@ -28,6 +28,10 @@ body {
 	display: none;
 }
 
+.overflow_hidden {
+	overflow: hidden;
+}
+
 .width1200 {
 	width: 1200px;
 	margin: 0 auto;
@@ -87,6 +91,20 @@ input, button, select, img {
 	cursor: pointer;
 }
 
-input[type='text'], input[type='search'] {
+input[type='text'], input[type='search'], input[type='password'] {
 	cursor: text;
+}
+
+input[type='submit'], button {
+	background-color: #563d7c;
+	color: white;
+	border: 1px solid #563d7c;
+	border-radius: 3px;
+}
+
+input[type='button'] {
+	background-color: gray;
+	color: white;
+	border: 1px solid gray;
+	border-radius: 3px;
 }

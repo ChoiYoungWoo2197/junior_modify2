@@ -19,7 +19,7 @@ th {
 table {
 	border-collapse: collapse;
 	width: 100%;
-	margin: 10px 0;
+	margin: 5px 0;
 }
 
 input[type='text'], input[type='search'], input[type='date'], select {
@@ -35,6 +35,11 @@ button {
 	padding: 3px;
 }
 
+img {
+	width: 30px;
+	height: 30px;
+	padding-right: 5px;
+}
 
 
 
