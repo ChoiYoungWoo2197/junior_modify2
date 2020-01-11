@@ -1,5 +1,6 @@
 	$(function() {
 		$("#sendReMail").click(function() {
+				
 			$("input[name='authKey']").val("");
 			$.ajax({
 				url : "/mail/request",
@@ -7,6 +8,7 @@
 				cache: false,
 				data : {"mail" : $("input[name='mail']").val()},
 				dataType : "text",
+				async: false, //비동기를 동기형식으로 변경
 				success : function(res) {
 					console.log(res);
 					if(res == "true") {
@@ -17,6 +19,9 @@
 					}
 				}
 			})
+			//이메일 재발송 클릭시 비활성가 되어있다면 메일전송후 활성화로 바꿔준다.
+			$('#sendReMail').attr('disabled',false);  //버튼 활성화
+			
 		})
 		
 		$("#cancel").click(function() {
@@ -25,4 +30,5 @@
 			}
 			
 		})
+		
 	})

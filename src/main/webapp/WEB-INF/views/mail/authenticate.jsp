@@ -50,7 +50,7 @@ table, th, td {
 					<td><b>인증번호</b></td>
 					<td colspan="2">
 					<input name="authKey" type="text" size="30" value="" />
-					<input 	type="button" id="sendReMail" value="인증메일 재발송"></td>
+					<input 	type="button" id="sendReMail" onClick="this.disabled=true;" value="인증메일 재발송"></td>
 				</tr>
 			</table>
 			<input type="button" id="cancel" value="취소" />

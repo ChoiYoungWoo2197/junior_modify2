@@ -228,10 +228,16 @@ $(function() {
 			var cancel = '<input type="button" id="denyExit" value="취소"/>';
 			var complete = '<input type="button" id="completeExit" value="완료"/>';
 
-
+			var startTime= $("input[name='startTime']").val();
+			var startTimeArray = startTime.split(':');
+			var actualEndTime = $("input[name='actualEndTime']").val();
+			var actualEndTimeArray = actualEndTime.split(':');
+			//alert(startTimeArray[0] + " : " + actualEndTimeArray[0]);
+			
+			
 			$("#inputForm").append(td).append(exitTd);
 			$('#exitTd').append(selectStart);
-			for (var count = 9; count <= 22; count++) {
+			for (var count = startTimeArray[0]; count <= actualEndTimeArray[0]; count++) {
 				var option = $("<option>" + count + "</option>");
 				$('#exitTimeHours').append(option);
 			}
