@@ -162,7 +162,7 @@ public class MemberController {
 			employeeService.deleteManager(employee.getEmployeeId());
 		}
 		
-		return "/member/list";
+		return  "redirect:/member/list";
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)

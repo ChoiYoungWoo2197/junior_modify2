@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp"%>
-<link href="${pageContext.request.contextPath}/resources/css/member/modify.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/member/insert.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/member/read.js"></script>
 
 
@@ -14,7 +16,7 @@
 			<td>
 				<b>No.</b>
 			</td>
-			<td colspan="2">
+			<td class="td_input" colspan="2">
 				<span>${employeeDetail.employeeId}</span>
 			</td>
 		</tr>
@@ -22,7 +24,7 @@
 			<td id="name">
 				<b>이름</b>
 			</td>
-			<td colspan="2">
+			<td class="td_input" colspan="2">
 				<span>${employeeDetail.name}</span>
 			</td>
 		</tr>
@@ -30,7 +32,7 @@
 			<td>
 				<b>사원번호</b>
 			</td>
-			<td colspan="2">
+			<td class="td_input" colspan="2">
 				<span>${employeeDetail.memberId}</span>
 			</td>
 		</tr>
@@ -38,7 +40,7 @@
 			<td>
 				<b>부서</b>
 			</td>
-			<td colspan="2">
+			<td class="td_input" colspan="2">
 				<span>${employeeDetail.departmentId}</span>
 			</td>
 		</tr>
@@ -46,7 +48,7 @@
 			<td>
 				<b>승인여부</b>
 			</td>
-			<td colspan="2">
+			<td class="td_input" colspan="2">
 				<span>${employeeDetail.state}</span>
 			</td>
 		</tr>
@@ -54,7 +56,7 @@
 			<td>
 				<b>관리자권한</b>
 			</td>
-			<td colspan="2">
+			<td class="td_input" colspan="2">
 				<span>${managerType}</span>
 			</td>
 		</tr>
@@ -62,7 +64,7 @@
 			<td>
 				<b>이메일</b>
 			</td>
-			<td colspan="2">
+			<td class="td_input" colspan="2">
 				<span>${employeeDetail.email}</span>
 			</td>
 		</tr>
@@ -70,7 +72,7 @@
 			<td>
 				<b>전화번호</b>
 			</td>
-			<td colspan="2">
+			<td class="td_input" colspan="2">
 				<span>${employeeDetail.phone}</span>
 			</td>
 		</tr>
@@ -79,9 +81,16 @@
 
 	<input type="hidden" name="name" value="${employeeDetail.name}">
 	<input type="hidden" name="memberId" value="${employeeDetail.memberId}">
-	<button id="list">목록</button>
-	<button id="update">수정</button>
-	<button id="delete">삭제</button>
+	<div  class="float_right">
+		<input type="button" id="list" name="list" value="목록">
+		<input type="button" id="update" name="update" value="수정">
+		<input type="button" id="delete" name="delete" value="삭제">
+<!-- 		<button id="list">목록</button>
+		<button id="update">수정</button>
+		<button id="delete">삭제</button> -->
+		<div class="clear_both"></div>
+	</div>
+
 </section>
 </body>
 </html>
