@@ -83,12 +83,13 @@ input[type='text'], select[name='meetingRoomId'], select[name='meetAttendess'] {
 	overflow-x:hidden; 
 	overflow-y:auto; 
 	height: 100px;
-	width: 96%;
+	width: 98%;
 	margin: 0 auto;
 	padding: 5px 5px 5px 10px;
 }
 #reservationList li {
 	margin-bottom: 5px;
+	list-style: none;
 }
 #reservationList li > span {
 	float: left;

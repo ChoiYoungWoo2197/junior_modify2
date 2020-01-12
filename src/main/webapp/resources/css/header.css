@@ -89,6 +89,11 @@ section {
 	padding-top: 30px;
 }
 
+h1 {
+	text-align: center;
+	padding-bottom: 20px;
+}
+
 /*--*/
 input, button, select, img {
 	cursor: pointer;
@@ -120,7 +125,4 @@ img {
 	width: 30px;
 	height: 30px;
 	padding-right: 5px;
-}
-h1 {
-	text-align: center;
 }

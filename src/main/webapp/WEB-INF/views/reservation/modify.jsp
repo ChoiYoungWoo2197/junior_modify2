@@ -6,6 +6,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reservation/modify.js"></script>
 
 <section class="width1300">
+	<h1>예약 수정</h1>
 	<form id="updateReservationForm" method="post" action="/reservation/update">
 		<div class="color_red float_right">* 필수입력</div>
 		<div class="clear_both"></div>
@@ -146,7 +147,7 @@
 		<input type="hidden" name="reservationId" value="${reservation.reservationId}">
 		<input type="hidden" name="choiceDay">
 		<div class="float_right">
-			<input type="submit" value="예약수정">
+			<input type="submit" value="수정">
 			<input type="button" value="취소" id="readReservation">
 		</div>
 	</form>

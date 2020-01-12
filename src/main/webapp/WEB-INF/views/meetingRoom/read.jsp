@@ -1,49 +1,12 @@
-</html><%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
-<style>
-	.color_red {
-		color: red;
-		font-size: 14px;
-	}
-	table {
-		border-collapse: collapse;
-		width: 100%;
-		margin: 10px 0;
-	}
-	td, th {
-		border: 1px solid black;
-		padding: 5px;
-	}
-	td {
-		padding-left: 20px;
-		width: 70%;
-	}
-</style>
+
+<link href="${pageContext.request.contextPath}/resources/css/meetingRoom/read.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/read.js"></script>
-<!-- <script>
-	$(function() {
-		$("#listMeetingRoom").click(function() {
-			location.href = "list";
-		})
-		
-		$("#updateMeetingRoom").click(function() {
-			var meetingRoomId = Number($("input[name=meetingRoomId]").val());
-			location.href = "modify?meetingRoomId="+meetingRoomId;
-		})
-		
-		$("#deleteMeetingRoom").click(function() {
-			var result = confirm($("#meetingRoomName").text()+"회의실을 삭제하시겠습니까?");
-			
-			if(result == true) {
-				var meetingRoomId = Number($("input[name=meetingRoomId]").val());
-				location.href = "delete?meetingRoomId="+meetingRoomId;
-			}
-		})
-	})
-</script> -->
 
 	<section class="width1200">
+		<h1>회의실 상세내역</h1>
 		<div>
 			<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="listMeetingRoom" class="float_right">
 		</div>

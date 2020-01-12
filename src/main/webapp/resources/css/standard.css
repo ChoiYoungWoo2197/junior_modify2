@@ -22,16 +22,17 @@ table {
 	margin: 5px 0;
 }
 
-input[type='text'], input[type='search'], input[type='date'], select {
+input[type='text'], input[type='search'], input[type='date'], input[type='password'], select {
 	padding: 3px 0;
 	border-radius: 3px;
 	border: 1px solid rgb(169,169,169);
 }
-input[type='text'], input[type='search'], input[type='date'] {
-	padding: 3px 0;
+input[type='text'], input[type='date'] {
 	width: 150px;
 }
-
+input[type='search'] {
+	width: 200px;
+}
 
 
 /* ----- 페이지 ----- */

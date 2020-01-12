@@ -11,8 +11,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reservationDetail/read.js"></script>
 
 <section class="width1200">
-	<h3>예약 상세보기</h3>
-	<br>
+	<h1>예약 상세보기</h1>
 	<form name="reservationDetailForm" id="reservationDetailForm" method="post">
 		<table>
 			<tr>

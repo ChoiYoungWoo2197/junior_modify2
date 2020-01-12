@@ -6,7 +6,7 @@
 
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/management/list.js"></script>
-
+	
 <section class="width1200">
 	<c:if test="${management eq 'equipment'}">
 		<c:set var="title" value="장비"/>
@@ -54,7 +54,7 @@
 					<tr class="updateManagement">
 						<td class="readManagement" data-managementId="${equipment.equipmentId}">${listIndex}</td>
 						<c:set var="listIndex" value="${listIndex-1}"/>
-						<td>${equipment.name}</td>
+						<td class="managementName">${equipment.name}</td>
 						<td><fmt:formatDate value="${equipment.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
 						<td class="noEvent"><button class="deleteManagement" data-managementId="${equipment.equipmentId}">삭제</button></td>
 					</tr>
@@ -94,7 +94,7 @@
 					<tr class="updateManagement">
 						<td class="readManagement"  data-managementId="${department.departmentId}">${listIndex}</td>
 						<c:set var="listIndex" value="${listIndex-1}"/>
-						<td>${department.name}</td>
+						<td class="managementName">${department.name}</td>
 						<td>${department.emoloyeeCount}명</td>
 						<td><fmt:formatDate value="${department.registerDate}" pattern="yyyy.MM.dd kk:mm"/></td>
 						<td class="noEvent"><button class="deleteManagement" data-managementId="${department.departmentId}">삭제</button></td>
@@ -112,6 +112,35 @@
 		<input type="hidden" name="management" value="${management}">
 	</form>
 	
+	<form id="insertManagementForm" method="post" action="/management/insert" class="display_none">
+		<input type="hidden" name="management" value="${management}">
+		<c:if test="${management eq 'equipment'}">
+			<label>장비명</label>
+		</c:if>
+		<c:if test="${management eq 'department'}">
+			<label>부서명</label>
+		</c:if>
+		<input type="text" name="name">
+		<input type="submit" value="등록">
+		<input type="button" value="취소" id="cancelInsertManagement">
+	</form>
+	
+	<form id="updateManagementForm" method="post" action="/management/modify" class="display_none">
+		<input type="hidden" name="management" value="${management}">
+		<c:if test="${management eq 'equipment'}">
+			<label>장비명</label>
+			<input type="hidden" name="equipmentId" value="${equipment.equipmentId}">
+			<input type="text" name="name" value="${equipment.name}">
+		</c:if>
+		<c:if test="${management eq 'department'}">
+			<label>부서명</label>
+			<input type="hidden" name="departmentId" value="${department.departmentId}">
+			<input type="text" name="name" value="${department.name}">
+		</c:if>
+		<input type="submit" value="수정">
+		<input type="button" value="취소" id="cancelUpdateManagement">
+	</form>
+
 	<div id="page">
 		<ul class="pagination">
 			<c:if test="${page.prev}">

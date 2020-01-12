@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>memberRegister test</title>
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/member/insert.css" rel="stylesheet" type="text/css" />
 
@@ -36,8 +35,8 @@
 						<b>사번</b><b class="red">*</b>
 					</td>
 					<td class="td_input td_border_hide">
-						<input name="memberId" type="text" size="20" placeholder=" 사원번호는 영문,숫자 조합입니다." />
-						<input class="float_right" type="button" onclick="checkId()" value="중복체크">	
+						<input name="memberId" type="text" placeholder=" 사원번호는 영문,숫자 조합입니다." />
+						<input type="button" onclick="checkId()" value="중복체크">	
 						<div class="clear_both"></div>				
 						<div>
 						<span id="valideId" class="error">사원번호를 입력하세요.</span>
@@ -53,7 +52,7 @@
 						<b>사원명</b><b class="red">*</b>
 					</td>
 					<td class="td_input td_border_hide">
-						<input name="name" type="text" size="20" placeholder=" 이름은 한글만 입력해주세요."/>
+						<input name="name" type="text" placeholder=" 이름은 한글만 입력해주세요."/>
 						<div>
 						<span id="valideName" class="error">이름을 입력하세요.</span>
 						</div>
@@ -109,7 +108,7 @@
 					</td>
 					<td class="td_input td_border_hide ">
 						<input name="email" type="text" size="20" placeholder=" 예)abc@naver.com"/>
-						<input class="float_right" type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크">
+						<input type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크">
 						<div class="float_right"></div>
 						<div>
 						<span id="valideEmail" class="error">이메일을 입력하세요.</span>
@@ -157,11 +156,13 @@
 				<div class="float_right">
 					<c:if test="${empty loginUser}">
 						<input type="submit" value="회원가입" />
+						<input type="button" value="취소" class="listMember">
 					</c:if>
 					<c:if test="${not empty loginUser}">
 						<c:if test="${loginUser.manager eq 'true'}">
 							<input type="hidden" id="manager" name="manager" value="${loginUser.manager}"> 
-							<input type="submit" value="회원등록" />
+							<input type="submit" value="등록" />
+							<input type="button" value="취소" class="listMember">
 						</c:if>
 					</c:if>
 				</div>

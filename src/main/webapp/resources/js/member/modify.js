@@ -217,5 +217,7 @@
 	
 	function memberList() {
 		//alert("list");
-		window.location.href = "/member/list";
+		//window.location.href = "/member/list";
+		var memberId = $("input[name='modifyMemberId']").val();
+		location.href = "read?memberId=" + memberId;
 	}

@@ -3,7 +3,7 @@ $(function() {
 		location.href = "/member/insert";
 	})
 
-	$("#searchEquipment").click(function() {
+	$("#searchMember").click(function() {
 		if ($("input[name='searchContent']").val() == "") {
 			alert("검색할 내용을 입력해주세요.");
 			return false;
@@ -24,7 +24,7 @@ $(function() {
 		location.href = "read?memberId=" + memberId;
 	})
 
-	$("#AllMeetingRoom").click(function() {
+	$("#allMember").click(function() {
 		location.href = "list";
 	})
 

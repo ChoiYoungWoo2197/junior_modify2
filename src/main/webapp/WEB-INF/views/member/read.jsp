@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp"%>
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/member/insert.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/member/read.js"></script>
@@ -11,6 +10,7 @@
 
 <section class="width1200">
 	<h1>회원 상세내역</h1>
+	<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="list" class="float_right">
 	<table>
 		<tr>
 			<td>
@@ -82,9 +82,11 @@
 	<input type="hidden" name="name" value="${employeeDetail.name}">
 	<input type="hidden" name="memberId" value="${employeeDetail.memberId}">
 	<div  class="float_right">
-		<input type="button" id="list" name="list" value="목록">
-		<input type="button" id="update" name="update" value="수정">
-		<input type="button" id="delete" name="delete" value="삭제">
+		<!-- <input type="button" id="list" name="list" value="목록"> -->
+		<!-- <input type="button" id="update" name="update" value="수정">
+		<input type="button" id="delete" name="delete" value="삭제"> -->
+		<button id="update">수정</button>
+		<button id="delete">삭제</button>
 <!-- 		<button id="list">목록</button>
 		<button id="update">수정</button>
 		<button id="delete">삭제</button> -->

@@ -6,6 +6,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/insert.js"></script>
 
 <section class="width1200">
+	<h1>회의실 등록</h1>
 	<form id="insertMeetingRoomForm" method="post" action="/meetingRoom/insert">
 		<div class="color_red float_right">* 필수입력</div>
 		<div class="clear_both"></div>

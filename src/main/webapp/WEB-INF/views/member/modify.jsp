@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>memberRegister test</title>
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/member/insert.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -17,8 +16,7 @@
 </head>
 <body>
 	<section class="width1200">
-		<h3>회원 수정</h3>
-		<br>
+		<h1>회원 수정</h1>
 		<form name="memberForm"  method="post"	onsubmit="return check()">
 			<table>
 				<tr>
@@ -117,8 +115,8 @@
 			<input type="hidden" id="managerType" name="managerType" value="${managerType}"> 
 			<input type="hidden" id="originalMemberId" name="originalMemberId" value="${employeeModify.memberId}"> 
 			<div class="float_right">
-				<input type="button" value="목록" onclick="memberList()">
-				<input type="submit" value="수정하기" />
+				<input type="submit" value="수정" />
+				<input type="button" value="취소" onclick="memberList()">
 			</div>
 			<div class="clear_both"></div>
 			

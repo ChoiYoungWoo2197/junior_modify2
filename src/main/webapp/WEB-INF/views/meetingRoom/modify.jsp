@@ -6,6 +6,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/modify.js"></script>
 
 <section class="width1200">
+	<h1>회의실 수정</h1>
 	<form id="updateMeetingRoomForm" method="post" action="/meetingRoom/modify">
 		<div class="color_red float_right">* 필수입력</div>
 		<div class="clear_both"></div>

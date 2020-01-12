@@ -229,3 +229,9 @@
 		}
 
 	}
+
+	$(function() {
+		$(".listMember").click(function() {
+			location.href = "list";
+		})
+	})

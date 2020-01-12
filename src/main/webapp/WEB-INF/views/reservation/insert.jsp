@@ -6,6 +6,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reservation/insert.js"></script>
 
 <section class="width1300">
+	<h1>예약 등록</h1>
 	<form id="insertReservationForm" method="post" action="/reservation/insert">
 		<div class="color_red float_right">* 필수입력</div>
 		<div class="clear_both"></div>

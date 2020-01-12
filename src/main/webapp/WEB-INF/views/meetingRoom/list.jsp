@@ -5,34 +5,8 @@
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/list.js"></script>
 
-<!-- <script>
-	$(function() {
-		$("#insertMeetingRoom").click(function() {
-			location.href = "insert";
-		})
-		
-		$(document).on("click", ".updateMeetingRoom", function(){
-			var meetingRoomId = Number($(this).find(".readMeetingRoom").attr("data-meetingRoomId"));
-			
-			location.href = "read?meetingRoomId="+meetingRoomId;
-		})
-		
-		$("#searchEquipment").click(function() {
-			if($("input[name='searchContent']").val()=="") {
-				alert("검색할 내용을 입력해주세요.");
-				return false;
-			}
-			
-			location.href = "list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();
-		})
-		
-		$("#allMeetingRoom").click(function() {
-			location.href = "list";
-		})
-	})
-</script> -->
 	<section class="width1200">
-		<h1>회의실관리</h1>
+		<h1>회의실 관리</h1>
 		<div class="overflow_hidden">
 			<div class="float_left">
 				<select name="searchType">
