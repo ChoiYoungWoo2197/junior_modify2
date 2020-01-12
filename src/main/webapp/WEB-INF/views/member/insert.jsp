@@ -37,7 +37,8 @@
 					</td>
 					<td class="td_input td_border_hide">
 						<input name="memberId" type="text" size="20" placeholder=" 사원번호는 영문,숫자 조합입니다." />
-						<input type="button" onclick="checkId()" value="중복체크">					
+						<input class="float_right" type="button" onclick="checkId()" value="중복체크">	
+						<div class="clear_both"></div>				
 						<div>
 						<span id="valideId" class="error">사원번호를 입력하세요.</span>
 						<span id="checkIdSuccess" class="success">사용가능한 사원번호 입니다.</span>
@@ -108,7 +109,8 @@
 					</td>
 					<td class="td_input td_border_hide ">
 						<input name="email" type="text" size="20" placeholder=" 예)abc@naver.com"/>
-						<input type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크">
+						<input class="float_right" type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크">
+						<div class="float_right"></div>
 						<div>
 						<span id="valideEmail" class="error">이메일을 입력하세요.</span>
 						<span id="checkEmailSuccess" class="success">사용가능한 이메일 입니다.</span>

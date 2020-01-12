@@ -46,7 +46,7 @@ input[type='submit'], input[type='button'] {
 	width: 85%; /* 원하는 너비 설정 */
 	height: auto; /* 높이값 초기화 */
 	line-height: normal; /* line-height 초기화 */
-	padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+	padding: 10px 10px; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
 	font-family: inherit; /* 폰트 상속 */
 	border: 1px solid #999;
 	border-radius: 0; /* iSO 둥근모서리 제거 */

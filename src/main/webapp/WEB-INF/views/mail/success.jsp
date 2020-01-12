@@ -8,38 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>success</title>
-<style>
-*, ::after, ::before {
-   box-sizing: border-box;
-}
-
-.main-page {
-   position: absolute;
-   left: 50%;
-   top: 50%;
-   margin: -145px 0 0 -160px;
-}
-
-.main-page-unit {
-   position: relative;
-   width: 320px;
-   
-}
-
-.login-btn {
-   margin: 20px 0 0;
-   width: 100%;
-   height: 48px;
-   font-family : sans-serif;
-   font-size: 16px;
-   color: #404040;
-   background-color: #e0e0e0;
-   border-radius: 12px;/* 버튼 테두리를 둥글게 */
-   border : 2px;
-   border-color:  #e0e0e0;
-}
-</style>
-
+<link href="${pageContext.request.contextPath}/resources/css/mail/authenticate.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mail/success.js"></script>
 
@@ -56,7 +26,8 @@
 
 		<section class="main-page-unit">
 			<form id="loginForm" name="loginForm" method="post"	action="${pageContext.request.contextPath}/login/check">
-				<button type="submit" class="login-btn">로그인</button>
+				<input type="submit" class="login-btn" value="로그인" />
+				<!-- <button type="submit" >로그인</button> -->
 			</form>
 		</section>
 	</main>
