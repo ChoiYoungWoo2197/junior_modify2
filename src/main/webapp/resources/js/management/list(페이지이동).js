@@ -1,7 +1,6 @@
 $(function() {
 	$("#insertManagement").click(function() {
-		$("#updateManagementForm").addClass("display_none");
-		$("#insertManagementForm").removeClass("display_none");
+		location.href = "insert?management="+$("input[name=management]").val();
 	})
 	
 	$("table tr").each(function() {
@@ -44,17 +43,11 @@ $(function() {
 	
 	$(document).on("click", ".updateManagement", function(){
 		var managementId = Number($(this).find(".readManagement").attr("data-managementId"));
-		var managementName = $(this).find(".managementName").text();
-		var management = $("input[name='management']").val();
 		
-		$("#insertManagementForm").addClass("display_none");
-		$("#updateManagementForm").removeClass("display_none");
-
-		$("input[name='name']").val(managementName);
-		if(management == 'department') {
-			$("input[name='departmentId']").val(managementId);
-		}else {
-			$("input[name='equipmentId']").val(managementId);
+		var result = confirm("수정하시겠습니까?");
+		
+		if(result == true) { 
+			location.href = "modify?management="+$("input[name=management]").val()+"&managementId="+managementId;
 		}
 		
 	})
@@ -70,30 +63,5 @@ $(function() {
 	
 	$("#AllManagement").click(function() {
 		location.href = "list?management="+$("input[name=management]").val();
-	})
-	
-	$("#insertManagementForm").submit(function() {
-		if($("input[name='name']").val()=="") {
-			alert("등록할 이름을 적어주세요.");
-			return false;
-		}
-	})
-	
-	$("#cancelInsertManagement").click(function() {
-		$("input[name='name']").val("");
-		$("#insertManagementForm").addClass("display_none");
-	})
-	
-	$("#updateManagementForm").submit(function() {
-		var result = confirm("수정하시겠습니까?");
-		
-		if(result == false) {
-			return false;
-		}
-	})
-	
-	$("#cancelUpdateManagement").click(function() {
-		$("input[name='name']").val("");
-		$("#updateManagementForm").addClass("display_none");
 	})
 })

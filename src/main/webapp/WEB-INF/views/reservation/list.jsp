@@ -4,14 +4,6 @@
 
 <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
 
-<style>
-	img {
-		width: 30px;
-		height: 30px;
-		padding-right: 5px;
-	}
-</style>
-
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -21,40 +13,44 @@
 
 <section class="width1300">
 	<h1>예약현황</h1>
-	<div>
-		<label class="float_left">사용일&nbsp;</label>
-		<input type="text" name="searchDate" id="searchStart" value="${searchCriteria.searchStart}" class="float_left">
-		<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="startImg" class="float_left"> 
-		<span class="float_left">~&nbsp;</span> 
-		<input type="text" name="searchDate" id="searchEnd" value="${searchCriteria.searchEnd}" class="float_left">
-		<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="endImg" class="float_left">
-		<select name="state">
-			<option value="none">상태</option>
-			<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약(진행중)</option>
-			<option value="RC" ${searchCriteria.state == 'RC' ? 'selected' : ''}>예약취소</option>
-			<option value="E" ${searchCriteria.state == 'E' ? 'selected' : ''}>연장</option>
-			<option value="F" ${searchCriteria.state == 'F' ? 'selected' : ''}>종료</option>
-			<option value="FV" ${searchCriteria.state == 'FV' ? 'selected' : ''}>종료확인</option>
-		</select>
-		<select name="meetingRoomId">
-			<option value="0">회의실</option>
-			<c:forEach var="meetingRoom" items="${meetingRoomList}">
-				<c:if test="${meetingRoom.meetingRoomId == searchCriteria.meetingRoomId}">
-					<option value="${meetingRoom.meetingRoomId}" selected="selected">${meetingRoom.name}</option>
-				</c:if>
-				<c:if test="${meetingRoom.meetingRoomId != searchCriteria.meetingRoomId}">
-					<option value="${meetingRoom.meetingRoomId}">${meetingRoom.name}</option>
-				</c:if>
-			</c:forEach>
-		</select>
-		<select name="searchType">
-			<option value="department" ${searchCriteria.searchType == 'department' ? 'selected':''}>부서</option>
-			<option value="employee" ${searchCriteria.searchType == 'employee' ? 'selected':''}>신청자</option>
-			<option value="meetPurpose" ${searchCriteria.searchType == 'meetPurpose' ? 'selected':''}>회의목적</option>
-		</select>
-		<input type="search" name="searchContent" value="${searchCriteria.searchContent}">
-		<button id="searchReservation">검색</button>
-		<button id="allReservation">전체보기</button>
+	<div class="overflow_hidden">
+		<div class="float_left">
+			<label class="float_left">사용일&nbsp;</label>
+			<input type="text" name="searchDate" id="searchStart" value="${searchCriteria.searchStart}" class="float_left">
+			<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="startImg" class="float_left"> 
+			<span class="float_left">~&nbsp;</span> 
+			<input type="text" name="searchDate" id="searchEnd" value="${searchCriteria.searchEnd}" class="float_left">
+			<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="endImg" class="float_left">
+			<select name="state">
+				<option value="none">상태</option>
+				<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약(진행중)</option>
+				<option value="RC" ${searchCriteria.state == 'RC' ? 'selected' : ''}>예약취소</option>
+				<option value="E" ${searchCriteria.state == 'E' ? 'selected' : ''}>연장</option>
+				<option value="F" ${searchCriteria.state == 'F' ? 'selected' : ''}>종료</option>
+				<option value="FV" ${searchCriteria.state == 'FV' ? 'selected' : ''}>종료확인</option>
+			</select>
+			<select name="meetingRoomId">
+				<option value="0">회의실</option>
+				<c:forEach var="meetingRoom" items="${meetingRoomList}">
+					<c:if test="${meetingRoom.meetingRoomId == searchCriteria.meetingRoomId}">
+						<option value="${meetingRoom.meetingRoomId}" selected="selected">${meetingRoom.name}</option>
+					</c:if>
+					<c:if test="${meetingRoom.meetingRoomId != searchCriteria.meetingRoomId}">
+						<option value="${meetingRoom.meetingRoomId}">${meetingRoom.name}</option>
+					</c:if>
+				</c:forEach>
+			</select>
+			<select name="searchType">
+				<option value="department" ${searchCriteria.searchType == 'department' ? 'selected':''}>부서</option>
+				<option value="employee" ${searchCriteria.searchType == 'employee' ? 'selected':''}>신청자</option>
+				<option value="meetPurpose" ${searchCriteria.searchType == 'meetPurpose' ? 'selected':''}>회의목적</option>
+			</select>
+			<input type="search" name="searchContent" value="${searchCriteria.searchContent}">&nbsp;
+		</div>
+		<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchReservation" class="float_left">
+		<!-- <button id="searchReservation">검색</button> -->
+		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allReservation" class="float_right">
+		<!-- <button id="allReservation">전체보기</button> -->
 	</div>
 	<table>
 		<tr>

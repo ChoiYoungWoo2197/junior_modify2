@@ -7,7 +7,6 @@
 
 <section class="width1300">
 	<form id="insertReservationForm" method="post" action="/reservation/insert">
-		<%-- <img src="${pageContext.request.contextPath}/resources/images/list.png" id="listReservation" class="float_right"> --%>
 		<div class="color_red float_right">* 필수입력</div>
 		<div class="clear_both"></div>
 		<div class="width15 float_left">
@@ -113,12 +112,14 @@
 			</div>
 		</div>
 		<div class="clear_both"></div>
-		<input type="button" value="목록" id="listReservation" class="float_left">
 		<input type="hidden" name="start">
 		<input type="hidden" name="end">
 		<input type="hidden" name="employeeId" value="${loginUser.user.employeeId}">
 		<input type="hidden" name="choiceDay">
-		<input type="submit" value="예약등록" class="float_right">
+		<div class="float_right">
+			<input type="submit" value="등록">
+			<input type="button" value="취소" id="listReservation">
+		</div>
 	</form>
 </section>
 </body>

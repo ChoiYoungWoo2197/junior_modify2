@@ -12,7 +12,7 @@
 		<table>
 			<tr>
 				<td>
-					<label>회의실명 <span class="color_red">*</span></label>
+					<label>회의실명 <span class="color_red display_inline">*</span></label>
 				</td>
 				<td>
 					<input type="text" name="name" placeholder="회의실명을 입력해주세요.">
@@ -21,7 +21,7 @@
 			</tr>
 			<tr>
 				<td>
-					<label>좌석수 <span class="color_red">*</span></label>
+					<label>좌석수 <span class="color_red display_inline">*</span></label>
 				</td>
 				<td>
 					<input type="text" name="seats" placeholder="좌석수를 입력해주세요.">
@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<td>
-					<label>예약가능여부 <span class="color_red">*</span></label>
+					<label>예약가능여부 <span class="color_red display_inline">*</span></label>
 				</td>
 				<td>
 					<label for="availabilityTrue"><input type="radio" name="availability" checked="checked" value="true" id="availabilityTrue">가능</label>
@@ -50,10 +50,10 @@
 				</td>
 			</tr>
 		</table>
-		<input type="button" value="목록" id="listMeetingRoom">
 		<div class="float_right">
 			<input type="hidden" name="managerId" value="${loginUser.user.employeeId}">
 			<input type="submit" value="등록">
+			<input type="button" value="취소" id="listMeetingRoom">
 		</div>
 	</form>
 </section>

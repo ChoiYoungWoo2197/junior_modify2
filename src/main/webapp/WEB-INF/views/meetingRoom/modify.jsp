@@ -7,11 +7,12 @@
 
 <section class="width1200">
 	<form id="updateMeetingRoomForm" method="post" action="/meetingRoom/modify">
-		<div class="color_red">* 필수입력</div>
+		<div class="color_red float_right">* 필수입력</div>
+		<div class="clear_both"></div>
 		<table>
 			<tr>
 				<td>
-					<label>회의실명 <span class="color_red">*</span></label>
+					<label>회의실명 <span class="color_red display_inline">*</span></label>
 				</td>
 				<td>
 					<input type="text" name="name" value="${meetingRoom.name}">
@@ -20,7 +21,7 @@
 			</tr>
 			<tr>
 				<td>
-					<label>좌석수 <span class="color_red">*</span></label>
+					<label>좌석수 <span class="color_red display_inline">*</span></label>
 				</td>
 				<td>
 					<input type="text" name="seats" value="${meetingRoom.seats}">
@@ -30,7 +31,7 @@
 			</tr>
 			<tr>
 				<td>
-					<label>예약가능여부 <span class="color_red">*</span></label>
+					<label>예약가능여부 <span class="color_red display_inline">*</span></label>
 				</td>
 				<td>
 					<c:if test="${meetingRoom.availability eq 'true'}">
@@ -62,12 +63,12 @@
 				</td>
 			</tr>
 		</table>
-		<input type="button" value="목록" id="listMeetingRoom">
+		<!-- <input type="button" value="목록" id="listMeetingRoom"> -->
 		<div class="float_right">
 			<input type="hidden" name="meetingRoomId" value="${meetingRoom.meetingRoomId}">
 			<input type="hidden" name="managerId" value="1">
 			<input type="submit" value="수정">
-			<input type="button" value="돌아가기" id="cancelUpdate">
+			<input type="button" value="취소" id="cancelUpdate">
 		</div>
 	</form>
 </section>

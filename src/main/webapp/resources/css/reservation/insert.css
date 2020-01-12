@@ -27,13 +27,13 @@
 .font_bold {
 	font-weight: bold;	
 }
-.overflow_ellipsis {
+/* .overflow_ellipsis {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 300px;
 	display: inline-block;
-}
+} */
 
 table {
 	border-collapse: collapse;
@@ -46,6 +46,9 @@ td, th {
 }
 th {
    	background-color: #D8D8D8;
+}
+td {
+	cursor: pointer;
 }
 .color_gray {
 	cursor: default;

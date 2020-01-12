@@ -145,8 +145,10 @@
 		<input type="hidden" name="employeeId" value="${loginUser.user.employeeId}">
 		<input type="hidden" name="reservationId" value="${reservation.reservationId}">
 		<input type="hidden" name="choiceDay">
-		<input type="submit" value="예약수정"  class="float_right">
-		<input type="button" value="취소" id="readReservation" class="float_right">
+		<div class="float_right">
+			<input type="submit" value="예약수정">
+			<input type="button" value="취소" id="readReservation">
+		</div>
 	</form>
 </section>
 </body>
