@@ -103,6 +103,7 @@ input[type='submit'], button {
 	color: white;
 	border: 1px solid #563d7c;
 	border-radius: 3px;
+	padding: 3px;
 }
 
 input[type='button'] {
@@ -110,6 +111,7 @@ input[type='button'] {
 	color: white;
 	border: 1px solid gray;
 	border-radius: 3px;
+	padding: 3px;
 }
 button {
 	padding: 3px;
@@ -118,4 +120,7 @@ img {
 	width: 30px;
 	height: 30px;
 	padding-right: 5px;
+}
+h1 {
+	text-align: center;
 }

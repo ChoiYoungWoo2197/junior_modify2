@@ -53,7 +53,7 @@ td {
 .color_gray {
 	cursor: default;
 }
-input, select {
+input[type='text'], select {
 	padding: 3px 0;
 	margin: 5px 0 10px 0;
 	border-radius: 3px;
@@ -66,10 +66,6 @@ input[type='text'], select[name='meetingRoomId'], select[name='meetAttendess'] {
 	padding: 10px 50px;
 	margin-top: 20px;
 } */
-img {
-	width: 30px;
-	height: 30px;	
-}
 
 
 .width65 {
