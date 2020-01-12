@@ -12,6 +12,7 @@
 /* input[type="text"] 지정해준것에 의해서 width속성이 안먹혀서 강제로 먹히게 함. */
 .width100_Important {
 	width: 100% !important;
+	
 }
 
 .width30_Important {
@@ -55,7 +56,7 @@ input[type="password"] {
 	width: 100%; /* 원하는 너비 설정 */
 	height: auto; /* 높이값 초기화 */
 	line-height: normal; /* line-height 초기화 */
-	padding: .7em .4em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+	padding: 10px 10px; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
 	font-family: inherit; /* 폰트 상속 */
 	border: 1px solid #999;
 	border-radius: 0; /* iSO 둥근모서리 제거 */
@@ -83,5 +84,5 @@ input[name="email"] {
 }
  
 #search > input[type="text"] { 
-	padding: .3em .4em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+	padding: 5px 5px; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
 } 

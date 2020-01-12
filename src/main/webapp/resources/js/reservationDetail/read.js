@@ -21,6 +21,7 @@ $(function() {
 			var complete = '<input type="button" id="completeCancel" value="완료"/>';
 			$("#inputForm").append(td).append(reason);
 			$("#btnDiv").append(cancel).append(complete);
+			$('#btnDiv').addClass('float_right');
 
 		})
 		$(document).on("click", "#denyCancel", function() {
@@ -85,7 +86,7 @@ $(function() {
 				if(exitDate <  startDate || exitDate > actualDate) {
 					empty();
 					creatExitTag();
-					$('#exitTd').append('<label style="color:red"> 시작일시와 종료일시 사이에 종료하실수 있습니다. 다시입력해주세요.</label>');
+					$('#exitTd').append('<div><span style="color:red"> 예약사용일시에 종료하실수 있습니다. 다시입력해주세요.</span></div>');
 					
 				}
 				else {
@@ -96,7 +97,7 @@ $(function() {
 					else {
 						empty();
 						creatExitTag();
-						$('#exitTd').append('<label style="color:red"> 현재일시보다 일찍 종료할수 없습니다. 다시입력해주세요.</label>');
+						$('#exitTd').append('<div><span style="color:red"> 현재일시보다 일찍 종료할수 없습니다. 다시입력해주세요.</span></div>');
 					}
 					
 
@@ -145,7 +146,7 @@ $(function() {
 					if(actualDate >= extendDate) {
 						empty();
 						createExtendTag();
-						$('#extendTd').append('<label style="color:red"> 예약종료일시보다 빠릅니다. 다시입력해주세요.</label>');
+						$('#extendTd').append('<div><span style="color:red"> 예약종료일시보다 빠릅니다. 다시입력해주세요.</span></div>');
 
 					}
 					else {
@@ -188,6 +189,7 @@ $(function() {
 			var complete = '<input type="button" id="completeExitCheck" value="완료"/>';
 			$("#inputForm").append(td).append(abnormality);
 			$("#btnDiv").append(cancel).append(complete);
+			$('#btnDiv').addClass('float_right');
 		})
 
 		$(document).on("click", "#denyExitCheck", function() {
