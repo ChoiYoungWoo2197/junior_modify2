@@ -65,7 +65,7 @@ input[type='button'] {
 	color: white;
 	border: 1px solid gray;
 	border-radius: 3px;
-	padding: 3px;
+	padding: 3px 6px;
 }
 
 input[type='submit'], button, .background_color {
@@ -73,7 +73,7 @@ input[type='submit'], button, .background_color {
 	color: white;
 	border: 1px solid #563d7c;
 	border-radius: 3px;
-	padding: 3px;
+	padding: 3px 6px;
 }
 
 img {
