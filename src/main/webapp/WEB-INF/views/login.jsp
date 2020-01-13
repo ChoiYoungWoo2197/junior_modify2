@@ -6,12 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>login test</title>
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/common/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/common/list.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/login/login.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<main class="main-page">
+	<div class="main-page">
 		<section class="main-page-unit">
 			<form id="loginForm" name="loginForm" method="post" action="${pageContext.request.contextPath}/login/check">
 				<div class="login-frame">
@@ -32,13 +32,13 @@
 			<form id="insertForm" name="insertForm" method="get" action="${pageContext.request.contextPath}/member/insert">
 				<div class="login-frame">
 					<div class="login-unit border text_center">
-						<span>아직 회원이 아니십니까?</span>
+						<span>※ 아직 회원이 아니십니까?</span>
 						<button type="submit" class="login-btn">회원가입</button>
 					</div>
 				</div>
 
 			</form>
 		</section>
-	</main>
+	</div>
 </body>
 </html>

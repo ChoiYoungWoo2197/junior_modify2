@@ -10,15 +10,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap&subset=korean" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/common/header.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/calendar.js" charset="UTF-8" type="text/javascript"></script>
 </head>
 <body>
-	<div class="width1200">
+	<div class="width1300">
 		<header>
 			<c:if test="${empty loginUser}">
-				<img src="${pageContext.request.contextPath}/resources/images/login.png" id="loginButton" class="float_right" onclick="location.href='${pageContext.request.contextPath}/login/login'">
+				<img src="${pageContext.request.contextPath}/resources/images/login2.png" id="loginButton" class="float_right" onclick="location.href='${pageContext.request.contextPath}/login/login'">
 				<%--<button id="loginButton" class="float_right" type="button" onclick="location.href='${pageContext.request.contextPath}/login/login'">로그인</button> --%>
 		
 				<div class="clear_both"></div>
@@ -26,12 +26,12 @@
 			<c:if test="${not empty loginUser}">
 				<div class="float_right">
 					<c:if test="${loginUser.manager eq 'true'}">
-						<span>관리자(${loginUser.user.name}) 님</span>
+						<span class="float_left">관리자(${loginUser.user.name}) 님</span>
 					</c:if>
 					<c:if test="${loginUser.manager eq 'false'}">
-						<span>${loginUser.user.name} 님</span>
+						<span class="float_left">${loginUser.user.name} 님</span>
 					</c:if>
-					<img src="${pageContext.request.contextPath}/resources/images/logout.png" id="loginButton" class="float_right" onclick="location.href='${pageContext.request.contextPath}/login/out'">
+					&emsp;<img src="${pageContext.request.contextPath}/resources/images/logout2.png" id="loginButton" class="float_right" onclick="location.href='${pageContext.request.contextPath}/login/out'">
 					<%-- <button id="loginButton" class="float_right" type="button" onclick="location.href='${pageContext.request.contextPath}/login/out'">로그아웃</button> --%>
 				</div>
 				<div class="clear_both"></div>
@@ -39,7 +39,7 @@
 		</header>
 	</div>
 	<nav>
-		<div class="width1200">
+		<div class="width1300">
 			<ul>
 				<c:if test="${loginUser.manager eq 'true'}">
 					<li><a href="${pageContext.request.contextPath}/reservation/list">예약 현황</a></li>

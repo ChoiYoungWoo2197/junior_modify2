@@ -16,6 +16,12 @@ td:last-child > label {
 	width: 140px;
 	float: left;
 }
+.border_right_hide {
+	border-right: none;
+}
+.border_left_hide {
+	border-left: none;
+}
 span {
 	display: block;
 	padding-left: 10px;
@@ -25,10 +31,6 @@ form {
 }
 input[type='checkbox'], input[type='radio'] {
 	margin-right: 5px;
-}
-input[type='text'] {
-	width: 90%;
-	padding-left: 10px;
 }
 
 .red {
@@ -49,7 +51,7 @@ input[type="text"],
 input[type="password"], select {
 	width: 100%; /* 원하는 너비 설정 */
 	height: auto; /* 높이값 초기화 */
-	line-height: normal; /* line-height 초기화 */
+	padding-left: 10px;
 }
 
 input[name="memberId"],

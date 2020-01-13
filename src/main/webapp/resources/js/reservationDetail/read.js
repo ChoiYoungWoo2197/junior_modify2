@@ -54,7 +54,7 @@ $(function() {
 			empty();
 			$("#listDiv").show();
 			$("#processingDiv").show();
-			$("#lastTr").addClass("border_bottom");
+			//$("#lastTr").addClass("border_bottom");
 			
 		});
 

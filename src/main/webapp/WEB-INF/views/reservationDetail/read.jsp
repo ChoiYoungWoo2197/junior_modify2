@@ -18,7 +18,7 @@
 				<th>
 					예약번호
 				</th>
-				<td colspan="2" class="td_input">
+				<td  class="td_input">
 					<span>${reservation.reservationId}</span>
 				</td>
 			</tr>
@@ -26,7 +26,7 @@
 				<th>
 					예약사용일시
 				</th>
-				<td colspan="2" class="td_input">
+				<td class="td_input">
 					<span>
 					<fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd" /> <fmt:formatDate value="${reservation.startDate}" pattern="kk:mm" /> ~ <fmt:formatDate value="${reservation.endDate}" pattern="kk:mm" />
 					<input type="hidden" size="50" name="startTime" value=<fmt:formatDate value="${reservation.startDate}" pattern="kk:mm" /> />
@@ -43,7 +43,7 @@
 				<th>
 					회의실명
 				</th>
-				<td colspan="2" class="td_input">
+				<td class="td_input">
 					<span>${reservation.meetingRoomName}</span>
 				</td>
 			</tr>
@@ -51,7 +51,7 @@
 				<th>
 					회의목적
 				</th>
-				<td colspan="2" class="td_input">
+				<td class="td_input">
 					<span>${reservation.meetPurpose}</span>
 				</td>
 			</tr>
@@ -59,7 +59,7 @@
 				<th>
 					참석자수
 				</th>
-				<td colspan="2" class="td_input">
+				<td class="td_input">
 					<span>${reservation.meetAttendess}명</span>
 				</td>
 			</tr>
@@ -67,7 +67,7 @@
 				<th>
 					상태
 				</th>
-				<td colspan="2" class="td_input">
+				<td class="td_input">
 					<c:choose>
 						<c:when test="${reservation.state eq 'R'}">
 							<fmt:formatDate value="${now}" pattern="yyyy.MM.dd kk:mm" var="today" />
@@ -101,7 +101,7 @@
 				<th>
 					신청자
 				</th>
-				<td colspan="2" class="td_input">
+				<td class="td_input">
 					<span>${reservation.employeeName}</span>
 				</td>
 			</tr>
@@ -109,7 +109,7 @@
 				<th>
 					소속부서
 				</th>
-				<td colspan="2" class="td_input">
+				<td class="td_input">
 					<span>${reservation.departmentName}</span>
 				</td>
 			</tr>
@@ -117,7 +117,7 @@
 				<th >
 					예약신청일시
 				</th>
-				<td colspan="2" class="td_input">
+				<td  class="td_input">
 					<fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd kk:mm" />
 				</td>
 			</tr>
@@ -200,17 +200,17 @@
 					<c:choose>
 						<c:when test="${today >= startDate  &&  today < actualEndDate}">
 							<div id="processingDiv"  class="float_right">
-								<input type="button" id="exitReservation" value="조기종료" />
+								<input type="button" id="exitReservation" value="조기종료" class="background_color"/>
 								<c:if test="${loginUser.manager eq 'false' && extendIspossible eq 'true'}">
-									<input type="button" id="extendReservation" value="연장신청" />
+									<input type="button" id="extendReservation" value="연장신청" class="background_color" />
 								</c:if>
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div id="reservationDiv" class="float_right">
-								<input type="button" id="cancelReservation" value="예약취소" />
+								<input type="button" id="cancelReservation" value="예약취소" class="background_color" />
 								<c:if test="${loginUser.manager eq 'false'}">
-									<input  type="button" id="updateReservation" value="예약수정" />
+									<input  type="button" id="updateReservation" value="예약수정" class="background_color" />
 								</c:if>
 							</div>
 						</c:otherwise>
@@ -220,7 +220,7 @@
 				<c:if test="${reservation.state eq 'F'}">
 					<div id="exitDiv" class="float_right">
 						<c:if test="${loginUser.manager eq 'true'}">
-							<input type="button" id="exitCheckReservation" value="종료확인" />
+							<input type="button" id="exitCheckReservation" value="종료확인" class="background_color" />
 						</c:if>
 					</div>
 				</c:if>

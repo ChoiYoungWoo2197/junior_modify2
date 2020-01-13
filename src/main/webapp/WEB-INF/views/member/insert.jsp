@@ -34,7 +34,7 @@
 					<td>
 						<b>사번</b><b class="red">*</b>
 					</td>
-					<td class="td_input td_border_hide">
+					<td class=" border_right_hide">
 						<input name="memberId" type="text" placeholder=" 사원번호는 영문,숫자 조합입니다." />
 						<input class="float_right"  type="button" onclick="checkId()" value="중복체크">	
 						<div class="clear_both"></div>				
@@ -45,26 +45,26 @@
 						</div>
 
 					</td>
-					<td colspan="2"></td>
+					<td colspan="2"  class=" border_left_hide"></td>
 				</tr>
 				<tr>
 					<td>
 						<b>사원명</b><b class="red">*</b>
 					</td>
-					<td class="td_input td_border_hide">
+					<td class=" border_right_hide">
 						<input name="name" type="text" placeholder=" 이름은 한글만 입력해주세요."/>
 						<div>
 						<span id="valideName" class="error">이름을 입력하세요.</span>
 						</div>
 						
 					</td>
-					<td colspan="2"></td>
+					<td colspan="2"  class=" border_left_hide"></td>
 				</tr>
 				<tr>
 					<td>
 						<b>소속부서</b><b class="red">*</b>
 					</td>
-					<td class="td_input td_border_hide">
+					<td class=" border_right_hide">
 						<select name="departmentType" id="departmentType" class="width100">
 							<option value="">부서선택</option>
 							<c:forEach var="list" items="${departmentList}" varStatus="i">
@@ -76,23 +76,23 @@
 						</div>
 						
 					</td>
-					<td colspan="2"></td>
+					<td colspan="2"  class=" border_left_hide"></td>
 				</tr>
 				<tr>
 					<td>
 						<b>비빌번호</b><b class="red">*</b>
 					</td>
-					<td class="td_input td_border_hide">
+					<td class=" border_right_hide">
 						<input name="password" type="password" size="20" placeholder=" 비밀번호는 영문,숫자 조합입니다.[3자리이상 12자리이하]"/>
 						<div>
 						<span id="validePassword" class="error">비밀번호를 입력하세요.</span>
 						</div>
 					</td>
 
-					<td>
+					<td class="border_right_hide">
 						<b>비밀번호 확인</b><b class="red">*</b>
 					</td>
-					<td colspan="1" class="td_input">
+					<td colspan="1" class="">
 						<input id="passwordCheck" name="passwordCheck" type="password" size="20" />
 						<div>
 						<span id="validePasswordCheck" class="error">비밀번호 확인을 입력하세요.</span>
@@ -106,7 +106,7 @@
 					<td>
 						<b>이메일</b><b class="red">*</b>
 					</td>
-					<td class="td_input td_border_hide ">
+					<td class=" border_right_hide ">
 						<input name="email" type="text" size="20" placeholder=" 예)abc@naver.com"/>
 						<input class="float_right" type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크">
 						<div class="float_right"></div>
@@ -117,7 +117,7 @@
 						</div>
 						
 					</td>
-					<td colspan="2">
+					<td colspan="2"  class=" border_left_hide">
 						
 					</td>
 				</tr>
@@ -125,13 +125,13 @@
 					<td>
 						<label>전화번호</label>
 					</td>
-					<td class="td_input td_border_hide">
+					<td class=" border_right_hide">
  						<input name="phone" type="text" size="20" placeholder=" 예)010.0000.0000"/>
  						<div>
  						<span id="validePhone" class="error">전화번호를 입력하세요.</span>
  						</div>
 					</td>
-					<td colspan="2"></td>
+					<td colspan="2"  class=" border_left_hide"></td>
 				</tr>
 				<c:if test="${not empty loginUser}">
 					<c:if test="${loginUser.manager eq 'true'}">
@@ -139,11 +139,11 @@
 							<td>
 								<label>관리자권한</label>
 							</td>
-							<td class="td_input td_border_hide">
+							<td class=" border_right_hide">
 								<input type="radio" name="manager" value="yes" /> yes
 								<input type="radio" name="manager" value="no" checked="checked" /> no
 							</td>
-							<td colspan="2"></td>
+							<td colspan="2"  class=" border_left_hide"></td>
 						</tr>
 					</c:if>
 				</c:if>

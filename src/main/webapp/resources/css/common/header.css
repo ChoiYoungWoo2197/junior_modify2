@@ -60,14 +60,6 @@ input[type='text'], input[type='search'], input[type='password'] {
 	cursor: text;
 }
 
-input[type='submit'], button {
-	background-color: #563d7c;
-	color: white;
-	border: 1px solid #563d7c;
-	border-radius: 3px;
-	padding: 3px;
-}
-
 input[type='button'] {
 	background-color: gray;
 	color: white;
@@ -75,6 +67,15 @@ input[type='button'] {
 	border-radius: 3px;
 	padding: 3px;
 }
+
+input[type='submit'], button, .background_color {
+	background-color: #563d7c !important;
+	color: white;
+	border: 1px solid #563d7c;
+	border-radius: 3px;
+	padding: 3px;
+}
+
 img {
 	width: 30px;
 	height: 30px;
