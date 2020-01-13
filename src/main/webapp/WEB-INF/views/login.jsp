@@ -29,15 +29,7 @@
 		</section>
 
 		<section class="main-page-unit">
-			<form id="insertForm" name="insertForm" method="get" action="${pageContext.request.contextPath}/member/insert">
-				<div class="login-frame">
-					<div class="login-unit border text_center">
-						<span>아직 회원이 아니십니까?</span>
-						<button type="submit" class="login-btn">회원가입</button>
-					</div>
-				</div>
-
-			</form>
+			<a href="${pageContext.request.contextPath}/member/insert">회원가입</a>
 		</section>
 	</div>
 </body>

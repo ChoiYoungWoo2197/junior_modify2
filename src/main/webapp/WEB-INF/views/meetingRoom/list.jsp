@@ -22,6 +22,14 @@
 		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allMeetingRoom" class="float_right">
 	</div>
 	<table>
+		<colgroup>
+			<col width="80px" />
+			<col width="110px" />
+			<col width="80px" />
+			<col width="*" />
+			<col width="120px" />
+			<col width="160px" />
+		</colgroup>
 		<tr>
 			<th>번호</th>
 			<th>회의실</th>

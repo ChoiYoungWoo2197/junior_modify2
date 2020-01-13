@@ -125,6 +125,7 @@
 				<li>
 				
 					<a href='javascript:paging("list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>
+					
 						<c:if test="${page.criteria.page == index}">
 							<span class="page_shape color_sky"></span>
 						</c:if>

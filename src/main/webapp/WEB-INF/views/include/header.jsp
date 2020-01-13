@@ -31,7 +31,7 @@
 					<c:if test="${loginUser.manager eq 'false'}">
 						<span class="float_left">${loginUser.user.name} 님</span>
 					</c:if>
-					&emsp;<img src="${pageContext.request.contextPath}/resources/images/logout2.png" id="loginButton" class="float_right" onclick="location.href='${pageContext.request.contextPath}/login/out'">
+					<img src="${pageContext.request.contextPath}/resources/images/logout2.png" id="loginButton" class="float_right" onclick="location.href='${pageContext.request.contextPath}/login/out'">
 					<%-- <button id="loginButton" class="float_right" type="button" onclick="location.href='${pageContext.request.contextPath}/login/out'">로그아웃</button> --%>
 				</div>
 				<div class="clear_both"></div>

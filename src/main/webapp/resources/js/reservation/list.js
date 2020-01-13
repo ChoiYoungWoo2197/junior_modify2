@@ -20,11 +20,12 @@ $(function() {
 	})
 	
 	$(document).on("click", ".updateReservation", function(){
-		var reservationId = Number($(this).find(".readReservation").attr("data-reservationId"));
 		
-		location.href = encodeURI("/reservationDetail/read?reservationId="+ reservationId
-		+ "&page=1" + "&state=" + $("select[name='state']").val() + "&meetingRoomId=" + $("select[name='meetingRoomId']").val()
-		+ "&searchType="+$("select[name='searchType']").val() + "&searchContent=" +$("input[name='searchContent']").val());
+		var reservationId = Number($(this).find(".readReservation").attr("data-reservationId"));
+		//alert("예약 상세내역 : " + reservationId);
+		location.href = encodeURI("/reservationDetail/read?reservationId="+ reservationId);
+	/*	location.href = encodeURI("/reservationDetail/read?reservationId="+ reservationId+ "&page=1" + "&state=" + $("select[name='state']").val() + "&meetingRoomId=" + $("select[name='meetingRoomId']").val()
+		+ "&searchType="+$("select[name='searchType']").val() + "&searchContent=" +$("input[name='searchContent']").val());*/
 	})
 	
 	$("#searchReservation").click(function() {
