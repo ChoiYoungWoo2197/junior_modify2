@@ -21,7 +21,7 @@
 		<table>
 			<c:if test="${management eq 'equipment'}">
 				<tr>
-					<td><label>장비명 <span class="color_red display_inline">*</span></label></td>
+					<th><label>장비명 <span class="color_red display_inline">*</span></label></th>
 					<td>
 						<input type="text" name="name" value="${equipment.name}">
 						<span class="color_red display_none">장비명을 입력하세요.</span>
@@ -31,7 +31,7 @@
 			</c:if>
 			<c:if test="${management eq 'department'}">
 				<tr>
-					<td><label>부서명 <span class="color_red display_inline">*</span></label></td>
+					<th><label>부서명 <span class="color_red display_inline">*</span></label></th>
 					<td>
 						<input type="text" name="name" value="${department.name}">
 						<span class="color_red display_none">부서명 입력하세요.</span>

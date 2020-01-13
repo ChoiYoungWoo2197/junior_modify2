@@ -5,16 +5,30 @@ table {
 	width: 100%;
 	margin: 10px 0 10px 0;
 }
-td {
-	border: 1px solid black;
-	padding: 5px 20px 5px 20px;
+tr:first-child {
+	border-top: 2px solid black;
 }
-td:first-child {
+
+tr:last-child {
+	border-bottom: 2px solid black;
+}
+td {
+	border-bottom: 1px solid black;
+	padding: 10px 20px 10px 20px;
+}
+th {
+	background-color : #563d7c;
+	border-bottom: 1px solid black;
+	color: white;
+	font-size: 14px;
+	width: 30%;
+}
+/* td:first-child {
 	width: 20%;
 }
 td:last-child > label {
 	width: 140px;
-	float: left;
+	 */float: left;
 }
 .border_right_hide {
 	border-right: none;
@@ -24,7 +38,7 @@ td:last-child > label {
 }
 span {
 	display: block;
-	padding-left: 10px;
+	/* padding-left: 10px; */
 }
 form {
 	margin-top: 10px;
@@ -63,3 +77,6 @@ input[name="email"] {
 	
 }
 
+.width150px {
+	width: 150px;s
+}

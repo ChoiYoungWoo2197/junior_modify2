@@ -12,18 +12,18 @@
 		<div class="clear_both"></div>
 		<table>
 			<tr>
-				<td>
+				<th>
 					<label>회의실명 <span class="color_red display_inline">*</span></label>
-				</td>
+				</th>
 				<td>
 					<input type="text" name="name" value="${meetingRoom.name}">
 					<span class="color_red display_none">회의실명을 입력하세요.</span>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<th>
 					<label>좌석수 <span class="color_red display_inline">*</span></label>
-				</td>
+				</th>
 				<td>
 					<input type="text" name="seats" value="${meetingRoom.seats}">
 					<span class="color_red display_none">좌석수를 입력하세요.</span>
@@ -31,9 +31,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<th>
 					<label>예약가능여부 <span class="color_red display_inline">*</span></label>
-				</td>
+				</th>
 				<td>
 					<c:if test="${meetingRoom.availability eq 'true'}">
 						<label for="availabilityTrue"><input type="radio" name="availability" value="true" checked="checked" id="availabilityTrue">가능</label>
@@ -46,9 +46,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<th>
 					<label>지원설비</label>
-				</td>
+				</th>
 				<td>
 					<c:forEach var="equipment" items="${equipmentList}">
 						<label for="${equipment.equipmentId}"><input type="checkbox" name="equipmentId" value="${equipment.equipmentId}" id="${equipment.equipmentId}">${equipment.name}</label>

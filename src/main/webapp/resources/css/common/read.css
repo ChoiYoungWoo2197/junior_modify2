@@ -14,7 +14,7 @@ table th:first-child {
 	font-size: 14px;
 }
 td {
-	padding-left: 20px;
+	padding: 10px 20px 10px 20px;
 	width: 70%;
 	border-bottom: 1px solid black;
 }

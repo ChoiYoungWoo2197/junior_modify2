@@ -18,9 +18,11 @@
 	<section class="width1200">
 		<h1>회원 수정</h1>
 		<form name="memberForm"  method="post"	onsubmit="return check()">
+			<div class="color_red float_right">* 필수입력</div>
+			<div class="clear_both"></div>
 			<table>
 				<tr>
-					<td><b>사번</b><b class="red">*</b></td>
+					<th  class="width150px"><b>사번</b><b class="color_red">*</b></th>
 					<td class="td_input td_border_hide">
 						<input name="modifyMemberId" type="text" size="20" value="${employeeModify.memberId}" placeholder=" 사원번호는 영문,숫자 조합입니다."  readonly="readonly"/> 
 						<div>
@@ -31,7 +33,7 @@
 					<td colspan="2"></td>
 				</tr>
 				<tr>
-					<td><b>사원명</b><b class="red">*</b></td>
+					<th  class="width150px"><b>사원명</b><b class="color_red">*</b></th>
 					<td class="td_input td_border_hide">
 						<input name="name" type="text" size="20" value="${employeeModify.name}" placeholder=" 이름은 한글만 입력해주세요. [2자리이상 5자리이하]"/>
 						<div>
@@ -41,7 +43,7 @@
 					<td colspan="2"></td>
 				</tr>
 				<tr>
-					<td><b>소속부서</b><b class="red">*</b></td>
+					<th  class="width150px"><b>소속부서</b><b class="color_red">*</b></th>
 					<td class="td_input td_border_hide">
 						<select name="departmentType" id="departmentType" class="width100">
 							<option value="">부서선택</option>
@@ -56,7 +58,7 @@
 					<td colspan="2"></td>
 				</tr>
 				<tr>
-					<td><b>비빌번호</b><b class="red">*</b></td>
+					<th  class="width150px"><b>비빌번호</b><b class="color_red">*</b></th>
 					<td class="td_input td_border_hide">
 						<input name="password" type="password" size="20" placeholder=" 비밀번호는 영문,숫자 조합입니다.[3자리이상 12자리이하]"/>
 						<div>
@@ -65,7 +67,7 @@
 						
 					</td>
 
-					<td><b>비밀번호 확인</b><b class="red">*</b></td>
+					<th  class="width150px"><b>비밀번호 확인</b><b class="color_red">*</b></th>
 					<td colspan="1" class="td_input">
 						<input id="passwordCheck" name="passwordCheck" type="password" size="20" />
 						<div>
@@ -77,7 +79,7 @@
 					
 				</tr>
 				<tr>
-					<td><b>이메일</b><b class="red">*</b></td>
+					<th  class="width150px"><b>이메일</b><b class="color_red">*</b></th>
 					<td class="td_input td_border_hide">
 						<input class="width100_Important"  name="email" type="text" size="20" value="${employeeModify.email}" placeholder=" 예)abc@naver.com"/>
 						<div>
@@ -90,7 +92,7 @@
 					<td colspan="2"></td>
 				</tr>
 				<tr>
-					<td><label>전화번호</label></td>
+					<th  class="width150px"><label>전화번호</label></th>
 					<td class="td_input td_border_hide">
 						<input name="phone" type="text" size="20" value="${employeeModify.phone}" placeholder=" 예)010.0000.0000"/>
 						<div>
@@ -101,7 +103,7 @@
 					<td colspan="2"></td>
 				</tr>
 				<tr>
-					<td><label>관리자권한</label></td>
+					<th  class="width150px"><label>관리자권한</label></th>
 					<td class="td_input td_border_hide">
 						<input type="radio" name="manager" value="yes"> yes
 						<input type="radio" name="manager" value="no" checked="checked"> no</td>

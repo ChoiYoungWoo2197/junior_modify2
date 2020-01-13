@@ -19,7 +19,7 @@
 	<form id="insertManagementForm" method="post" action="/management/insert">
 		<table>
 			<tr>
-				<td>
+				<th>
 					<c:if test="${management eq 'equipment'}">
 						<label>장비명 <span class="color_red display_inline">*</span></label>
 						<input type="hidden" name="management" value="${management}">
@@ -28,7 +28,7 @@
 						<label>부서명 <span class="color_red display_inline">*</span></label>
 						<input type="hidden" name="management" value="${management}">
 					</c:if>
-				</td>
+				</th>
 				<td>
 					<input type="text" name="name" placeholder="${title}명을 입력해주세요.">
 					<span class="color_red display_none">${title}명을 입력하세요.</span>
