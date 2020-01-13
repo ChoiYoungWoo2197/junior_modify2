@@ -39,6 +39,12 @@
 				</tr>
 			</c:if>
 			<c:if test="${!empty equipmentList}">
+				<colgroup>
+					<col width="120px" />
+					<col width="*" />
+					<col width="200px" />
+					<col width="170px" />
+				</colgroup>
 				<tr>
 					<th>번호</th>
 					<th>장비명</th>
@@ -78,6 +84,13 @@
 				</tr>
 			</c:if>
 			<c:if test="${!empty employeeByDepartmentList}">
+				<colgroup>
+					<col width="120px" />
+					<col width="*" />
+					<col width="230px" />
+					<col width="200px" />
+					<col width="170px" />
+				</colgroup>
 				<tr>
 					<th>번호</th>
 					<th>부서명</th>

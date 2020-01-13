@@ -16,10 +16,12 @@ tr:last-child {
 	border-bottom: 2px solid black;
 }
 th {
-	background-color: #D8D8D8;
+	background-color: #563d7c;
 	border-bottom: 2px solid black;
 	border-top: 2px solid black;
 	padding: 10px 0;
+	color: white;
+	font-size: 14px;
 }
 input[type='text'], input[type='search'], input[type='date'], input[type='password'], select {
 	padding: 3px 0;

@@ -16,7 +16,7 @@
 	<h1>예약현황</h1>
 	<div class="overflow_hidden">
 		<div class="float_left">
-			<label class="float_left">사용일&nbsp;</label>
+			<label class="float_left">사용일</label>
 			<input type="text" name="searchDate" id="searchStart" value="${searchCriteria.searchStart}" class="float_left">
 			<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="startImg" class="float_left"> 
 			<span class="float_left">~&nbsp;</span> 
@@ -46,7 +46,7 @@
 				<option value="employee" ${searchCriteria.searchType == 'employee' ? 'selected':''}>신청자</option>
 				<option value="meetPurpose" ${searchCriteria.searchType == 'meetPurpose' ? 'selected':''}>회의목적</option>
 			</select>
-			<input type="search" name="searchContent" value="${searchCriteria.searchContent}">&nbsp;
+			<input type="search" name="searchContent" value="${searchCriteria.searchContent}">
 		</div>
 		<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchReservation" class="float_left">
 		<!-- <button id="searchReservation">검색</button> -->
@@ -54,6 +54,16 @@
 		<!-- <button id="allReservation">전체보기</button> -->
 	</div>
 	<table>
+		<colgroup>
+			<col width="70px" />
+			<col width="130px" />
+			<col width="160px" />
+			<col width="100px" />
+			<col width="120px" />
+			<col width="*" />
+			<col width="180px" />
+			<col width="180px" />
+		</colgroup>
 		<tr>
 			<th>번호</th>
 			<th>회의일자</th>
