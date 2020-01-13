@@ -5,11 +5,13 @@ table {
 	width: 100%;
 	margin: 10px 0;
 }
-th {
-	border-right: 1px solid black;
+table th:first-child {
+	background-color : #563d7c;
 	border-bottom: 1px solid black;
 	padding: 5px;
 	width: 30%;
+	color: white;
+	font-size: 14px;
 }
 td {
 	padding-left: 20px;
@@ -18,14 +20,12 @@ td {
 }
 
 tr:first-child {
-	border-top: 1px solid black;
+	border-top: 2px solid black;
 }
-/* tr:last-child, .border_bottom {
+
+tr:last-child {
 	border-bottom: 2px solid black;
 }
-tr:first-child {
-	border-top: 2px solid black;
-} */
 
 .position_down {
 	position: relative;

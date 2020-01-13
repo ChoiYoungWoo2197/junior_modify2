@@ -18,7 +18,7 @@
 				<th>
 					예약번호
 				</th>
-				<td  class="td_input">
+				<td  >
 					<span>${reservation.reservationId}</span>
 				</td>
 			</tr>
@@ -26,7 +26,7 @@
 				<th>
 					예약사용일시
 				</th>
-				<td class="td_input">
+				<td >
 					<span>
 					<fmt:formatDate value="${reservation.startDate}" pattern="yyyy.MM.dd" /> <fmt:formatDate value="${reservation.startDate}" pattern="kk:mm" /> ~ <fmt:formatDate value="${reservation.endDate}" pattern="kk:mm" />
 					<input type="hidden" size="50" name="startTime" value=<fmt:formatDate value="${reservation.startDate}" pattern="kk:mm" /> />
@@ -43,7 +43,7 @@
 				<th>
 					회의실명
 				</th>
-				<td class="td_input">
+				<td >
 					<span>${reservation.meetingRoomName}</span>
 				</td>
 			</tr>
@@ -51,7 +51,7 @@
 				<th>
 					회의목적
 				</th>
-				<td class="td_input">
+				<td >
 					<span>${reservation.meetPurpose}</span>
 				</td>
 			</tr>
@@ -59,7 +59,7 @@
 				<th>
 					참석자수
 				</th>
-				<td class="td_input">
+				<td >
 					<span>${reservation.meetAttendess}명</span>
 				</td>
 			</tr>
@@ -67,7 +67,7 @@
 				<th>
 					상태
 				</th>
-				<td class="td_input">
+				<td >
 					<c:choose>
 						<c:when test="${reservation.state eq 'R'}">
 							<fmt:formatDate value="${now}" pattern="yyyy.MM.dd kk:mm" var="today" />
@@ -101,7 +101,7 @@
 				<th>
 					신청자
 				</th>
-				<td class="td_input">
+				<td >
 					<span>${reservation.employeeName}</span>
 				</td>
 			</tr>
@@ -109,15 +109,15 @@
 				<th>
 					소속부서
 				</th>
-				<td class="td_input">
+				<td >
 					<span>${reservation.departmentName}</span>
 				</td>
 			</tr>
-			<tr id="lastTr" class="border_bottom">
+			<tr id="lastTr" >
 				<th >
 					예약신청일시
 				</th>
-				<td  class="td_input">
+				<td  >
 					<fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd kk:mm" />
 				</td>
 			</tr>
@@ -127,7 +127,7 @@
 					<th>
 						취소사유
 					</th>
-					<td class="td_input">
+					<td >
 						<span>${reservation.cancelReason}</span>
 					</td>
 				</tr>
@@ -139,15 +139,15 @@
 					<th>
 						종료일시
 					</th>
-					<td class="td_input">
+					<td >
 						<fmt:formatDate value="${extend.endDate}" pattern="yyyy.MM.dd kk:mm" />
 					</td>
 				</tr>
-				<tr class="border_bottom">
+				<tr >
 					<th>
 						연장사유
 					</th>
-					<td class="td_input">
+					<td >
 						<span>${extend.extendReason}</span>
 					</td>
 				</tr>	
@@ -158,26 +158,26 @@
 					<th>
 						종료일시
 					</th>
-					<td class="td_input">
+					<td >
 						<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" />
 					</td>
 				</tr>
 				<c:if test="${not empty extend}">
-					<tr class="border_bottom">
+					<tr >
 						<th>
 							연장사유
 						</th>
-						<td class="td_input">
+						<td >
 							<span>${extend.extendReason}</span>
 						</td>
 					</tr>
 				</c:if>
 				<c:if test="${reservation.state eq 'FV'}">
-					<tr class="border_bottom">
+					<tr >
 						<th>
 							이상유무
 						</th>
-						<td class="td_input">
+						<td >
 							<span>${reservation.abnormality}</span>
 						</td>
 					</tr>
@@ -185,7 +185,7 @@
 				</c:when>
 			</c:choose>
 
-			<tr id="inputForm" class="border_bottom"></tr>
+			<tr id="inputForm" ></tr>
 			<tr id="reasonForm"></tr>
 
 		</table>
