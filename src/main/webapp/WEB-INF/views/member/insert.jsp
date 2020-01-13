@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>memberRegister test</title>
-<link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/member/insert.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/common/insert.css" rel="stylesheet" type="text/css" /> 
+<%-- <link href="${pageContext.request.contextPath}/resources/css/member/insert.css" rel="stylesheet" type="text/css" /> --%>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/member/insert.js"></script>
@@ -36,7 +36,7 @@
 					</td>
 					<td class="td_input td_border_hide">
 						<input name="memberId" type="text" placeholder=" 사원번호는 영문,숫자 조합입니다." />
-						<input type="button" onclick="checkId()" value="중복체크">	
+						<input class="float_right"  type="button" onclick="checkId()" value="중복체크">	
 						<div class="clear_both"></div>				
 						<div>
 						<span id="valideId" class="error">사원번호를 입력하세요.</span>
@@ -108,7 +108,7 @@
 					</td>
 					<td class="td_input td_border_hide ">
 						<input name="email" type="text" size="20" placeholder=" 예)abc@naver.com"/>
-						<input type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크">
+						<input class="float_right" type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크">
 						<div class="float_right"></div>
 						<div>
 						<span id="valideEmail" class="error">이메일을 입력하세요.</span>

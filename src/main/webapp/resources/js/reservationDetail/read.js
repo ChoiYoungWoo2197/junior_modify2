@@ -15,13 +15,13 @@ $(function() {
 		//예약취소 클릭시
 		$("#cancelReservation").click(function() {
 			hide();
-			var td = '<td> <b>취소사유</b></td>';
+			var td = '<th> 취소사유</th>';
 			var reason = '<td class="td_input"><input type="text" name="cancelReason" style="width:100%;"/></td>';
 			var cancel = '<input type="button" id="denyCancel" value="취소"/>';
-			var complete = '<input type="button" id="completeCancel" value="완료"/>';
+			var complete = '<button id="completeCancel" class="margin_right">완료 </button>';
 			$("#inputForm").append(td).append(reason);
-			$("#btnDiv").append(cancel).append(complete);
-			$('#btnDiv').addClass('float_right');
+			$("#btnDiv").append(complete).append(cancel);
+			/*$('#btnDiv').addClass('float_right');*/
 
 		})
 		$(document).on("click", "#denyCancel", function() {
@@ -46,12 +46,16 @@ $(function() {
 		$("#exitReservation").click(function() {
 			hide();
 			creatExitTag();
+			$("#lastTr").removeClass("border_bottom");
+			$("#inputForm").addClass("border_bottom");
 		})
 
 		$(document).on("click", "#denyExit", function() {
 			empty();
 			$("#listDiv").show();
 			$("#processingDiv").show();
+			$("#lastTr").addClass("border_bottom");
+			
 		});
 
 		$(document).on("click",	"#completeExit",function() {
@@ -110,12 +114,15 @@ $(function() {
 		$("#extendReservation").click(function() {
 			hide();
 			createExtendTag();
+			$("#lastTr").removeClass("border_bottom");
+			$("#inputForm").removeClass("border_bottom");
 		})
 
 		$(document).on("click", "#denyExtend", function() {
 			empty();
 			$("#listDiv").show();
 			$("#processingDiv").show();
+			$("#lastTr").addClass("border_bottom");
 		});
 
 		$(document).on("click",	"#completeExtend", function() {
@@ -183,13 +190,13 @@ $(function() {
 
 		$("#exitCheckReservation").click(function() {
 			hide();
-			var td = '<td> <b>이상유무확인</b></td>';
+			var td = '<th> 이상유무확인</th>';
 			var abnormality = '<td class="td_input"><input type="text" name="abnormality" style="width:100%;"/></td>';
 			var cancel = '<input type="button" id="denyExitCheck" value="취소"/>';
-			var complete = '<input type="button" id="completeExitCheck" value="완료"/>';
+			var complete = '<button id="completeExitCheck" class="margin_right">완료 </button>';
 			$("#inputForm").append(td).append(abnormality);
-			$("#btnDiv").append(cancel).append(complete);
-			$('#btnDiv').addClass('float_right');
+			$("#btnDiv").append(complete).append(cancel);
+			/*$('#btnDiv').addClass('float_right');*/
 		})
 
 		$(document).on("click", "#denyExitCheck", function() {
@@ -221,15 +228,15 @@ $(function() {
 		})
 		
 		function creatExitTag() {
-			var td = '<td> <b>조기종료시각</b></td>';
+			var td = '<th > 조기종료시각</th>';
 			var exitTd = '<td id="exitTd"></td>';
 			var selectStart = '<select name="exitTimeHours" id="exitTimeHours"></select>';
 			var selectEnd = '<select name="exitTimeMinutes" id="exitTimeMinutes"></select>';
 			var spanHour = '<span> : </span>';
 			var spanMinutes = '<span> 분 </span>';
 			var cancel = '<input type="button" id="denyExit"  value="취소"/>';
-			var complete = '<input type="button" id="completeExit" value="완료"/>';
-
+			var complete = '<button id="completeExit" class="margin_right">완료 </button>';
+	
 			var startTime= $("input[name='startTime']").val();
 			var startTimeArray = startTime.split(':');
 			var actualEndTime = $("input[name='actualEndTime']").val();
@@ -251,21 +258,21 @@ $(function() {
 			}
 			
 			//$("#inputForm").append(spanMinutes);
-			$("#btnDiv").append(cancel).append(complete);
-			$('#btnDiv').addClass('float_right');
+			$("#btnDiv").append(complete).append(cancel);
+			/*$('#btnDiv').addClass('float_right');*/
 		}
 		
 		function createExtendTag() {
-			var td = '<td><b>종료시각</b></td>';
+			var td = '<th>종료시각</th>';
 			var extendTd = '<td id="extendTd"></td>';
-			var reasonTd = '<td id="reasonTd"><b>연장사유</b></td>';
+			var reasonTd = '<th id="reasonTd">연장사유</th>';
 			var selectStart = '<select name="extendTimeHours" id="extendTimeHours"></select>';
 			var selectEnd = '<select name="extendTimeMinutes" id="extendTimeMinutes"></select>';
 			var spanHour = '<span> : </span>';
 			var spanMinutes = '<span> 분 </span>';
 			var reason = '<td><input type="text" name="extendReason" style="width:100%;"/></td>';
 			var cancel = '<input type="button" id="denyExtend" value="취소"/>';
-			var complete = '<input type="button" id="completeExtend" value="완료"/>';
+			var complete = '<button id="completeExtend" class="margin_right">완료 </button>';
 
 			var actualEndTime = $("input[name='actualEndTime']").val().substring(0,2);
 			var limitReservation = $("input[name='limitReservation']").val() == null ? 22 : $("input[name='limitReservation']").val().substring(0,2);
@@ -290,8 +297,8 @@ $(function() {
 			}
 			
 			$("#reasonForm").append(reasonTd).append(reason);
-			$("#btnDiv").append(cancel).append(complete);
-			$('#btnDiv').addClass('float_right');
+			$("#btnDiv").append(complete).append(cancel);
+			/*$('#btnDiv').addClass('float_right');*/
 		}
 		
 		function parseDate(strDate) {

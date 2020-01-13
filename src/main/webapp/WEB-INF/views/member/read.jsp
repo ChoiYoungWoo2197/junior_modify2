@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="../include/header.jsp"%>
-<link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/member/insert.css" rel="stylesheet" type="text/css" />
+<%-- <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" /> --%>
+<link href="${pageContext.request.contextPath}/resources/css/common/read.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/member/read.js"></script>
 
 
@@ -13,65 +13,65 @@
 	<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="list" class="float_right">
 	<table>
 		<tr>
-			<td>
-				<b>No.</b>
-			</td>
+			<th>
+				번호
+			</th>
 			<td class="td_input" colspan="2">
 				<span>${employeeDetail.employeeId}</span>
 			</td>
 		</tr>
 		<tr>
-			<td id="name">
-				<b>이름</b>
-			</td>
+			<th id="name">
+				이름
+			</th>
 			<td class="td_input" colspan="2">
 				<span>${employeeDetail.name}</span>
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<b>사원번호</b>
-			</td>
+			<th>
+				사원번호
+			</th>
 			<td class="td_input" colspan="2">
 				<span>${employeeDetail.memberId}</span>
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<b>부서</b>
-			</td>
+			<th>
+				부서
+			</th>
 			<td class="td_input" colspan="2">
 				<span>${employeeDetail.departmentId}</span>
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<b>승인여부</b>
-			</td>
+			<th>
+				승인여부
+			</th>
 			<td class="td_input" colspan="2">
 				<span>${employeeDetail.state}</span>
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<b>관리자권한</b>
-			</td>
+			<th>
+				관리자권한
+			</th>
 			<td class="td_input" colspan="2">
 				<span>${managerType}</span>
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<b>이메일</b>
-			</td>
+			<th>
+				이메일
+			</th>
 			<td class="td_input" colspan="2">
 				<span>${employeeDetail.email}</span>
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<b>전화번호</b>
-			</td>
+			<th>
+				전화번호
+			</th>
 			<td class="td_input" colspan="2">
 				<span>${employeeDetail.phone}</span>
 			</td>

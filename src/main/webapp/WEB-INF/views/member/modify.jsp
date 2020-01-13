@@ -8,8 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title>memberRegister test</title>
-<link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/member/insert.css" rel="stylesheet" type="text/css" />
+<%-- <link href="${pageContext.request.contextPath}/resources/css/standard.css" rel="stylesheet" type="text/css" /> --%>
+<link href="${pageContext.request.contextPath}/resources/css/common/insert.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/member/modify.js"></script>
 

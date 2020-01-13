@@ -13,16 +13,16 @@
 		<interceptor>
 			<!-- css와 js 안먹히는 이유, 이미지가 액박으로 표시되는 이유 그리고 무한 리다이렉트가 걸리는 이유를 알아야 할듯.. -->
 			<!-- 모든경로를 대상으로 잡았기 때문에 외부폴더경로(CSS, JS)를 제외시켜줘야한다. -->
-<!--   	 		<mapping path="/**" /> 
+  	 		<mapping path="/**" /> 
  		 	<exclude-mapping path="/" />
 		 	<exclude-mapping path="/login/**" />
 		 	<exclude-mapping path="/reservation/list" />
 		 	<exclude-mapping path="/member/insert" />
  		 	<exclude-mapping path="/**/*.js" /> 
 		 	<exclude-mapping path="/**/*.css" /> 
-		 	<exclude-mapping path="/resources/images/**" />  -->
+		 	<exclude-mapping path="/resources/images/**" />  
 
-  		 	<mapping path="/management/list" />
+<!--   		 	<mapping path="/management/list" />
 			<mapping path="/management/insert" />
 			<mapping path="/management/modify" />
 			<mapping path="/meetingRoom/list" />
@@ -34,7 +34,7 @@
 			<mapping path="/member/modify" />
 			<mapping path="/reservation/insert" />
 			<mapping path="/reservation/modify" />
-			<mapping path="/reservationDetail/read" />
+			<mapping path="/reservationDetail/read" /> -->
 		 	
 			<beans:ref bean="authInterceptor" />
 		</interceptor>

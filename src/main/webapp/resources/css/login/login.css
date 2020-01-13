@@ -14,8 +14,6 @@ input[type='submit'], input[type='button'] {
 	margin-top: 20px;
 }
 
-
-
 /* 개별 CSS */
 .main-page {
 	position: absolute;
@@ -52,6 +50,7 @@ input[type='submit'], input[type='button'] {
 	border-radius: 0; /* iSO 둥근모서리 제거 */
 	outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
 	-webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */
+	border-radius: 3px; /* 버튼 테두리를 둥글게 */
 }
 
 .login-text input, img {
@@ -74,7 +73,7 @@ input[type='submit'], input[type='button'] {
 	background-color: #563d7c;
 	color: white;
 	/* background-color: #e0e0e0; */
-	border-radius: 12px; /* 버튼 테두리를 둥글게 */
+	border-radius: 8px; /* 버튼 테두리를 둥글게 */
 	border: 2px;
 	border-color: #e0e0e0;
 }

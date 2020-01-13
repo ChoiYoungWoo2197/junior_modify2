@@ -7,7 +7,7 @@ table {
 }
 td {
 	border: 1px solid black;
-	padding: 5px 5px 5px 20px;
+	padding: 5px 20px 5px 20px;
 }
 td:first-child {
 	width: 20%;
@@ -30,3 +30,36 @@ input[type='text'] {
 	width: 90%;
 	padding-left: 10px;
 }
+
+.red {
+	color: red;
+}
+
+.error {
+	color: red;
+	display: none;
+}
+
+.success {
+	color: blue;
+	display: none;
+}
+
+input[type="text"],
+input[type="password"], select {
+	width: 100%; /* 원하는 너비 설정 */
+	height: auto; /* 높이값 초기화 */
+	line-height: normal; /* line-height 초기화 */
+}
+
+input[name="memberId"],
+input[name="email"] {
+	width: 84%;
+	margin-right: 1.5px;
+}	
+
+.width100_Important {
+	width: 100% !important;
+	
+}
+
