@@ -113,79 +113,74 @@
 					<span>${reservation.departmentName}</span>
 				</td>
 			</tr>
-			<tr id="lastTr" >
-				<th >
-					예약신청일시
-				</th>
-				<td  >
-					<fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd kk:mm" />
-				</td>
-			</tr>
+			<!-- 바꿔야됨.  -->
 			<c:choose>
-				<c:when test="${reservation.state eq 'RC'}">
-				<tr>
-					<th>
-						취소사유
-					</th>
-					<td >
-						<span>${reservation.cancelReason}</span>
-					</td>
+				<c:when test="${reservation.state eq 'R'}">
+				<tr id="trLast" class="tr_last_child">
+					<th >예약신청일시</th>
+					<td><fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd kk:mm" /></td>
 				</tr>
-
+				</c:when>
+				
+				<c:when test="${reservation.state eq 'RC'}">
+				<tr >
+					<th >예약신청일시</th>
+					<td><fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd kk:mm" /></td>
+				</tr>
+				<tr class="tr_last_child">
+					<th>취소사유</th>
+					<td ><span>${reservation.cancelReason}</span></td>
+				</tr>
 				</c:when>
 
 				<c:when test="${reservation.state eq 'E' && not empty extend}">
-				<tr>
-					<th>
-						종료일시
-					</th>
-					<td >
-						<fmt:formatDate value="${extend.endDate}" pattern="yyyy.MM.dd kk:mm" />
-					</td>
-				</tr>
 				<tr >
-					<th>
-						연장사유
-					</th>
-					<td >
-						<span>${extend.extendReason}</span>
-					</td>
+					<th >예약신청일시</th>
+					<td><fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd kk:mm" /></td>
+				</tr>
+				<tr>
+					<th>종료일시</th>
+					<td ><fmt:formatDate value="${extend.endDate}" pattern="yyyy.MM.dd kk:mm" /></td>
+				</tr>
+				<tr class="tr_last_child">
+					<th>연장사유</th>
+					<td ><span>${extend.extendReason}</span></td>
 				</tr>	
 				</c:when>
 				
 				<c:when test="${reservation.state eq 'F' || reservation.state eq 'FV'}">
-				<tr >
-					<th>
-						종료일시
-					</th>
-					<td >
-						<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" />
-					</td>
-				</tr>
-				<c:if test="${not empty extend}">
-					<tr >
+					<tr>
 						<th>
-							연장사유
+							종료일시
 						</th>
 						<td >
-							<span>${extend.extendReason}</span>
+							<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" />
 						</td>
 					</tr>
-				</c:if>
-				<c:if test="${reservation.state eq 'FV'}">
-					<tr >
-						<th>
-							이상유무
-						</th>
-						<td >
-							<span>${reservation.abnormality}</span>
-						</td>
-					</tr>
-				</c:if>
+					<c:if test="${not empty extend}">
+						<tr>
+							<th>
+								연장사유
+							</th>
+							<td >
+								<span>${extend.extendReason}</span>
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${reservation.state eq 'FV'}">
+						<tr class="tr_last_child">
+							<th>
+								이상유무
+							</th>
+							<td >
+								<span>${reservation.abnormality}</span>
+							</td>
+						</tr>
+					</c:if>
 				</c:when>
 			</c:choose>
-
-			<tr id="inputForm" ></tr>
+			
+			<tr id="inputForm"></tr>
 			<tr id="reasonForm"></tr>
 
 		</table>
@@ -201,7 +196,6 @@
 						<c:when test="${today >= startDate  &&  today < actualEndDate}">
 							<div id="processingDiv"  class="float_right">
 								<input type="button" id="exitReservation" value="조기종료" class="background_color"/>
-								<%-- <c:if test="${loginUser.manager eq 'false' && extendIspossible eq 'true'}"> --%>
 								<c:if test="${extendIspossible eq 'true'}">
 									<input type="button" id="extendReservation" value="연장신청" class="background_color" />
 								</c:if>
@@ -211,9 +205,6 @@
 							<div id="reservationDiv" class="float_right">
 								<input type="button" id="cancelReservation" value="예약취소" class="background_color" />
 								<input  type="button" id="updateReservation" value="예약수정" class="background_color" />
-								<%-- c:if test="${loginUser.manager eq 'false'}">
-									<input  type="button" id="updateReservation" value="예약수정" class="background_color" />
-								</c:if> --%>
 							</div>
 						</c:otherwise>
 					</c:choose>
