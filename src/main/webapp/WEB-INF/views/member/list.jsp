@@ -24,6 +24,15 @@
 		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allMember" class="float_right">
 	</div>
 	<table>
+		<colgroup>
+			<col width="80px" />
+			<col width="180px" />
+			<col width="140px" />
+			<col width="140px" />
+			<col width="450px" />
+			<col width="160px" />
+		</colgroup>
+	
 		<tr>
 			<th>번호</th>
 			<th>사번</th>

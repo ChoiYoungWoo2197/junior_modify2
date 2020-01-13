@@ -28,8 +28,9 @@
 			</form>
 		</section>
 
-		<section class="main-page-unit">
-			<a href="${pageContext.request.contextPath}/member/insert">회원가입</a>
+		<section class="main-page-unit text_center">
+			<br>
+			<span>계정이 없으신가요?</span><a href="${pageContext.request.contextPath}/member/insert">  회원가입</a>
 		</section>
 	</div>
 </body>

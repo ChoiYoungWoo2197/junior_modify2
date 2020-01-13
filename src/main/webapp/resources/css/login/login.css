@@ -1,17 +1,21 @@
 @charset "UTF-8";
 
 section {
-	padding-top: 0; 
+	padding-top: 0;
 }
 
 /* 공통 CSS  */
 .border {
- 	border: 1px solid #ddd; 
+	border: 1px solid #ddd;
 }
 
 input[type='submit'], input[type='button'] {
 	padding: 10px 50px;
 	margin-top: 20px;
+}
+
+.text_center {
+	text-align: center;
 }
 
 /* 개별 CSS */
@@ -29,7 +33,6 @@ input[type='submit'], input[type='button'] {
 
 .login-frame {
 	margin: 35px 0 0;
-	
 }
 
 .login-unit {
@@ -39,8 +42,7 @@ input[type='submit'], input[type='button'] {
 	overflow: hidden;
 }
 
-.login-unit input[type="text"],
-.login-unit input[type="password"] {
+.login-unit input[type="text"], .login-unit input[type="password"] {
 	width: 85%; /* 원하는 너비 설정 */
 	height: auto; /* 높이값 초기화 */
 	line-height: normal; /* line-height 초기화 */
@@ -55,9 +57,9 @@ input[type='submit'], input[type='button'] {
 }
 
 .login-img {
-	position : relative;
-	top : 5px;
-	width: 40px;
+	position: relative;
+	top: 5px;
+	width: 30px;
 	height: 30px;
 }
 
@@ -73,4 +75,8 @@ input[type='submit'], input[type='button'] {
 	border-radius: 5px; /* 버튼 테두리를 둥글게 */
 	border: 2px;
 	border-color: #e0e0e0;
+}
+
+a {
+	text-decoration: none;
 }
