@@ -1,6 +1,11 @@
 @charset "UTF-8";
 
 /* ----- 리스트 ----- */
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin: 5px 0;
+}
 td {
 	border-bottom: 1px solid #aaa;
 	padding: 8px 0;
@@ -16,12 +21,6 @@ th {
 	border-top: 2px solid black;
 	padding: 10px 0;
 }
-table {
-	border-collapse: collapse;
-	width: 100%;
-	margin: 5px 0;
-}
-
 input[type='text'], input[type='search'], input[type='date'], input[type='password'], select {
 	padding: 3px 0;
 	border-radius: 3px;

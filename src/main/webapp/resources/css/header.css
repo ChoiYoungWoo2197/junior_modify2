@@ -11,52 +11,6 @@ body {
 	background-color: #f8f9fa;
 }
 
-.float_left {
-	float: left;
-}
-
-.float_right {
-	float: right;
-}
-
-.clear_both {
-	clear: both;
-}
-
-.display_none {
-	display: none;
-}
-
-.overflow_hidden {
-	overflow: hidden;
-}
-.display_inline {
-	display: inline;
-}
-
-.width1200 {
-	width: 1200px;
-	margin: 0 auto;
-}
-
-.width1300 {
-	width: 1300px;
-	margin: 0 auto;
-}
-
-.color_gray {
-	color: gray;
-}
-
-.text_left {
-	text-align: left;
-}
-
-.text_center {
-	text-align: center;
-}
-
-
 header {
 	padding: 20px 0;
 }
@@ -94,7 +48,10 @@ h1 {
 	padding-bottom: 20px;
 }
 
-/*--*/
+h3 {
+	margin-bottom: 20px;
+}
+
 input, button, select, img {
 	cursor: pointer;
 }
@@ -118,11 +75,64 @@ input[type='button'] {
 	border-radius: 3px;
 	padding: 3px;
 }
-button {
-	padding: 3px;
-}
 img {
 	width: 30px;
 	height: 30px;
 	padding-right: 5px;
 }
+
+.float_left {
+	float: left;
+}
+
+.float_right {
+	float: right;
+}
+
+.clear_both {
+	clear: both;
+}
+
+.display_none {
+	display: none;
+}
+
+.overflow_hidden {
+	overflow: hidden;
+}
+.display_inline {
+	display: inline;
+}
+
+.width1200 {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.width1300 {
+	width: 1300px;
+	margin: 0 auto;
+}
+
+.color_gray {
+	color: gray;
+}
+
+.color_red {
+	color: red;
+	font-size: 14px;
+}
+
+.font_bold {
+	font-weight: bold;	
+}
+
+.text_left {
+	text-align: left;
+}
+
+.text_center {
+	text-align: center;
+}
+
+

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 
-<link href="${pageContext.request.contextPath}/resources/css/meetingRoom/insert.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/common/insert.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/meetingRoom/insert.js"></script>
 
 <section class="width1200">
