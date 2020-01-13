@@ -44,8 +44,9 @@
 				</tr>
 			</table>
 			<div class="float_right">
-				<input type="button" id="cancel" value="취소" />
 				<input type="submit" value="확인" />
+				<input type="button" id="cancel" value="취소" />
+				
 			</div>
 			<div class="clear_both"></div>
 		</form>

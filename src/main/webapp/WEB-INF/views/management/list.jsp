@@ -6,6 +6,7 @@
 
 <link href="${pageContext.request.contextPath}/resources/css/common/list.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/management/list.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/common/page.js"></script>
 
 <section class="width1200">
 	<c:if test="${management eq 'equipment'}">
@@ -116,12 +117,12 @@
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 				<li>
-					<a href="list?management=${management}&page=${page.startPage-1}&searchContent=${page.criteria.searchContent}">&lt;</a>
+					<a href='javascript:paging("list?management=${management}&page=${page.startPage-1}&searchContent=${page.criteria.searchContent}")'>&lt;</a>
 				</li>
 			</c:if>
 			<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
 				<li>
-					<a href="list?management=${management}&page=${index}&searchContent=${page.criteria.searchContent}">
+					<a href='javascript:paging("list?management=${management}&page=${index}&searchContent=${page.criteria.searchContent}")'>
 						<c:if test="${page.criteria.page == index}">
 							<span class="page_shape color_sky"></span>
 						</c:if>
@@ -133,7 +134,7 @@
 			</c:forEach>
 			<c:if test="${page.next}">
 				<li>
-					<a href="list?management=${management}&page=${page.endPage+1}&searchContent=${page.criteria.searchContent}">&gt;</a>
+					<a href='javascript:paging("list?management=${management}&page=${page.endPage+1}&searchContent=${page.criteria.searchContent}")'>&gt;</a>
 				</li>
 			</c:if>
 		</ul>

@@ -22,15 +22,15 @@ input[type="password"] {
 	outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
 	-webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */
 }
-
+/* 
 input[type='submit'], 
 input[type='button'] {
 	padding: 10px 50px;
-/* 	margin-top: 20px;
-	margin: 5px 0 10px 0; */
+	margin-top: 20px;
+	margin: 5px 0 10px 0;
 	border-radius: 3px;
 	border: 1px solid rgb(169,169,169);
-}
+} */
 
 input[name="authKey"] {
 	width: 81%;

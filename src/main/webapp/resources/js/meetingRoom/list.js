@@ -9,7 +9,7 @@ $(function() {
 		location.href = "read?meetingRoomId="+meetingRoomId;
 	})
 	
-	$("#searchEquipment").click(function() {
+	$("#searchMeetingRoom").click(function() {
 		if($("input[name='searchContent']").val()=="") {
 			alert("검색할 내용을 입력해주세요.");
 			return false;

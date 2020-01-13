@@ -201,7 +201,8 @@
 						<c:when test="${today >= startDate  &&  today < actualEndDate}">
 							<div id="processingDiv"  class="float_right">
 								<input type="button" id="exitReservation" value="조기종료" class="background_color"/>
-								<c:if test="${loginUser.manager eq 'false' && extendIspossible eq 'true'}">
+								<%-- <c:if test="${loginUser.manager eq 'false' && extendIspossible eq 'true'}"> --%>
+								<c:if test="${extendIspossible eq 'true'}">
 									<input type="button" id="extendReservation" value="연장신청" class="background_color" />
 								</c:if>
 							</div>
@@ -209,9 +210,10 @@
 						<c:otherwise>
 							<div id="reservationDiv" class="float_right">
 								<input type="button" id="cancelReservation" value="예약취소" class="background_color" />
-								<c:if test="${loginUser.manager eq 'false'}">
+								<input  type="button" id="updateReservation" value="예약수정" class="background_color" />
+								<%-- c:if test="${loginUser.manager eq 'false'}">
 									<input  type="button" id="updateReservation" value="예약수정" class="background_color" />
-								</c:if>
+								</c:if> --%>
 							</div>
 						</c:otherwise>
 					</c:choose>

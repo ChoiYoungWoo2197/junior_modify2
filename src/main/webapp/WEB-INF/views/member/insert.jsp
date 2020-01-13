@@ -9,8 +9,6 @@
 <meta charset="UTF-8">
 <title>memberRegister test</title>
 <link href="${pageContext.request.contextPath}/resources/css/common/insert.css" rel="stylesheet" type="text/css" /> 
-<%-- <link href="${pageContext.request.contextPath}/resources/css/member/insert.css" rel="stylesheet" type="text/css" /> --%>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/member/insert.js"></script>
 
@@ -32,11 +30,11 @@
 			<table>
 				<tr>
 					<td>
-						<b>사번</b><b class="red">*</b>
+						<b>사번</b><b class="color_red">*</b>
 					</td>
 					<td class=" border_right_hide">
 						<input name="memberId" type="text" placeholder=" 사원번호는 영문,숫자 조합입니다." />
-						<input class="float_right"  type="button" onclick="checkId()" value="중복체크">	
+						<input class="float_right"  type="button" onclick="checkId()" value="중복체크"/>	
 						<div class="clear_both"></div>				
 						<div>
 						<span id="valideId" class="error">사원번호를 입력하세요.</span>
@@ -49,7 +47,7 @@
 				</tr>
 				<tr>
 					<td>
-						<b>사원명</b><b class="red">*</b>
+						<b>사원명</b><b class="color_red">*</b>
 					</td>
 					<td class=" border_right_hide">
 						<input name="name" type="text" placeholder=" 이름은 한글만 입력해주세요."/>
@@ -62,7 +60,7 @@
 				</tr>
 				<tr>
 					<td>
-						<b>소속부서</b><b class="red">*</b>
+						<b>소속부서</b><b class="color_red">*</b>
 					</td>
 					<td class=" border_right_hide">
 						<select name="departmentType" id="departmentType" class="width100">
@@ -80,7 +78,7 @@
 				</tr>
 				<tr>
 					<td>
-						<b>비빌번호</b><b class="red">*</b>
+						<b>비빌번호</b><b class="color_red">*</b>
 					</td>
 					<td class=" border_right_hide">
 						<input name="password" type="password" size="20" placeholder=" 비밀번호는 영문,숫자 조합입니다.[3자리이상 12자리이하]"/>
@@ -90,7 +88,7 @@
 					</td>
 
 					<td class="border_right_hide">
-						<b>비밀번호 확인</b><b class="red">*</b>
+						<b>비밀번호 확인</b><b class="color_red">*</b>
 					</td>
 					<td colspan="1" class="">
 						<input id="passwordCheck" name="passwordCheck" type="password" size="20" />
@@ -104,7 +102,7 @@
 				</tr>
 				<tr>
 					<td>
-						<b>이메일</b><b class="red">*</b>
+						<b>이메일</b><b class="color_red">*</b>
 					</td>
 					<td class=" border_right_hide ">
 						<input name="email" type="text" size="20" placeholder=" 예)abc@naver.com"/>
@@ -126,7 +124,7 @@
 						<label>전화번호</label>
 					</td>
 					<td class=" border_right_hide">
- 						<input name="phone" type="text" size="20" placeholder=" 예)010.0000.0000"/>
+ 						<input name="phone" type="text" size="20" placeholder=" 예)010-0000-0000"/>
  						<div>
  						<span id="validePhone" class="error">전화번호를 입력하세요.</span>
  						</div>

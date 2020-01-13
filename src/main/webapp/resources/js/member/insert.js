@@ -137,20 +137,24 @@
 		}
 
 		var memberId = $("input[name='memberId']").val();
+		//alert(memberId);
 		$.ajax({
 			url : "/member/checkId",
 			type : "post",
 			data : {
 				"memberId" : $("input[name='memberId']").val()
 			},
+			cache : false,
 			dataType : "text",
 			success : function(res) {
+				//alert(res);
 				console.log(res);
 				if (res == "true") {
 					$("#checkIdSuccess").css("display", "none");
 					$("#checkIdFail").css("display", "inline");
 					checkMemberId = false;
 				} else if (res == "false") {
+					//alert("결과");
 					$("#checkIdSuccess").css("display", "inline");
 					$("#checkIdFail").css("display", "none");
 					checkMemberId = true;
@@ -172,6 +176,7 @@
 		$.ajax({
 			url : "/member/checkEmail",
 			type : "post",
+			cache : false,
 			data : {
 				"email" : $("input[name='email']").val()
 			},

@@ -123,6 +123,7 @@
 		$.ajax({
 			url : "/member/checkId",
 			type : "post",
+			cache : false,
 			data : {
 				"memberId" : $("input[name='modifyMemberId']").val()
 			},
@@ -156,6 +157,7 @@
 		$.ajax({
 			url : "/member/checkEmail",
 			type : "post",
+			cache : false,
 			data : {
 				"email" : $("input[name='email']").val()
 			},
