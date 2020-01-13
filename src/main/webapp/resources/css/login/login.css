@@ -79,4 +79,6 @@ input[type='submit'], input[type='button'] {
 
 a {
 	text-decoration: none;
+	color: #563d7c;
+	font-size: 14px;
 }

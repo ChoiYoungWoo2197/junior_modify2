@@ -18,7 +18,7 @@
 	<div class="width1300">
 		<header>
 			<c:if test="${empty loginUser}">
-				<img src="${pageContext.request.contextPath}/resources/images/login2.png" id="loginButton" class="float_right" onclick="location.href='${pageContext.request.contextPath}/login/login'">
+				<img src="${pageContext.request.contextPath}/resources/images/login2.png" id="loginButton" class="float_right icon_img" onclick="location.href='${pageContext.request.contextPath}/login/login'">
 				<%--<button id="loginButton" class="float_right" type="button" onclick="location.href='${pageContext.request.contextPath}/login/login'">로그인</button> --%>
 		
 				<div class="clear_both"></div>
@@ -31,7 +31,7 @@
 					<c:if test="${loginUser.manager eq 'false'}">
 						<span class="float_left">${loginUser.user.name} 님</span>
 					</c:if>
-					<img src="${pageContext.request.contextPath}/resources/images/logout2.png" id="loginButton" class="float_right" onclick="location.href='${pageContext.request.contextPath}/login/out'">
+					<img src="${pageContext.request.contextPath}/resources/images/logout2.png" id="loginButton" class="float_right icon_img" onclick="location.href='${pageContext.request.contextPath}/login/out'">
 					<%-- <button id="loginButton" class="float_right" type="button" onclick="location.href='${pageContext.request.contextPath}/login/out'">로그아웃</button> --%>
 				</div>
 				<div class="clear_both"></div>

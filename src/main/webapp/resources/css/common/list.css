@@ -34,7 +34,9 @@ input[type='text'], input[type='date'] {
 input[type='search'] {
 	width: 200px;
 }
-
+select {
+	width: 100px;
+}
 
 /* ----- 페이지 ----- */
 #page {

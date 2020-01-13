@@ -76,10 +76,11 @@ input[type='submit'], button, .background_color {
 	padding: 3px 6px;
 }
 
-img {
-	width: 30px;
-	height: 30px;
-	margin: 0 5px;
+img, .icon_img {
+	width: 20px;
+	height: 20px;
+	/* margin: 0 5px; */
+	margin: 3px;
 }
 
 .float_left {
