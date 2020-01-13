@@ -16,18 +16,23 @@ $(function() {
 		$("#cancelReservation").click(function() {
 			hide();
 			var td = '<th> 취소사유</th>';
-			var reason = '<td class="td_input"><input type="text" name="cancelReason" style="width:100%;"/></td>';
+			var reason = '<td ><input type="text" name="cancelReason" style="width:100%;"/></td>';
 			var cancel = '<input type="button" id="denyCancel" value="취소"/>';
 			var complete = '<button id="completeCancel" class="margin_right">완료 </button>';
 			$("#inputForm").append(td).append(reason);
 			$("#btnDiv").append(complete).append(cancel);
-			/*$('#btnDiv').addClass('float_right');*/
+			
+			$("#trLast").removeClass("tr_last_child");
+			$("#inputForm").addClass("tr_last_child");
 
 		})
 		$(document).on("click", "#denyCancel", function() {
 			empty();
 			$("#listDiv").show();
 			$("#reservationDiv").show();
+			
+			$("#trLast").addClass("tr_last_child");
+			$("#inputForm").removeClass("tr_last_child");
 		});
 
 		$(document).on("click",	"#completeCancel", function() {
@@ -46,15 +51,16 @@ $(function() {
 		$("#exitReservation").click(function() {
 			hide();
 			creatExitTag();
-			$("#lastTr").removeClass("border_bottom");
-			$("#inputForm").addClass("border_bottom");
+			$("#trLast").removeClass("tr_last_child");
+			$("#inputForm").addClass("tr_last_child");
 		})
 
 		$(document).on("click", "#denyExit", function() {
 			empty();
 			$("#listDiv").show();
 			$("#processingDiv").show();
-			//$("#lastTr").addClass("border_bottom");
+			$("#trLast").addClass("tr_last_child");
+			$("#inputForm").removeClass("tr_last_child");
 			
 		});
 
@@ -114,15 +120,19 @@ $(function() {
 		$("#extendReservation").click(function() {
 			hide();
 			createExtendTag();
-			$("#lastTr").removeClass("border_bottom");
-			$("#inputForm").removeClass("border_bottom");
+			$("#trLast").removeClass("tr_last_child");
+			$("#inputForm").removeClass("tr_last_child");
+			$("#reasonForm").addClass("tr_last_child");
+			
 		})
 
 		$(document).on("click", "#denyExtend", function() {
 			empty();
 			$("#listDiv").show();
 			$("#processingDiv").show();
-			$("#lastTr").addClass("border_bottom");
+			$("#trLast").addClass("tr_last_child");
+			$("#inputForm").removeClass("tr_last_child");
+			$("#reasonForm").removeClass("tr_last_child");
 		});
 
 		$(document).on("click",	"#completeExtend", function() {
@@ -191,18 +201,24 @@ $(function() {
 		$("#exitCheckReservation").click(function() {
 			hide();
 			var td = '<th> 이상유무확인</th>';
-			var abnormality = '<td class="td_input"><input type="text" name="abnormality" style="width:100%;"/></td>';
+			var abnormality = '<td><input type="text" name="abnormality" style="width:100%;"/></td>';
 			var cancel = '<input type="button" id="denyExitCheck" value="취소"/>';
 			var complete = '<button id="completeExitCheck" class="margin_right">완료 </button>';
 			$("#inputForm").append(td).append(abnormality);
 			$("#btnDiv").append(complete).append(cancel);
 			/*$('#btnDiv').addClass('float_right');*/
+			
+			$("#trLast").removeClass("tr_last_child");
+			$("#inputForm").addClass("tr_last_child");
 		})
 
 		$(document).on("click", "#denyExitCheck", function() {
 			empty();
 			$("#listDiv").show();
 			$("#exitDiv").show();
+			
+			$("#trLast").addClass("tr_last_child");
+			$("#inputForm").removeClass("tr_last_child");
 		});
 
 		$(document).on("click", "#completeExitCheck", function() {
@@ -229,7 +245,7 @@ $(function() {
 		
 		function creatExitTag() {
 			var td = '<th > 조기종료시각</th>';
-			var exitTd = '<td id="exitTd"></td>';
+			var exitTd = '<td id="exitTd" ></td>';
 			var selectStart = '<select name="exitTimeHours" id="exitTimeHours"></select>';
 			var selectEnd = '<select name="exitTimeMinutes" id="exitTimeMinutes"></select>';
 			var spanHour = '<span> : </span>';
@@ -245,7 +261,6 @@ $(function() {
 			
 			
 			$("#inputForm").append(td).append(exitTd);
-			$('#exitTd').addClass('td_input');
 			$('#exitTd').append(selectStart);
 			for (var count = startTimeArray[0]; count <= actualEndTimeArray[0]; count++) {
 				var option = $("<option>" + count + "</option>");
@@ -265,7 +280,7 @@ $(function() {
 		function createExtendTag() {
 			var td = '<th>종료시각</th>';
 			var extendTd = '<td id="extendTd"></td>';
-			var reasonTd = '<th id="reasonTd">연장사유</th>';
+			var reasonTd = '<th id="reasonTd" >연장사유</th>';
 			var selectStart = '<select name="extendTimeHours" id="extendTimeHours"></select>';
 			var selectEnd = '<select name="extendTimeMinutes" id="extendTimeMinutes"></select>';
 			var spanHour = '<span> : </span>';
@@ -278,7 +293,6 @@ $(function() {
 			var limitReservation = $("input[name='limitReservation']").val() == null ? 22 : $("input[name='limitReservation']").val().substring(0,2);
 			
 			$("#inputForm").append(td).append(extendTd);
-			$('#extendTd').addClass('td_input');
 			$('#extendTd').append(selectStart);
 
 			for (var count = actualEndTime; count <= limitReservation; count++) {

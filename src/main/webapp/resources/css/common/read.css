@@ -23,7 +23,7 @@ tr:first-child {
 	border-top: 2px solid black;
 }
 
-tr:last-child {
+tr:last-child, .tr_last_child {
 	border-bottom: 2px solid black;
 }
 
@@ -34,4 +34,8 @@ tr:last-child {
 
 .margin_right {
 	margin-right: 3px;
+}
+
+.tr_border_top {
+	border-top: 1px solid black;
 }
