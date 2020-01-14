@@ -13,7 +13,7 @@ $(function() {
     
     $("#searchEnd").datepicker({ 
         dateFormat:"yy-mm-dd",    // 날짜 출력폼 설정
-    })
+    });
     
 	$("#insertReservation").click(function() {
 		location.href = "insert";

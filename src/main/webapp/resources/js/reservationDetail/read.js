@@ -1,4 +1,4 @@
-$(function() {
+
 		function hide() {
 			$("#listDiv").hide();
 			$("#reservationDiv").hide();
@@ -11,6 +11,9 @@ $(function() {
 			$("#reasonForm").empty();
 			$("#btnDiv").empty();
 		}
+
+
+$(function() {
 
 		//예약취소 클릭시
 		$("#cancelReservation").click(function() {

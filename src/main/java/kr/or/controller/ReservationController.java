@@ -70,7 +70,6 @@ public class ReservationController {
 	@RequestMapping(value = "/infoReserve", method = RequestMethod.GET)
 	public @ResponseBody List<Reservation> infoReserve(int meetingRoomId, String choiceDay) throws ParseException {
 		String startDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
-		
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(meetingRoomId, startDate);
 		for(int i=0; i<reservationList.size()-1; i++) {
 			Reservation reservation = reservationList.get(i);
@@ -79,7 +78,12 @@ public class ReservationController {
 				reservationList.remove(i+1);
 			}
 		}
-			
+		
+		for(Reservation reservation : reservationList) {
+			System.out.println(reservation.getStartDate() + "-----------------------");
+			System.out.println(reservation.getEndDate() + "-----------------------");
+		}
+		
 		return reservationList;
 	}
 	
@@ -87,8 +91,6 @@ public class ReservationController {
 	public String insert(Model model, Reservation reservation, String start, String end) {
 		Date startDate = null;
 		Date endDate = null;
-		
-		Date now = new Date();
 		try {
 			startDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(start); //String -> Date : parse & Date -> String : format
 			endDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(end);
