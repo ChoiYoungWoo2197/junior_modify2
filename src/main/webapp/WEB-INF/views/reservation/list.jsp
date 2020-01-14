@@ -53,7 +53,7 @@
 		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allReservation" class="float_right icon_img">
 		<!-- <button id="allReservation">전체보기</button> -->
 	</div>
-	<table>
+	<table id="listTable">
 		<colgroup>
 			<col width="70px" />
 			<col width="130px" />
@@ -128,14 +128,12 @@
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 				<li>
-					<a href='javascript:paging("list?page=${page.startPage-1}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&lt;</a>
+					<a href='javascript:paging("list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&lt;</a>
 				</li>
 			</c:if>
 			<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
 				<li>
-				
-					<a href='javascript:paging("list?page=${index}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>
-					
+					<a href='javascript:paging("list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>
 						<c:if test="${page.criteria.page == index}">
 							<span class="page_shape color_sky"></span>
 						</c:if>
@@ -147,7 +145,7 @@
 			</c:forEach>
 			<c:if test="${page.next}">
 				<li>
-					<a href='javascript:paging("list?page=${page.startPage-1}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a>
+					<a href='javascript:paging("list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a>
 				</li>
 			</c:if>
 		</ul>

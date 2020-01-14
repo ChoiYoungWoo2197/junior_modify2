@@ -51,7 +51,7 @@ $(function() {
 		$("#exitReservation").click(function() {
 			hide();
 			creatExitTag();
-			$("#trLast").removeClass("tr_last_child");
+			$("#reservationDetailForm tr").removeClass("tr_last_child");
 			$("#inputForm").addClass("tr_last_child");
 		})
 
@@ -61,7 +61,7 @@ $(function() {
 			$("#processingDiv").show();
 			$("#trLast").addClass("tr_last_child");
 			$("#inputForm").removeClass("tr_last_child");
-			
+			$("#extendTr").addClass("tr_last_child");
 		});
 
 		$(document).on("click",	"#completeExit",function() {
@@ -120,10 +120,7 @@ $(function() {
 		$("#extendReservation").click(function() {
 			hide();
 			createExtendTag();
-			$("#trLast").removeClass("tr_last_child");
-			$("#inputForm").removeClass("tr_last_child");
-			$("#reasonForm").addClass("tr_last_child");
-			
+			$("#reservationDetailForm tr").removeClass("tr_last_child");
 		})
 
 		$(document).on("click", "#denyExtend", function() {
@@ -132,7 +129,8 @@ $(function() {
 			$("#processingDiv").show();
 			$("#trLast").addClass("tr_last_child");
 			$("#inputForm").removeClass("tr_last_child");
-			$("#reasonForm").removeClass("tr_last_child");
+			$("#extendTr").addClass("tr_last_child");
+			//$("#reservationDetailForm tr").eq(10).addClass("tr_last_child");
 		});
 
 		$(document).on("click",	"#completeExtend", function() {
@@ -235,8 +233,8 @@ $(function() {
 		});
 
 		$(document).on("click", "#list", function() {
-			//location.href = "/reservation/list";
-			location.href=$("input[name='oldUrl']").val();
+			location.href = "/reservation/list";
+			//location.href=$("input[name='oldUrl']").val();
 		});
 		
 		$("#updateReservation").click(function() {

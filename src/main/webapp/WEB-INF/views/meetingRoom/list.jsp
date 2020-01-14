@@ -21,7 +21,7 @@
 		<!-- <button id="allMeetingRoom">전체보기</button> -->
 		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allMeetingRoom" class="float_right icon_img">
 	</div>
-	<table>
+	<table id="listTable">
 		<colgroup>
 			<col width="80px" />
 			<col width="110px" />

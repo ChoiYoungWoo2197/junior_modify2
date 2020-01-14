@@ -18,7 +18,7 @@
 				<th>
 					예약번호
 				</th>
-				<td  >
+				<td>
 					<span>${reservation.reservationId}</span>
 				</td>
 			</tr>
@@ -142,14 +142,14 @@
 					<th>종료일시</th>
 					<td ><fmt:formatDate value="${extend.endDate}" pattern="yyyy.MM.dd kk:mm" /></td>
 				</tr>
-				<tr class="tr_last_child">
+				<tr class="tr_last_child"  id="extendTr">
 					<th>연장사유</th>
 					<td ><span>${extend.extendReason}</span></td>
 				</tr>	
 				</c:when>
 				
 				<c:when test="${reservation.state eq 'F' || reservation.state eq 'FV'}">
-					<tr>
+					<tr class="tr_last_child">
 						<th>
 							종료일시
 						</th>
@@ -195,9 +195,11 @@
 					<c:choose>
 						<c:when test="${today >= startDate  &&  today < actualEndDate}">
 							<div id="processingDiv"  class="float_right">
-								<input type="button" id="exitReservation" value="조기종료" class="background_color"/>
-								<c:if test="${extendIspossible eq 'true'}">
-									<input type="button" id="extendReservation" value="연장신청" class="background_color" />
+								<c:if test="${reservation.validateApplicant eq null || reservation.validateApplicant eq ''}">
+									<input type="button" id="exitReservation" value="조기종료" class="background_color"/>
+									<c:if test="${extendIspossible eq 'true'}">
+										<input type="button" id="extendReservation" value="연장신청" class="background_color" />
+									</c:if>
 								</c:if>
 							</div>
 						</c:when>

@@ -91,27 +91,6 @@ public class ReservationServiceImpl implements ReservationService {
 	
 	@Override
 	public String checks(String result, Date startDate, Date endDate, Reservation reservation) {
-//		if(string.equals("extend")) {
-//			if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getExtendEndDate().getTime()) {
-//				result = "false";
-//			}
-//			if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getExtendEndDate().getTime()) {
-//				result = "false";
-//			}
-//			if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getExtendEndDate().getTime() <= endDate.getTime()) {
-//				result = "false";
-//			}
-//		} else {
-//			if(reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getEndDate().getTime()) {
-//				result = "false";
-//			}
-//			if(reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getEndDate().getTime()) {
-//				result = "false";
-//			}
-//			if(startDate.getTime() <= reservation.getStartDate().getTime() && reservation.getEndDate().getTime() <= endDate.getTime()) {
-//				result = "false";
-//			}
-//		}
 		if (reservation.getStartDate().getTime() <= startDate.getTime() && startDate.getTime() <= reservation.getActualEndDate().getTime()) {
 			result = "false";
 		} else if (reservation.getStartDate().getTime() <= endDate.getTime() && endDate.getTime() <= reservation.getActualEndDate().getTime()) {
@@ -125,20 +104,6 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public boolean availableReservation(Reservation reservation, Date startDate, Date endDate) {
-//		if(reservation.getStartDate().getTime() > new Date().getTime()) { //등록 & 수정
-//			if (reservation.getStartDate().getTime() < startDate.getTime() && startDate.getTime() < reservation.getActualEndDate().getTime()) {
-//				return false;
-//			} else if (reservation.getStartDate().getTime() < endDate.getTime() && endDate.getTime() < reservation.getActualEndDate().getTime()) {
-//				return false;
-//			} else if ((startDate.getTime() <= reservation.getStartDate().getTime()) && (reservation.getActualEndDate().getTime() <= endDate.getTime())) {
-//				return false;
-//			}
-//		} else if(reservation.getStartDate().getTime() <= new Date().getTime()){ //연장신청
-//			if (reservation.getStartDate().getTime() < endDate.getTime() && endDate.getTime() <= reservation.getActualEndDate().getTime()) {
-//				
-//			}
-//			
-//		}
 		if (reservation.getStartDate().getTime() < startDate.getTime() && startDate.getTime() < reservation.getActualEndDate().getTime()) {
 			return false;
 		} else if (reservation.getStartDate().getTime() < endDate.getTime() && endDate.getTime() < reservation.getActualEndDate().getTime()) {

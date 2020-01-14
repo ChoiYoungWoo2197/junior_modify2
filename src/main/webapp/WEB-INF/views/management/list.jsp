@@ -27,7 +27,7 @@
 		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="AllManagement" class="float_right icon_img">
 	</div>
 	<c:if test="${management eq 'equipment'}">
-		<table>
+		<table id="listTable">
 			<c:if test="${empty equipmentList}">
 				<tr>
 					<th>번호</th>

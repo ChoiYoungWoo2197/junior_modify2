@@ -9,15 +9,18 @@ table {
 td, th {
    	padding: 10px 0;
    	text-align: center;
-   	border: 1px solid #bbb;
 }
 
 th {
-   	background-color: #D8D8D8;
+   	background-color: #563d7c;
+   	color: white;
+   	font-size: 14px;
+   	border: 1px solid black;
 }
 
 td {
 	cursor: pointer;
+	border: 1px solid #bbb;
 }
 
 input[type='text'], select {

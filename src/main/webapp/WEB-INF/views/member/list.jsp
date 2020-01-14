@@ -23,7 +23,7 @@
 		<!-- <input type="button" id="allMeetingRoom" name="AllMeetingRoom" value="전체보기"> -->
 		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allMember" class="float_right icon_img">
 	</div>
-	<table>
+	<table id="listTable">
 		<colgroup>
 			<col width="80px" />
 			<col width="180px" />

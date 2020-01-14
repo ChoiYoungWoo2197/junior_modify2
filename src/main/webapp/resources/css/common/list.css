@@ -37,6 +37,11 @@ input[type='search'] {
 select {
 	width: 100px;
 }
+#listTable tr:hover {
+	background-color: #9c8fb1;
+	
+}
+
 
 /* ----- 페이지 ----- */
 #page {

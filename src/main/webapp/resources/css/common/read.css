@@ -5,7 +5,7 @@ table {
 	width: 100%;
 	margin: 10px 0;
 }
-table th:first-child {
+table th {
 	background-color : #563d7c;
 	border-bottom: 1px solid black;
 	padding: 5px;

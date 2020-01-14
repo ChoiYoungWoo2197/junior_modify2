@@ -160,8 +160,11 @@ public class ReservationController {
 		List<MeetingRoomEquipment> meetingRoomEquipmentList = reservationService.selectMeetingRoomEquipmentById(reservation.getMeetingRoomId());
 		model.addAttribute("meetingRoomEquipmentList", meetingRoomEquipmentList);
 		
-		int seats = reservation.getMeetAttendess();
-		model.addAttribute("seats", seats);
+		for(MeetingRoom meetingRoom : meetingRoomList) {
+			if(meetingRoom.getMeetingRoomId() == reservation.getMeetingRoomId()) {
+				model.addAttribute("seats", meetingRoom.getSeats());
+			}
+		}
 		
 		Date startDate = reservation.getStartDate();
 		String start = new SimpleDateFormat("yyyy-MM-dd").format(startDate);
