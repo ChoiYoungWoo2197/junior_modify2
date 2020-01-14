@@ -37,7 +37,7 @@
 			<mapping path="/reservation/insert" />
 			<mapping path="/reservation/modify" />
 			<mapping path="/reservationDetail/read" />
-		 	
+
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 	</interceptors>

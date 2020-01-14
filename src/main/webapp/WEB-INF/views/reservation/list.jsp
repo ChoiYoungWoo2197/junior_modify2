@@ -144,7 +144,7 @@
 				</li>
 			</c:forEach>
 			<c:if test="${page.next}">
-				<li>
+				<li>					
 					<a href='javascript:paging("list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a>
 				</li>
 			</c:if>

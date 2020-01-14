@@ -95,7 +95,8 @@
 				</li>
 			</c:forEach>
 			<c:if test="${page.next}">
-				<li>
+				<li>		
+					<%-- <a href="list?page=${page.endPage+1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a> --%>
 					<a href='javascript:paging("list?page=${page.endPage+1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a>
 				</li>
 			</c:if>
