@@ -107,10 +107,10 @@ $(function() {
 					$("#reservationList p").text("예약 내역이 존재하지 않습니다.");	
 				}else {
 					$(res).each(function(index, element) {
-						var startDateOrigin = new Date(element.startDate);
-						var startDate = startDateOrigin.getHours()+":"+("00" + startDateOrigin.getMinutes()).slice(-2);
-						var endDateOrigin = new Date(element.actualEndDate);
-						var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
+//						var startDateOrigin = new Date(element.startDate);
+//						var startDate = startDateOrigin.getHours()+":"+("00" + startDateOrigin.getMinutes()).slice(-2);
+//						var endDateOrigin = new Date(element.actualEndDate);
+//						var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
 						
 						var $reservationLi = $("<li>").html("<span>"+ startDate + "</span><span>&ensp;~&ensp;</span><span>" + endDate + "</span>&ensp;<span class='overflow_ellipsis'>&ensp;&ensp;" + element.meetPurpose +"</span><br>(" + element.employeeName + "("+ element.departmentName + "))" );
 						$("#reservationList ul").append($reservationLi);
