@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.domain.Extend;
 import kr.or.domain.MeetingRoom;
 import kr.or.domain.MeetingRoomEquipment;
 import kr.or.domain.Reservation;
@@ -101,6 +102,9 @@ public class ReservationServiceImpl implements ReservationService {
 		
 		return result;
 	}
+	
+	//public boolean 예약할수있어(Reservation reservation) {return true; }
+	//public boolean 연장할수있어(Reservation reservation, Extend extend) {return true; }
 
 	@Override
 	public boolean availableReservation(Reservation reservation, Date startDate, Date endDate) {
