@@ -149,7 +149,7 @@
 				</c:when>
 				
 				<c:when test="${reservation.state eq 'F' || reservation.state eq 'FV'}">
-					<tr class="tr_last_child">
+					<tr class="tr_last_child" id="finishTr">
 						<th>
 							종료일시
 						</th>

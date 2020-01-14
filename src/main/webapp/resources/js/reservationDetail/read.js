@@ -198,6 +198,9 @@ $(function() {
 
 		$("#exitCheckReservation").click(function() {
 			hide();
+			$("#reservationDetailForm tr").removeClass("tr_last_child");
+			
+			
 			var td = '<th> 이상유무확인</th>';
 			var abnormality = '<td><input type="text" name="abnormality" style="width:100%;"/></td>';
 			var cancel = '<input type="button" id="denyExitCheck" value="취소"/>';
@@ -215,6 +218,7 @@ $(function() {
 			$("#listDiv").show();
 			$("#exitDiv").show();
 			
+			$("#finishTr").addClass("tr_last_child");
 			$("#trLast").addClass("tr_last_child");
 			$("#inputForm").removeClass("tr_last_child");
 		});
