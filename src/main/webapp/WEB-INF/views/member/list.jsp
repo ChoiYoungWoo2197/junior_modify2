@@ -19,9 +19,9 @@
 			<input type="search" name="searchContent" value="${searchCriteria.searchContent}"> &nbsp;
 		</div>
 		<!-- <input type="button" id="searchEquipment" name="searchEquipment" value="검색"> -->
-		<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchMember" class="float_left">
+		<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchMember" class="float_left icon_img">
 		<!-- <input type="button" id="allMeetingRoom" name="AllMeetingRoom" value="전체보기"> -->
-		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allMember" class="float_right">
+		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allMember" class="float_right icon_img">
 	</div>
 	<table>
 		<colgroup>

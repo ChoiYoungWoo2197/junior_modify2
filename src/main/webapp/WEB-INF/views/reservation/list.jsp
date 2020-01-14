@@ -18,10 +18,10 @@
 		<div class="float_left">
 			<label class="float_left">사용일</label>
 			<input type="text" name="searchDate" id="searchStart" value="${searchCriteria.searchStart}" class="float_left">
-			<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="startImg" class="float_left"> 
+			<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="startImg" class="float_left icon_img"> 
 			<span class="float_left">~&nbsp;</span> 
 			<input type="text" name="searchDate" id="searchEnd" value="${searchCriteria.searchEnd}" class="float_left">
-			<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="endImg" class="float_left">
+			<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="endImg" class="float_left icon_img">
 			<select name="state">
 				<option value="none">상태</option>
 				<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약(진행중)</option>
@@ -48,9 +48,9 @@
 			</select>
 			<input type="search" name="searchContent" value="${searchCriteria.searchContent}">
 		</div>
-		<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchReservation" class="float_left">
+		<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchReservation" class="float_left icon_img">
 		<!-- <button id="searchReservation">검색</button> -->
-		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allReservation" class="float_right">
+		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allReservation" class="float_right icon_img">
 		<!-- <button id="allReservation">전체보기</button> -->
 	</div>
 	<table>

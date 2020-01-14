@@ -10,7 +10,7 @@
 
 <section class="width1200">
 	<h1>예약 상세보기</h1>
-	<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="list" class="float_right">
+	<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="list" class="float_right icon_img">
 		
 	<form name="reservationDetailForm" id="reservationDetailForm" method="post">
 		<table>

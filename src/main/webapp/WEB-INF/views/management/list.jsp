@@ -22,9 +22,9 @@
 			<input type="search" name="searchContent" value="${searchCriteria.searchContent}">&nbsp;
 		</div>
 		<!-- <button id="searchManagement">검색</button> -->
-		<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchManagement" class="float_left">
+		<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchManagement" class="float_left icon_img">
 		<!-- <button id="AllManagement">전체보기</button> -->
-		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="AllManagement" class="float_right">
+		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="AllManagement" class="float_right icon_img">
 	</div>
 	<c:if test="${management eq 'equipment'}">
 		<table>

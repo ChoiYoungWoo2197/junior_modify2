@@ -8,7 +8,7 @@
 	<section class="width1200">
 		<h1>회의실 상세내역</h1>
 		<div>
-			<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="listMeetingRoom" class="float_right">
+			<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="listMeetingRoom" class="float_right icon_img">
 		</div>
 		<table>
 			<tr>
