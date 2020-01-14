@@ -41,6 +41,7 @@ $(function() {
 					alert("취소사유를 입력해주세요.");
 				}
 				else {
+					/*location.href = "/reservationDetail/cancel";*/
 					document.getElementById('reservationDetailForm').action = "/reservationDetail/cancel";
 					document.getElementById('reservationDetailForm').submit();
 				}
@@ -101,6 +102,7 @@ $(function() {
 				}
 				else {
 					if(currentTime < exitDate) {
+						//location.href = "/reservationDetail/exit";
 						document.getElementById('reservationDetailForm').action = "/reservationDetail/exit";
 						document.getElementById('reservationDetailForm').submit();
 					}
@@ -180,14 +182,13 @@ $(function() {
 									alert("다른 시간을 선택해주세요.");
 								} else {
 									result = true;
+									/*location.href = "/reservationDetail/extend";*/
+									document.getElementById('reservationDetailForm').action = "/reservationDetail/extend";
+									document.getElementById('reservationDetailForm').submit();	
 								}
 							}
 						})
-						
-						if(result) {
-							document.getElementById('reservationDetailForm').action = "/reservationDetail/extend";
-							document.getElementById('reservationDetailForm').submit();	
-						}
+
 					}
 
 
@@ -229,6 +230,7 @@ $(function() {
 					alert("이상유무를 입력해주세요.");
 				}
 				else {
+					/*location.href = "/reservationDetail/exitCheck";*/
 					document.getElementById('reservationDetailForm').action = "/reservationDetail/exitCheck";
 					document.getElementById('reservationDetailForm').submit();	
 				}

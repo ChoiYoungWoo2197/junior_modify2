@@ -87,6 +87,8 @@ public class ReservationController {
 	public String insert(Model model, Reservation reservation, String start, String end) {
 		Date startDate = null;
 		Date endDate = null;
+		
+		Date now = new Date();
 		try {
 			startDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(start); //String -> Date : parse & Date -> String : format
 			endDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(end);
