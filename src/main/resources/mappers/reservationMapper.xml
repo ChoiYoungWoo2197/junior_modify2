@@ -3,28 +3,39 @@
 <mapper namespace="kr.or.mappers.reservationMapper">
 	
 	<sql id="search">
-		<if test="searchStart">
-			WHERE start_date BETWEEN DATE(#{searchStart}) <if test="searchEnd">AND DATE(#{searchEnd})+1 </if>
+		<if test="searchStart != null">
+			<!-- WHERE start_date BETWEEN DATE(#{searchStart}) <if test="searchEnd">AND DATE_ADD(#{searchEnd}, INTERVAL 1 DAY)</if> -->
+			WHERE start_date <![CDATA[>=]]> #{searchStart} <if test="searchEnd != null"> AND end_date <![CDATA[<=]]> #{searchEnd}</if>
 		</if>
 		<if test="state">
 			<if test="searchStart == null">
-				WHERE reservation.state = #{state}
+				<if test="state != 'none'.toString()">
+					WHERE reservation.state = #{state}
+				</if>
 			</if>
 			<if test="searchStart != null">
-				AND reservation.state = #{state}
+				<if test="state != 'none'.toString()">
+					AND reservation.state = #{state}
+				</if>
 			</if>
 		</if>
 		<if test="meetingRoomId">
 			<if test="searchStart == null">
-				<if test="state == null">
-					WHERE reservation.meeting_room_id = #{meetingRoomId}
+				<if test="state == 'none'.toString()">
+					<if test="meetingRoomId != '0'.toString()">
+						WHERE reservation.meeting_room_id = #{meetingRoomId}
+					</if>
 				</if>
-				<if test="state != null">
-					AND reservation.meeting_room_id = #{meetingRoomId}
+				<if test="state != 'none'.toString()">
+					<if test="meetingRoomId != '0'.toString()">
+						AND reservation.meeting_room_id = #{meetingRoomId}
+					</if>
 				</if>
 			</if>
 			<if test="searchStart != null">
-				AND reservation.meeting_room_id = #{meetingRoomId}
+				<if test="meetingRoomId != '0'.toString()">
+					AND reservation.meeting_room_id = #{meetingRoomId}
+				</if>
 			</if>
 		</if>
 		<if test="searchType == 'department'.toString()">

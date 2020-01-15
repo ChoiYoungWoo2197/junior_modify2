@@ -78,12 +78,6 @@ public class ReservationController {
 				reservationList.remove(i+1);
 			}
 		}
-		
-		for(Reservation reservation : reservationList) {
-			System.out.println(reservation.getStartDate() + "-----------------------");
-			System.out.println(reservation.getEndDate() + "-----------------------");
-		}
-		
 		return reservationList;
 	}
 	

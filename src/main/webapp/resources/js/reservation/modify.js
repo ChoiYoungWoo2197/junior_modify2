@@ -3,11 +3,11 @@ $(function() {
 	
 	$("#prevMonth").on("click", function() {
 		prevMonth();
-	})
+	});
 	
 	$("#nextMonth").on("click", function() {
 		nextMonth();
-	})
+	});
 
 	var choiceDay;
 	var choiceDay2;
@@ -89,7 +89,7 @@ $(function() {
 				}
 			})
 		}
-	})
+	});
 	
 	var date = new Date();
 	var today = String(date.getFullYear())+String(('0'+(date.getMonth()+1)).slice(-2))+String(('0'+date.getDate()).slice(-2));
@@ -134,7 +134,7 @@ $(function() {
 				}
 			}
 		})
-	})
+	});
 	
 	var currentDate = today+String(("00" + date.getHours()).slice(-2))+String(("00" + date.getMinutes()).slice(-2));
 	
@@ -203,9 +203,9 @@ $(function() {
 			}
 		})
 		return result;
-	})
+	});
 	
 	$("#readReservation").click(function() {
 		location.href="/reservationDetail/read?reservationId="+$("input[name='reservationId']").val();
-	})
+	});
 })

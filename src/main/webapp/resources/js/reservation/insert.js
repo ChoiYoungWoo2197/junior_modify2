@@ -3,11 +3,11 @@ $(function() {
 	
 	$("#prevMonth").on("click", function() {
 		prevMonth();
-	})
+	});
 	
 	$("#nextMonth").on("click", function() {
 		nextMonth();
-	})
+	});
 
 	$("#reservationList").hide();
 	
@@ -67,7 +67,7 @@ $(function() {
 				})
 			}
 		}
-	})
+	});
 	
 	/* var meetingStart = new Array(); //ajax로 받은 값을 담을 변수 지정
 	var meetingEnd = new Array(); */
@@ -124,7 +124,7 @@ $(function() {
 				}
 			}
 		})
-	})
+	});
 	
 	var currentDate = today+String(("00" + date.getHours()).slice(-2))+String(("00" + date.getMinutes()).slice(-2));
 	
@@ -210,9 +210,9 @@ $(function() {
 			}
 		})
 		return result;
-	})
+	});
 	
 	$("#listReservation").click(function() {
 		location.href = "list";
-	})
+	});
 })

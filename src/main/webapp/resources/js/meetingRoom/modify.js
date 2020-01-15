@@ -1,7 +1,7 @@
 $(function() {
 	$("#listMeetingRoom").click(function() {
 		location.href = "list";
-	})
+	});
 	
 	$("#updateMeetingRoomForm").submit(function() {
 		var result = confirm("수정하시겠습니까?");
@@ -41,10 +41,10 @@ $(function() {
 		} else {
 			return false;
 		}
-	})
+	});
 	
 	$("#cancelUpdate").click(function() {
 		var meetingRoomId = Number($("input[name='meetingRoomId']").val());
 		location.href = "read?meetingRoomId="+meetingRoomId;
-	})
+	});
 })
