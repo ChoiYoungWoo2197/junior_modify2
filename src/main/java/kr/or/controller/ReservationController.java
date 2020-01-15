@@ -8,8 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.mail.Session;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,6 +75,7 @@ public class ReservationController {
 	
 	@RequestMapping(value = "/infoReserve", method = RequestMethod.GET)
 	public @ResponseBody List<Reservation> infoReserve(int meetingRoomId, String choiceDay) throws ParseException {
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
 		String startDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(meetingRoomId, startDate);
 		for(int i=0; i<reservationList.size()-1; i++) {

@@ -113,7 +113,7 @@ $(function() {
 						console.log(element.startDate);
 						console.log(element.actualEndDate);
 						
-						var $reservationLi = $("<li>").html("<span>"+ element.startDate + "</span><span>&ensp;~&ensp;</span><span>" + element.actualEndDate + "</span>&ensp;<span class='overflow_ellipsis'>&ensp;&ensp;" + element.meetPurpose +"</span><br>(" + element.employeeName + "("+ element.departmentName + "))" );
+						var $reservationLi = $("<li>").html("<span>"+ startDate + "</span><span>&ensp;~&ensp;</span><span>" + endDate + "</span>&ensp;<span class='overflow_ellipsis'>&ensp;&ensp;" + element.meetPurpose +"</span><br>(" + element.employeeName + "("+ element.departmentName + "))" );
 						$("#reservationList ul").append($reservationLi);
 					})
 				}
