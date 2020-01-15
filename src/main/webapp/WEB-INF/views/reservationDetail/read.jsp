@@ -197,7 +197,7 @@
                      <div id="processingDiv"  class="float_right">
                         <c:if test="${reservation.validateApplicant eq null || reservation.validateApplicant eq ''}">
                            <input type="button" id="exitReservation" value="조기종료" class="background_color"/>
-                           <c:if test="${extendIspossible eq 'true'}">
+                           <c:if test="${loginUser.manager eq 'false' && extendIspossible eq 'true'}">
                               <input type="button" id="extendReservation" value="연장신청" class="background_color" />
                            </c:if>
                         </c:if>
