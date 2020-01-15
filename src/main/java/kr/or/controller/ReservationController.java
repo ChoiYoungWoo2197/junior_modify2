@@ -82,14 +82,18 @@ public class ReservationController {
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
 		String startDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(meetingRoomId, startDate);
+<<<<<<< HEAD
 		
 		//yyyy-MM-dd kk:mm 저장했으니깐 같은형태로 만들어준다.?
 		
 		for(int i=0; i<reservationList.size()-1; i++) {
+=======
+		for(int i=reservationList.size()-1; i>0; i--) {
+>>>>>>> 06ac990f1d81fb7a4d5ab5406380dbe3fa2a1e85
 			Reservation reservation = reservationList.get(i);
-			Reservation reservation2 = reservationList.get(i+1);
+			Reservation reservation2 = reservationList.get(i-1);
 			if(reservation.getReservationId() == reservation2.getReservationId()) {
-				reservationList.remove(i+1);
+				reservationList.remove(i);
 			}
 		}
 		return reservationList;

@@ -4,8 +4,6 @@ import java.util.Date;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class Reservation {
  	 private int reservationId;
 	 private int employeeId;
@@ -13,14 +11,14 @@ public class Reservation {
 	 @NotEmpty(message="회의목적을 입력하세요")
 	 private String meetPurpose;
 	 private int meetAttendess;
-	 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss", timezone = "Asia/Seoul")
+	// @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss", timezone = "Asia/Seoul")
 	 private Date startDate;
-	 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss", timezone = "Asia/Seoul")
+	 //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss", timezone = "Asia/Seoul")
 	 private Date endDate;
 	 private Date reservationDate;
 	 private String state;
 	 private Date modifyDate;
-	 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss", timezone = "Asia/Seoul")
+	// @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss", timezone = "Asia/Seoul")
 	 private Date actualEndDate;
 	 private Date validateTime;
 	 private String validateApplicant;
