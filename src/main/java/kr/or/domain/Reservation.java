@@ -13,14 +13,24 @@ public class Reservation {
 	 @NotEmpty(message="회의목적을 입력하세요")
 	 private String meetPurpose;
 	 private int meetAttendess;
+<<<<<<< HEAD
 	 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
 	 private Date startDate;
 	 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
+=======
+	 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss", timezone = "Asia/Seoul")
+	 private Date startDate;
+	 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss", timezone = "Asia/Seoul")
+>>>>>>> 3ddb8f2cc504434638898dc594e897cf8febe32e
 	 private Date endDate;
 	 private Date reservationDate;
 	 private String state;
 	 private Date modifyDate;
+<<<<<<< HEAD
 	 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
+=======
+	 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss", timezone = "Asia/Seoul")
+>>>>>>> 3ddb8f2cc504434638898dc594e897cf8febe32e
 	 private Date actualEndDate;
 	 private Date validateTime;
 	 private String validateApplicant;

@@ -127,12 +127,21 @@
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 				<li>
+<<<<<<< HEAD
 					<a href="./list?page=${index}&searchStart=${page.criteria.searchStart}&searchEnd=${page.criteria.searchEnd}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&lt;</a>
 				</li>
 			</c:if>
 			<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
 				<li>					
 					<a href="./list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">
+=======
+					<a href="list?page=${index}&searchStart=${page.criteria.searchStart}&searchEnd=${page.criteria.searchEnd}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&lt;</a>
+				</li>
+			</c:if>
+			<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
+				<li>
+					<a href="list?page=${index}&searchStart=${page.criteria.searchStart}&searchEnd=${page.criteria.searchEnd}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">
+>>>>>>> 3ddb8f2cc504434638898dc594e897cf8febe32e
 						<c:if test="${page.criteria.page == index}">
 							<span class="page_shape color_sky"></span>
 						</c:if>
@@ -144,7 +153,11 @@
 			</c:forEach>
 			<c:if test="${page.next}">
 				<li>					
+<<<<<<< HEAD
 					<a href="./list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&gt;</a>
+=======
+					<a href="list?page=${index}&searchStart=${page.criteria.searchStart}&searchEnd=${page.criteria.searchEnd}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&gt;</a>
+>>>>>>> 3ddb8f2cc504434638898dc594e897cf8febe32e
 				</li>
 			</c:if>
 		</ul>

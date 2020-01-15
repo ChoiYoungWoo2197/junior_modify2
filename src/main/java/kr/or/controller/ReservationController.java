@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +50,9 @@ public class ReservationController {
 	      }
 		
 		
+		if(searchCriteria.getSearchContent() != null) {
+			model.addAttribute("searchContent", URLEncoder.encode(searchCriteria.getSearchContent(), "UTF-8"));
+		}
 		return "reservation/list";
 	}
 	
