@@ -1,5 +1,7 @@
 package kr.or.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
@@ -7,8 +9,6 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,13 +48,16 @@ public class MemberController {
 	ReservationDetailService reservationDetailService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(SearchCriteria searchCriteria,Model model) {
+	public String list(SearchCriteria searchCriteria,Model model) throws UnsupportedEncodingException {
 		List<Employee> employeeList = employeeService.searchEmployee(searchCriteria);
 		model.addAttribute("employeeList", employeeList);
 		model.addAttribute("employeeListSize", employeeService.searchEmployeeCount(searchCriteria));
 		
 		model.addAttribute("searchCriteria", searchCriteria);
 		model.addAttribute("page", new Page(employeeService.searchEmployeeCount(searchCriteria), searchCriteria));
+		if(searchCriteria.getSearchContent()!=null){
+	         model.addAttribute("searchContent", URLEncoder.encode(searchCriteria.getSearchContent(),"UTF-8"));
+	      }
 		return "/member/list";
 	}
 
@@ -138,7 +141,9 @@ public class MemberController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(HttpServletRequest request) {
-		//Enumeration enums = request.getParameterNames();
+		Enumeration enums = request.getParameterNames();
+		
+		String modifyPassword = request.getParameter("modifyPassword");
 		String originalMemberId = request.getParameter("originalMemberId");
 		String managerType = request.getParameter("manager");
 		
@@ -146,7 +151,11 @@ public class MemberController {
 		employee.setDepartmentId(request.getParameter("departmentType"));
 		employee.setName(request.getParameter("name"));
 		employee.setMemberId(request.getParameter("modifyMemberId"));
-		employee.setPassword(employeeService.encSHA256(request.getParameter("password")));
+		
+		if(modifyPassword.equals("") != true) {
+			employee.setPassword(employeeService.encSHA256(modifyPassword));
+		}
+		
 		employee.setEmail(request.getParameter("email"));
 		employee.setPhone(request.getParameter("phone"));
 		employeeService.modifyEmployee(employee);

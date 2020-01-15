@@ -78,11 +78,11 @@ public class ReservationController {
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
 		String startDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(meetingRoomId, startDate);
-		for(int i=0; i<reservationList.size()-1; i++) {
+		for(int i=reservationList.size()-1; i>0; i--) {
 			Reservation reservation = reservationList.get(i);
-			Reservation reservation2 = reservationList.get(i+1);
+			Reservation reservation2 = reservationList.get(i-1);
 			if(reservation.getReservationId() == reservation2.getReservationId()) {
-				reservationList.remove(i+1);
+				reservationList.remove(i);
 			}
 		}
 		return reservationList;
