@@ -127,7 +127,7 @@
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 				<li>
-					<a href="list?page=${index}&searchStart=${page.criteria.searchStart}&searchEnd=${page.criteria.searchEnd}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&lt;</a>
+					<a href="list?page=${page.startPage-1}&searchStart=${page.criteria.searchStart}&searchEnd=${page.criteria.searchEnd}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&lt;</a>
 				</li>
 			</c:if>
 			<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
@@ -144,7 +144,7 @@
 			</c:forEach>
 			<c:if test="${page.next}">
 				<li>					
-					<a href="list?page=${index}&searchStart=${page.criteria.searchStart}&searchEnd=${page.criteria.searchEnd}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&gt;</a>
+					<a href="list?page=${page.endPage+1}&searchStart=${page.criteria.searchStart}&searchEnd=${page.criteria.searchEnd}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&gt;</a>
 				</li>
 			</c:if>
 		</ul>
