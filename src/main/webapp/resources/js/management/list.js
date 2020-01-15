@@ -41,7 +41,8 @@ $(function() {
 		})
 	});
 	
-	$(document).on("click", ".updateManagement", function(){
+	//$(document).on("click", ".updateManagement", function(){
+	$(".updateManagement").click(function() {
 		var managementId = Number($(this).find(".readManagement").attr("data-managementId"));
 		
 		var result = confirm("수정하시겠습니까?");

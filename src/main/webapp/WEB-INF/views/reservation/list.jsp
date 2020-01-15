@@ -49,8 +49,7 @@
 				</select>
 				<input type="search" name="searchContent" value="${searchCriteria.searchContent}">
 			</div>
-			<input type="submit" value="검색">
-			<%-- <img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchReservation" class="float_left icon_img"> --%>
+			<input type="image" src="${pageContext.request.contextPath}/resources/images/search.png" id="searchReservation" class="icon_img" onclick="return false">
 		</form>
 		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allReservation" class="float_right icon_img">
 	</div>
@@ -134,7 +133,7 @@
 			</c:if>
 			<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
 				<li>
-					<a href="list?page=${index}&searchStart=${page.criteria.searchStart}&searchEnd=${page.criteria.searchEnd}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}">
+					<a href='javascript:paging("list?page=${index}&searchStart=${page.criteria.searchStart}&searchEnd=${page.criteria.searchEnd}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>
 						<c:if test="${page.criteria.page == index}">
 							<span class="page_shape color_sky"></span>
 						</c:if>

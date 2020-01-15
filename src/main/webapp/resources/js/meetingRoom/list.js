@@ -3,7 +3,8 @@ $(function() {
 		location.href = "insert";
 	});
 	
-	$(document).on("click", ".updateMeetingRoom", function(){
+	//$(document).on("click", ".updateMeetingRoom", function(){
+	$(".updateMeetingRoom").click(function() {
 		var meetingRoomId = Number($(this).find(".readMeetingRoom").attr("data-meetingRoomId"));
 		
 		location.href = "read?meetingRoomId="+meetingRoomId;

@@ -25,12 +25,13 @@ $(function() {
 		location.href = encodeURI("/reservationDetail/read?reservationId="+ reservationId);
 	});
 	
-	$("#searchForm").submit(function() {
-		if($("input[name='searchContent']").val()=="" && $("select[name='state']").val()=="none" && $("select[name='meetingRoomId']").val()=="0"
-			&& $("input[name='searchStart']").val()=="" && $("input[name='searchEnd']").val()=="") {
-			alert("검색할 내용을 입력해주세요.");
-			return false;
-		}
+	$("#searchReservation").click(function() {
+//		if($("input[name='searchContent']").val()=="" && $("select[name='state']").val()=="none" && $("select[name='meetingRoomId']").val()=="0"
+//			&& $("input[name='searchStart']").val()=="" && $("input[name='searchEnd']").val()=="") {
+//			alert("검색할 내용을 입력해주세요.");
+//			return false;
+//		}
+		$("#searchForm").submit();
 	});
 	
 	$("#allReservation").click(function() {
