@@ -1,17 +1,115 @@
-$(function() {
-		function hide() {
+function hide() {
 			$("#listDiv").hide();
 			$("#reservationDiv").hide();
 			$("#processingDiv").hide();
 			$("#exitDiv").hide();
-		}
+		};
 
 		function empty() {
 			$("#inputForm").empty();
 			$("#reasonForm").empty();
 			$("#btnDiv").empty();
-		}
+		};
+		
+		function creatExitTag() {
+			var td = '<th > 조기종료시각</th>';
+			var exitTd = '<td id="exitTd" ></td>';
+			var selectStart = '<select name="exitTimeHours" id="exitTimeHours"></select>';
+			var selectEnd = '<select name="exitTimeMinutes" id="exitTimeMinutes"></select>';
+			var spanHour = '<span> : </span>';
+			var spanMinutes = '<span> 분 </span>';
+			var cancel = '<input type="button" id="denyExit"  value="취소"/>';
+			var complete = '<button id="completeExit" class="margin_right">완료 </button>';
+	
+			var startTime= $("input[name='startTime']").val();
+			var startTimeArray = startTime.split(':');
+			var actualEndTime = $("input[name='actualEndTime']").val();
+			var actualEndTimeArray = actualEndTime.split(':');
+			//alert(startTimeArray[0] + " : " + actualEndTimeArray[0]);
+			
+			
+			$("#inputForm").append(td).append(exitTd);
+			$('#exitTd').append(selectStart);
+			for (var count = startTimeArray[0]; count <= actualEndTimeArray[0]; count++) {
+				var option = $("<option>" + count + "</option>");
+				$('#exitTimeHours').append(option);
+			}
+			$('#exitTd').append(spanHour).append(selectEnd);
+			for (var count = 0; count <= 59; count++) {
+				var option = $("<option>" + count + "</option>");
+				$('#exitTimeMinutes').append(option);
+			}
+			
+			//$("#inputForm").append(spanMinutes);
+			$("#btnDiv").append(complete).append(cancel);
+			/*$('#btnDiv').addClass('float_right');*/
+		};
+		
+		function createExtendTag() {
+			var td = '<th>종료시각</th>';
+			var extendTd = '<td id="extendTd"></td>';
+			var reasonTd = '<th id="reasonTd" >연장사유</th>';
+			var selectStart = '<select name="extendTimeHours" id="extendTimeHours"></select>';
+			var selectEnd = '<select name="extendTimeMinutes" id="extendTimeMinutes"></select>';
+			var spanHour = '<span> : </span>';
+			var spanMinutes = '<span> 분 </span>';
+			var reason = '<td><input type="text" name="extendReason" style="width:100%;"/></td>';
+			var cancel = '<input type="button" id="denyExtend" value="취소"/>';
+			var complete = '<button id="completeExtend" class="margin_right">완료 </button>';
 
+			var actualEndTime = $("input[name='actualEndTime']").val().substring(0,2);
+			var limitReservation = $("input[name='limitReservation']").val() == null ? 22 : $("input[name='limitReservation']").val().substring(0,2);
+			
+			$("#inputForm").append(td).append(extendTd);
+			$('#extendTd').append(selectStart);
+
+			for (var count = actualEndTime; count <= limitReservation; count++) {
+				var option = $("<option>" + count + "</option>");
+				$('#extendTimeHours').append(option);
+			}
+			$('#extendTd').append(spanHour).append(selectEnd);
+			for (var count = 0; count <= 59; count++) {
+				var option = $("<option>" + count + "</option>");
+				$('#extendTimeMinutes').append(option);
+			}
+			
+			if($("input[name='limitReservation']").val() != null) {
+				var label = '<label> 이 후' +$("input[name='limitReservation']").val() +' 예약건이 있습니다. </label>';
+				$('#extendTd').append(label);
+			}
+			
+			$("#reasonForm").append(reasonTd).append(reason);
+			$("#btnDiv").append(complete).append(cancel);
+			/*$('#btnDiv').addClass('float_right');*/
+		};
+		
+		function parseDate(strDate) {
+		    var _strDate = strDate;
+		    var _dateObj = new Date(_strDate);
+		    if (_dateObj.toString() == 'Invalid Date') {
+		        _strDate = _strDate.split('.').join('-');
+		        _dateObj = new Date(_strDate);
+		    }
+		    if (_dateObj.toString() == 'Invalid Date') {
+		        var _parts = _strDate.split(' ');
+		 
+		        var _dateParts = _parts[0];
+		        _dateObj = new Date(_dateParts);
+		 
+		        if (_parts.length > 1) {
+		            var _timeParts = _parts[1].split(':');
+		            _dateObj.setHours(_timeParts[0]);
+		            _dateObj.setMinutes(_timeParts[1]);
+	            if (_timeParts.length > 2) {
+		                _dateObj.setSeconds(_timeParts[2]);
+		            }
+		        }
+		    }
+		 
+		    return _dateObj;
+		};
+
+$(function() {
 		//예약취소 클릭시
 		$("#cancelReservation").click(function() {
 			hide();
@@ -25,8 +123,10 @@ $(function() {
 			$("#trLast").removeClass("tr_last_child");
 			$("#inputForm").addClass("tr_last_child");
 
-		})
+		});
+		
 		$(document).on("click", "#denyCancel", function() {
+		/*$("#cancelReservation").click(function() { //이 형식으로 할경우 이벤트가 안먹힘 제외*/
 			empty();
 			$("#listDiv").show();
 			$("#reservationDiv").show();
@@ -36,15 +136,17 @@ $(function() {
 		});
 
 		$(document).on("click",	"#completeCancel", function() {
-			if (confirm("취소하시겠습니까?") == true) {
+			if (confirm("취소하시겠습니까?")) {
 				if($("input[name='cancelReason']").val() == "") {
 					alert("취소사유를 입력해주세요.");
 				}
 				else {
-					/*location.href = "/reservationDetail/cancel";*/
 					document.getElementById('reservationDetailForm').action = "/reservationDetail/cancel";
 					document.getElementById('reservationDetailForm').submit();
 				}
+			}
+			else {
+				return false;
 			}
 		});
 
@@ -54,7 +156,7 @@ $(function() {
 			creatExitTag();
 			$("#reservationDetailForm tr").removeClass("tr_last_child");
 			$("#inputForm").addClass("tr_last_child");
-		})
+		});
 
 		$(document).on("click", "#denyExit", function() {
 			empty();
@@ -66,7 +168,7 @@ $(function() {
 		});
 
 		$(document).on("click",	"#completeExit",function() {
-			if (confirm("종료하시겠습니까?") == true) {			
+			if (confirm("종료하시겠습니까?")) {			
 				var actualDay = $("input[name='actualEndDay']").val();
 				var actualDayArray = actualDay.split('.');				
 				var startTime = $("input[name='startTime']").val();
@@ -102,7 +204,6 @@ $(function() {
 				}
 				else {
 					if(currentTime < exitDate) {
-						//location.href = "/reservationDetail/exit";
 						document.getElementById('reservationDetailForm').action = "/reservationDetail/exit";
 						document.getElementById('reservationDetailForm').submit();
 					}
@@ -115,6 +216,9 @@ $(function() {
 
 				}
 			}
+			else {
+				return false;
+			}
 		
 		});
 
@@ -123,7 +227,7 @@ $(function() {
 			hide();
 			createExtendTag();
 			$("#reservationDetailForm tr").removeClass("tr_last_child");
-		})
+		});
 
 		$(document).on("click", "#denyExtend", function() {
 			empty();
@@ -136,7 +240,7 @@ $(function() {
 		});
 
 		$(document).on("click",	"#completeExtend", function() {
-			if (confirm("연장하시겠습니까?") == true) {
+			if (confirm("연장하시겠습니까?")) {
 				if($("input[name='extendReason']").val() == "") {
 					alert("연장사유를 입력해주세요.");	
 				}
@@ -195,6 +299,9 @@ $(function() {
 				}
 
 			}
+			else {
+				return false;
+			}
 		});
 
 		$("#exitCheckReservation").click(function() {
@@ -225,124 +332,28 @@ $(function() {
 		});
 
 		$(document).on("click", "#completeExitCheck", function() {
-			if (confirm("종료확인 하시겠습니까?") == true) {
+			if (confirm("종료확인 하시겠습니까?")) {
 				if($("input[name='abnormality']").val() == "") {
 					alert("이상유무를 입력해주세요.");
 				}
 				else {
-					/*location.href = "/reservationDetail/exitCheck";*/
 					document.getElementById('reservationDetailForm').action = "/reservationDetail/exitCheck";
 					document.getElementById('reservationDetailForm').submit();	
 				}
 
 			}
+			else {
+				return false;
+			}
 		});
 
-		$(document).on("click", "#list", function() {
+		$("#list").click(function() {
 			location.href = "/reservation/list";
 			//location.href=$("input[name='oldUrl']").val();
 		});
 		
 		$("#updateReservation").click(function() {
 			location.href="/reservation/update?reservationId="+ $("input[name='reservationId']").val();
-		})
-		
-		function creatExitTag() {
-			var td = '<th > 조기종료시각</th>';
-			var exitTd = '<td id="exitTd" ></td>';
-			var selectStart = '<select name="exitTimeHours" id="exitTimeHours"></select>';
-			var selectEnd = '<select name="exitTimeMinutes" id="exitTimeMinutes"></select>';
-			var spanHour = '<span> : </span>';
-			var spanMinutes = '<span> 분 </span>';
-			var cancel = '<input type="button" id="denyExit"  value="취소"/>';
-			var complete = '<button id="completeExit" class="margin_right">완료 </button>';
-	
-			var startTime= $("input[name='startTime']").val();
-			var startTimeArray = startTime.split(':');
-			var actualEndTime = $("input[name='actualEndTime']").val();
-			var actualEndTimeArray = actualEndTime.split(':');
-			//alert(startTimeArray[0] + " : " + actualEndTimeArray[0]);
-			
-			
-			$("#inputForm").append(td).append(exitTd);
-			$('#exitTd').append(selectStart);
-			for (var count = startTimeArray[0]; count <= actualEndTimeArray[0]; count++) {
-				var option = $("<option>" + count + "</option>");
-				$('#exitTimeHours').append(option);
-			}
-			$('#exitTd').append(spanHour).append(selectEnd);
-			for (var count = 0; count <= 59; count++) {
-				var option = $("<option>" + count + "</option>");
-				$('#exitTimeMinutes').append(option);
-			}
-			
-			//$("#inputForm").append(spanMinutes);
-			$("#btnDiv").append(complete).append(cancel);
-			/*$('#btnDiv').addClass('float_right');*/
-		}
-		
-		function createExtendTag() {
-			var td = '<th>종료시각</th>';
-			var extendTd = '<td id="extendTd"></td>';
-			var reasonTd = '<th id="reasonTd" >연장사유</th>';
-			var selectStart = '<select name="extendTimeHours" id="extendTimeHours"></select>';
-			var selectEnd = '<select name="extendTimeMinutes" id="extendTimeMinutes"></select>';
-			var spanHour = '<span> : </span>';
-			var spanMinutes = '<span> 분 </span>';
-			var reason = '<td><input type="text" name="extendReason" style="width:100%;"/></td>';
-			var cancel = '<input type="button" id="denyExtend" value="취소"/>';
-			var complete = '<button id="completeExtend" class="margin_right">완료 </button>';
+		});
 
-			var actualEndTime = $("input[name='actualEndTime']").val().substring(0,2);
-			var limitReservation = $("input[name='limitReservation']").val() == null ? 22 : $("input[name='limitReservation']").val().substring(0,2);
-			
-			$("#inputForm").append(td).append(extendTd);
-			$('#extendTd').append(selectStart);
-
-			for (var count = actualEndTime; count <= limitReservation; count++) {
-				var option = $("<option>" + count + "</option>");
-				$('#extendTimeHours').append(option);
-			}
-			$('#extendTd').append(spanHour).append(selectEnd);
-			for (var count = 0; count <= 59; count++) {
-				var option = $("<option>" + count + "</option>");
-				$('#extendTimeMinutes').append(option);
-			}
-			
-			if($("input[name='limitReservation']").val() != null) {
-				var label = '<label> 이 후' +$("input[name='limitReservation']").val() +' 예약건이 있습니다. </label>';
-				$('#extendTd').append(label);
-			}
-			
-			$("#reasonForm").append(reasonTd).append(reason);
-			$("#btnDiv").append(complete).append(cancel);
-			/*$('#btnDiv').addClass('float_right');*/
-		}
-		
-		function parseDate(strDate) {
-		    var _strDate = strDate;
-		    var _dateObj = new Date(_strDate);
-		    if (_dateObj.toString() == 'Invalid Date') {
-		        _strDate = _strDate.split('.').join('-');
-		        _dateObj = new Date(_strDate);
-		    }
-		    if (_dateObj.toString() == 'Invalid Date') {
-		        var _parts = _strDate.split(' ');
-		 
-		        var _dateParts = _parts[0];
-		        _dateObj = new Date(_dateParts);
-		 
-		        if (_parts.length > 1) {
-		            var _timeParts = _parts[1].split(':');
-		            _dateObj.setHours(_timeParts[0]);
-		            _dateObj.setMinutes(_timeParts[1]);
-	            if (_timeParts.length > 2) {
-		                _dateObj.setSeconds(_timeParts[2]);
-		            }
-		        }
-		    }
-		 
-		    return _dateObj;
-		}
-		
 	})

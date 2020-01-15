@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp"%>
 
 <link href="${pageContext.request.contextPath}/resources/css/common/list.css" rel="stylesheet" type="text/css" />
@@ -77,14 +76,14 @@
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 				<li>
-					<a href='javascript:paging("list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&lt;</a>
+					<a href="list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}">&lt;</a>
+					<%-- <a href='javascript:paging("list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&lt;</a> --%>
 				</li>
 			</c:if>
 			<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
-				<li>
-				
-					<a href='javascript:paging("list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>
-					<%-- <a href="list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}"> --%>
+				<li>				
+					<%-- <a href='javascript:paging("list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'> --%>
+					<a href="list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}">
 						<c:if test="${page.criteria.page == index}">
 							<span class="page_shape color_sky"></span>
 						</c:if>
@@ -96,8 +95,8 @@
 			</c:forEach>
 			<c:if test="${page.next}">
 				<li>		
-					<%-- <a href="list?page=${page.endPage+1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a> --%>
-					<a href='javascript:paging("list?page=${page.endPage+1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a>
+					<a href="list?page=${page.endPage+1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a>
+					<%-- <a href='javascript:paging("list?page=${page.endPage+1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a> --%>
 				</li>
 			</c:if>
 		</ul>

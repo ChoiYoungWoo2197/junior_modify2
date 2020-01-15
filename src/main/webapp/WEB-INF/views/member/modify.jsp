@@ -60,7 +60,7 @@
 				<tr>
 					<th  class="width150px"><b>비빌번호</b><b class="color_red">*</b></th>
 					<td class="td_input td_border_hide">
-						<input name="password" type="password" size="20" placeholder=" 비밀번호는 영문,숫자 조합입니다.[3자리이상 12자리이하]"/>
+						<input name="password" type="password" size="20"  placeholder=" 비밀번호는 영문,숫자 조합입니다.[3자리이상 12자리이하]"/>
 						<div>
 							<span id="validePassword" class="error">비밀번호를 입력하세요.</span>
 						</div>
@@ -69,7 +69,7 @@
 
 					<th  class="width150px"><b>비밀번호 확인</b><b class="color_red">*</b></th>
 					<td colspan="1" class="td_input">
-						<input id="passwordCheck" name="passwordCheck" type="password" size="20" />
+						<input id="passwordCheck" name="passwordCheck" type="password" size="20"  />
 						<div>
 							<span id="validePasswordCheck"	class="error">비밀번호 확인을 입력하세요.</span>
 							<span id="checkPasswordSuccess" class="success">비밀번호가 일치합니다.</span>
@@ -112,7 +112,7 @@
 
 
 			</table>
-
+			<input type="hidden" id="modifyPassword" name="modifyPassword" value="">
 			<input type="hidden" id="departmentId" name="departmentId" value="${employeeModify.departmentId}"> 
 			<input type="hidden" id="managerType" name="managerType" value="${managerType}"> 
 			<input type="hidden" id="originalMemberId" name="originalMemberId" value="${employeeModify.memberId}"> 

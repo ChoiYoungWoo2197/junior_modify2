@@ -2,8 +2,8 @@ $(function() {
 	$("#insertMeetingRoom").click(function() {
 		location.href = "insert";
 	})
-	
-	$(document).on("click", ".updateMeetingRoom", function(){
+
+	$("#updateMeetingRoom").click(function() {
 		var meetingRoomId = Number($(this).find(".readMeetingRoom").attr("data-meetingRoomId"));
 		
 		location.href = "read?meetingRoomId="+meetingRoomId;
@@ -15,6 +15,8 @@ $(function() {
 			return false;
 		}
 		
+		//alert($("input[name='searchContent']").val());
+		/*location.href = "list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val();*/
 		location.href = encodeURI("list?page=1&searchType="+$("select[name='searchType']").val()+"&searchContent="+$("input[name='searchContent']").val());
 	})
 	

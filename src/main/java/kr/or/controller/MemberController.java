@@ -138,7 +138,9 @@ public class MemberController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(HttpServletRequest request) {
-		//Enumeration enums = request.getParameterNames();
+		Enumeration enums = request.getParameterNames();
+		
+		String modifyPassword = request.getParameter("modifyPassword");
 		String originalMemberId = request.getParameter("originalMemberId");
 		String managerType = request.getParameter("manager");
 		
@@ -146,7 +148,11 @@ public class MemberController {
 		employee.setDepartmentId(request.getParameter("departmentType"));
 		employee.setName(request.getParameter("name"));
 		employee.setMemberId(request.getParameter("modifyMemberId"));
-		employee.setPassword(employeeService.encSHA256(request.getParameter("password")));
+		
+		if(modifyPassword.equals("") != true) {
+			employee.setPassword(employeeService.encSHA256(modifyPassword));
+		}
+		
 		employee.setEmail(request.getParameter("email"));
 		employee.setPhone(request.getParameter("phone"));
 		employeeService.modifyEmployee(employee);

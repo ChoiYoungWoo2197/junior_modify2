@@ -31,7 +31,7 @@
 		}
 
 		return check;
-	}
+	};
 	
 	function valideInput() {
 		checkInput = true;
