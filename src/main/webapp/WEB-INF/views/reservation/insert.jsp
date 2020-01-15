@@ -7,7 +7,7 @@
 
 <section class="width1300">
 	<h1>예약 등록</h1>
-	<form id="insertReservationForm" method="post" action="/reservation/insert">
+	<form id="insertReservationForm" action="/reservation/insert" method="post">
 		<div class="color_red float_right">* 필수입력</div>
 		<div class="clear_both"></div>
 		<div class="width15 float_left">

@@ -1,5 +1,7 @@
 package kr.or.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,7 +33,7 @@ public class ReservationController {
 	ReservationService reservationService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(SearchCriteria searchCriteria, Model model) {
+	public String list(SearchCriteria searchCriteria, Model model) throws UnsupportedEncodingException {
 		List<Reservation> reservationList = reservationService.searchReservation(searchCriteria);
 		
 		model.addAttribute("reservationList", reservationList);
@@ -41,6 +43,10 @@ public class ReservationController {
 		
 		model.addAttribute("searchCriteria", searchCriteria);
 		model.addAttribute("page", new Page(reservationService.searchReservationCount(searchCriteria), searchCriteria));
+		if(searchCriteria.getSearchContent()!=null){
+	         model.addAttribute("searchContent", URLEncoder.encode(searchCriteria.getSearchContent(),"UTF-8"));
+	      }
+		
 		
 		return "reservation/list";
 	}
@@ -68,14 +74,11 @@ public class ReservationController {
 	}
 	
 	@RequestMapping(value = "/infoReserve", method = RequestMethod.GET)
-	public @ResponseBody List<Reservation> infoReserve(int meetingRoomId, String choiceDay) {
+	public @ResponseBody List<Reservation> infoReserve(int meetingRoomId, String choiceDay) throws ParseException {
 		String startDate = choiceDay.substring(0, 4)+"-"+choiceDay.substring(4, 6)+"-"+choiceDay.substring(6, 8);
 		List<Reservation> reservationList = reservationService.selectReservationByMeetAndDate(meetingRoomId, startDate);
 		
 		//yyyy-MM-dd kk:mm 저장했으니깐 같은형태로 만들어준다.?
-		
-		
-		
 		
 		for(int i=0; i<reservationList.size()-1; i++) {
 			Reservation reservation = reservationList.get(i);
@@ -84,7 +87,6 @@ public class ReservationController {
 				reservationList.remove(i+1);
 			}
 		}
-		
 		return reservationList;
 	}
 	
@@ -92,8 +94,6 @@ public class ReservationController {
 	public String insert(Model model, Reservation reservation, String start, String end) {
 		Date startDate = null;
 		Date endDate = null;
-		
-		Date now = new Date();
 		try {
 			startDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(start); //String -> Date : parse & Date -> String : format
 			endDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(end);

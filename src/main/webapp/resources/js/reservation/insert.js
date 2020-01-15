@@ -3,11 +3,11 @@ $(function() {
 	
 	$("#prevMonth").on("click", function() {
 		prevMonth();
-	})
+	});
 	
 	$("#nextMonth").on("click", function() {
 		nextMonth();
-	})
+	});
 
 	$("#reservationList").hide();
 	
@@ -67,10 +67,8 @@ $(function() {
 				})
 			}
 		}
-	})
+	});
 	
-	/* var meetingStart = new Array(); //ajax로 받은 값을 담을 변수 지정
-	var meetingEnd = new Array(); */
 	var choiceDay;
 	var date = new Date();
 	var today = String(date.getFullYear())+String(('0'+(date.getMonth()+1)).slice(-2))+String(('0'+date.getDate()).slice(-2));
@@ -112,16 +110,18 @@ $(function() {
 						var endDateOrigin = new Date(element.actualEndDate);
 						var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
 						
-						var $reservationLi = $("<li>").html("<span>"+ startDate + "</span><span>&ensp;~&ensp;</span><span>" + endDate + "</span>&ensp;<span class='overflow_ellipsis'>&ensp;&ensp;" + element.meetPurpose +"</span><br>(" + element.employeeName + "("+ element.departmentName + "))" );
-						$("#reservationList ul").append($reservationLi);
+						console.log(startDateOrigin);
+						console.log(element.startDate);
+						console.log(endDateOrigin);
+						console.log(element.actualEndDate);
 						
-						/* meetingStart[index] = startDate;
-						meetingEnd[index] = endDate; */
+						var $reservationLi = $("<li>").html("<span>"+ element.startDate + "</span><span>&ensp;~&ensp;</span><span>" + element.actualEndDate + "</span>&ensp;<span class='overflow_ellipsis'>&ensp;&ensp;" + element.meetPurpose +"</span><br>(" + element.employeeName + "("+ element.departmentName + "))" );
+						$("#reservationList ul").append($reservationLi);
 					})
 				}
 			}
 		})
-	})
+	});
 	
 	var currentDate = today+String(("00" + date.getHours()).slice(-2))+String(("00" + date.getMinutes()).slice(-2));
 	
@@ -170,19 +170,6 @@ $(function() {
 		$("input[name='end']").val(endDate);
 		$("input[name='choiceDay']").val(choiceDay);
 		
-		/* for(var i=0; i<meetingStart.length; i++) {
-			if(Number(meetingStart[i].replace(":","")) <= start && start <= Number(meetingEnd[i].replace(":",""))) {
-				alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.1");
-				$("select[name='startHour']").focus();
-				return false;
-			}
-			if(Number(meetingStart[i].replace(":","")) <= end && end <= Number(meetingEnd[i].replace(":",""))) {
-				alert("이미 예약된 건이 있습니다. 다른 시간을 선택해주세요.2");
-				$("select[name='endHour']").focus();
-				return false;
-			}
-		} */
-		
 		var result = true;
 		$.ajax({
 			url : "/reservation/checkTime?choiceDay="+choiceDay+"&start="+startDate+"&end="+endDate
@@ -207,9 +194,9 @@ $(function() {
 			}
 		})
 		return result;
-	})
+	});
 	
 	$("#listReservation").click(function() {
 		location.href = "list";
-	})
+	});
 })

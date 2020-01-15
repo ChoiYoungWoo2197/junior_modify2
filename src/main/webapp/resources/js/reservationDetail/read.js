@@ -1,4 +1,4 @@
-function hide() {
+		function hide() {
 			$("#listDiv").hide();
 			$("#reservationDiv").hide();
 			$("#processingDiv").hide();
@@ -62,6 +62,7 @@ function hide() {
 			
 			$("#inputForm").append(td).append(extendTd);
 			$('#extendTd').append(selectStart);
+
 
 			for (var count = actualEndTime; count <= limitReservation; count++) {
 				var option = $("<option>" + count + "</option>");

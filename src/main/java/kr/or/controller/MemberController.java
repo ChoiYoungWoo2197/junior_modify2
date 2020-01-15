@@ -1,5 +1,7 @@
 package kr.or.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
@@ -48,13 +50,16 @@ public class MemberController {
 	ReservationDetailService reservationDetailService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(SearchCriteria searchCriteria,Model model) {
+	public String list(SearchCriteria searchCriteria,Model model) throws UnsupportedEncodingException {
 		List<Employee> employeeList = employeeService.searchEmployee(searchCriteria);
 		model.addAttribute("employeeList", employeeList);
 		model.addAttribute("employeeListSize", employeeService.searchEmployeeCount(searchCriteria));
 		
 		model.addAttribute("searchCriteria", searchCriteria);
 		model.addAttribute("page", new Page(employeeService.searchEmployeeCount(searchCriteria), searchCriteria));
+		if(searchCriteria.getSearchContent()!=null){
+	         model.addAttribute("searchContent", URLEncoder.encode(searchCriteria.getSearchContent(),"UTF-8"));
+	      }
 		return "/member/list";
 	}
 

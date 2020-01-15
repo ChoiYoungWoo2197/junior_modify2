@@ -1,7 +1,7 @@
 $(function() {
 	$("#insertManagement").click(function() {
 		location.href = "insert?management="+$("input[name=management]").val();
-	})
+	});
 	
 	$("table tr").each(function() {
 		$(".deleteManagement").on('click',function(e){
@@ -39,9 +39,10 @@ $(function() {
 			}
 			
 		})
-	})
+	});
 	
-	$(document).on("click", ".updateManagement", function(){
+	//$(document).on("click", ".updateManagement", function(){
+	$(".updateManagement").click(function() {
 		var managementId = Number($(this).find(".readManagement").attr("data-managementId"));
 		
 		var result = confirm("수정하시겠습니까?");
@@ -50,7 +51,7 @@ $(function() {
 			location.href = "modify?management="+$("input[name=management]").val()+"&managementId="+managementId;
 		}
 		
-	})
+	});
 	
 	$("#searchManagement").click(function() {
 		if($("input[name='searchContent']").val()=="") {
@@ -59,9 +60,9 @@ $(function() {
 		}
 		
 		location.href = encodeURI("list?management="+$("input[name=management]").val()+"&page=1&searchContent="+$("input[name='searchContent']").val());
-	})
+	});
 	
 	$("#AllManagement").click(function() {
 		location.href = "list?management="+$("input[name=management]").val();
-	})
+	});
 })

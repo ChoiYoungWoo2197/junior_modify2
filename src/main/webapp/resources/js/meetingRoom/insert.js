@@ -1,7 +1,7 @@
 $(function() {
 	$("#listMeetingRoom").click(function() {
 		location.href = "list";
-	})
+	});
 	
 	$("#insertMeetingRoomForm").submit(function() {
 		var check = true;
@@ -35,5 +35,5 @@ $(function() {
 	    $("input[name='checkTrue']").val(checkTrue);
 		
 		return check;
-	})
+	});
 })

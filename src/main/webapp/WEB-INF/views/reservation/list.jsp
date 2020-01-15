@@ -14,43 +14,43 @@
 <section class="width1300">
 	<h1>예약현황</h1>
 	<div class="overflow_hidden">
-		<div class="float_left">
-			<label class="float_left">사용일</label>
-			<input type="text" name="searchDate" id="searchStart" value="${searchCriteria.searchStart}" class="float_left">
-			<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="startImg" class="float_left icon_img"> 
-			<span class="float_left">~&nbsp;</span> 
-			<input type="text" name="searchDate" id="searchEnd" value="${searchCriteria.searchEnd}" class="float_left">
-			<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="endImg" class="float_left icon_img">
-			<select name="state">
-				<option value="none">상태</option>
-				<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약(진행중)</option>
-				<option value="RC" ${searchCriteria.state == 'RC' ? 'selected' : ''}>예약취소</option>
-				<option value="E" ${searchCriteria.state == 'E' ? 'selected' : ''}>연장</option>
-				<option value="F" ${searchCriteria.state == 'F' ? 'selected' : ''}>종료</option>
-				<option value="FV" ${searchCriteria.state == 'FV' ? 'selected' : ''}>종료확인</option>
-			</select>
-			<select name="meetingRoomId">
-				<option value="0">회의실</option>
-				<c:forEach var="meetingRoom" items="${meetingRoomList}">
-					<c:if test="${meetingRoom.meetingRoomId == searchCriteria.meetingRoomId}">
-						<option value="${meetingRoom.meetingRoomId}" selected="selected">${meetingRoom.name}</option>
-					</c:if>
-					<c:if test="${meetingRoom.meetingRoomId != searchCriteria.meetingRoomId}">
-						<option value="${meetingRoom.meetingRoomId}">${meetingRoom.name}</option>
-					</c:if>
-				</c:forEach>
-			</select>
-			<select name="searchType">
-				<option value="department" ${searchCriteria.searchType == 'department' ? 'selected':''}>부서</option>
-				<option value="employee" ${searchCriteria.searchType == 'employee' ? 'selected':''}>신청자</option>
-				<option value="meetPurpose" ${searchCriteria.searchType == 'meetPurpose' ? 'selected':''}>회의목적</option>
-			</select>
-			<input type="search" name="searchContent" value="${searchCriteria.searchContent}">
-		</div>
-		<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchReservation" class="float_left icon_img">
-		<!-- <button id="searchReservation">검색</button> -->
+		<form id="searchForm" action="/reservation/list" method="get">
+			<div class="float_left">
+				<label class="float_left">사용일</label>
+				<input type="text" name="searchStart" id="searchStart" value="${searchCriteria.searchStart}" autocomplete="off" class="float_left">
+				<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="startImg" class="float_left icon_img"> 
+				<span class="float_left">~&nbsp;</span> 
+				<input type="text" name="searchEnd" id="searchEnd" value="${searchCriteria.searchEnd}" autocomplete="off" class="float_left">
+				<img src="${pageContext.request.contextPath}/resources/images/calendar.png" id="endImg" class="float_left icon_img">
+				<select name="state">
+					<option value="none">상태</option>
+					<option value="R" ${searchCriteria.state == 'R' ? 'selected' : ''}>예약(진행중)</option>
+					<option value="RC" ${searchCriteria.state == 'RC' ? 'selected' : ''}>예약취소</option>
+					<option value="E" ${searchCriteria.state == 'E' ? 'selected' : ''}>연장</option>
+					<option value="F" ${searchCriteria.state == 'F' ? 'selected' : ''}>종료</option>
+					<option value="FV" ${searchCriteria.state == 'FV' ? 'selected' : ''}>종료확인</option>
+				</select>
+				<select name="meetingRoomId">
+					<option value="0">회의실</option>
+					<c:forEach var="meetingRoom" items="${meetingRoomList}">
+						<c:if test="${meetingRoom.meetingRoomId == searchCriteria.meetingRoomId}">
+							<option value="${meetingRoom.meetingRoomId}" selected="selected">${meetingRoom.name}</option>
+						</c:if>
+						<c:if test="${meetingRoom.meetingRoomId != searchCriteria.meetingRoomId}">
+							<option value="${meetingRoom.meetingRoomId}">${meetingRoom.name}</option>
+						</c:if>
+					</c:forEach>
+				</select>
+				<select name="searchType">
+					<option value="department" ${searchCriteria.searchType == 'department' ? 'selected':''}>부서</option>
+					<option value="employee" ${searchCriteria.searchType == 'employee' ? 'selected':''}>신청자</option>
+					<option value="meetPurpose" ${searchCriteria.searchType == 'meetPurpose' ? 'selected':''}>회의목적</option>
+				</select>
+				<input type="search" name="searchContent" value="${searchCriteria.searchContent}">
+			</div>
+			<input type="image" src="${pageContext.request.contextPath}/resources/images/search.png" id="searchReservation" class="icon_img" onclick="return false">
+		</form>
 		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allReservation" class="float_right icon_img">
-		<!-- <button id="allReservation">전체보기</button> -->
 	</div>
 	<table id="listTable">
 		<colgroup>
@@ -127,12 +127,12 @@
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 				<li>
-					<a href='javascript:paging("list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&lt;</a>
+					<a href="./list?page=${index}&searchStart=${page.criteria.searchStart}&searchEnd=${page.criteria.searchEnd}&state=${page.criteria.state}&meetingRoomId=${page.criteria.meetingRoomId}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&lt;</a>
 				</li>
 			</c:if>
 			<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
 				<li>					
-					<a href='javascript:paging("list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>
+					<a href="./list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">
 						<c:if test="${page.criteria.page == index}">
 							<span class="page_shape color_sky"></span>
 						</c:if>
@@ -144,7 +144,7 @@
 			</c:forEach>
 			<c:if test="${page.next}">
 				<li>					
-					<a href='javascript:paging("list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a>
+					<a href="./list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&gt;</a>
 				</li>
 			</c:if>
 		</ul>

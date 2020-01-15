@@ -1,5 +1,9 @@
 package kr.or.domain;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class SearchCriteria {
 	private int page; //페이지번호
 	private int amount; //페이지당 몇개의 데이터를 보여줄 것인가?
@@ -10,13 +14,22 @@ public class SearchCriteria {
 	private String meetingRoomId;
 	private String searchStart;
 	private String searchEnd;
+	private static Date startDate = new Date();
+	private static Date endDate = addMonth(startDate, 1);
+	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	private static String startDateStr = simpleDateFormat.format(startDate);
+	private static String endDateStr = simpleDateFormat.format(endDate);
 	
-	public SearchCriteria(int page, int amount) {
+	public SearchCriteria(int page, int amount, String state, String meetingRoomId, String searchStart, String searchEnd) {
 		this.page = page;
 		this.amount = amount;
+		this.state = state;
+		this.meetingRoomId = meetingRoomId;
+		this.searchStart = searchStart;
+		this.searchEnd = searchEnd;
 	}
 	public SearchCriteria() {
-		this(1, 10);
+		this(1, 10, "none", "0", startDateStr, endDateStr);
 	}
 	public int getPage() {
 		return page;
@@ -69,4 +82,10 @@ public class SearchCriteria {
 	public void setSearchEnd(String searchEnd) {
 		this.searchEnd = searchEnd;
 	}
+	public static Date addMonth(Date date, int months) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.MONTH, months);
+        return cal.getTime();
+    }
 }

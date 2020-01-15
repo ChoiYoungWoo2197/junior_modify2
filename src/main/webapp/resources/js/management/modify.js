@@ -1,12 +1,7 @@
 $(function() {
 	$("#listManagement").click(function() {
 		location.href = "list?management="+$("input[name='management']").val();
-	})
-	
-	/* $("#cancelUpdate").click(function() {
-		var managementId = Number($("input[name='departmentId']").val());
-		location.href = "read?management="+$("input[name='management']").val()+"&managementId="+managementId;
-	}) */
+	});
 	
 	$("#updateManagementForm").submit(function() {
 		$("input[name='name']").next().addClass("display_none");
@@ -21,5 +16,5 @@ $(function() {
 				return false;
 			}
 		}
-	})
+	});
 })

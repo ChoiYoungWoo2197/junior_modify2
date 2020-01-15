@@ -41,7 +41,12 @@ select {
 	background-color: #9c8fb1;
 	
 }
-
+#searchForm {
+	display: inline;
+}
+input[type='image'] {
+	outline: none;
+}
 
 /* ----- 페이지 ----- */
 #page {
