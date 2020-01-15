@@ -77,14 +77,13 @@
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 				<li>
-					<a href='javascript:paging("list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&lt;</a>
+					<a href="list?page=${page.startPage-1}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&lt;</a>
 				</li>
 			</c:if>
 			<c:forEach var="index" begin="${page.startPage}" end="${page.endPage}">
 				<li>
 				
-					<a href='javascript:paging("list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>
-					<%-- <a href="list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}"> --%>
+					<a href="list?page=${index}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">
 						<c:if test="${page.criteria.page == index}">
 							<span class="page_shape color_sky"></span>
 						</c:if>
@@ -96,8 +95,7 @@
 			</c:forEach>
 			<c:if test="${page.next}">
 				<li>		
-					<%-- <a href="list?page=${page.endPage+1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a> --%>
-					<a href='javascript:paging("list?page=${page.endPage+1}&searchType=${page.criteria.searchType}&searchContent=${page.criteria.searchContent}")'>&gt;</a>
+					<a href="list?page=${page.endPage+1}&searchType=${page.criteria.searchType}&searchContent=${searchContent}">&gt;</a>
 				</li>
 			</c:if>
 		</ul>

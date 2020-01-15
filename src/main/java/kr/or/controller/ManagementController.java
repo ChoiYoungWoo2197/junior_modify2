@@ -1,5 +1,7 @@
 package kr.or.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
@@ -26,19 +28,27 @@ public class ManagementController {
 	ManagementService managementServcice;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(SearchCriteria searchCriteria, Model model, String management) {
+	public String list(SearchCriteria searchCriteria, Model model, String management) throws UnsupportedEncodingException {
 		if(management.equals("equipment")) {
 			List<Equipment> equipmentList = managementServcice.searchEquipment(searchCriteria);
 			model.addAttribute("equipmentList", equipmentList);
 			
 			model.addAttribute("page", new Page(managementServcice.searchEquipmentCount(searchCriteria), searchCriteria));
 			model.addAttribute("management", management);
+			
+			if(searchCriteria.getSearchContent() != null) {
+				model.addAttribute("searchContent", URLEncoder.encode(searchCriteria.getSearchContent(), "UTF-8"));
+			}
 		} else if(management.equals("department")) {
 			List<Department> employeeByDepartmentList = managementServcice.searchDepartment(searchCriteria);
 			model.addAttribute("employeeByDepartmentList", employeeByDepartmentList);
 			
 			model.addAttribute("page", new Page(managementServcice.searchDepartmentCount(searchCriteria), searchCriteria));
 			model.addAttribute("management", management);
+			
+			if(searchCriteria.getSearchContent() != null) {
+				model.addAttribute("searchContent", URLEncoder.encode(searchCriteria.getSearchContent(), "UTF-8"));
+			}
 		}
 		return "management/list";
 	}

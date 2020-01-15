@@ -1,11 +1,15 @@
 package kr.or.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.mail.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +35,7 @@ public class ReservationController {
 	ReservationService reservationService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(SearchCriteria searchCriteria, Model model) {
+	public String list(SearchCriteria searchCriteria, Model model) throws UnsupportedEncodingException {
 		List<Reservation> reservationList = reservationService.searchReservation(searchCriteria);
 		
 		model.addAttribute("reservationList", reservationList);
@@ -42,6 +46,9 @@ public class ReservationController {
 		model.addAttribute("searchCriteria", searchCriteria);
 		model.addAttribute("page", new Page(reservationService.searchReservationCount(searchCriteria), searchCriteria));
 		
+		if(searchCriteria.getSearchContent() != null) {
+			model.addAttribute("searchContent", URLEncoder.encode(searchCriteria.getSearchContent(), "UTF-8"));
+		}
 		return "reservation/list";
 	}
 	

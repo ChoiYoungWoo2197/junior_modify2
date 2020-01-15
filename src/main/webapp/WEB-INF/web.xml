@@ -52,7 +52,11 @@
         <init-param>
             <param-name>forceEncoding</param-name>
             <param-value>true</param-value>
-        </init-param>	
+        </init-param>
+        <init-param>
+			<param-name>struts.i18n.encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
 	</filter>
 	<!-- 해당 filter를 매핑할 때 모든 URL에 대해 인코딩될 수 있도록 /*와 같이 url-pattern을 설정 -->
 	<filter-mapping> 

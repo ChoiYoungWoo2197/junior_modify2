@@ -110,8 +110,8 @@ $(function() {
 						var endDateOrigin = new Date(element.actualEndDate);
 						var endDate = endDateOrigin.getHours()+":"+("00" + endDateOrigin.getMinutes()).slice(-2);
 						
-						console.log(startDate);
 						console.log(element.startDate);
+						console.log(element.actualEndDate);
 						
 						var $reservationLi = $("<li>").html("<span>"+ element.startDate + "</span><span>&ensp;~&ensp;</span><span>" + element.actualEndDate + "</span>&ensp;<span class='overflow_ellipsis'>&ensp;&ensp;" + element.meetPurpose +"</span><br>(" + element.employeeName + "("+ element.departmentName + "))" );
 						$("#reservationList ul").append($reservationLi);
