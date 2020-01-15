@@ -4,8 +4,8 @@
 	
 	<sql id="search">
 		<if test="searchStart != null">
-			<!-- WHERE start_date BETWEEN DATE(#{searchStart}) <if test="searchEnd">AND DATE_ADD(#{searchEnd}, INTERVAL 1 DAY)</if> -->
-			WHERE start_date <![CDATA[>=]]> #{searchStart} <if test="searchEnd != null"> AND end_date <![CDATA[<=]]> #{searchEnd}</if>
+			WHERE start_date BETWEEN DATE(#{searchStart}) <if test="searchEnd != null">AND DATE_ADD(#{searchEnd}, INTERVAL 1 DAY)</if>
+			<!-- WHERE start_date <![CDATA[>=]]> #{searchStart} <if test="searchEnd != null"> AND start_date <![CDATA[<=]]> #{searchEnd}</if> -->
 		</if>
 		<if test="state">
 			<if test="searchStart == null">
