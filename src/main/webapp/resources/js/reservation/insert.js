@@ -126,6 +126,11 @@ $(function() {
 			return false;
 		}
 		
+		if(!$("#calendar td").hasClass("color_blue")) {
+			alert("날짜를 선택하세요.");
+			return false;
+		}
+		
 		var start = Number($("select[name='startHour']").val() + $("select[name='startMinute']").val());
 		var end = Number($("select[name='endHour']").val() + $("select[name='endMinute']").val());
 		if(start >= end) {

@@ -67,7 +67,7 @@
             <th>
           		  상태
             </th>
-            <td >
+            <td  id="fv">
                <c:choose>
                   <c:when test="${reservation.state eq 'R'}">
                      <fmt:formatDate value="${now}" pattern="yyyy.MM.dd kk:mm" var="today" />

@@ -111,6 +111,10 @@
       };
 
 $(function() {
+	  if($("#fv").text().indexOf("종료확인") > 0) {
+		   $("#finishTr").removeClass("tr_last_child");
+	  }
+	  
       //예약취소 클릭시
       $("#cancelReservation").click(function() {
          hide();
