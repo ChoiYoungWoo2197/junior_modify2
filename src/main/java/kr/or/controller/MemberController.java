@@ -121,7 +121,7 @@ public class MemberController {
 		
 		employee.setDepartmentId(department.getName());
 		model.addAttribute("employeeDetail", employee);
-		model.addAttribute("managerType", (manager != null)? "Y" : "N");
+		model.addAttribute("managerType", (manager != null)? "Y": "N");
 		return "member/read";
 	}
 	
@@ -133,7 +133,7 @@ public class MemberController {
 		
 		
 		model.addAttribute("employeeModify", employee);
-		model.addAttribute("managerType", (manager != null)? true : false);
+		model.addAttribute("managerType", (manager != null)? "Y" : "N");
 		model.addAttribute("departmentList", departmentList);
 		
 		return "member/modify";

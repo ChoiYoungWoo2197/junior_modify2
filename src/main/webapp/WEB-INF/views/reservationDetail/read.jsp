@@ -16,7 +16,7 @@
       <table>
          <tr>
             <th>
-               예약번호
+              	 예약번호
             </th>
             <td>
                <span>${reservation.reservationId}</span>
@@ -24,7 +24,7 @@
          </tr>
          <tr>
             <th>
-               예약사용일시
+              	 예약사용일시
             </th>
             <td >
                <span>
@@ -41,7 +41,7 @@
          </tr>
          <tr>
             <th>
-               회의실명
+           	        회의실명
             </th>
             <td >
                <span>${reservation.meetingRoomName}</span>
@@ -49,7 +49,7 @@
          </tr>
          <tr>
             <th>
-               회의목적
+             	 회의목적
             </th>
             <td >
                <span>${reservation.meetPurpose}</span>
@@ -57,7 +57,7 @@
          </tr>
          <tr>
             <th>
-               참석자수
+          	         참석자수
             </th>
             <td >
                <span>${reservation.meetAttendess}명</span>
@@ -65,7 +65,7 @@
          </tr>
          <tr>
             <th>
-               상태
+          		  상태
             </th>
             <td >
                <c:choose>
@@ -99,7 +99,7 @@
          </tr>
          <tr>
             <th>
-               신청자
+        	       신청자
             </th>
             <td >
                <span>${reservation.employeeName}</span>
@@ -107,7 +107,7 @@
          </tr>
          <tr>
             <th>
-               소속부서
+           	        소속부서
             </th>
             <td >
                <span>${reservation.departmentName}</span>
@@ -151,7 +151,7 @@
             <c:when test="${reservation.state eq 'F' || reservation.state eq 'FV'}">
                <tr class="tr_last_child" id="finishTr">
                   <th>
-                     종료일시
+                   	   종료일시
                   </th>
                   <td >
                      <fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" />
@@ -160,7 +160,7 @@
                <c:if test="${not empty extend}">
                   <tr>
                      <th>
-                        연장사유
+                       	 연장사유
                      </th>
                      <td >
                         <span>${extend.extendReason}</span>
@@ -170,7 +170,7 @@
                <c:if test="${reservation.state eq 'FV'}">
                   <tr class="tr_last_child">
                      <th>
-                        이상유무
+                     	  이상유무
                      </th>
                      <td >
                         <span>${reservation.abnormality}</span>
@@ -197,7 +197,7 @@
                      <div id="processingDiv"  class="float_right">
                         <c:if test="${reservation.validateApplicant eq null || reservation.validateApplicant eq ''}">
                            <input type="button" id="exitReservation" value="조기종료" class="background_color"/>
-                           <c:if test="${loginUser.manager eq 'false' && extendIspossible eq 'true'}">
+                           <c:if test="${isSelfReservation eq 'true' && extendIspossible eq 'true'}">
                               <input type="button" id="extendReservation" value="연장신청" class="background_color" />
                            </c:if>
                         </c:if>

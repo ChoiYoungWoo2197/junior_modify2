@@ -224,7 +224,8 @@ function modifyDepartMentType() {
 
 function modifyManagerType() {
    var managerType = $("input[name='managerType']").val();
-   if (managerType == true) {
+   
+   if (managerType == 'Y') {
       $('input:radio[name="manager"][value="yes"]').prop('checked', true);
    } else {
       $('input:radio[name="manager"][value="no"]').prop('checked', true);

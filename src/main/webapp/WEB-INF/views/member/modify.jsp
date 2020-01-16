@@ -58,7 +58,7 @@
 					<td colspan="2"></td>
 				</tr>
 				<tr>
-					<th  class="width150px"><b>비빌번호</b><b class="color_red">*</b></th>
+					<th  class="width150px"><b>비빌번호</b></th>
 					<td class="td_input td_border_hide">
 						<input name="password" type="password" size="20"  placeholder=" 비밀번호는 영문,숫자 조합입니다.[3자리이상 12자리이하]"/>
 						<div>
@@ -67,7 +67,7 @@
 						
 					</td>
 
-					<th  class="width150px"><b>비밀번호 확인</b><b class="color_red">*</b></th>
+					<th  class="width150px"><b>비밀번호 확인</b></th>
 					<td colspan="1" class="td_input">
 						<input id="passwordCheck" name="passwordCheck" type="password" size="20"  />
 						<div>
