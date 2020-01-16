@@ -113,8 +113,13 @@
 $(function() {
 	  if($("#fv").text().indexOf("종료확인") > 0) {
 		   $("#finishTr").removeClass("tr_last_child");
+		   $("#extendTr").removeClass("tr_last_child");
 	  }
 	  
+	  if($("#extendReason").text() != "" && $("#fv").text().indexOf("종료확인") < 0) {
+		  $("#finishTr").removeClass("tr_last_child");
+		  $("#extendTr").addClass("tr_last_child");
+	  }
       //예약취소 클릭시
       $("#cancelReservation").click(function() {
          hide();
@@ -311,9 +316,9 @@ $(function() {
 
       $("#exitCheckReservation").click(function() {
          hide();
-         $("#reservationDetailForm tr").removeClass("tr_last_child");
-         
-         
+         $("#finishTr").removeClass("tr_last_child");
+         $("#extendTr").removeClass("tr_last_child");
+
          var td = '<th> 이상유무확인</th>';
          var abnormality = '<td><input type="text" name="abnormality" style="width:100%;"/></td>';
          var cancel = '<input type="button" id="denyExitCheck" value="취소"/>';
@@ -331,9 +336,16 @@ $(function() {
          $("#listDiv").show();
          $("#exitDiv").show();
          
+         if($("#extendReason").text() != "" ) {
+	   		  $("#finishTr").removeClass("tr_last_child");
+	   	  } else {
+	   		$("#finishTr").addClass("tr_last_child");
+	   	  }
+         
          $("#finishTr").addClass("tr_last_child");
          $("#trLast").addClass("tr_last_child");
          $("#inputForm").removeClass("tr_last_child");
+         $("#extendTr").addClass("tr_last_child");
       });
 
       $(document).on("click", "#completeExitCheck", function() {

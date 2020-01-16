@@ -158,11 +158,11 @@
                   </td>
                </tr>
                <c:if test="${not empty extend}">
-                  <tr>
+                  <tr id="extendTr">
                      <th>
                        	 연장사유
                      </th>
-                     <td >
+                     <td id="extendReason">
                         <span>${extend.extendReason}</span>
                      </td>
                   </tr>
