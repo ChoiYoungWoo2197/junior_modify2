@@ -1,15 +1,9 @@
 package kr.or.service;
 
-import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-
-import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,14 +15,15 @@ import kr.or.persistence.EmployeeDao;
 import kr.or.persistence.ManagerDao;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl implements  EmployeeService{
 
 	@Autowired
 	EmployeeDao employeeDao;
 
 	@Autowired
 	ManagerDao managerDao;
-
+	
+	
 	@Override
 	public void insertEmployee(Employee employee) {
 		// TODO Auto-generated method stub
@@ -41,11 +36,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.checkEmployeeById(memberId);
 	}
 
+
 	@Override
 	public Employee checkEmployeeByEmail(String email) {
 		// TODO Auto-generated method stub
 		return employeeDao.checkEmployeeByEmail(email);
 	}
+
 
 	@Override
 	public Employee checkKeyByMap(String email, String authKey) {
@@ -53,11 +50,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.checkKeyByMap(email, authKey);
 	}
 
+
 	@Override
 	public void updateStateByMap(String memberId, String state) {
 		// TODO Auto-generated method stub
 		employeeDao.updateStateByMap(memberId, state);
 	}
+
 
 	@Override
 	public void updateKeyByMap(String memberId, String authKey) {
@@ -65,12 +64,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeDao.updateKeyByMap(memberId, authKey);
 	}
 
+
 	@Override
 	public Employee checkUser(String memberId, String password) {
 		// TODO Auto-generated method stub
 		return employeeDao.checkUser(memberId, password);
 	}
-
+	
 	@Override
 	public Employee checkStateByMap(String memberId, String state) {
 		// TODO Auto-generated method stub
@@ -90,7 +90,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			byte[] msgStr = mDigest.digest();
 			for (int i = 0; i < msgStr.length; i++) {
 				byte tmpStrByte = msgStr[i];
-				String tmpEncTxt = Integer.toString((tmpStrByte & 0xff) + 0x100, 16).substring(1);
+				String tmpEncTxt = Integer.toString((tmpStrByte & 0xff) + 0x100,16).substring(1);
 				buf.append(tmpEncTxt);
 			}
 		} catch (NoSuchAlgorithmException e) {
@@ -101,11 +101,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return buf.toString();
 	}
 
+
 	@Override
 	public Manager checkManager(int managerId) {
 		// TODO Auto-generated method stub
 		return managerDao.checkManager(managerId);
 	}
+
 
 	@Override
 	public void updateKeyDateByMap(String memberId, Date currentTime) {
@@ -113,11 +115,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeDao.updateKeyDateByMap(memberId, currentTime);
 	}
 
+
 	@Override
 	public List<Employee> searchEmployee(SearchCriteria criteria) {
 		// TODO Auto-generated method stub
 		return employeeDao.searchEmployee(criteria);
 	}
+
 
 	@Override
 	public int searchEmployeeCount(SearchCriteria criteria) {
@@ -153,5 +157,4 @@ public class EmployeeServiceImpl implements EmployeeService {
 		// TODO Auto-generated method stub
 		return employeeDao.checkEmployeeByEmployeeId(employeeId);
 	}
-
 }

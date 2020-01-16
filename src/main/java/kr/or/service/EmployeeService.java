@@ -1,6 +1,5 @@
 package kr.or.service;
 
-import java.security.Key;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +9,7 @@ import kr.or.domain.SearchCriteria;
 
 public interface EmployeeService {
 	public void insertEmployee(Employee employee);
-	public String encSHA256(String text); //암호화 방식 (복호화 불능)
+	public String encSHA256(String text);
 	public Employee checkEmployeeById(String memberId);
 	public Employee checkEmployeeByEmail(String email);
 	public Employee checkUser(String memberId, String password);

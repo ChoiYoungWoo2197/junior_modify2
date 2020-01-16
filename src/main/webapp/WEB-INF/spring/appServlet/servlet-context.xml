@@ -59,7 +59,6 @@
 		<!-- 뷰(jsp)의 접두어, 접미어 설정 : 파일명만 작성할 수 있게 세팅 -->
 		<beans:property name="prefix" value="/WEB-INF/views/" /> <!-- 접두어(디렉토리) -->
 		<beans:property name="suffix" value=".jsp" /> <!-- 접미어(확장자) -->
-
 		<!--뷰(View) 경로를 나타내는 것으로 suffix(.jsp) 가 뒤에 자동으로 붙고 prefix (파일의 앞경로) 도 붙게되어 
 			view 경로를 리턴할시 만약 view 만 리턴하게되어도 서블릿이 자동으로 WEB-INF/views/view.jsp 경로로 리턴해 
 			준다. -->

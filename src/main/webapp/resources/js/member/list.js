@@ -14,8 +14,12 @@ $(function() {
 				+ "&searchContent="
 				+ $("input[name='searchContent']").val());
 	})
-	
-	$(".readMember").click(function() {
+
+	$(document).on("click", ".readMember", function() {
+		// var memberId = Number($(this).prev().text());
+		// var memberId = $(this).prev().text();
+		// location.href = "read?memberId=" + memberId;
+
 		var memberId = $(this).find(".readMemberId").attr("data-memberId");
 		location.href = "read?memberId=" + memberId;
 	})
