@@ -1,8 +1,10 @@
 package kr.or.controller;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.or.domain.Department;
 import kr.or.domain.Employee;
@@ -83,12 +87,24 @@ public class ReservationDetailController {
 			isSelfReservation = true;
 		}
 		
+		Map resultMap = null;
+		if(reservation != null) {
+			resultMap = converObjectToMap(reservation);
+		}
+		
+		Map resultExtendMap = null;
+		if(extend != null) {
+			resultExtendMap = converObjectToMap(extend);
+		}
+		
 		model.addAttribute("isSelfReservation", isSelfReservation);
 		model.addAttribute("reservation", reservation);
 		model.addAttribute("extend", extend);
 		model.addAttribute("extendIspossible", (extendIspossible.size() == 0)? true : false);
 		model.addAttribute("limitReservation", limitReservation);
 		model.addAttribute("oldUrl", oldUrl);
+		model.addAttribute("Map", resultMap);
+		model.addAttribute("ExtendMap", resultExtendMap);
 		return "reservationDetail/read";
 	}
 
@@ -211,4 +227,24 @@ public class ReservationDetailController {
 		return "redirect:/reservation/list";
 		
 	}
+	
+	public Map converObjectToMap(Object obj){ 
+			try { 
+				//Field[] fields = obj.getClass().getFields(); //private field는 나오지 않음. 
+				Field[] fields = obj.getClass().getDeclaredFields();
+				Map resultMap = new HashMap();
+				for(int i=0; i<=fields.length-1;i++){
+					fields[i].setAccessible(true);
+					resultMap.put("'" +fields[i].getName()+"'", "'" +fields[i].get(obj) + "'");
+				}
+				return resultMap;
+				}
+			catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+			catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
 }

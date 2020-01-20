@@ -13,13 +13,14 @@
    <img src="${pageContext.request.contextPath}/resources/images/list2.png" id="list" class="float_right icon_img">
       
    <form name="reservationDetailForm" id="reservationDetailForm" method="post" onsubmit="return false;">
-      <table>
+      <table id=reservationTable>
          <tr>
             <th>
               	 예약번호
             </th>
             <td>
-               <span>${reservation.reservationId}</span>
+            	<%-- <input type="text" name="reservationId" value="${reservation.reservationId}"/> --%>
+              <span>${reservation.reservationId}</span>
             </td>
          </tr>
          <tr>
@@ -67,7 +68,7 @@
             <th>
           		  상태
             </th>
-            <td  id="fv">
+            <td id="fv">
                <c:choose>
                   <c:when test="${reservation.state eq 'R'}">
                      <fmt:formatDate value="${now}" pattern="yyyy.MM.dd kk:mm" var="today" />
@@ -113,75 +114,10 @@
                <span>${reservation.departmentName}</span>
             </td>
          </tr>
-         <!-- 바꿔야됨.  -->
-         <c:choose>
-            <c:when test="${reservation.state eq 'R'}">
-            <tr id="trLast" class="tr_last_child">
-               <th >예약신청일시</th>
-               <td><fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd kk:mm" /></td>
-            </tr>
-            </c:when>
-            
-            <c:when test="${reservation.state eq 'RC'}">
-            <tr >
-               <th >예약신청일시</th>
-               <td><fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd kk:mm" /></td>
-            </tr>
-            <tr class="tr_last_child">
-               <th>취소사유</th>
-               <td ><span>${reservation.cancelReason}</span></td>
-            </tr>
-            </c:when>
-
-            <c:when test="${reservation.state eq 'E' && not empty extend}">
-            <tr >
-               <th >예약신청일시</th>
-               <td><fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd kk:mm" /></td>
-            </tr>
-            <tr>
-               <th>종료일시</th>
-               <td ><fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" /></td>
-            </tr>
-            <tr class="tr_last_child"  id="extendTr">
-               <th>연장사유</th>
-               <td ><span>${extend.extendReason}</span></td>
-            </tr>   
-            </c:when>
-            
-            <c:when test="${reservation.state eq 'F' || reservation.state eq 'FV'}">
-               <tr class="tr_last_child" id="finishTr">
-                  <th>
-                   	   종료일시
-                  </th>
-                  <td >
-                     <fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd kk:mm" />
-                  </td>
-               </tr>
-               <c:if test="${not empty extend}">
-                  <tr id="extendTr">
-                     <th>
-                       	 연장사유
-                     </th>
-                     <td id="extendReason">
-                        <span>${extend.extendReason}</span>
-                     </td>
-                  </tr>
-               </c:if>
-               <c:if test="${reservation.state eq 'FV'}">
-                  <tr class="tr_last_child">
-                     <th>
-                     	  이상유무
-                     </th>
-                     <td >
-                        <span>${reservation.abnormality}</span>
-                     </td>
-                  </tr>
-               </c:if>
-            </c:when>
-         </c:choose>
          
-         <tr id="inputForm"></tr>
-         <tr id="reasonForm"></tr>
+         <tr id="readForm"></tr>
+<!--          <tr id="inputForm"></tr>
+         <tr id="reasonForm"></tr> -->
 
       </table>
       <div id="btnDiv" class="float_right"></div>
@@ -222,6 +158,8 @@
          </c:if>
       </div>
       <input type="hidden" size="50" name="oldUrl" value="${oldUrl}" />
+      <input type="hidden" size="50" name="Map" value="${Map}" />
+      <input type="hidden" size="50" name="ExtendMap" value="${ExtendMap}" />
       <input type="hidden" size="50" name="meetingRoomId" value="${reservation.meetingRoomId}" />
       <input type="hidden" size="50" name="reservationId" value="${reservation.reservationId}" />
    </form>

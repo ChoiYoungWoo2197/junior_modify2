@@ -18,11 +18,11 @@
 	<section class="width1200">
 		<h1>회원 수정</h1>
 		<form name="memberForm"  method="post"	onsubmit="return check()">
-			<div class="color_red float_right">* 필수입력</div>
+			<div class="color_red float_right">*&nbsp;필수입력</div>
 			<div class="clear_both"></div>
 			<table>
 				<tr>
-					<th  class="width150px"><b>사번</b><b class="color_red">*</b></th>
+					<th class="width150px"><b class="color_red">*&nbsp;</b><b>사번</b></th>
 					<td class="td_input td_border_hide">
 						<input name="modifyMemberId" type="text" size="20" value="${employeeModify.memberId}" placeholder=" 사원번호는 영문,숫자 조합입니다."  readonly="readonly"/> 
 						<div>
@@ -33,17 +33,15 @@
 					<td colspan="2"></td>
 				</tr>
 				<tr>
-					<th  class="width150px"><b>사원명</b><b class="color_red">*</b></th>
+					<th class="width150px"><b class="color_red">*&nbsp;</b><b>사원명</b></th>
 					<td class="td_input td_border_hide">
 						<input name="name" type="text" size="20" value="${employeeModify.name}" placeholder=" 이름은 한글만 입력해주세요. [2자리이상 5자리이하]"/>
-						<div>
-						<span id="valideName" class="error">이름을 입력하세요.</span>
-						</div>
+						<div><span id="valideName" class="error">이름을 입력하세요.</span></div>
 					</td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
-					<th  class="width150px"><b>소속부서</b><b class="color_red">*</b></th>
+					<th class="width150px"><b class="color_red">*&nbsp;</b><b>소속부서</b></th>
 					<td class="td_input td_border_hide">
 						<select name="departmentType" id="departmentType" class="width100">
 							<option value="">부서선택</option>
@@ -51,42 +49,35 @@
 								<option value="${list.departmentId}">${list.name}</option>
 							</c:forEach>
 						</select>
-						<div>
-							<span id="valideDepartmentType" class="error">부서를 선택하세요.</span>
-						</div>
+						<div><span id="valideDepartmentType" class="error">부서를 선택하세요.</span></div>
 					</td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
-					<th  class="width150px"><b>비빌번호</b></th>
+					<th class="width150px"><b>비빌번호</b></th>
 					<td class="td_input td_border_hide">
 						<input name="password" type="password" size="20"  placeholder=" 비밀번호는 영문,숫자 조합입니다.[3자리이상 12자리이하]"/>
-						<div>
-							<span id="validePassword" class="error">비밀번호를 입력하세요.</span>
-						</div>
-						
+						<div><span id="validePassword" class="error">비밀번호를 입력하세요.</span></div>
 					</td>
 
-					<th  class="width150px"><b>비밀번호 확인</b></th>
+					<th class="width150px"><b>비밀번호 확인</b></th>
 					<td colspan="1" class="td_input">
-						<input id="passwordCheck" name="passwordCheck" type="password" size="20"  />
+						<input id="passwordCheck" name="passwordCheck" type="password" size="20"  placeholder=" 비밀번호와 일치해야 합니다."/>
 						<div>
 							<span id="validePasswordCheck"	class="error">비밀번호 확인을 입력하세요.</span>
 							<span id="checkPasswordSuccess" class="success">비밀번호가 일치합니다.</span>
 							<span id="checkPasswordFail" class="error">비밀번호가 일치하지 않습니다.</span>
 						</div>
 						</td>
-					
 				</tr>
 				<tr>
-					<th  class="width150px"><b>이메일</b><b class="color_red">*</b></th>
+					<th class="width150px"><b class="color_red">*&nbsp;</b><b>이메일</b></th>
 					<td class="td_input td_border_hide">
 						<input class="width100_Important"  name="email" type="text" size="20" value="${employeeModify.email}" placeholder=" 예)abc@naver.com"/>
 						<div>
 							<span id="valideEmail"	class="error">이메일을 입력하세요.</span>
 							<span id="checkEmailSuccess" class="success">사용가능한 이메일 입니다.</span>
-							<span id="checkEmailFail" class="error">이미 존재하는 이메일 입니다.</span>
-							
+							<span id="checkEmailFail" class="error">이미 존재하는 이메일 입니다.</span>		
 						</div>
 					</td>
 					<td colspan="2"></td>
@@ -95,11 +86,8 @@
 					<th  class="width150px"><label>전화번호</label></th>
 					<td class="td_input td_border_hide">
 						<input name="phone" type="text" size="20" value="${employeeModify.phone}" placeholder=" 예)010.0000.0000"/>
-						<div>
-						<span id="validePhone" class="error">전화번호를 입력하세요.</span>	
-						</div>
+						<div><span id="validePhone" class="error">전화번호를 입력하세요.</span>	</div>
 					</td>
-					
 					<td colspan="2"></td>
 				</tr>
 				<tr>
@@ -120,8 +108,7 @@
 				<input type="submit" value="수정" />
 				<input type="button" value="취소" onclick="memberList()">
 			</div>
-			<div class="clear_both"></div>
-			
+			<div class="clear_both"></div>	
 		</form>
 
 	</section>

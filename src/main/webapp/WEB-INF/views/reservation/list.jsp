@@ -12,6 +12,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reservation/list.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/common/page.js"></script>
 
+
 <section class="width1300">
 	<h1>예약현황</h1>
 	<div class="overflow_hidden">

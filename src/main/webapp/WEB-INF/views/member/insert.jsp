@@ -30,9 +30,7 @@
 		<form name="memberForm" method="post" onsubmit="return check()">
 			<table>
 				<tr>
-					<th class="width150px">
-						<b>사번</b><b class="color_red">*</b>
-					</th>
+					<th class="width150px"><b class="color_red">*&nbsp;</b><b>사번</b></th>
 					<td class=" border_right_hide">
 						<input name="memberId" type="text" placeholder=" 사원번호는 영문,숫자 조합입니다." />
 						<input class="float_right"  type="button" onclick="checkId()" value="중복체크"/>	
@@ -42,27 +40,19 @@
 						<span id="checkIdSuccess" class="success">사용가능한 사원번호 입니다.</span>
 						<span id="checkIdFail" class="error">이미 존재하는 사원번호 입니다.</span>
 						</div>
-
 					</td>
 					<td colspan="2"  class=" border_left_hide"></td>
 				</tr>
 				<tr>
-					<th class="width150px">
-						<b>사원명</b><b class="color_red">*</b>
-					</th>
+					<th class="width150px"><b class="color_red">*&nbsp;</b><b>사원명</b></th>
 					<td class=" border_right_hide">
 						<input name="name" type="text" placeholder=" 이름은 한글만 입력해주세요."/>
-						<div>
-						<span id="valideName" class="error">이름을 입력하세요.</span>
-						</div>
-						
+						<div><span id="valideName" class="error">이름을 입력하세요.</span></div>					
 					</td>
 					<td colspan="2"  class=" border_left_hide"></td>
 				</tr>
 				<tr>
-					<th class="width150px">
-						<b>소속부서</b><b class="color_red">*</b>
-					</th>
+					<th class="width150px"><b class="color_red">*&nbsp;</b><b>소속부서</b></th>
 					<td class=" border_right_hide">
 						<select name="departmentType" id="departmentType" class="width100">
 							<option value="">부서선택</option>
@@ -70,17 +60,12 @@
 								<option value="${list.departmentId}">${list.name}</option>
 							</c:forEach>
 						</select>
-						<div>
-						<span id="valideDepartmentType" class="error">부서를 선택하세요.</span>
-						</div>
-						
+						<div><span id="valideDepartmentType" class="error">부서를 선택하세요.</span></div>
 					</td>
 					<td colspan="2"  class=" border_left_hide"></td>
 				</tr>
 				<tr>
-					<th class="width150px">
-						<b>비빌번호</b><b class="color_red">*</b>
-					</th>
+					<th class="width150px"><b class="color_red">*&nbsp;</b><b>비빌번호</b></th>
 					<td class=" border_right_hide">
 						<input name="password" type="password" size="20" placeholder=" 비밀번호는 영문,숫자 조합입니다.[3자리이상 12자리이하]"/>
 						<div>
@@ -88,23 +73,18 @@
 						</div>
 					</td>
 
-					<th class="border_right_hide width150px">
-						<b>비밀번호 확인</b><b class="color_red">*</b>
-					</th>
+					<th class="border_right_hide width150px"><b class="color_red">*&nbsp;</b><b>비밀번호 확인</b></th>
 					<td colspan="1" class="">
-						<input id="passwordCheck" name="passwordCheck" type="password" size="20" />
+						<input id="passwordCheck" name="passwordCheck" type="password" size="20" placeholder=" 비밀번호 재입력"/>
 						<div>
 						<span id="validePasswordCheck" class="error">비밀번호 확인을 입력하세요.</span>
 						<span id="checkPasswordSuccess" class="success">비밀번호가 일치합니다.</span>
 						<span id="checkPasswordFail" class="error">비밀번호가 일치하지 않습니다.</span>
-						</div>
-						
+						</div>	
 					</td>
 				</tr>
 				<tr>
-					<th class="width150px">
-						<b>이메일</b><b class="color_red">*</b>
-					</th>
+					<th class="width150px"><b class="color_red">*&nbsp;</b><b>이메일</b></th>
 					<td class=" border_right_hide ">
 						<input name="email" type="text" size="20" placeholder=" 예)abc@naver.com"/>
 						<input class="float_right" type="button" id="employeeEmailCheck" onclick="checkEmail()" value="중복체크">
@@ -116,28 +96,20 @@
 						</div>
 						
 					</td>
-					<td colspan="2"  class=" border_left_hide">
-						
-					</td>
+					<td colspan="2" class=" border_left_hide"></td>
 				</tr>
 				<tr>
-					<th class="width150px">
-						<label>전화번호</label>
-					</th>
+					<th class="width150px"><label>전화번호</label></th>
 					<td class=" border_right_hide">
  						<input name="phone" type="text" size="20" placeholder=" 예)010-0000-0000"/>
- 						<div>
- 						<span id="validePhone" class="error">전화번호를 입력하세요.</span>
- 						</div>
+ 						<div><span id="validePhone" class="error">전화번호를 입력하세요.</span>	</div>
 					</td>
 					<td colspan="2"  class=" border_left_hide"></td>
 				</tr>
 				<c:if test="${not empty loginUser}">
 					<c:if test="${loginUser.manager eq 'true'}">
 						<tr>
-							<th class="width150px">
-								<label>관리자권한</label>
-							</th>
+							<th class="width150px"><label>관리자권한</label></th>
 							<td class=" border_right_hide">
 								<input type="radio" name="manager" value="yes" /> yes
 								<input type="radio" name="manager" value="no" checked="checked" /> no

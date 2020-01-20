@@ -4,10 +4,10 @@ $(function() {
 	})
 
 	$("#searchMember").click(function() {
-		if ($("input[name='searchContent']").val() == "") {
+/*		if ($("input[name='searchContent']").val() == "") {
 			alert("검색할 내용을 입력해주세요.");
 			return false;
-		}
+		}*/
 
 		location.href = encodeURI("list?page=1&searchType="
 				+ $("select[name='searchType']").val()

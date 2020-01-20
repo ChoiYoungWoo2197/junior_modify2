@@ -1,84 +1,63 @@
 @charset "UTF-8";
 
-section {
-	padding-top: 0;
-}
-
-/* 공통 CSS  */
-.border {
-	border: 1px solid #ddd;
-}
-
-input[type='submit'], input[type='button'] {
-	padding: 10px 50px;
-	margin-top: 20px;
-}
-
 .text_center {
 	text-align: center;
 }
 
 /* 개별 CSS */
-.main-page {
+.main_page {
 	position: absolute;
 	left: 50%;
-	top: 50%;
+	top: 57%;
 	margin: -220px 0 0 -160px;
 }
 
-.main-page-unit {
-	position: relative;
+.main_page_unit {
 	width: 320px;
 }
 
-.login-frame {
-	margin: 35px 0 0;
-}
-
-.login-unit {
-	position: relative;
+.login_unit {
 	width: 100%;
 	padding: 10px;
 	overflow: hidden;
 }
 
-.login-unit input[type="text"], .login-unit input[type="password"] {
+.login_unit > input[type="text"], input[type="password"] {
 	width: 85%; /* 원하는 너비 설정 */
 	height: auto; /* 높이값 초기화 */
 	line-height: normal; /* line-height 초기화 */
 	padding: 10px 10px; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
 	font-family: inherit; /* 폰트 상속 */
 	-webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */
+	border: 1px solid rgb(169,169,169); 
 	border-radius: 3px; /* 버튼 테두리를 둥글게 */
+	margin-left: 5px;
 }
 
-.login-text input, img {
+.login_unit > input, img {
 	float: left;
 }
 
-.login-img {
+img {
 	position: relative;
 	top: 5px;
 	width: 30px;
 	height: 30px;
+	margin-left: 5px;
 }
 
-.login-btn {
+button {
 	margin: 20px 0 0;
 	width: 100%;
 	height: 48px;
 	font-family: sans-serif;
 	font-size: 16px;
-	background-color: #563d7c;
-	color: white;
-	/* background-color: #e0e0e0; */
 	border-radius: 5px; /* 버튼 테두리를 둥글게 */
 	border: 2px;
-	border-color: #e0e0e0;
 }
 
 a {
 	text-decoration: none;
 	color: #563d7c;
-	font-size: 14px;
+	font-size: 12px;
 }

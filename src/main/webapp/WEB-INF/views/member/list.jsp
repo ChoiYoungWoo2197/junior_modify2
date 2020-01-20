@@ -18,10 +18,8 @@
 			</select>
 			<input type="search" name="searchContent" value="${searchCriteria.searchContent}"> &nbsp;
 		</div>
-		<!-- <input type="button" id="searchEquipment" name="searchEquipment" value="검색"> -->
 		<img src="${pageContext.request.contextPath}/resources/images/search.png" id="searchMember" class="float_left icon_img">
-		<!-- <input type="button" id="allMeetingRoom" name="AllMeetingRoom" value="전체보기"> -->
-		<img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allMember" class="float_right icon_img">
+		<%-- <img src="${pageContext.request.contextPath}/resources/images/list2.png" id="allMember" class="float_right icon_img"> --%>
 	</div>
 	<table id="listTable">
 		<colgroup>
@@ -64,11 +62,7 @@
 		
 	</table>
 	
-	<div class="float_right">
-		<button id="insertMember">회원등록</button>
-	</div>
-	
-	<!-- <button id="insertMember">회원등록</button> -->
+	<div class="float_right"><button id="insertMember">회원등록</button></div>
 	<div class="clear_both"></div>
 	
 	<div id="page">
