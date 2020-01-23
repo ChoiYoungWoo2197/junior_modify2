@@ -33,6 +33,8 @@
                <input type="hidden" size="50" name="startTime" value=<fmt:formatDate value="${reservation.startDate}" pattern="kk:mm" /> />
                <input type="hidden" size="50" name="actualEndDay" value=<fmt:formatDate value="${reservation.actualEndDate}" pattern="yyyy.MM.dd" /> />
                <input type="hidden" size="50" name="actualEndTime" value=<fmt:formatDate value="${reservation.actualEndDate}" pattern="kk:mm" /> />
+               <input type="hidden" size="50" name="reservationDay" value=<fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy.MM.dd" /> />
+               <input type="hidden" size="50" name="reservationTime" value=<fmt:formatDate value="${reservation.reservationDate}" pattern="kk:mm" /> />
                <c:if test="${not empty limitReservation}">
                <input type="hidden" size="50" name="limitReservation" value=<fmt:formatDate value="${limitReservation}" pattern="kk:mm" /> />
                </c:if>

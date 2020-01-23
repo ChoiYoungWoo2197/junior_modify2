@@ -23,9 +23,9 @@
     	  cancelTr += '</tr>';
           var cancel = '<input type="button" id="denyCancel" value="취소"/>';
           var complete = '<button id="completeCancel" class="margin_right">완료 </button>';
-          $("#reservationTable").append(td).append(reason);
+          $("#reservationTable").append(cancelTr);
           $("#btnDiv").append(complete).append(cancel);   
-      }
+      };
       
       function creatExitTag() {
     	 var exitTimeTr = '<tr id="exitTimeTr">';
@@ -149,10 +149,10 @@
       
 
 $(function() {
-	  if($("#fv").text().indexOf("예약") > 0) {
+	  if($("#fv").text().indexOf("예약") > 0 || $("#fv").text().indexOf("진행중") > 0) {
 		  var jsonObj = getJson($("input[name='Map']").val());
 		  var th = '<th>예약신청일시</th>';
-	      var td = '<td><span>'+ jsonObj.reservationDate + '</span></td>';
+	      var td = '<td><span>'+ $("input[name='reservationDay']").val()+ ' '+ $("input[name='reservationTime']").val() + '</span></td>';
 	      $("#readForm").append(th).append(td);
 	     
 	      if($("#fv").text().indexOf("취소") > 0) {
@@ -162,19 +162,16 @@ $(function() {
 	    	  trReason += "</tr>";
 	    	  $("#reservationTable").append(trReason);
 	      }
-	      else {
-	    	  $("#readForm").addClass("tr_last_child");
-	      } 
 	  }
 	  else if($("#fv").text().indexOf("연장") > 0) {
 		  var jsonObj = getJson($("input[name='Map']").val());
 		  var th = '<th>예약신청일시</th>';
-	      var td = '<td><span>'+ jsonObj.reservationDate + '</span></td>';
+	      var td = '<td><span>'+ $("input[name='reservationDay']").val()+ ' '+ $("input[name='reservationTime']").val() + '</span></td>';
 	      $("#readForm").append(th).append(td);
 	      
     	  var trExtendTime = '<tr>';
     	  trExtendTime += "<th>종료일시</th>";
-    	  trExtendTime += "<td><span>" +jsonObj.actualEndDate + "</span></td>";
+    	  trExtendTime += "<td><span>" + $("input[name='actualEndDay']").val()+ ' '+ $("input[name='actualEndTime']").val() + "</span></td>";
     	  trExtendTime += "</tr>";
     	  $("#reservationTable").append(trExtendTime);
     	  
@@ -186,16 +183,37 @@ $(function() {
     	  $("#reservationTable").append(trExtendReason);
 	  }
 	  else if($("#fv").text().indexOf("종료") > 0) {
-		  
+		  var jsonObj = getJson($("input[name='Map']").val());
+		  var th = '<th>예약신청일시</th>';
+	      var td = '<td><span>'+ $("input[name='reservationDay']").val()+ ' '+ $("input[name='reservationTime']").val() + '</span></td>';
+	      $("#readForm").append(th).append(td);
+
+    	  var trActualEndTime = '<tr>';
+    	  trActualEndTime += "<th>종료일시</th>";
+    	  trActualEndTime += "<td><span>" + $("input[name='actualEndDay']").val()+ ' '+ $("input[name='actualEndTime']").val() + "</span></td>";
+    	  trActualEndTime += "</tr>";
+    	  $("#reservationTable").append(trActualEndTime);
+	      
+	      var extend = $("input[name='ExtendMap']").val();
+	      if(extend != "") {
+	    	var extendObj = getJson($("input[name='ExtendMap']").val());
+	    	//alert(extendObj);
+	    	
+		    var trExtendReadReason = '<tr id="trExtendReadReason">';
+		    trExtendReadReason += "<th>연장사유</th>";
+		    trExtendReadReason += "<td><span>" +extendObj.extendReason + "</span></td>";
+		    trExtendReadReason += "</tr>";
+	    	$("#reservationTable").append(trExtendReadReason);
+	      }
+
+    	  if($("#fv").text().indexOf("종료확인") > 0) {
+        	var trExitCheck = '<tr>';
+        	trExitCheck += "<th>종료확인</th>";
+        	trExitCheck += "<td><span>" +jsonObj.abnormality + "</span></td>";
+        	trExitCheck += "</tr>";
+        	$("#reservationTable").append(trExitCheck);
+    	  }
 	  }
-	  else if($("#fv").text().indexOf("종료확인") > 0) {
-		  
-	  }
-	  
-	  if($("#extendReason").text() != "" && $("#fv").text().indexOf("종료확인") < 0) {
-		  $("#finishTr").removeClass("tr_last_child");
-		  $("#extendTr").addClass("tr_last_child");
-	  };
 	  
       //예약취소 클릭시
       $("#cancelReservation").click(function() {
@@ -366,7 +384,7 @@ $(function() {
 
       $("#exitCheckReservation").click(function() {
          hide();
-         createExitCheckTag9();
+         createExitCheckTag();
       });
 
       $(document).on("click", "#denyExitCheck", function() {

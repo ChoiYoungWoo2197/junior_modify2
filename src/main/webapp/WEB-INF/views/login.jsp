@@ -21,7 +21,7 @@
 					<img src="${pageContext.request.contextPath}/resources/images/loginPw.png">
 					<input id="loginPw" name="loginPw" type="password" placeholder="비밀번호">
 				</div>
-				<button type="submit" >로그인</button>
+				<button type="submit"  class="login_btn">로그인</button>
 			</form>
 		</section>
 

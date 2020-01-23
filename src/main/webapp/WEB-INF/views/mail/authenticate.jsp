@@ -8,8 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>authenticate</title>
-<link href="${pageContext.request.contextPath}/resources/css/common/header.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/css/common/list.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/css/common/read.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/css/mail/authenticate.css" rel="stylesheet" type="text/css" />
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mail/authenticate.js"></script>
@@ -30,13 +29,13 @@
 		<form name="authenticateForm" action="${pageContext.request.contextPath}/mail/complete" method="post">
 			<table>
 				<tr>
-					<td><b>이메일 주소</b></td>
-					<td class= "td_input"><input name="mail" type="text" size="50" value="${mail}" readonly="readonly"/>
+					<th><b>이메일 주소</b></th>
+					<td><input name="mail" type="text" size="50" value="${mail}" readonly="readonly"/>
 				</tr>
 
 				<tr>
-					<td><b>인증번호</b></td>
-					<td colspan="2" class= "td_input">
+					<th><b>인증번호</b></th>
+					<td>
 					<input name="authKey" type="text" size="30" value="" />
 					<input class="float_right" type="button" id="sendReMail" onClick="this.disabled=true;" value="인증메일 재발송">
 					<div class="clear_both"></div>
