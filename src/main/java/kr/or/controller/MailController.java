@@ -39,6 +39,8 @@ public class MailController {
 	public String authenticate(Locale locale, Model model, HttpServletRequest request) {
 		Employee employee = employeeService.checkEmployeeById(request.getParameter("memberId"));
 		model.addAttribute("mail", employee.getEmail());
+
+		//test
 		return "/mail/authenticate";
 	}
 
