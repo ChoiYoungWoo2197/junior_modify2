@@ -39,7 +39,8 @@ public class MailController {
 	public String authenticate(Locale locale, Model model, HttpServletRequest request) {
 		Employee employee = employeeService.checkEmployeeById(request.getParameter("memberId"));
 		model.addAttribute("mail", employee.getEmail());
-
+		boolean b = true ;
+		System.out.println("인텔리제이 커밋");
 		//test
 		return "/mail/authenticate";
 	}
